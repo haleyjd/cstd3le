@@ -1656,7 +1656,7 @@ void idPlayer::Init( void ) {
 			kv = spawnArgs.MatchPrefix( "pm_", kv );
 		}
 		//#modified-fva; BEGIN
-		bool useBFGPlayerSpeed = gameLocal.isMultiplayer == false && cst_bfgPlayerSpeedSP.GetBool();
+		bool useBFGPlayerSpeed = (gameLocal.isMultiplayer == false && cst_bfgPlayerSpeedSP.GetBool());
 		if (useBFGPlayerSpeed) {
 			cvarSystem->SetCVarString("pm_crouchspeed", CST_BFG_PM_CROUCH_SPEED);
 			cvarSystem->SetCVarString("pm_walkspeed", CST_BFG_PM_WALK_SPEED_SP);
@@ -2630,6 +2630,14 @@ void idPlayer::Restore( idRestoreGame *savefile ) {
 		cvarSystem->SetCVarString( kv->GetKey(), kv->GetValue() );
 		kv = spawnArgs.MatchPrefix( "pm_", kv );
 	}
+	//#modified-fva; BEGIN
+	bool useBFGPlayerSpeed = (gameLocal.isMultiplayer == false && cst_bfgPlayerSpeedSP.GetBool());
+	if (useBFGPlayerSpeed) {
+		cvarSystem->SetCVarString("pm_crouchspeed", CST_BFG_PM_CROUCH_SPEED);
+		cvarSystem->SetCVarString("pm_walkspeed", CST_BFG_PM_WALK_SPEED_SP);
+		cvarSystem->SetCVarString("pm_runspeed", CST_BFG_PM_RUN_SPEED_SP);
+	}
+	//#modified-fva; END
 
 	savefile->ReadFloat( set );
 	pm_stamina.SetFloat( set );
