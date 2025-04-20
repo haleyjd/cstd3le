@@ -459,3 +459,9 @@ idCVar cst_shotgunHalfSpreadSP("cst_shotgunHalfSpreadSP", "0", CVAR_GAME | CVAR_
 idCVar cst_grenadesToggle("cst_grenadesToggle", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE | CVAR_USERINFO, "enable the grenades key to toggle between grenades and the previous weapon");
 idCVar cst_allowGrenadesToggleMP("cst_allowGrenadesToggleMP", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE | CVAR_SERVERINFO | CVAR_CST_INFOSYNC, "allow grenades toggle in multiplayer");
 //#modified-fva; END
+
+// haleyjd: CstD3LE 
+idCVar cst_ammoPickupFactor("cst_ammoPickupFactor", "1.0", CVAR_GAME | CVAR_FLOAT | CVAR_ARCHIVE, "multiply ammo pickup values by this amount", 0.25, 4.0);
+idCVar cst_armorProtectionSP("cst_armorProtectionSP", "-1", CVAR_GAME | CVAR_FLOAT | CVAR_ARCHIVE, "armor protection factor in singleplayer:\n  < 0.0 = default (0.3 on recruit/marine, 0.2 on veteran/nightmare)\n  0.0 to 1.0 = use this value on any skill", -1.0f, 1.0f);
+idCVar cst_bfgPlayerSpeedSP("cst_bfgPlayerSpeedSP", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "use the player speed from Doom 3 BFG Edition (faster movement) in singleplayer");
+// haleyjd: CstD3LE END

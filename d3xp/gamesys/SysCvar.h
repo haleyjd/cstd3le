@@ -324,6 +324,12 @@ extern idCVar cst_grenadesToggle;
 extern idCVar cst_allowGrenadesToggleMP;
 //#modified-fva; END
 
+// haleyjd CstD3LE
+extern idCVar cst_ammoPickupFactor;
+extern idCVar cst_armorProtectionSP;
+extern idCVar cst_bfgPlayerSpeedSP;
+// haleyjd CstD3LE END
+
 extern const char *si_gameTypeArgs[];
 
 extern const char *ui_skinArgs[];

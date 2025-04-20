@@ -135,6 +135,11 @@ const int MAX_PDA_ITEMS = 128;
 const int STEPUP_TIME = 200;
 const int MAX_INVENTORY_ITEMS = 20;
 
+//#modified-fva; BEGIN
+const char CST_BFG_PM_CROUCH_SPEED[] = "100";
+const char CST_BFG_PM_WALK_SPEED_SP[] = "175";
+const char CST_BFG_PM_RUN_SPEED_SP[] = "275";
+//#modified-fva; END
 
 #ifdef _D3XP
 idVec3 idPlayer::colorBarTable[ 8 ] = { 
@@ -860,7 +865,9 @@ bool idInventory::Give( idPlayer *owner, const idDict &spawnArgs, const char *st
 		if ( ammo[ i ] >= max ) {
 			return false;
 		}
-		amount = atoi( value );
+		// haleyjd: CstD3LE - allow ammo factor
+		amount = int(atoi( value ) * cst_ammoPickupFactor.GetFloat());
+		// haleyjd: CstD3LE END
 		if ( amount ) {			
 			ammo[ i ] += amount;
 			if ( ( max > 0 ) && ( ammo[ i ] > max ) ) {
@@ -1648,6 +1655,14 @@ void idPlayer::Init( void ) {
 			cvarSystem->SetCVarString( kv->GetKey(), kv->GetValue() );
 			kv = spawnArgs.MatchPrefix( "pm_", kv );
 		}
+		//#modified-fva; BEGIN
+		bool useBFGPlayerSpeed = gameLocal.isMultiplayer == false && cst_bfgPlayerSpeedSP.GetBool();
+		if (useBFGPlayerSpeed) {
+			cvarSystem->SetCVarString("pm_crouchspeed", CST_BFG_PM_CROUCH_SPEED);
+			cvarSystem->SetCVarString("pm_walkspeed", CST_BFG_PM_WALK_SPEED_SP);
+			cvarSystem->SetCVarString("pm_runspeed", CST_BFG_PM_RUN_SPEED_SP);
+		}
+		//#modified-fva; END
 	}
 
 	// disable stamina on hell levels
@@ -8402,8 +8417,20 @@ void idPlayer::CalcDamagePoints( idEntity *inflictor, idEntity *attacker, const 
 	// save some from armor
 	if ( !damageDef->GetBool( "noArmor" ) ) {
 		float armor_protection;
-
-		armor_protection = ( gameLocal.isMultiplayer ) ? g_armorProtectionMP.GetFloat() : g_armorProtection.GetFloat();
+        
+		//#modified-fva; BEGIN
+		//armor_protection = ( gameLocal.isMultiplayer ) ? g_armorProtectionMP.GetFloat() : g_armorProtection.GetFloat();
+		if (gameLocal.isMultiplayer) {
+			armor_protection = g_armorProtectionMP.GetFloat();
+		} else {
+			float cstArmorProtectionSP = cst_armorProtectionSP.GetFloat();
+			if (cstArmorProtectionSP < 0.0f) {
+				armor_protection = (g_skill.GetInteger() < 2) ? 0.3f : 0.2f;
+			} else {
+				armor_protection = cstArmorProtectionSP;
+			}
+		}
+		//#modified-fva; END
 
 		armorSave = ceil( damage * armor_protection );
 		if ( armorSave >= inventory.armor ) {
