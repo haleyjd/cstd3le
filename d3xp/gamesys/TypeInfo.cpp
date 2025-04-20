@@ -1,6 +1,8 @@
 // Copyright (C) 2004 Id Software, Inc.
 //
 
+#define _ALLOW_KEYWORD_MACROS
+
 // This is real evil but allows the code to inspect arbitrary class variables.
 #define private		public
 #define protected	public

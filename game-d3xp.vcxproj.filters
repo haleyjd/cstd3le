@@ -2,22 +2,22 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="d3xp">
-      <UniqueIdentifier>{f4624dc3-0ec9-414f-8200-79ede87e829e}</UniqueIdentifier>
+      <UniqueIdentifier>{44fd354d-4e03-4698-a5b9-9e81842e046b}</UniqueIdentifier>
     </Filter>
     <Filter Include="d3xp\AI">
-      <UniqueIdentifier>{3d36e311-37d1-4c91-91c2-717896e5a2e8}</UniqueIdentifier>
+      <UniqueIdentifier>{d0f62085-015b-49a7-bbf4-2ddc46402993}</UniqueIdentifier>
     </Filter>
     <Filter Include="d3xp\Anim">
-      <UniqueIdentifier>{2725fe74-3e6b-4d97-b6b0-262401bebf6b}</UniqueIdentifier>
+      <UniqueIdentifier>{66c64d12-7d2e-4a91-9974-909111b130d5}</UniqueIdentifier>
     </Filter>
     <Filter Include="d3xp\GameSys">
-      <UniqueIdentifier>{51d35b49-987d-434f-a80a-d0f864e1ace6}</UniqueIdentifier>
+      <UniqueIdentifier>{16a706c4-3974-475d-9876-9dc0a247d6a5}</UniqueIdentifier>
     </Filter>
     <Filter Include="d3xp\Physics">
-      <UniqueIdentifier>{48a515b0-df71-429b-a856-91a8f913c24e}</UniqueIdentifier>
+      <UniqueIdentifier>{50b85307-449c-4229-bac7-8667d4fc997d}</UniqueIdentifier>
     </Filter>
     <Filter Include="d3xp\Script">
-      <UniqueIdentifier>{dcd5543f-fad8-4cd5-974c-d90e008722de}</UniqueIdentifier>
+      <UniqueIdentifier>{2aa89ee6-cbe0-454c-b0f2-01ab4a617dd2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
