@@ -38,3 +38,4 @@
 *.pdb
 *.idb
 *.ipch
+/cstd3le/.vs/*
