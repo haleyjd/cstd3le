@@ -167,6 +167,12 @@ public:
 	virtual bool				DownloadRequest( const char *IP, const char *guid, const char *paks, char urls[ MAX_STRING_CHARS ] ) = 0;
 
 	virtual void				GetMapLoadingGUI( char gui[ MAX_STRING_CHARS ] ) = 0;
+
+	//#modified-fva; BEGIN
+	virtual int					CstGetDifficulty() = 0;
+	virtual int					CstGetAw() = 0;
+	virtual void				CstChangeFov(float deltaFov) = 0;
+	//#modified-fva; END
 };
 
 extern idGame *					game;
@@ -295,7 +301,14 @@ extern idGameEdit *				gameEdit;
 ===============================================================================
 */
 
-const int GAME_API_VERSION		= 8;
+//#modified-fva; BEGIN
+//const int GAME_API_VERSION		= 8;
+// CstDoom3 v1.0: 9
+// CstDoom3 v1.1: 10
+// CstDoom3 v1.2: 11
+// CstDoom3 v2.0: 12
+const int GAME_API_VERSION = 12;
+//#modified-fva; END
 
 typedef struct {
 

@@ -172,6 +172,9 @@ void idMultiplayerGame::Reset() {
 	mainGui->SetStateBool( "gameDraw", true );
 	mainGui->SetKeyBindingNames();
 	mainGui->SetStateInt( "com_machineSpec", cvarSystem->GetCVarInteger( "com_machineSpec" ) );
+	//#modified-fva; BEGIN
+	mainGui->SetStateBool("cstIsClient", gameLocal.isClient);
+	//#modified-fva; END
 	SetMenuSkin();
 	msgmodeGui = uiManager->FindGui( "guis/mpmsgmode.gui", true, false, true );
 	msgmodeGui->SetStateBool( "gameDraw", true );
@@ -582,7 +585,10 @@ void idMultiplayerGame::UpdateScoreboard( idUserInterface *scoreBoard, idPlayer 
 	scoreBoard->SetStateString( "livesinfo", livesinfo );
 	scoreBoard->SetStateString( "timeinfo", timeinfo );
 
-	scoreBoard->Redraw( gameLocal.time );
+	//#modified-fva; BEGIN
+	//scoreBoard->Redraw( gameLocal.time );
+	scoreBoard->Redraw(gameLocal.cstMenuTime);
+	//#modified-fva; END
 }
 
 #ifdef CTF 
@@ -784,7 +790,10 @@ void idMultiplayerGame::UpdateCTFScoreboard( idUserInterface *scoreBoard, idPlay
 	scoreBoard->HandleNamedEvent( "BlueFlagStatusChange" );
     scoreBoard->HandleNamedEvent( "RedFlagStatusChange" );
 	
-	scoreBoard->Redraw( gameLocal.time );
+	//#modified-fva; BEGIN
+	//scoreBoard->Redraw( gameLocal.time );
+	scoreBoard->Redraw(gameLocal.cstMenuTime);
+	//#modified-fva; END
 
 	
 	
@@ -1977,7 +1986,10 @@ void idMultiplayerGame::UpdateMainGui( void ) {
 		const idKeyValue *keyval = gameLocal.serverInfo.GetKeyVal( i );
 		mainGui->SetStateString( keyval->GetKey(), keyval->GetValue() );
 	}
-	mainGui->StateChanged( gameLocal.time );
+	//#modified-fva; BEGIN
+	//mainGui->StateChanged( gameLocal.time );
+	mainGui->StateChanged(gameLocal.cstMenuTime);
+	//#modified-fva; END
 #if defined( __linux__ )
 	// replacing the oh-so-useful s_reverse with sound backend prompt
 	mainGui->SetStateString( "driver_prompt", "1" );
@@ -2081,11 +2093,17 @@ idUserInterface* idMultiplayerGame::StartMenu( void ) {
 #endif
 
 		mainGui->SetStateString( "chattext", "" );
-		mainGui->Activate( true, gameLocal.time );
+		//#modified-fva; BEGIN
+		//mainGui->Activate( true, gameLocal.time );
+		mainGui->Activate(true, gameLocal.cstMenuTime);
+		//#modified-fva; END
 		return mainGui;
 	} else if ( currentMenu == 2 ) {
 		// the setup is done in MessageMode
-		msgmodeGui->Activate( true, gameLocal.time );
+		//#modified-fva; BEGIN
+		//msgmodeGui->Activate( true, gameLocal.time );
+		msgmodeGui->Activate(true, gameLocal.cstMenuTime);
+		//#modified-fva; END
 		cvarSystem->SetCVarBool( "ui_chat", true );
 		return msgmodeGui;
 	}
@@ -2100,9 +2118,15 @@ idMultiplayerGame::DisableMenu
 void idMultiplayerGame::DisableMenu( void ) {
 	gameLocal.sessionCommand = "";	// in case we used "game_startMenu" to trigger the menu
 	if ( currentMenu == 1 ) {
-		mainGui->Activate( false, gameLocal.time );
+		//#modified-fva; BEGIN
+		//mainGui->Activate( false, gameLocal.time );
+		mainGui->Activate(false, gameLocal.cstMenuTime);
+		//#modified-fva; END
 	} else if ( currentMenu == 2 ) {
-		msgmodeGui->Activate( false, gameLocal.time );
+		//#modified-fva; BEGIN
+		//msgmodeGui->Activate( false, gameLocal.time );
+		msgmodeGui->Activate(false, gameLocal.cstMenuTime);
+		//#modified-fva; END
 	}
 	currentMenu = 0;
 	nextMenu = 0;
@@ -2177,7 +2201,10 @@ const char* idMultiplayerGame::HandleGuiCommands( const char *_menuCommand ) {
 
 			if ( oldSpec !=	cvarSystem->GetCVarInteger(	"com_machineSpec" )	) {
 				currentGui->SetStateInt( "com_machineSpec",	cvarSystem->GetCVarInteger(	"com_machineSpec" )	);
-				currentGui->StateChanged( gameLocal.realClientTime );
+				//#modified-fva; BEGIN
+				//currentGui->StateChanged( gameLocal.realClientTime );
+				currentGui->StateChanged(gameLocal.cstMenuTime);
+				//#modified-fva; END
 				cmdSystem->BufferCommandText( CMD_EXEC_NOW,	"execMachineSpec\n"	);
 			}
 
@@ -2288,6 +2315,23 @@ const char* idMultiplayerGame::HandleGuiCommands( const char *_menuCommand ) {
 				mainGui->SetKeyBindingNames();
 			}
 			continue;
+		//#modified-fva; BEGIN
+		} else if (!idStr::Icmp(cmd, "cstBind")) {
+			if (args.Argc() - icmd >= 3) {
+				idStr cstLayer = args.Argv(icmd++);
+				idStr key = args.Argv(icmd++);
+				idStr bind = args.Argv(icmd++);
+				cmdSystem->BufferCommandText(CMD_EXEC_NOW, va("cstBindUnbindTwo \"%s\" \"%s\" \"%s\"", cstLayer.c_str(), key.c_str(), bind.c_str()));
+				mainGui->SetKeyBindingNames();
+			}
+			continue;
+		} else if (!idStr::Icmp(cmd, "cstChangeFov")) {
+			if (args.Argc() - icmd >= 1) {
+				float deltaFov = atof(args.Argv(icmd++));
+				gameLocal.CstChangeFov(deltaFov);
+			}
+			continue;
+		//#modified-fva; END
 		} else if ( !idStr::Icmp( cmd, "clearbind" ) ) {
 			if ( args.Argc() - icmd >= 1 ) {
 				idStr bind = args.Argv( icmd++ );
@@ -2295,6 +2339,21 @@ const char* idMultiplayerGame::HandleGuiCommands( const char *_menuCommand ) {
 				mainGui->SetKeyBindingNames();
 			}
 			continue;
+		//#modified-fva; BEGIN
+		} else if (!idStr::Icmp(cmd, "cstClearbind")) {
+			if (args.Argc() - icmd >= 2) {
+				idStr cstLayer = args.Argv(icmd++);
+				idStr bind = args.Argv(icmd++);
+				cmdSystem->BufferCommandText(CMD_EXEC_NOW, va("cstUnbind \"%s\" \"%s\"", cstLayer.c_str(), bind.c_str()));
+				mainGui->SetKeyBindingNames();
+			}
+			continue;
+		//#modified-fva; END
+		//#modified-fva; BEGIN
+		} else if (!idStr::Icmp(cmd, "loadBinds")) {
+			mainGui->SetKeyBindingNames();
+			continue;
+		//#modified-fva; END
 		} else if (	!idStr::Icmp( cmd, "MAPScan" ) ) {
 			const char *gametype = gameLocal.serverInfo.GetString( "si_gameType" );
 			if ( gametype == NULL || *gametype == 0 || idStr::Icmp( gametype, "singleplayer" ) == 0 ) {
@@ -2409,9 +2468,15 @@ bool idMultiplayerGame::Draw( int clientNum ) {
 		DrawChat();
 		if ( currentMenu == 1 ) {
 			UpdateMainGui();
-			mainGui->Redraw( gameLocal.time );
+			//#modified-fva; BEGIN
+			//mainGui->Redraw( gameLocal.time );
+			mainGui->Redraw(gameLocal.cstMenuTime);
+			//#modified-fva; END
 		} else {
-			msgmodeGui->Redraw( gameLocal.time );
+			//#modified-fva; BEGIN
+			//msgmodeGui->Redraw( gameLocal.time );
+			msgmodeGui->Redraw(gameLocal.cstMenuTime);
+			//#modified-fva; END
 		}
 	} else {
 #if 0
@@ -2468,7 +2533,10 @@ bool idMultiplayerGame::Draw( int clientNum ) {
 			} else {
 				spectateGui->SetStateString( "vote", "" );
 			}
-			spectateGui->Redraw( gameLocal.time );
+			//#modified-fva; BEGIN
+			//spectateGui->Redraw( gameLocal.time );
+			spectateGui->Redraw(gameLocal.cstMenuTime);
+			//#modified-fva; END
 		}
 		DrawChat();
 		DrawScoreBoard( player );
@@ -2548,7 +2616,10 @@ idMultiplayerGame::DrawScoreBoard
 void idMultiplayerGame::DrawScoreBoard( idPlayer *player ) {
 	if ( player->scoreBoardOpen || gameState == GAMEREVIEW ) {
 		if ( !playerState[ player->entityNumber ].scoreBoardUp ) {
-			scoreBoard->Activate( true, gameLocal.time );
+			//#modified-fva; BEGIN
+			//scoreBoard->Activate( true, gameLocal.time );
+			scoreBoard->Activate(true, gameLocal.cstMenuTime);
+			//#modified-fva; END
 			playerState[ player->entityNumber ].scoreBoardUp = true;
 		}
         
@@ -2561,7 +2632,10 @@ void idMultiplayerGame::DrawScoreBoard( idPlayer *player ) {
         
 	} else {
 		if ( playerState[ player->entityNumber ].scoreBoardUp ) {
-			scoreBoard->Activate( false, gameLocal.time );
+			//#modified-fva; BEGIN
+			//scoreBoard->Activate( false, gameLocal.time );
+			scoreBoard->Activate(false, gameLocal.cstMenuTime);
+			//#modified-fva; END
 			playerState[ player->entityNumber ].scoreBoardUp = false;
 		}
 	}
@@ -2601,7 +2675,10 @@ void idMultiplayerGame::AddChatLine( const char *fmt, ... ) {
 		chatHistorySize++;
 	}
 	chatDataUpdated = true;
-	lastChatLineTime = gameLocal.time;
+	//#modified-fva; BEGIN
+	//lastChatLineTime = gameLocal.time;
+	lastChatLineTime = gameLocal.cstMenuTime;
+	//#modified-fva; END
 }
 
 /*
@@ -2612,7 +2689,11 @@ idMultiplayerGame::DrawChat
 void idMultiplayerGame::DrawChat() {
 	int i, j;
 	if ( guiChat ) {
-		if ( gameLocal.time - lastChatLineTime > CHAT_FADE_TIME ) {
+		//#modified-fva; BEGIN
+		//if ( gameLocal.time - lastChatLineTime > CHAT_FADE_TIME ) {
+		if (gameLocal.cstMenuTime - lastChatLineTime > CHAT_FADE_TIME || gameLocal.cstMenuTime < lastChatLineTime) {
+		// note: "gameLocal.cstMenuTime < lastChatLineTime" is here in case cstMenuTime wraps around
+		//#modified-fva; END
 			if ( chatHistorySize > 0 ) {
 				for ( i = chatHistoryIndex - chatHistorySize; i < chatHistoryIndex; i++ ) {
 					chatHistory[ i % NUM_CHAT_NOTIFY ].fade--;
@@ -2622,7 +2703,10 @@ void idMultiplayerGame::DrawChat() {
 				}
 				chatDataUpdated = true;
 			}
-			lastChatLineTime = gameLocal.time;
+			//#modified-fva; BEGIN
+			//lastChatLineTime = gameLocal.time;
+			lastChatLineTime = gameLocal.cstMenuTime;
+			//#modified-fva; END
 		}
 		if ( chatDataUpdated ) {
 			j = 0;
@@ -2637,10 +2721,16 @@ void idMultiplayerGame::DrawChat() {
 				guiChat->SetStateString( va( "chat%i", j ), "" );
 				j++;
 			}
-			guiChat->Activate( true, gameLocal.time );
+			//#modified-fva; BEGIN
+			//guiChat->Activate( true, gameLocal.time );
+			guiChat->Activate(true, gameLocal.cstMenuTime);
+			//#modified-fva; END
 			chatDataUpdated = false;
 		}
-		guiChat->Redraw( gameLocal.time );
+		//#modified-fva; BEGIN
+		//guiChat->Redraw( gameLocal.time );
+		guiChat->Redraw(gameLocal.cstMenuTime);
+		//#modified-fva; END
 	}
 }
 

@@ -369,12 +369,20 @@ void idEvent::Schedule( idClass *obj, const idTypeInfo *type, int time ) {
 	typeinfo = type;
 
 	// wraps after 24 days...like I care. ;)
+	//#modified-fva; BEGIN
+	//this->time = gameLocal.time + time;
+#ifndef _D3XP
 	this->time = gameLocal.time + time;
+#endif
+	//#modified-fva; END
 
 	eventNode.Remove();
 
 #ifdef _D3XP
 	if ( obj->IsType( idEntity::Type ) && ( ( (idEntity*)(obj) )->timeGroup == TIME_GROUP2 ) ) {
+		//#modified-fva; BEGIN
+		this->time = gameLocal.fast.time + time;
+		//#modified-fva; END
 		event = FastEventQueue.Next();
 		while( ( event != NULL ) && ( this->time >= event->time ) ) {
 			event = event->eventNode.Next();

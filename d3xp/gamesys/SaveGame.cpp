@@ -641,6 +641,9 @@ void idSaveGame::WriteUsercmd( const usercmd_t &usercmd ) {
 	WriteSignedChar( usercmd.impulse );
 	WriteByte( usercmd.flags );
 	WriteInt( usercmd.sequence );
+	//#modified-fva; BEGIN
+	WriteSignedChar(usercmd.cstLayer);
+	//#modified-fva; END
 }
 
 /*
@@ -1417,6 +1420,9 @@ void idRestoreGame::ReadUsercmd( usercmd_t &usercmd ) {
 	ReadSignedChar( usercmd.impulse );
 	ReadByte( usercmd.flags );
 	ReadInt( usercmd.sequence );
+	//#modified-fva; BEGIN
+	ReadSignedChar(usercmd.cstLayer);
+	//#modified-fva; END
 }
 
 /*

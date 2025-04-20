@@ -1108,7 +1108,10 @@ idAFEntity_Gibbable::Collide
 */
 bool idAFEntity_Gibbable::Collide( const trace_t &collision, const idVec3 &velocity ) {
 
-	if ( !gibbed && wasThrown ) {
+	//#modified-fva; BEGIN
+	//if ( !gibbed && wasThrown ) {
+	if (!gibbed && wasThrown && !fl.grabbed) {
+	//#modified-fva; END
 
 		// Everything gibs (if possible)
 		if ( spawnArgs.GetBool( "gib" ) ) {
@@ -1195,6 +1198,12 @@ void idAFEntity_Gibbable::Gib( const idVec3 &dir, const char *damageDefName ) {
 		return;
 	}
 
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	SetTimeState ts(timeGroup);
+#endif
+	//#modified-fva; END
+
 #ifdef _D3XP
 	// Don't grab this ent after it's been gibbed (and now invisible!)
 	noGrab = true;
@@ -1218,14 +1227,42 @@ void idAFEntity_Gibbable::Gib( const idVec3 &dir, const char *damageDefName ) {
 	UnlinkCombat();
 
 	if ( g_bloodEffects.GetBool() ) {
-		if ( gameLocal.time > gameLocal.GetGibTime() ) {
-			gameLocal.SetGibTime( gameLocal.time + GIB_DELAY );
+		//#modified-fva; BEGIN
+		//if ( gameLocal.time > gameLocal.GetGibTime() ) {
+#ifdef _D3XP
+		if (gameLocal.fast.time > gameLocal.GetGibTime())
+#else
+		if (gameLocal.time > gameLocal.GetGibTime())
+#endif
+		{
+		//#modified-fva; END
+			//#modified-fva; BEGIN
+			//gameLocal.SetGibTime( gameLocal.time + GIB_DELAY );
+#ifdef _D3XP
+			gameLocal.SetGibTime(gameLocal.fast.time + GIB_DELAY);
+#else
+			gameLocal.SetGibTime(gameLocal.time + GIB_DELAY);
+#endif
+			//#modified-fva; END
 			SpawnGibs( dir, damageDefName );
 			renderEntity.noShadow = true;
 			renderEntity.shaderParms[ SHADERPARM_TIME_OF_DEATH ] = gameLocal.time * 0.001f;
 			StartSound( "snd_gibbed", SND_CHANNEL_ANY, 0, false, NULL );
 			gibbed = true;
 		}
+		//#modified-fva; BEGIN
+		else {
+			const char* skinName = spawnArgs.GetString("skin_dropGib");
+			if (skinName[0]) {
+				SetSkin(declManager->FindSkin(skinName));
+			}
+			if (skinName[0] || skeletonModel) {
+				renderEntity.noShadow = true;
+				renderEntity.shaderParms[SHADERPARM_TIME_OF_DEATH] = gameLocal.time * 0.001f;
+				gibbed = true;
+			}
+		}
+		//#modified-fva; END
 	} else {
 		gibbed = true;
 	}
@@ -3324,6 +3361,11 @@ void idHarvestable::BeginBurn() {
 		return;
 	}
 
+
+	//#modified-fva; BEGIN
+	parent->spawnArgs.SetBool("gib", false);
+	parent->noGrab = true;
+	//#modified-fva; END
 
 	//Switch Skins if the parent would like us to.
 	idStr skin = parent->spawnArgs.GetString("skin_harvest_burn", "");

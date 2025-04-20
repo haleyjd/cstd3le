@@ -9,7 +9,10 @@
 #if defined( _DEBUG )
 	#define	BUILD_DEBUG	"-debug"
 #else
-	#define	BUILD_DEBUG "-release"
+	//#modified-fva; BEGIN
+	//#define	BUILD_DEBUG "-release"
+	#define	BUILD_DEBUG ""
+	//#modified-fva; END
 #endif
 
 /*
@@ -36,7 +39,10 @@ const char *ui_skinArgs[]			= { "skins/characters/player/marine_mp", "skins/char
 const char *ui_teamArgs[]			= { "Red", "Blue", NULL }; 
 
 struct gameVersion_s {
-	gameVersion_s( void ) { sprintf( string, "%s.%d%s %s %s", ENGINE_VERSION, BUILD_NUMBER, BUILD_DEBUG, BUILD_STRING, __DATE__, __TIME__ ); }
+	//#modified-fva; BEGIN
+	//gameVersion_s( void ) { sprintf( string, "%s.%d%s %s %s", ENGINE_VERSION, BUILD_NUMBER, BUILD_DEBUG, BUILD_STRING, __DATE__, __TIME__ ); }
+	gameVersion_s(void) { sprintf(string, "%s.%d%s %s %s %s", ENGINE_VERSION, BUILD_NUMBER, BUILD_DEBUG, BUILD_STRING, __DATE__, __TIME__); }
+	//#modified-fva; END
 	char	string[256];
 } gameVersion;
 
@@ -56,7 +62,14 @@ idCVar si_gameType(					"si_gameType",		si_gameTypeArgs[ 0 ],	CVAR_GAME | CVAR_S
 #endif
 
 idCVar si_map(						"si_map",					"game/mp/d3dm1",CVAR_GAME | CVAR_SERVERINFO | CVAR_ARCHIVE, "map to be played next on server", idCmdSystem::ArgCompletion_MapName );
-idCVar si_maxPlayers(				"si_maxPlayers",			"8",			CVAR_GAME | CVAR_SERVERINFO | CVAR_ARCHIVE | CVAR_INTEGER, "max number of players allowed on the server", 1, 8 );
+//#modified-fva; BEGIN
+//idCVar si_maxPlayers(				"si_maxPlayers",			"8",			CVAR_GAME | CVAR_SERVERINFO | CVAR_ARCHIVE | CVAR_INTEGER, "max number of players allowed on the server", 1, 8 );
+#define CST_QUOTES_AUX(x) #x
+#define CST_QUOTES(x) CST_QUOTES_AUX(x)
+idCVar si_maxPlayers("si_maxPlayers", CST_QUOTES(CST_MAX_PLAYERS), CVAR_GAME | CVAR_SERVERINFO | CVAR_ARCHIVE | CVAR_INTEGER, "max number of players allowed on the server", 1, CST_MAX_PLAYERS);
+#undef CST_QUOTES
+#undef CST_QUOTES_AUX
+//#modified-fva; END
 idCVar si_fragLimit(				"si_fragLimit",				"10",			CVAR_GAME | CVAR_SERVERINFO | CVAR_ARCHIVE | CVAR_INTEGER, "frag limit", 1, MP_PLAYER_MAXFRAGS );
 idCVar si_timeLimit(				"si_timeLimit",				"10",			CVAR_GAME | CVAR_SERVERINFO | CVAR_ARCHIVE | CVAR_INTEGER, "time limit in minutes", 0, 60 );
 idCVar si_teamDamage(				"si_teamDamage",			"0",			CVAR_GAME | CVAR_SERVERINFO | CVAR_ARCHIVE | CVAR_BOOL, "enable team damage" );
@@ -87,7 +100,10 @@ idCVar ui_chat(						"ui_chat",					"0",			CVAR_GAME | CVAR_USERINFO | CVAR_BOOL
 // change anytime vars
 idCVar developer(					"developer",				"0",			CVAR_GAME | CVAR_BOOL, "" );
 
-idCVar r_aspectRatio( 				"r_aspectRatio",			"0",			CVAR_RENDERER | CVAR_INTEGER | CVAR_ARCHIVE, "aspect ratio of view:\n0 = 4:3\n1 = 16:9\n2 = 16:10", 0, 2 );
+//#modified-fva; BEGIN
+//idCVar r_aspectRatio( 				"r_aspectRatio",			"0",			CVAR_RENDERER | CVAR_INTEGER | CVAR_ARCHIVE, "aspect ratio of view:\n0 = 4:3\n1 = 16:9\n2 = 16:10", 0, 2 );
+idCVar cst_aspectRatio("cst_aspectRatio", "-1", CVAR_RENDERER | CVAR_INTEGER | CVAR_NOCHEAT, "aspect ratio of view:\n-1 = Automatic\n0 = 4:3\n1 = 16:9\n2 = 16:10", -1, 2);
+//#modified-fva; END
 
 idCVar g_cinematic(					"g_cinematic",				"1",			CVAR_GAME | CVAR_BOOL, "skips updating entities that aren't marked 'cinematic' '1' during cinematics" );
 idCVar g_cinematicMaxSkipTime(		"g_cinematicMaxSkipTime",	"600",			CVAR_GAME | CVAR_FLOAT, "# of seconds to allow game to run when skipping cinematic.  prevents lock-up when cinematic doesn't end.", 0, 3600 );
@@ -307,12 +323,18 @@ idCVar g_showPlayerShadow(			"g_showPlayerShadow",		"0",			CVAR_GAME | CVAR_ARCH
 idCVar g_showHud(					"g_showHud",				"1",			CVAR_GAME | CVAR_ARCHIVE | CVAR_BOOL, "" );
 idCVar g_showProjectilePct(			"g_showProjectilePct",		"0",			CVAR_GAME | CVAR_ARCHIVE | CVAR_BOOL, "enables display of player hit percentage" );
 idCVar g_showBrass(					"g_showBrass",				"1",			CVAR_GAME | CVAR_ARCHIVE | CVAR_BOOL, "enables ejected shells from weapon" );
-idCVar g_gun_x(						"g_gunX",					"0",			CVAR_GAME | CVAR_FLOAT, "" );
+//#modified-fva; BEGIN
+//idCVar g_gun_x(						"g_gunX",					"0",			CVAR_GAME | CVAR_FLOAT, "" );
+idCVar g_gun_x("g_gunX", "0", CVAR_GAME | CVAR_FLOAT | CVAR_ARCHIVE, "");
+//#modified-fva; END
 idCVar g_gun_y(						"g_gunY",					"0",			CVAR_GAME | CVAR_FLOAT, "" );
 idCVar g_gun_z(						"g_gunZ",					"0",			CVAR_GAME | CVAR_FLOAT, "" );
 idCVar g_viewNodalX(				"g_viewNodalX",				"0",			CVAR_GAME | CVAR_FLOAT, "" );
 idCVar g_viewNodalZ(				"g_viewNodalZ",				"0",			CVAR_GAME | CVAR_FLOAT, "" );
-idCVar g_fov(						"g_fov",					"90",			CVAR_GAME | CVAR_INTEGER | CVAR_NOCHEAT, "" );
+//#modified-fva; BEGIN
+//idCVar g_fov(						"g_fov",					"90",			CVAR_GAME | CVAR_INTEGER | CVAR_NOCHEAT, "" );
+idCVar g_fov("g_fov", "90", CVAR_GAME | CVAR_FLOAT | CVAR_ARCHIVE, "");
+//#modified-fva; END
 idCVar g_skipViewEffects(			"g_skipViewEffects",		"0",			CVAR_GAME | CVAR_BOOL, "skip damage and other view effects" );
 idCVar g_mpWeaponAngleScale(		"g_mpWeaponAngleScale",		"0",			CVAR_GAME | CVAR_FLOAT, "Control the weapon sway in MP" );
 
@@ -382,9 +404,58 @@ idCVar g_grabberDamping(			"g_grabberDamping",			"0.5",			CVAR_GAME | CVAR_FLOAT
 #endif
 
 #ifdef _D3XP
-idCVar g_xp_bind_run_once( "g_xp_bind_run_once", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "Rebind all controls once for D3XP." );
+//#modified-fva; BEGIN
+//idCVar g_xp_bind_run_once( "g_xp_bind_run_once", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "Rebind all controls once for D3XP." );
+idCVar cst_bind_run_once("cst_bind_run_once", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "rebind all controls once");
+//#modified-fva; END
 #endif
 
 idCVar net_serverDownload(			"net_serverDownload",		"0",			CVAR_GAME | CVAR_INTEGER | CVAR_ARCHIVE, "enable server download redirects. 0: off 1: redirect to si_serverURL 2: use builtin download. see net_serverDl cvars for configuration" );
 idCVar net_serverDlBaseURL(			"net_serverDlBaseURL",		"",				CVAR_GAME | CVAR_ARCHIVE, "base URL for the download redirection" );
 idCVar net_serverDlTable(			"net_serverDlTable",		"",				CVAR_GAME | CVAR_ARCHIVE, "pak names for which download is provided, seperated by ;" );
+
+//#modified-fva; BEGIN
+#ifdef _D3XP
+idCVar cst_grabberUnlimitedTimeSP("cst_grabberUnlimitedTimeSP", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "don't limit the grabber hold time in singleplayer");
+idCVar cst_grabberUnlimitedTimeMP("cst_grabberUnlimitedTimeMP", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE | CVAR_SERVERINFO | CVAR_CST_INFOSYNC, "don't limit the grabber hold time in multiplayer");
+idCVar cst_grabberStableThrowSP("cst_grabberStableThrowSP", "0", CVAR_GAME | CVAR_INTEGER | CVAR_ARCHIVE, "stabilize the movement of the grabbed object before it is thrown - SP:\n 0: don't stabilize\n 1: stabilize relative to the player\n 2: stabilize relative to the world", 0, 2);
+idCVar cst_grabberStableThrowMP("cst_grabberStableThrowMP", "0", CVAR_GAME | CVAR_INTEGER | CVAR_ARCHIVE | CVAR_SERVERINFO | CVAR_CST_INFOSYNC, "stabilize the movement of the grabbed object before it is thrown - MP:\n 0: don't stabilize\n 1: stabilize relative to the player\n 2: stabilize relative to the world", 0, 2);
+idCVar cst_grabberDropOnHoldLayer("cst_grabberDropOnHoldLayer", "0", CVAR_GAME | CVAR_INTEGER | CVAR_ARCHIVE, "drop the grabbed object on hold layer commands:\n 0: don't drop\n 1 to 9: drop when this layer is held\n -1: drop when any layer is held", -1, 9);
+idCVar cst_grabberDropOnSwitchLayer("cst_grabberDropOnSwitchLayer", "0", CVAR_GAME | CVAR_INTEGER | CVAR_ARCHIVE, "drop the grabbed object on switch layer commands:\n 0: don't drop\n 1 to 9: drop when switching to this layer\n -1: drop when switching to any layer", -1, 9);
+idCVar cst_noSmokeFlyGrabbed("cst_noSmokeFlyGrabbed", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "disable fly smoke of projectiles while grabbed");
+idCVar cst_noSmokeFlyGrabbedOthersMP("cst_noSmokeFlyGrabbedOthersMP", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "disable fly smoke of projectiles while grabbed by other players - multiplayer");
+idCVar cst_awChainsawRoE("cst_awChainsawRoE", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "spawn the Chainsaw in RoE");
+#endif
+//#modified-fva; END
+
+//#modified-fva; BEGIN
+idCVar cst_noStaminaDrop("cst_noStaminaDrop", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "no stamina drop when running");
+idCVar cst_headlampAlertMonsters("cst_headlampAlertMonsters", "1", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "alert monsters when the headlamp is on");
+idCVar cst_headlampKeepState("cst_headlampKeepState", "1", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "preserve the headlamp on/off state between maps");
+idCVar cst_headlampSound("cst_headlampSound", "1", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "play the headlamp on/off sounds");
+idCVar cst_allowHeadlampMP("cst_allowHeadlampMP", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE | CVAR_SERVERINFO | CVAR_CST_INFOSYNC, "allow headlamp in multiplayer");
+idCVar cst_showAccessCodes("cst_showAccessCodes", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "show access codes");
+idCVar cst_takeNoAmmoWeapons("cst_takeNoAmmoWeapons", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "always take no ammo weapons in singleplayer");
+idCVar cst_smokeFixMP("cst_smokeFixMP", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "experimental fix for multiplayer smoke");
+idCVar cst_allowSmokeControlMP("cst_allowSmokeControlMP", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE | CVAR_SERVERINFO | CVAR_CST_INFOSYNC, "allow fly/muzzle smoke control in multiplayer");
+idCVar cst_noSmokeFly("cst_noSmokeFly", "", CVAR_GAME | CVAR_ARCHIVE, "disable fly smoke for the specified projectiles");
+idCVar cst_noSmokeFlyOthersMP("cst_noSmokeFlyOthersMP", "", CVAR_GAME | CVAR_ARCHIVE, "disable fly smoke for the specified projectiles of other players - multiplayer");
+idCVar cst_noSmokeMuzzle("cst_noSmokeMuzzle", "", CVAR_GAME | CVAR_ARCHIVE, "disable muzzle smoke for the specified weapons");
+idCVar cst_noSmokeMuzzleOthersMP("cst_noSmokeMuzzleOthersMP", "", CVAR_GAME | CVAR_ARCHIVE, "disable muzzle smoke for the specified weapons of other players - multiplayer");
+idCVar cst_allowFlashlightToggleSP("cst_allowFlashlightToggleSP", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "allow switching the flashlight on/off in singleplayer using the reload key");
+idCVar cst_allowDamageFeedbackControlMP("cst_allowDamageFeedbackControlMP", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE | CVAR_SERVERINFO | CVAR_CST_INFOSYNC, "allow damage feedback control in multiplayer");
+idCVar cst_dfNoDoubleVision("cst_dfNoDoubleVision", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "disable double vision when damaged");
+idCVar cst_dfNoTunnelVision("cst_dfNoTunnelVision", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "disable tunnel vision when damaged");
+idCVar cst_dfNoViewAngleKick("cst_dfNoViewAngleKick", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "disable view angle kick when damaged");
+idCVar cst_dfNoScreenBlob("cst_dfNoScreenBlob", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "disable screen blob when damaged");
+idCVar cst_dfNoArmorPulse("cst_dfNoArmorPulse", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "disable armor pulse when damaged");
+idCVar cst_dfNoSoundPain("cst_dfNoSoundPain", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "disable pain sound when damaged");
+idCVar cst_dfNoSoundAirGasp("cst_dfNoSoundAirGasp", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "disable gasp sound when damaged by lack of air");
+idCVar cst_hudZoom("cst_hudZoom", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "enable the HUD's zoom indicator");
+idCVar cst_hudCrouch("cst_hudCrouch", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "enable the HUD's crouch indicator");
+idCVar cst_hudRun("cst_hudRun", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "enable the HUD's run indicator");
+idCVar cst_crosshairAlwaysShow("cst_crosshairAlwaysShow", "1", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "don't hide the crosshair when switching or reloading weapons");
+idCVar cst_shotgunHalfSpreadSP("cst_shotgunHalfSpreadSP", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE, "reduce the shotgun spread by half in singleplayer");
+idCVar cst_grenadesToggle("cst_grenadesToggle", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE | CVAR_USERINFO, "enable the grenades key to toggle between grenades and the previous weapon");
+idCVar cst_allowGrenadesToggleMP("cst_allowGrenadesToggleMP", "0", CVAR_GAME | CVAR_BOOL | CVAR_ARCHIVE | CVAR_SERVERINFO | CVAR_CST_INFOSYNC, "allow grenades toggle in multiplayer");
+//#modified-fva; END

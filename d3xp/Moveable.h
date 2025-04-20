@@ -176,6 +176,11 @@ private:
 #ifdef _D3XP
 	bool					isStable;
 #endif
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	bool					cstGrabberFlames;
+#endif
+	//#modified-fva; END
 
 	void					AddParticles( const char *name, bool burn );
 	void					AddLight( const char *name , bool burn );

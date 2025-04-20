@@ -149,6 +149,11 @@ public:
 	int						AmmoCount() const;
 	int						GetGrabberState() const;
 #endif
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	void					CstUpdateGrabber();
+#endif
+	//#modified-fva; END
 
 	virtual void			WriteToSnapshot( idBitMsgDelta &msg ) const;
 	virtual void			ReadFromSnapshot( const idBitMsgDelta &msg );
@@ -385,6 +390,18 @@ private:
 	void					Event_StartWeaponLight( const char* name);
 	void					Event_StopWeaponLight( const char* name);
 #endif
+
+	//#modified-fva; BEGIN
+	int						cstSnapshotLight;
+	bool					cstCanSyncLight;
+	int						cstAux;
+
+	void					Event_CstGetAux();
+	void					Event_CstSetAux(int aux);
+	void					Event_CstBeginLightSync();
+	void					Event_CstSetNetfiring(int isNetfiring);
+	void					Event_CstSetWeaponGuiParm(const char *key, const char *val);
+	//#modified-fva; END
 };
 
 ID_INLINE bool idWeapon::IsLinked( void ) {

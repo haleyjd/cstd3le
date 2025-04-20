@@ -1021,11 +1021,23 @@ void idTarget_SetInfluence::Event_Activate( idEntity *activator ) {
 		switchToCamera->PostEventSec( &EV_Activate, flashIn + 0.05f, this );
 	}
 
+	//#modified-fva; BEGIN
+	/*
 	int fov = spawnArgs.GetInt( "fov" );
 	if ( fov ) {
 		fovSetting.Init( gameLocal.time, SEC2MS( spawnArgs.GetFloat( "fovTime" ) ), player->DefaultFov(), fov );
 		BecomeActive( TH_THINK );
 	}
+	*/
+	float fov = spawnArgs.GetFloat("fov");
+	if (fov != 0.0f) {
+		float invAmpFactor = idMath::Tan(DEG2RAD((float)fov * 0.5f)) / idMath::Tan(DEG2RAD(90.0f * 0.5f));
+		float newFov = RAD2DEG(2.0f * idMath::ATan(invAmpFactor * idMath::Tan(DEG2RAD(player->DefaultFov()) * 0.5f)));
+		newFov = idMath::ClampFloat(1.0f, 179.0f, newFov);
+		fovSetting.Init(gameLocal.time, SEC2MS(spawnArgs.GetFloat("fovTime")), player->DefaultFov(), newFov);
+		BecomeActive(TH_THINK);
+	}
+	//#modified-fva; END
 
 	for ( i = 0; i < genericList.Num(); i++ ) {
 		ent = gameLocal.entities[genericList[i]];

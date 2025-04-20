@@ -159,6 +159,11 @@ bool idSmokeParticles::EmitSmoke( const idDeclParticle *smoke, const int systemS
 	}
 
 	if ( !gameLocal.isNewFrame ) {
+		//#modified-fva; BEGIN
+		if (cst_smokeFixMP.GetBool()) {
+			return true;
+		}
+		//#modified-fva; END
 		return false;
 	}
 

@@ -75,6 +75,10 @@ typedef enum {
 	CVAR_ROM				= BIT(16),	// display only, cannot be set by user at all
 	CVAR_ARCHIVE			= BIT(17),	// set to cause it to be saved to a config file
 	CVAR_MODIFIED			= BIT(18)	// set when the variable is modified
+	//#modified-fva; BEGIN
+	,
+	CVAR_CST_INFOSYNC		= BIT(19)	// combine with CVAR_SERVERINFO to sync the value as soon as it changes
+	//#modified-fva; END
 } cvarFlags_t;
 
 
@@ -117,6 +121,9 @@ public:
 	bool					GetBool( void ) const { return ( internalVar->integerValue != 0 ); }
 	int						GetInteger( void ) const { return internalVar->integerValue; }
 	float					GetFloat( void ) const { return internalVar->floatValue; }
+	//#modified-fva; BEGIN
+	int						CstGetStringLength() { return internalVar->cstValueLength; }
+	//#modified-fva; END
 
 	void					SetString( const char *value ) { internalVar->InternalSetString( value ); }
 	void					SetBool( const bool value ) { internalVar->InternalSetBool( value ); }
@@ -136,6 +143,9 @@ protected:
 	float					valueMax;				// maximum value
 	const char **			valueStrings;			// valid value strings
 	argCompletion_t			valueCompletion;		// value auto-completion function
+	//#modified-fva; BEGIN
+	int						cstValueLength;
+	//#modified-fva; END
 	int						integerValue;			// atoi( string )
 	float					floatValue;				// atof( value )
 	idCVar *				internalVar;			// internal cvar
@@ -261,6 +271,9 @@ ID_INLINE void idCVar::Init( const char *name, const char *value, int flags, con
 	this->valueMax = valueMax;
 	this->valueStrings = valueStrings;
 	this->valueCompletion = valueCompletion;
+	//#modified-fva; BEGIN
+	this->cstValueLength = 0;
+	//#modified-fva; END
 	this->integerValue = 0;
 	this->floatValue = 0.0f;
 	this->internalVar = this;

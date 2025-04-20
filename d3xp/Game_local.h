@@ -24,11 +24,31 @@
 	#define ASYNC_WRITE_PVS 0
 #endif
 
-#ifdef ID_DEBUG_UNINITIALIZED_MEMORY
-// This is real evil but allows the code to inspect arbitrary class variables.
-#define private		public
-#define protected	public
+//#modified-fva; BEGIN
+// for debugging only: do NOT set this to 1 in final builds
+#ifndef CST_DEBUG
+	#define CST_DEBUG 0
 #endif
+//#modified-fva; END
+
+//#modified-fva; BEGIN
+#ifndef CST_MAX_PLAYERS
+	#ifdef _D3XP
+		#define CST_MAX_PLAYERS 8
+	#else
+		#define CST_MAX_PLAYERS 4
+	#endif
+#endif
+//#modified-fva; END
+
+
+//#modified-fva; BEGIN
+//#ifdef ID_DEBUG_UNINITIALIZED_MEMORY
+//// This is real evil but allows the code to inspect arbitrary class variables.
+//#define private		public
+//#define protected	public
+//#endif
+//#modified-fva; END
 
 extern idRenderWorld *				gameRenderWorld;
 extern idSoundWorld *				gameSoundWorld;
@@ -249,6 +269,16 @@ enum slowmoState_t {
 class idGameLocal : public idGame {
 public:
 	idDict					serverInfo;				// all the tunable parameters, like numclients, etc
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	bool					cstSiGrabberUnlimitedTimeMP;
+	int						cstSiGrabberStableThrowMP;
+#endif
+	bool					cstSiAllowHeadlampMP;
+	bool					cstSiAllowSmokeControlMP;
+	bool					cstSiAllowDamageFeedbackControlMP;
+	bool					cstSiAllowGrenadesToggleMP;
+	//#modified-fva; END
 	int						numClients;				// pulled from serverInfo and verified
 	idDict					userInfo[MAX_CLIENTS];	// client specific settings
 	usercmd_t				usercmds[MAX_CLIENTS];	// client input commands
@@ -299,6 +329,9 @@ public:
 	int						previousTime;			// time in msec of last frame
 	int						time;					// in msec
 	int						msec;					// time since last update in milliseconds
+	//#modified-fva; BEGIN
+	int						cstMenuTime;
+	//#modified-fva; END
 
 	int						vacuumAreaNum;			// -1 if level doesn't have any outside areas
 
@@ -396,6 +429,11 @@ public:
 	virtual bool			DownloadRequest( const char *IP, const char *guid, const char *paks, char urls[ MAX_STRING_CHARS ] );
 
 	virtual void				GetMapLoadingGUI( char gui[ MAX_STRING_CHARS ] );
+	//#modified-fva; BEGIN
+	virtual int				CstGetDifficulty();
+	virtual int				CstGetAw();
+	virtual void			CstChangeFov(float deltaFov);
+	//#modified-fva; END
 
 	// ---------------------- Public idGameLocal Interface -------------------
 

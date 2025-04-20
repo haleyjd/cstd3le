@@ -24,6 +24,9 @@ typedef enum {
 
 template< class type >
 class idExtrapolate {
+	//#modified-fva; BEGIN
+	friend class idTypeInfoTools;
+	//#modified-fva; END
 public:
 						idExtrapolate();
 

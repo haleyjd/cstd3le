@@ -154,6 +154,11 @@ const idEventDef AI_StopEmitter( "stopEmitter", "s" );
 
 
 #endif
+//#modified-fva; BEGIN
+#ifdef _D3XP
+const idEventDef AI_CstClearGrabbed("cstClearGrabbed");
+#endif
+//#modified-fva; END
 
 CLASS_DECLARATION( idActor, idAI )
 	EVENT( EV_Activate,							idAI::Event_Activate )
@@ -300,6 +305,11 @@ CLASS_DECLARATION( idActor, idAI )
 	EVENT( AI_GetEmitter,						idAI::Event_GetEmitter )
 	EVENT( AI_StopEmitter,						idAI::Event_StopEmitter )
 #endif
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	EVENT(AI_CstClearGrabbed, idAI::Event_CstClearGrabbed)
+#endif
+	//#modified-fva; END
 END_CLASS
 
 /*
@@ -2888,6 +2898,17 @@ void idAI::Event_StopEmitter( const char* name ) {
 	StopEmitter(name);
 }
 
+//#modified-fva; BEGIN
+#ifdef _D3XP
+void idAI::Event_CstClearGrabbed() {
+	fl.grabbed = false;
+	fl.cstGrabbedNoPhysicsMP = false;
+	fl.cstGrabbedNoThinkMP = false;
+	noGrab = spawnArgs.GetBool("noGrab", "0");
+	wasThrown = false;
+}
+#endif
+//#modified-fva; END
 
 //Added for LM (Lost mission)
 

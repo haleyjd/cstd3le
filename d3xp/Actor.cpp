@@ -2149,6 +2149,10 @@ void idActor::Gib( const idVec3 &dir, const char *damageDefName ) {
 		return;
 	}
 	idAFEntity_Gibbable::Gib( dir, damageDefName );
+	//#modified-fva; BEGIN
+	// moved from idActor::SpawnGibs
+	RemoveAttachments();
+	//#modified-fva; END
 	if ( head.GetEntity() ) {
 		head.GetEntity()->Hide();
 	}
@@ -2280,6 +2284,13 @@ bool idActor::Pain( idEntity *inflictor, idEntity *attacker, int damage, const i
 	// don't play pain sounds more than necessary
 	pain_debounce_time = gameLocal.time + pain_delay;
 
+	//#modified-fva; BEGIN
+	bool cstPlaySound = true;
+	if (entityNumber == gameLocal.localClientNum && this->IsType(idPlayer::Type) && cst_dfNoSoundPain.GetBool()) {
+		cstPlaySound = false;
+	}
+	if (cstPlaySound) {
+	//#modified-fva; END
 	if ( health > 75  ) {
 		StartSound( "snd_pain_small", SND_CHANNEL_VOICE, 0, false, NULL );
 	} else if ( health > 50 ) {
@@ -2289,6 +2300,9 @@ bool idActor::Pain( idEntity *inflictor, idEntity *attacker, int damage, const i
 	} else {
 		StartSound( "snd_pain_huge", SND_CHANNEL_VOICE, 0, false, NULL );
 	}
+	//#modified-fva; BEGIN
+	}
+	//#modified-fva; END
 
 	if ( !allowPain || ( gameLocal.time < painTime ) ) {
 		// don't play a pain anim
@@ -2349,7 +2363,10 @@ idActor::SpawnGibs
 */
 void idActor::SpawnGibs( const idVec3 &dir, const char *damageDefName ) {
 	idAFEntity_Gibbable::SpawnGibs( dir, damageDefName );
-	RemoveAttachments();
+	//#modified-fva; BEGIN
+	// moved to idActor::Gib
+	//RemoveAttachments();
+	//#modified-fva; END
 }
 
 /*

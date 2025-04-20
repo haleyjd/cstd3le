@@ -227,6 +227,9 @@ public:
 
 	bool					noclip;
 	bool					godmode;
+	//#modified-fva; BEGIN
+	bool					cstDemigod;
+	//#modified-fva; END
 
 	bool					spawnAnglesSet;		// on first usercmd, we must set deltaAngles
 	idAngles				spawnAngles;
@@ -272,11 +275,19 @@ public:
 	int						weapon_soulcube;
 	int						weapon_pda;
 	int						weapon_fists;
+	//#modified-fva; BEGIN
+	int						cst_weapon_shotgun;
+	int						cst_weapon_handgrenade;
+	//#modified-fva; END
 #ifdef _D3XP
 	int						weapon_bloodstone;
 	int						weapon_bloodstone_active1;
 	int						weapon_bloodstone_active2;
 	int						weapon_bloodstone_active3;
+	//#modified-fva; BEGIN
+	int						cst_weapon_chainsaw;
+	int						cstAwChainsawRoE;
+	//#modified-fva; END
 	bool					harvest_lock;
 #endif
 
@@ -436,8 +447,15 @@ public:
 	float					DefaultFov( void ) const;
 	float					CalcFov( bool honorZoom );
 	void					CalculateViewWeaponPos( idVec3 &origin, idMat3 &axis );
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	idVec3					GetEyePosition(bool cstForGrabber = false) const;
+	void					GetViewPos(idVec3 &origin, idMat3 &axis, bool cstForGrabber = false) const;
+#else
 	idVec3					GetEyePosition( void ) const;
 	void					GetViewPos( idVec3 &origin, idMat3 &axis ) const;
+#endif
+	//#modified-fva; END
 	void					OffsetThirdPersonView( float angle, float range, float height, bool clip );
 
 	bool					Give( const char *statname, const char *value );
@@ -580,6 +598,14 @@ public:
 
 	bool					SelfSmooth( void );
 	void					SetSelfSmooth( bool b );
+
+	//#modified-fva; BEGIN
+	int						CstGetCurrentWeapon() { return currentWeapon; }
+#ifdef _D3XP
+	void					CstGetViewPosForGrabberMP(idVec3 &origin, idMat3 &axis);
+	int						CstGetAw();
+#endif
+	//#modified-fva; END
 
 private:
 	jointHandle_t			hipJoint;
@@ -776,7 +802,57 @@ private:
 	void					Event_StopHelltime( int mode );
 	void					Event_ToggleBloom( int on );
 	void					Event_SetBloomParms( float speed, float intensity );
+	//#modified-fva; BEGIN
+	void					Event_CstGetAwChainsawRoE();
+	//#modified-fva; END
 #endif
+
+	//#modified-fva; BEGIN
+	class CstHeadlamp {
+	public:
+		CstHeadlamp();
+		~CstHeadlamp();
+		void					Init(idPlayer *owner);
+		void					Save(idSaveGame *savefile) const;
+		void					Restore(idRestoreGame *savefile);
+		void					SavePersistantInfo(idDict &dict);
+		void					RestorePersistantInfo(const idDict &dict);
+		void					WriteToSnapshot(idBitMsgDelta &msg) const;
+		void					ReadFromSnapshot(const idBitMsgDelta &msg);
+
+		void					Toggle(idPlayer *owner);
+		void					Update(idPlayer *owner);
+
+	private:
+		int						weapon_flashlight;
+		renderLight_t			renderLight;
+		qhandle_t				lightDefHandle;
+		bool					lampOn;
+
+		void					Create(idPlayer *owner);
+		void					Remove();
+		bool					IsAllowed(idPlayer *owner);
+		void					AlertMonsters(idPlayer *owner);
+	};
+	CstHeadlamp				cstHeadlamp;
+	idCVar *				cstServerSnapshotDelay;
+#ifdef _D3XP
+	int						cstPdaAw;
+#endif
+
+	void					CstShowAccessCode(idUserInterface *focusUI);
+	void					CstHideAccessCode();
+
+#ifdef _D3XP
+	void					CstCalculateFirstPersonView(idVec3 &cstOrigin, idMat3 &cstAxis, bool cstForGrabber);
+#endif
+	//#modified-fva; END
+
+	//#modified-fva; BEGIN
+#if CST_DEBUG
+	bool					cstForceAttack;
+#endif
+	//#modified-fva; END
 };
 
 ID_INLINE bool idPlayer::IsReady( void ) {

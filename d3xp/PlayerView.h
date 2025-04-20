@@ -324,6 +324,11 @@ public:
 class idPlayerView {
 public:
 						idPlayerView();
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+						~idPlayerView();
+#endif
+	//#modified-fva; END
 
 	void				Save( idSaveGame *savefile ) const;
 	void				Restore( idRestoreGame *savefile );
@@ -332,7 +337,10 @@ public:
 
 	void				ClearEffects( void );
 
-	void				DamageImpulse( idVec3 localKickDir, const idDict *damageDef );
+	//#modified-fva; BEGIN
+	//void				DamageImpulse( idVec3 localKickDir, const idDict *damageDef );
+	void				DamageImpulse(idVec3 localKickDir, const idDict *damageDef, bool cstIsDamage = true);
+	//#modified-fva; END
 
 	void				WeaponFireFeedback( const idDict *weaponDef );
 
@@ -354,6 +362,10 @@ public:
 
 	// temp for view testing
 	void				EnableBFGVision( bool b ) { bfgVision = b; };
+
+	//#modified-fva; BEGIN
+	bool				CstCanControlDamageFeedback() const;
+	//#modified-fva; END
 
 private:
 	void				SingleView( idUserInterface *hud, const renderView_t *view );

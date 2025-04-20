@@ -25,6 +25,12 @@ public:
 	void					SetDragDistance( float dist );
 	int						Update( idPlayer *player, bool hide );
 
+	//#modified-fva; BEGIN
+	void					CstWriteToSnapshot(idBitMsgDelta &msg) const;
+	void					CstReadFromSnapshot(int grabberState, const idBitMsgDelta &msg);
+	void					CstReload(int grabberState);
+	//#modified-fva; END
+
 private:
 	idEntityPtr<idEntity>	dragEnt;			// entity being dragged
 	idForce_Grab			drag;
@@ -54,6 +60,24 @@ private:
 	void					StopDrag( bool dropOnly );
 	void					UpdateBeams( void );
 	void					ApplyShake( void );
+
+	//#modified-fva; BEGIN
+	idVec3					cstOrigin;
+	idAngles				cstAngles;
+	bool					cstStart;
+	bool					cstDrop;
+	float					cstDistanceToGoal;
+
+	int						CstServerUpdate(idPlayer *player, bool hide);
+	void					CstServerStartDrag(idEntity *grabEnt);
+	void					CstServerStopDrag(bool dropOnly);
+
+	void					CstClientUpdate(idPlayer *player, bool hide);
+	void					CstClientStartDrag(idEntity *grabEnt);
+	void					CstClientStopDrag();
+
+	float					CstEvalMP();
+	//#modified-fva; END
 };
 
 #endif

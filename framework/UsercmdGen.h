@@ -56,7 +56,14 @@ const int IMPULSE_26			= 26;			// <unused>
 const int IMPULSE_27			= 27;			// <unused>
 const int IMPULSE_28			= 28;			// vote yes
 const int IMPULSE_29			= 29;			// vote no
+//#modified-fva; BEGIN
+const int IMPULSE_30 = 30;
+//#modified-fva; END
 const int IMPULSE_40			= 40;			// use vehicle
+//#modified-fva; BEGIN
+const int IMPULSE_62 = 62;
+const int IMPULSE_63 = 63;
+//#modified-fva; END
 
 // usercmd_t->flags
 const int UCF_IMPULSE_SEQUENCE	= 0x0001;		// toggled every time an impulse command is sent
@@ -76,6 +83,9 @@ public:
 	signed char impulse;						// impulse command
 	byte		flags;							// additional flags
 	int			sequence;						// just for debugging
+	//#modified-fva; BEGIN
+	signed char	cstLayer; // activated layer; valid with impulse 62 (switch layer) and 63 (hold layer)
+	//#modified-fva; END
 
 public:
 	void		ByteSwap();						// on big endian systems, byte swap the shorts and ints

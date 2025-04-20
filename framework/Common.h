@@ -173,16 +173,32 @@ public:
 	virtual const idLangDict *	GetLanguageDict( void ) = 0;
 
 								// Returns key bound to the command
-	virtual const char *		KeysFromBinding( const char *bind ) = 0;
+	//#modified-fva; BEGIN
+	//virtual const char *		KeysFromBinding( const char *bind ) = 0;
+	virtual const char *		KeysFromBinding(const char *bind, int cstLayer) = 0;
+	//#modified-fva; END
 
 								// Returns the binding bound to the key
-	virtual const char *		BindingFromKey( const char *key ) = 0; 
+	//#modified-fva; BEGIN
+	//virtual const char *		BindingFromKey( const char *key ) = 0; 
+	virtual const char *		BindingFromKey(const char *key, int cstLayer) = 0;
+	//#modified-fva; END
 
 								// Directly sample a button.
 	virtual int					ButtonState( int key ) = 0;
 
 								// Directly sample a keystate.
 	virtual int					KeyState( int key ) = 0;
+
+	//#modified-fva; BEGIN
+	virtual void CstInit(void) = 0;
+	virtual void CstShutdown(void) = 0;
+	virtual	void CstLoadGraphics(void) = 0;
+	virtual void CstPrintMsg (const char * in_msg) = 0;
+	virtual void CstDrawMsgs (void) = 0;
+	virtual void CstClearMsgs (void) = 0;
+	virtual int CstGetComFrameTime(void) = 0;
+	//#modified-fva; END
 };
 
 extern idCommon *		common;

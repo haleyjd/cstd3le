@@ -11,7 +11,19 @@
 
 #define GAME_NAME						"DOOM 3"		// appears on window titles and errors
 
-#define ENGINE_VERSION					"DOOM 1.3"		// printed in console
+#define ENGINE_VERSION					"DOOM 1.3.1"	// printed in console
+
+//#modified-fva; BEGIN
+// CstDoom3 v1.0: "1.0"
+// CstDoom3 v1.1: "1.1"
+// CstDoom3 v1.2: "1.2"
+// CstDoom3 v2.0: "2.0"
+#define CST_ENGINE_VERSION				"2.0"
+//#modified-fva; END
+
+//#modified-fva; BEGIN
+#define CST_SAVE_PATH					"\\id Software\\CstDoom3"
+//#modified-fva; END
 
 // paths
 #define	CD_BASEDIR						"Doom"
@@ -49,14 +61,24 @@
 
 // see ASYNC_PROTOCOL_VERSION
 // use a different major for each game
-#define ASYNC_PROTOCOL_MAJOR			1
+//#modified-fva; BEGIN
+//#define ASYNC_PROTOCOL_MAJOR			1
+#define ASYNC_PROTOCOL_MAJOR			21819
+//#modified-fva; END
 
 // Savegame Version
 // Update when you can no longer maintain compatibility with previous savegames
 // NOTE: a seperate core savegame version and game savegame version could be useful
 // 16: Doom v1.1
 // 17: Doom v1.2 / D3XP. Can still read old v16 with defaults for new data
-#define SAVEGAME_VERSION				17
+//#modified-fva; BEGIN
+//#define SAVEGAME_VERSION				17
+// CstDoom3 v1.0: 18
+// CstDoom3 v1.1: 19
+// CstDoom3 v1.2: 20
+// CstDoom3 v2.0: 21
+#define SAVEGAME_VERSION				21
+//#modified-fva; END
 
 // <= Doom v1.1: 1. no DS_VERSION token ( default )
 // Doom v1.2: 2
@@ -85,7 +107,7 @@
 #define CDKEY_FILE						"doomkey"
 #define XPKEY_FILE						"xpkey"
 #define CDKEY_TEXT						"\n// Do not give this file to ANYONE.\n" \
-										"// id Software and Activision will NOT ask you to send this file to them.\n"
+										"// id Software or Zenimax will NEVER ask you to send this file to them.\n"
 
 #define CONFIG_SPEC						"config.spec"
 

@@ -55,6 +55,14 @@ const idEventDef EV_Weapon_StopWeaponParticle( "stopWeaponParticle", "s" );
 const idEventDef EV_Weapon_StartWeaponLight( "startWeaponLight", "s" );
 const idEventDef EV_Weapon_StopWeaponLight( "stopWeaponLight", "s" );
 #endif
+//#modified-fva; BEGIN
+#define CST_AUX_BITS 2
+const idEventDef EV_Weapon_CstGetAux("cstGetAux", NULL, 'd');
+const idEventDef EV_Weapon_CstSetAux("cstSetAux", "d");
+const idEventDef EV_Weapon_CstBeginLightSync("cstBeginLightSync");
+const idEventDef EV_Weapon_CstSetNetfiring("cstSetNetfiring", "d");
+const idEventDef EV_Weapon_CstSetWeaponGuiParm("cstSetWeaponGuiParm", "ss");
+//#modified-fva; END
 
 //
 // class def
@@ -109,6 +117,13 @@ CLASS_DECLARATION( idAnimatedEntity, idWeapon )
 	EVENT( EV_Weapon_StartWeaponLight,			idWeapon::Event_StartWeaponLight )
 	EVENT( EV_Weapon_StopWeaponLight,			idWeapon::Event_StopWeaponLight )
 #endif
+	//#modified-fva; BEGIN
+	EVENT(EV_Weapon_CstGetAux, idWeapon::Event_CstGetAux)
+	EVENT(EV_Weapon_CstSetAux, idWeapon::Event_CstSetAux)
+	EVENT(EV_Weapon_CstBeginLightSync, idWeapon::Event_CstBeginLightSync)
+	EVENT(EV_Weapon_CstSetNetfiring, idWeapon::Event_CstSetNetfiring)
+	EVENT(EV_Weapon_CstSetWeaponGuiParm, idWeapon::Event_CstSetWeaponGuiParm)
+	//#modified-fva; END
 END_CLASS
 
 /***********************************************************************
@@ -409,6 +424,11 @@ void idWeapon::Save( idSaveGame *savefile ) const {
 	}
 #endif
 
+	//#modified-fva; BEGIN
+	savefile->WriteInt(cstSnapshotLight);
+	savefile->WriteBool(cstCanSyncLight);
+	savefile->WriteInt(cstAux);
+	//#modified-fva; END
 }
 
 /*
@@ -636,6 +656,12 @@ void idWeapon::Restore( idRestoreGame *savefile ) {
 		weaponLights.Set(newLight.name, newLight);
 	}
 #endif
+
+	//#modified-fva; BEGIN
+	savefile->ReadInt(cstSnapshotLight);
+	savefile->ReadBool(cstCanSyncLight);
+	savefile->ReadInt(cstAux);
+	//#modified-fva; END
 }
 
 /***********************************************************************
@@ -844,6 +870,12 @@ void idWeapon::Clear( void ) {
 	projectileEnt		= NULL;
 
 	isFiring			= false;
+
+	//#modified-fva; BEGIN
+	cstSnapshotLight = 0;
+	cstCanSyncLight = false;
+	cstAux = 0;
+	//#modified-fva; END
 }
 
 /*
@@ -1528,6 +1560,12 @@ void idWeapon::Reload( void ) {
 	if ( isLinked ) {
 		WEAPON_RELOAD = true;
 	}
+
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	grabber.CstReload(grabberState);
+#endif
+	//#modified-fva; END
 }
 
 /*
@@ -1718,7 +1756,15 @@ idWeapon::ShowCrosshair
 ================
 */
 bool idWeapon::ShowCrosshair( void ) const {
-	return !( state == idStr( WP_RISING ) || state == idStr( WP_LOWERING ) || state == idStr( WP_HOLSTERED ) );
+	//#modified-fva; BEGIN
+	//return !( state == idStr( WP_RISING ) || state == idStr( WP_LOWERING ) || state == idStr( WP_HOLSTERED ) );
+	if (cst_crosshairAlwaysShow.GetBool()) {
+		return true;
+	}
+	// the return line below is from the 'Doom 3 BFG Edition GPL Source Code'
+	// Copyright (C) 1993-2012 id Software LLC, a ZeniMax Media company
+	return !(status == WP_RISING || status == WP_LOWERING || status == WP_HOLSTERED || status == WP_RELOAD);
+	//#modified-fva; END
 }
 
 /*
@@ -2123,6 +2169,16 @@ idWeapon::PresentWeapon
 ================
 */
 void idWeapon::PresentWeapon( bool showViewModel ) {
+	//#modified-fva; BEGIN
+	// moved from ReadFromSnapshot (with changes)
+	if (gameLocal.isClient && cstCanSyncLight && cstSnapshotLight > 0) {
+		if ((bool)(cstSnapshotLight - 1) != lightOn) {
+			Reload();
+		}
+		cstSnapshotLight = 0;
+	}
+	//#modified-fva; END
+
 	playerViewOrigin = owner->firstPersonViewOrigin;
 	playerViewAxis = owner->firstPersonViewAxis;
 
@@ -2191,6 +2247,34 @@ void idWeapon::PresentWeapon( bool showViewModel ) {
 	if ( nozzleFx ) {
 		UpdateNozzleFx();
 	}
+
+	//#modified-fva; BEGIN
+	// update muzzle smoke on/off state
+	{
+		int currentWeapon = owner->CstGetCurrentWeapon();
+		if (currentWeapon >= 0) {
+			bool isAllowed = true;
+			if (!gameLocal.isMultiplayer || gameLocal.cstSiAllowSmokeControlMP) {
+				idCVar *noSmokeMuzzleCVar;
+				if (gameLocal.isMultiplayer && owner->entityNumber != gameLocal.localClientNum) {
+					noSmokeMuzzleCVar = &cst_noSmokeMuzzleOthersMP;
+				} else {
+					noSmokeMuzzleCVar = &cst_noSmokeMuzzle;
+				}
+				int lastCharIndex = noSmokeMuzzleCVar->CstGetStringLength() - 1;
+				int index = lastCharIndex - currentWeapon;
+				if (index >= 0 && noSmokeMuzzleCVar->GetString()[index] == '1') {
+					isAllowed = false;
+				}
+			}
+			if (!isAllowed) {
+				weaponSmokeStartTime = 0;
+			} else if (continuousSmoke && weaponSmokeStartTime == 0) {
+				weaponSmokeStartTime = gameLocal.time;
+			}
+		}
+	}
+	//#modified-fva; END
 
 	// muzzle smoke
 	if ( showViewModel && !disabled && weaponSmoke && ( weaponSmokeStartTime != 0 ) ) {
@@ -2269,10 +2353,15 @@ void idWeapon::PresentWeapon( bool showViewModel ) {
 		}
 	}
 
+	//#modified-fva; BEGIN
+	// moved to CstUpdateGrabber
+	/*
 	// Update the grabber effects
 	if ( grabberState != -1 ) {
 		grabberState = grabber.Update( owner, hide );
 	}
+	*/
+	//#modified-fva; END
 #endif
 
 	// remove the muzzle flash light when it's done
@@ -2343,6 +2432,9 @@ void idWeapon::EnterCinematic( void ) {
 	}
 
 	disabled = true;
+	//#modified-fva; BEGIN
+	isFiring = false;
+	//#modified-fva; END
 
 	LowerWeapon();
 }
@@ -2381,7 +2473,19 @@ idWeapon::GetZoomFov
 ================
 */
 int	idWeapon::GetZoomFov( void ) {
-	return zoomFov;
+	//#modified-fva; BEGIN
+	//return zoomFov;
+
+	int fov;
+	if (owner) {
+		float invAmpFactor = idMath::Tan(DEG2RAD((float)zoomFov * 0.5f)) / idMath::Tan(DEG2RAD(90.0f * 0.5f));
+		float newFov = RAD2DEG(2.0f * idMath::ATan(invAmpFactor * idMath::Tan(DEG2RAD(owner->DefaultFov()) * 0.5f)));
+		fov = idMath::ClampInt(1, 179, (int)newFov);
+	} else {
+		fov = zoomFov;
+	}
+	return fov;
+	//#modified-fva; END
 }
 
 /*
@@ -2655,8 +2759,22 @@ idWeapon::WriteToSnapshot
 void idWeapon::WriteToSnapshot( idBitMsgDelta &msg ) const {
 	msg.WriteBits( ammoClip, ASYNC_PLAYER_INV_CLIP_BITS );
 	msg.WriteBits( worldModel.GetSpawnId(), 32 );
-	msg.WriteBits( lightOn, 1 );
+	//#modified-fva; BEGIN
+	//msg.WriteBits( lightOn, 1 );
+	int cstLightState = 0;
+	if (cstCanSyncLight) {
+		cstLightState = (int)lightOn + 1;
+	}
+	msg.WriteBits(cstLightState, 2);
+	//#modified-fva; END
 	msg.WriteBits( isFiring ? 1 : 0, 1 );
+	//#modified-fva; BEGIN
+	msg.WriteBits(cstAux, CST_AUX_BITS);
+#ifdef _D3XP
+	msg.WriteBits(grabberState + 1, 3); // grabberState = [-1, 3] :: grabberState + 1 = [0, 4] :: 3 bits
+	grabber.CstWriteToSnapshot(msg);
+#endif
+	//#modified-fva; END
 }
 
 /*
@@ -2667,12 +2785,24 @@ idWeapon::ReadFromSnapshot
 void idWeapon::ReadFromSnapshot( const idBitMsgDelta &msg ) {	
 	ammoClip = msg.ReadBits( ASYNC_PLAYER_INV_CLIP_BITS );
 	worldModel.SetSpawnId( msg.ReadBits( 32 ) );
-	bool snapLight = msg.ReadBits( 1 ) != 0;
+	//#modified-fva; BEGIN
+	//bool snapLight = msg.ReadBits( 1 ) != 0;
+	cstSnapshotLight = msg.ReadBits(2);
+	//#modified-fva; END
 	isFiring = msg.ReadBits( 1 ) != 0;
+	//#modified-fva; BEGIN
+	cstAux = msg.ReadBits(CST_AUX_BITS);
+#ifdef _D3XP
+	grabberState = msg.ReadBits(3) - 1;
+	grabber.CstReadFromSnapshot(grabberState, msg);
+#endif
+	//#modified-fva; END
 
 	// WEAPON_NETFIRING is only turned on for other clients we're predicting. not for local client
 	if ( owner && gameLocal.localClientNum != owner->entityNumber && WEAPON_NETFIRING.IsLinked() ) {
 
+		//#modified-fva; BEGIN
+		/*
 		// immediately go to the firing state so we don't skip fire animations
 		if ( !WEAPON_NETFIRING && isFiring ) {
 			idealState = "Fire";
@@ -2682,13 +2812,20 @@ void idWeapon::ReadFromSnapshot( const idBitMsgDelta &msg ) {
         if ( WEAPON_NETFIRING && !isFiring ) {
             idealState = "Idle";
         }
+		*/
+		//#modified-fva; END
 
 		WEAPON_NETFIRING = isFiring;
 	}
 
+	//#modified-fva; BEGIN
+	// moved to PresentWeapon
+	/*
 	if ( snapLight != lightOn ) {
 		Reload();
 	}
+	*/
+	//#modified-fva; END
 }
 
 /*
@@ -2770,11 +2907,15 @@ void idWeapon::Event_WeaponState( const char *statename, int blendFrames ) {
 
 	idealState = statename;
 
+	//#modified-fva; BEGIN
+	/*
 	if ( !idealState.Icmp( "Fire" ) ) {
 		isFiring = true;
 	} else {
 		isFiring = false;
 	}
+	*/
+	//#modified-fva; END
 
 	animBlendFrames = blendFrames;
 	thread->DoneProcessing();
@@ -2865,7 +3006,15 @@ void idWeapon::Event_UseAmmo( int amount ) {
 		return;
 	}
 
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	if (clipSize == 0) {
+		owner->inventory.UseAmmo(ammoType, (powerAmmo) ? amount : (amount * ammoRequired));
+	}
+#else
 	owner->inventory.UseAmmo( ammoType, ( powerAmmo ) ? amount : ( amount * ammoRequired ) );
+#endif
+	//#modified-fva; END
 	if ( clipSize && ammoRequired ) {
 		ammoClip -= powerAmmo ? amount : ( amount * ammoRequired );
 		if ( ammoClip < 0 ) {
@@ -3354,6 +3503,12 @@ void idWeapon::Event_LaunchProjectiles( int num_projectiles, float spread, float
 	if ( kick_endtime > gameLocal.realClientTime + muzzle_kick_maxtime ) {
 		kick_endtime = gameLocal.realClientTime + muzzle_kick_maxtime;
 	}
+
+	//#modified-fva; BEGIN
+	if (!gameLocal.isMultiplayer && owner->CstGetCurrentWeapon() == owner->cst_weapon_shotgun && cst_shotgunHalfSpreadSP.GetBool()) {
+		spread *= 0.5f;
+	}
+	//#modified-fva; END
 
 	if ( gameLocal.isClient ) {
 
@@ -3909,5 +4064,72 @@ idWeapon::ClientPredictionThink
 ===============
 */
 void idWeapon::ClientPredictionThink( void ) {
-	UpdateAnimation();	
+	//#modified-fva; BEGIN
+	// already called in PresentWeapon
+	//UpdateAnimation();	
+	//#modified-fva; END
 }
+
+//#modified-fva; BEGIN
+#ifdef _D3XP
+void idWeapon::CstUpdateGrabber() {
+	// moved from PresentWeapon (with changes)
+	if (grabberState != -1) {
+		if (!gameLocal.isClient) {
+			grabberState = grabber.Update(owner, hide);
+		} else {
+			grabber.Update(owner, hide); // clients update grabberState via snapshots
+		}
+	}
+}
+#endif
+
+// ==========
+void idWeapon::Event_CstGetAux() {
+	idThread::ReturnInt(cstAux);
+}
+
+// ==========
+void idWeapon::Event_CstSetAux(int aux) {
+	if (gameLocal.isServer) {
+		cstAux = aux;
+	}
+}
+
+// ==========
+void idWeapon::Event_CstBeginLightSync() {
+	cstCanSyncLight = true;
+}
+
+// ==========
+void idWeapon::Event_CstSetNetfiring(int isNetfiring) {
+	if (gameLocal.isServer) {
+		// this will set/clear WEAPON_NETFIRING on clients; see WriteToSnapshot/ReadFromSnapshot
+		isFiring = isNetfiring;
+	}
+}
+
+// ==========
+void idWeapon::Event_CstSetWeaponGuiParm(const char *key, const char *val) {
+	// code below is adapted from idWeapon::UpdateGUI and idEntity::Event_SetGuiParm
+
+	if (!renderEntity.gui[0] || !owner) {
+		return;
+	}
+
+	if (gameLocal.localClientNum != owner->entityNumber) {
+		// if updating the hud for a followed client
+		if (gameLocal.localClientNum >= 0 && gameLocal.entities[gameLocal.localClientNum] && gameLocal.entities[gameLocal.localClientNum]->IsType(idPlayer::Type)) {
+			idPlayer *p = static_cast< idPlayer * >(gameLocal.entities[gameLocal.localClientNum]);
+			if (!p->spectating || p->spectator != owner->entityNumber) {
+				return;
+			}
+		} else {
+			return;
+		}
+	}
+
+	renderEntity.gui[0]->SetStateString(key, val);
+	renderEntity.gui[0]->StateChanged(gameLocal.time);
+}
+//#modified-fva; END

@@ -9,7 +9,10 @@ extern idCVar	developer;
 extern idCVar	g_cinematic;
 extern idCVar	g_cinematicMaxSkipTime;
 
-extern idCVar	r_aspectRatio;
+//#modified-fva; BEGIN
+//extern idCVar	r_aspectRatio;
+extern idCVar	cst_aspectRatio;
+//#modified-fva; END
 
 extern idCVar	g_monsters;
 extern idCVar	g_decals;
@@ -227,7 +230,10 @@ extern idCVar	g_grabberDamping;
 #endif
 
 #ifdef _D3XP
-extern idCVar	g_xp_bind_run_once;
+//#modified-fva; BEGIN
+//extern idCVar	g_xp_bind_run_once;
+extern idCVar	cst_bind_run_once;
+//#modified-fva; END
 #endif
 
 extern idCVar	aas_test;
@@ -271,6 +277,52 @@ extern idCVar g_CTFArrows;
 
 extern idCVar	net_clientSelfSmoothing;
 extern idCVar	net_clientLagOMeter;
+
+//#modified-fva; BEGIN
+#ifdef _D3XP
+extern idCVar cst_grabberUnlimitedTimeSP;
+extern idCVar cst_grabberUnlimitedTimeMP;
+extern idCVar cst_grabberStableThrowSP;
+extern idCVar cst_grabberStableThrowMP;
+extern idCVar cst_grabberDropOnHoldLayer;
+extern idCVar cst_grabberDropOnSwitchLayer;
+extern idCVar cst_noSmokeFlyGrabbed;
+extern idCVar cst_noSmokeFlyGrabbedOthersMP;
+extern idCVar cst_awChainsawRoE;
+#endif
+//#modified-fva; END
+
+//#modified-fva; BEGIN
+extern idCVar cst_noStaminaDrop;
+extern idCVar cst_headlampAlertMonsters;
+extern idCVar cst_headlampKeepState;
+extern idCVar cst_headlampSound;
+extern idCVar cst_allowHeadlampMP;
+extern idCVar cst_showAccessCodes;
+extern idCVar cst_takeNoAmmoWeapons;
+extern idCVar cst_smokeFixMP;
+extern idCVar cst_allowSmokeControlMP;
+extern idCVar cst_noSmokeFly;
+extern idCVar cst_noSmokeFlyOthersMP;
+extern idCVar cst_noSmokeMuzzle;
+extern idCVar cst_noSmokeMuzzleOthersMP;
+extern idCVar cst_allowFlashlightToggleSP;
+extern idCVar cst_allowDamageFeedbackControlMP;
+extern idCVar cst_dfNoDoubleVision;
+extern idCVar cst_dfNoTunnelVision;
+extern idCVar cst_dfNoViewAngleKick;
+extern idCVar cst_dfNoScreenBlob;
+extern idCVar cst_dfNoArmorPulse;
+extern idCVar cst_dfNoSoundPain;
+extern idCVar cst_dfNoSoundAirGasp;
+extern idCVar cst_hudZoom;
+extern idCVar cst_hudCrouch;
+extern idCVar cst_hudRun;
+extern idCVar cst_crosshairAlwaysShow;
+extern idCVar cst_shotgunHalfSpreadSP;
+extern idCVar cst_grenadesToggle;
+extern idCVar cst_allowGrenadesToggleMP;
+//#modified-fva; END
 
 extern const char *si_gameTypeArgs[];
 

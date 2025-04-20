@@ -58,6 +58,22 @@ idPlayerView::idPlayerView() {
 	ClearEffects();
 }
 
+//#modified-fva; BEGIN
+#ifdef _D3XP
+/*
+==============
+idPlayerView::~idPlayerView
+==============
+*/
+idPlayerView::~idPlayerView() {
+	if (fxManager) {
+		delete fxManager;
+		fxManager = NULL;
+	}
+}
+#endif
+//#modified-fva; END
+
 /*
 ==============
 idPlayerView::Save
@@ -224,17 +240,38 @@ LocalKickDir is the direction of force in the player's coordinate system,
 which will determine the head kick direction
 ==============
 */
-void idPlayerView::DamageImpulse( idVec3 localKickDir, const idDict *damageDef ) {
+//#modified-fva; BEGIN
+//void idPlayerView::DamageImpulse( idVec3 localKickDir, const idDict *damageDef ) {
+void idPlayerView::DamageImpulse(idVec3 localKickDir, const idDict *damageDef, bool cstIsDamage) {
+//#modified-fva; END
+
+	//#modified-fva; BEGIN
+	int cstFastBaseTime;
+	int cstSlowBaseTime;
+	if (gameLocal.isClient && cstIsDamage) {
+		cstFastBaseTime = gameLocal.fast.realClientTime + gameLocal.fast.msec;
+		cstSlowBaseTime = gameLocal.slow.realClientTime + gameLocal.slow.msec;
+	} else {
+		cstFastBaseTime = gameLocal.fast.time;
+		cstSlowBaseTime = gameLocal.slow.time;
+	}
+	//#modified-fva; END
+
 	//
 	// double vision effect
 	//
-	if ( lastDamageTime > 0.0f && SEC2MS( lastDamageTime ) + IMPULSE_DELAY > gameLocal.slow.time ) {
+	//#modified-fva; BEGIN
+	//if ( lastDamageTime > 0.0f && SEC2MS( lastDamageTime ) + IMPULSE_DELAY > gameLocal.slow.time ) {
+	if (lastDamageTime > 0.0f && SEC2MS(lastDamageTime) + IMPULSE_DELAY > cstSlowBaseTime) {
+	//#modified-fva; END
 		// keep shotgun from obliterating the view
 		return;
 	}
 
 	float	dvTime = damageDef->GetFloat( "dv_time" );
 	if ( dvTime ) {
+		//#modified-fva; BEGIN
+		/*
 		if ( dvFinishTime < gameLocal.fast.time ) {
 			dvFinishTime = gameLocal.fast.time;
 		}
@@ -243,14 +280,30 @@ void idPlayerView::DamageImpulse( idVec3 localKickDir, const idDict *damageDef )
 		if ( dvFinishTime > gameLocal.fast.time + 5000 ) {
 			dvFinishTime = gameLocal.fast.time + 5000;
 		}
+		*/
+		if (dvFinishTime < cstFastBaseTime) {
+			dvFinishTime = cstFastBaseTime;
+		}
+		dvFinishTime += g_dvTime.GetFloat() * dvTime;
+		// don't let it add up too much in god mode
+		if (dvFinishTime > cstFastBaseTime + 5000) {
+			dvFinishTime = cstFastBaseTime + 5000;
+		}
+		//#modified-fva; END
 	}
 
 	//
 	// head angle kick
 	//
+	//#modified-fva; BEGIN
+	if (!CstCanControlDamageFeedback() || !cst_dfNoViewAngleKick.GetBool() || !cstIsDamage) {
+	//#modified-fva; END
 	float	kickTime = damageDef->GetFloat( "kick_time" );
 	if ( kickTime ) {
-		kickFinishTime = gameLocal.slow.time + g_kickTime.GetFloat() * kickTime;
+		//#modified-fva; BEGIN
+		//kickFinishTime = gameLocal.slow.time + g_kickTime.GetFloat() * kickTime;
+		kickFinishTime = cstSlowBaseTime + g_kickTime.GetFloat() * kickTime;
+		//#modified-fva; END
 
 		// forward / back kick will pitch view
 		kickAngles[0] = localKickDir[0];
@@ -269,6 +322,9 @@ void idPlayerView::DamageImpulse( idVec3 localKickDir, const idDict *damageDef )
 			kickAngles *= kickAmplitude;
 		}
 	}
+	//#modified-fva; BEGIN
+	}
+	//#modified-fva; END
 
 	//
 	// screen blob
@@ -276,8 +332,12 @@ void idPlayerView::DamageImpulse( idVec3 localKickDir, const idDict *damageDef )
 	float	blobTime = damageDef->GetFloat( "blob_time" );
 	if ( blobTime ) {
 		screenBlob_t	*blob = GetScreenBlob();
-		blob->startFadeTime = gameLocal.slow.time;
-		blob->finishTime = gameLocal.slow.time + blobTime * g_blobTime.GetFloat() * ((float)gameLocal.msec / USERCMD_MSEC);
+		//#modified-fva; BEGIN
+		//blob->startFadeTime = gameLocal.slow.time;
+		//blob->finishTime = gameLocal.slow.time + blobTime * g_blobTime.GetFloat() * ((float)gameLocal.msec / USERCMD_MSEC);
+		blob->startFadeTime = cstSlowBaseTime;
+		blob->finishTime = cstSlowBaseTime + blobTime * g_blobTime.GetFloat() * ((float)gameLocal.msec / USERCMD_MSEC);
+		//#modified-fva; END
 
 		const char *materialName = damageDef->GetString( "mtr_blob" );
 		blob->material = declManager->FindMaterial( materialName );
@@ -298,7 +358,10 @@ void idPlayerView::DamageImpulse( idVec3 localKickDir, const idDict *damageDef )
 	//
 	// save lastDamageTime for tunnel vision accentuation
 	//
-	lastDamageTime = MS2SEC( gameLocal.slow.time );
+	//#modified-fva; BEGIN
+	//lastDamageTime = MS2SEC( gameLocal.slow.time );
+	lastDamageTime = MS2SEC(cstSlowBaseTime);
+	//#modified-fva; END
 
 }
 
@@ -500,6 +563,13 @@ void idPlayerView::SingleView( idUserInterface *hud, const renderView_t *view ) 
 
 	// draw screen blobs
 	if ( !pm_thirdPerson.GetBool() && !g_skipViewEffects.GetBool() ) {
+		//#modified-fva; BEGIN
+		bool cstCanControl = CstCanControlDamageFeedback();
+		//#modified-fva; END
+
+		//#modified-fva; BEGIN
+		if (!cstCanControl || !cst_dfNoScreenBlob.GetBool()) {
+		//#modified-fva; END
 		for ( int i = 0 ; i < MAX_SCREEN_BLOBS ; i++ ) {
 			screenBlob_t	*blob = &screenBlobs[i];
 			if ( blob->finishTime <= gameLocal.slow.time ) {
@@ -517,18 +587,30 @@ void idPlayerView::SingleView( idUserInterface *hud, const renderView_t *view ) 
 				renderSystem->DrawStretchPic( blob->x, blob->y, blob->w, blob->h,blob->s1, blob->t1, blob->s2, blob->t2, blob->material );
 			}
 		}
+		//#modified-fva; BEGIN
+		}
+		//#modified-fva; END
 		player->DrawHUD( hud );
 
 		// armor impulse feedback
+		//#modified-fva; BEGIN
+		if (!cstCanControl || !cst_dfNoArmorPulse.GetBool()) {
+		//#modified-fva; END
 		float	armorPulse = ( gameLocal.fast.time - player->lastArmorPulse ) / 250.0f;
 
 		if ( armorPulse > 0.0f && armorPulse < 1.0f ) {
 			renderSystem->SetColor4( 1, 1, 1, 1.0 - armorPulse );
 			renderSystem->DrawStretchPic( 0, 0, 640, 480, 0, 0, 1, 1, armorMaterial );
 		}
+		//#modified-fva; BEGIN
+		}
+		//#modified-fva; END
 
 
 		// tunnel vision
+		//#modified-fva; BEGIN
+		if (!cstCanControl || !cst_dfNoTunnelVision.GetBool()) {
+		//#modified-fva; END
 		float	health = 0.0f;
 		if ( g_testHealthVision.GetFloat() != 0.0f ) {
 			health = g_testHealthVision.GetFloat();
@@ -547,6 +629,9 @@ void idPlayerView::SingleView( idUserInterface *hud, const renderView_t *view ) 
 			renderSystem->SetColor4( ( player->health <= 0.0f ) ? MS2SEC( gameLocal.slow.time ) : lastDamageTime, 1.0f, 1.0f, ( player->health <= 0.0f ) ? 0.0f : alpha );
 			renderSystem->DrawStretchPic( 0.0f, 0.0f, 640.0f, 480.0f, 0.0f, 0.0f, 1.0f, 1.0f, tunnelMaterial );
 		}
+		//#modified-fva; BEGIN
+		}
+		//#modified-fva; END
 
 		if ( bfgVision ) {
 			renderSystem->SetColor4( 1.0f, 1.0f, 1.0f, 1.0f );
@@ -663,10 +748,59 @@ void idPlayerView::RenderPlayerView( idUserInterface *hud ) {
 	ScreenFade();
 
 	if ( net_clientLagOMeter.GetBool() && lagoMaterial && gameLocal.isClient ) {
+		//#modified-fva; BEGIN
+		/*
 		renderSystem->SetColor4( 1.0f, 1.0f, 1.0f, 1.0f );
 		renderSystem->DrawStretchPic( 10.0f, 380.0f, 64.0f, 64.0f, 0.0f, 0.0f, 1.0f, 1.0f, lagoMaterial );
+		*/
+		float x = 10.0f;
+		float y = 380.0f;
+		float w = 64.0f;
+		float h = 64.0f;
+		if (cvarSystem->GetCVarBool("cst_hudAdjustAspect")) {
+			// similar to CST_ANCHOR_BOTTOM_LEFT
+			int glWidth, glHeight;
+			renderSystem->GetGLSettings(glWidth, glHeight);
+			if (glWidth > 0 && glHeight > 0) {
+				float glAspectRatio = (float)glWidth / (float)glHeight;
+
+				const float vidWidth = SCREEN_WIDTH;
+				const float vidHeight = SCREEN_HEIGHT;
+				const float vidAspectRatio = (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT;
+
+				float modWidth = vidWidth;
+				float modHeight = vidHeight;
+				if (glAspectRatio >= vidAspectRatio) {
+					modWidth = modHeight * glAspectRatio;
+				} else {
+					modHeight = modWidth / glAspectRatio;
+				}
+
+				float xScale = vidWidth / modWidth;
+				float yScale = vidHeight / modHeight;
+				float xOffset = 0.0f;
+				float yOffset = vidHeight * (1.0f - yScale);
+
+				x = x * xScale + xOffset;
+				y = y * yScale + yOffset;
+				w *= xScale;
+				h *= yScale;
+			}
+		}
+		renderSystem->SetColor4(1.0f, 1.0f, 1.0f, 1.0f);
+		renderSystem->DrawStretchPic(x, y, w, h, 0.0f, 0.0f, 1.0f, 1.0f, lagoMaterial);
+		//#modified-fva; END
 	}	
 }
+
+//#modified-fva; BEGIN
+bool idPlayerView::CstCanControlDamageFeedback() const {
+	if (!gameLocal.isMultiplayer || gameLocal.cstSiAllowDamageFeedbackControlMP) {
+		return true;
+	}
+	return false;
+}
+//#modified-fva; END
 
 #ifdef _D3XP
 /*
@@ -1303,6 +1437,11 @@ FullscreenFX_DoubleVision::Active
 ==================
 */
 bool FullscreenFX_DoubleVision::Active() {
+	//#modified-fva; BEGIN
+	if (fxman->GetPlayerView()->CstCanControlDamageFeedback() && cst_dfNoDoubleVision.GetBool()) {
+		return false;
+	}
+	//#modified-fva; END
 
 	if ( gameLocal.fast.time < fxman->GetPlayerView()->dvFinishTime ) {
 		return true;
@@ -1581,7 +1720,14 @@ FullscreenFXManager::~FullscreenFXManager
 ==================
 */
 FullscreenFXManager::~FullscreenFXManager() {
-
+	//#modified-fva; BEGIN
+	for (int i = 0; i < fx.Num(); i++) {
+		if (fx[i]) {
+			delete fx[i];
+			fx[i] = NULL;
+		}
+	}
+	//#modified-fva; END
 }
 
 /*

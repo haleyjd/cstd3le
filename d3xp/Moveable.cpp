@@ -494,9 +494,12 @@ idMoveable::ReadFromSnapshot
 */
 void idMoveable::ReadFromSnapshot( const idBitMsgDelta &msg ) {
 	physicsObj.ReadFromSnapshot( msg );
-	if ( msg.HasChanged() ) {
-		UpdateVisuals();
-	}
+	//#modified-fva; BEGIN
+	//if ( msg.HasChanged() ) {
+	//	UpdateVisuals();
+	//}
+	UpdateVisuals();
+	//#modified-fva; END
 }
 
 /*
@@ -658,6 +661,20 @@ void idBarrel::BarrelThink( void ) {
 	idVec3 curOrigin, gravityNormal, dir;
 	idMat3 curAxis, axis;
 
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	if (gameLocal.isMultiplayer && fl.grabbed) {
+		if (!fl.cstGrabbedNoPhysicsMP) {
+			RunPhysics();
+			lastOrigin = GetPhysics()->GetOrigin();
+			lastAxis = GetPhysics()->GetAxis();
+			Present();
+		}
+		return;
+	}
+#endif
+	//#modified-fva; END
+
 	wasAtRest = IsAtRest();
 
 	// run physics
@@ -809,6 +826,11 @@ idExplodingBarrel::idExplodingBarrel() {
 #ifdef _D3XP
 	isStable = true;
 #endif
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	cstGrabberFlames = false;
+#endif
+	//#modified-fva; END
 	particleModelDefHandle = -1;
 	lightDefHandle = -1;
 	memset( &particleRenderEntity, 0, sizeof( particleRenderEntity ) );
@@ -855,6 +877,12 @@ void idExplodingBarrel::Save( idSaveGame *savefile ) const {
 #ifdef _D3XP
 	savefile->WriteBool( isStable );
 #endif
+
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	savefile->WriteBool(cstGrabberFlames);
+#endif
+	//#modified-fva; END
 }
 
 /*
@@ -887,6 +915,12 @@ void idExplodingBarrel::Restore( idRestoreGame *savefile ) {
 		particleModelDefHandle = gameRenderWorld->AddEntityDef( &particleRenderEntity );
 	}
 #endif
+
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	savefile->ReadBool(cstGrabberFlames);
+#endif
+	//#modified-fva; END
 }
 
 /*
@@ -901,6 +935,11 @@ void idExplodingBarrel::Spawn( void ) {
 	isStable = true;
 	fl.networkSync = true;
 #endif
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	cstGrabberFlames = false;
+#endif
+	//#modified-fva; END
 	spawnOrigin = GetPhysics()->GetOrigin();
 	spawnAxis = GetPhysics()->GetAxis();
 	state = NORMAL;
@@ -981,8 +1020,29 @@ idExplodingBarrel::StartBurning
 ================
 */
 void idExplodingBarrel::StartBurning( void ) {
+	//#modified-fva; BEGIN
+	//state = BURNING;
+	//AddParticles( "barrelfire.prt", true );
+
+	if (state != NORMAL && state != BURNING) {
+		return;
+	}
+
 	state = BURNING;
-	AddParticles( "barrelfire.prt", true );
+	cstGrabberFlames = true;
+
+	CancelEvents(&EV_Explode);
+	CancelEvents(&EV_Activate);
+
+	if (particleModelDefHandle < 0) {
+		idStr cstModelBurn;
+		if (spawnArgs.GetString("model_burn", "", cstModelBurn)) {
+			AddParticles(cstModelBurn.c_str(), true);
+		} else {
+			AddParticles("barrelfire.prt", true);
+		}
+	}
+	//#modified-fva; END
 }
 
 /*
@@ -991,6 +1051,14 @@ idExplodingBarrel::StartBurning
 ================
 */
 void idExplodingBarrel::StopBurning( void ) {
+	//#modified-fva; BEGIN
+	if (!cstGrabberFlames) {
+		return;
+	}
+	cstGrabberFlames = false;
+	health = spawnArgs.GetInt("health", "5");
+	//#modified-fva; END
+
 	state = NORMAL;
 
 	if ( particleModelDefHandle >= 0 ){
@@ -1078,6 +1146,16 @@ idExplodingBarrel::ExplodingEffects
 */
 void idExplodingBarrel::ExplodingEffects( void ) {
 	const char *temp;
+
+	//#modified-fva; BEGIN
+	// remove flames before adding the exploding effects
+	if (particleModelDefHandle >= 0) {
+		gameRenderWorld->FreeEntityDef(particleModelDefHandle);
+		particleModelDefHandle = -1;
+		particleTime = 0;
+		memset(&particleRenderEntity, 0, sizeof(particleRenderEntity));
+	}
+	//#modified-fva; END
 
 	StartSound( "snd_explode", SND_CHANNEL_ANY, 0, false, NULL );
 
@@ -1265,6 +1343,24 @@ void idExplodingBarrel::Event_Respawn() {
 	}
 	health = spawnArgs.GetInt( "health", "5" );
 	fl.takedamage = true;
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	isStable = true;
+	cstGrabberFlames = false;
+#endif
+	if (particleModelDefHandle >= 0) {
+		gameRenderWorld->FreeEntityDef(particleModelDefHandle);
+		particleModelDefHandle = -1;
+		particleTime = 0;
+		memset(&particleRenderEntity, 0, sizeof(particleRenderEntity));
+	}
+	if (lightDefHandle >= 0) {
+		gameRenderWorld->FreeLightDef(lightDefHandle);
+		lightDefHandle = -1;
+		lightTime = 0;
+		memset(&light, 0, sizeof(light));
+	}
+	//#modified-fva; END
 	physicsObj.SetOrigin( spawnOrigin );
 	physicsObj.SetAxis( spawnAxis );
 	physicsObj.SetContents( CONTENTS_SOLID );
@@ -1291,6 +1387,11 @@ idMoveable::WriteToSnapshot
 void idExplodingBarrel::WriteToSnapshot( idBitMsgDelta &msg ) const {
 	idMoveable::WriteToSnapshot( msg );
 	msg.WriteBits( IsHidden(), 1 );
+
+	//#modified-fva; BEGIN
+	msg.WriteBits(state, 2);
+	msg.WriteBits(particleModelDefHandle >= 0, 1);
+	//#modified-fva; END
 }
 
 /*
@@ -1306,6 +1407,61 @@ void idExplodingBarrel::ReadFromSnapshot( const idBitMsgDelta &msg ) {
 	} else {
 		Show();
 	}
+
+	//#modified-fva; BEGIN
+	explode_state_t cstState = (explode_state_t)msg.ReadBits(2);
+	bool cstParticle = msg.ReadBits(1) != 0;
+
+	bool cstAddFlames = false;
+	bool cstFreeParticle = false;
+	bool cstFreeLight = false;
+
+	switch (cstState)
+	{
+	case NORMAL:
+		cstFreeParticle = true;
+		cstFreeLight = true;
+		break;
+
+	case BURNING:
+		if (cstParticle) {
+			cstAddFlames = true;
+		} else {
+			cstFreeParticle = true;
+		}
+		break;
+
+	default:
+		// if exploding, idExplodingBarrel::ExplodingEffects takes care of removing the flames
+		break;
+	}
+
+	if (cstAddFlames && particleModelDefHandle < 0) {
+		idStr cstModelBurn;
+		if (spawnArgs.GetString("model_burn", "", cstModelBurn)) {
+			AddParticles(cstModelBurn.c_str(), true);
+		}
+#ifdef _D3XP
+		else {
+			AddParticles("barrelfire.prt", true);
+		}
+#endif
+	}
+
+	if (cstFreeParticle && particleModelDefHandle >= 0) {
+		gameRenderWorld->FreeEntityDef(particleModelDefHandle);
+		particleModelDefHandle = -1;
+		particleTime = 0;
+		memset(&particleRenderEntity, 0, sizeof(particleRenderEntity));
+	}
+
+	if (cstFreeLight && lightDefHandle >= 0) {
+		gameRenderWorld->FreeLightDef(lightDefHandle);
+		lightDefHandle = -1;
+		lightTime = 0;
+		memset(&light, 0, sizeof(light));
+	}
+	//#modified-fva; END
 }
 
 /*

@@ -1107,7 +1107,13 @@ void idAI::DormantEnd( void ) {
 	
 	if ( particles.Num() ) {
 		for ( int i = 0; i < particles.Num(); i++ ) {
+			//#modified-fva; BEGIN
+#ifdef _D3XP
+			particles[i].time = gameLocal.slow.time;
+#else
 			particles[i].time = gameLocal.time;
+#endif
+			//#modified-fva; END
 		}
 	}
 
@@ -3377,14 +3383,30 @@ const idDeclParticle *idAI::SpawnParticlesOnJoint( particleEmitter_t &pe, const 
 		origin = renderEntity.origin + origin * renderEntity.axis;
 
 		BecomeActive( TH_UPDATEPARTICLES );
-		if ( !gameLocal.time ) {
+		//#modified-fva; BEGIN
+#ifdef _D3XP
+		if (!gameLocal.slow.time)
+#else
+		if ( !gameLocal.time ) //{
+#endif
+		{
+		//#modified-fva; END
 			// particles with time of 0 don't show, so set the time differently on the first frame
 			pe.time = 1;
 		} else {
+			//#modified-fva; BEGIN
+#ifdef _D3XP
+			pe.time = gameLocal.slow.time;
+#else
 			pe.time = gameLocal.time;
+#endif
+			//#modified-fva; END
 		}
 		pe.particle = static_cast<const idDeclParticle *>( declManager->FindType( DECL_PARTICLE, particleName ) );
-		gameLocal.smokeParticles->EmitSmoke( pe.particle, pe.time, gameLocal.random.CRandomFloat(), origin, axis, timeGroup /*_D3XP*/ );
+		//#modified-fva; BEGIN
+		//gameLocal.smokeParticles->EmitSmoke( pe.particle, pe.time, gameLocal.random.CRandomFloat(), origin, axis, timeGroup /*_D3XP*/ );
+		gameLocal.smokeParticles->EmitSmoke(pe.particle, pe.time, gameLocal.random.CRandomFloat(), origin, axis, TIME_GROUP1 /*_D3XP*/);
+		//#modified-fva; END
 	}
 
 	return pe.particle;
@@ -3456,11 +3478,28 @@ void idAI::Killed( idEntity *inflictor, idEntity *attacker, int damage, const id
 
 	Unbind();
 
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	// To be properly grabbed by the Grabber, the lost soul now has a ragdoll. Only the Grabber should start it, however.
+	bool cstHasModelDeath = spawnArgs.GetString("model_death", "", &modelDeath);
+	if (!cstHasModelDeath && StartRagdoll()) {
+		StartSound("snd_death", SND_CHANNEL_VOICE, 0, false, NULL);
+	}
+#else
 	if ( StartRagdoll() ) {
 		StartSound( "snd_death", SND_CHANNEL_VOICE, 0, false, NULL );
 	}
+#endif
+	//#modified-fva; END
 
-	if ( spawnArgs.GetString( "model_death", "", &modelDeath ) ) {
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	if (cstHasModelDeath) //{
+#else
+	if ( spawnArgs.GetString( "model_death", "", &modelDeath ) ) //{
+#endif
+	{
+	//#modified-fva; END
 		// lost soul is only case that does not use a ragdoll and has a model_death so get the death sound in here
 		StartSound( "snd_death", SND_CHANNEL_VOICE, 0, false, NULL );
 		renderEntity.shaderParms[ SHADERPARM_TIMEOFFSET ] = -MS2SEC( gameLocal.time );
@@ -4792,10 +4831,15 @@ void idAI::UpdateParticles( void ) {
 
 		int particlesAlive = 0;
 		for ( int i = 0; i < particles.Num(); i++ ) {
+			//#modified-fva; BEGIN
+			// now the slow time is explicitly used for the ai smoke particles
+			/*
 #ifdef _D3XP
 			// Smoke particles on AI characters will always be "slow", even when held by grabber
 			SetTimeState ts(TIME_GROUP1);
 #endif
+			*/
+			//#modified-fva; END
 			if ( particles[i].particle && particles[i].time ) {
 				particlesAlive++;
 				if (af.IsActive()) {
@@ -4807,9 +4851,18 @@ void idAI::UpdateParticles( void ) {
 					realVector = physicsObj.GetOrigin() + ( realVector + modelOffset ) * ( viewAxis * physicsObj.GetGravityAxis() );
 				}
 
-				if ( !gameLocal.smokeParticles->EmitSmoke( particles[i].particle, particles[i].time, gameLocal.random.CRandomFloat(), realVector, realAxis, timeGroup /*_D3XP*/ )) {
+				//#modified-fva; BEGIN
+				//if ( !gameLocal.smokeParticles->EmitSmoke( particles[i].particle, particles[i].time, gameLocal.random.CRandomFloat(), realVector, realAxis, timeGroup /*_D3XP*/ )) {
+				if (!gameLocal.smokeParticles->EmitSmoke(particles[i].particle, particles[i].time, gameLocal.random.CRandomFloat(), realVector, realAxis, TIME_GROUP1 /*_D3XP*/)) {
+				//#modified-fva; END
 					if ( restartParticles ) {
+						//#modified-fva; BEGIN
+#ifdef _D3XP
+						particles[i].time = gameLocal.slow.time;
+#else
 						particles[i].time = gameLocal.time;
+#endif
+						//#modified-fva; END
 					} else {
 						particles[i].time = 0;
 						particlesAlive--;
@@ -4834,7 +4887,13 @@ void idAI::TriggerParticles( const char *jointName ) {
 	jointNum = animator.GetJointHandle( jointName );
 	for ( int i = 0; i < particles.Num(); i++ ) {
 		if ( particles[i].joint == jointNum ) {
+			//#modified-fva; BEGIN
+#ifdef _D3XP
+			particles[i].time = gameLocal.slow.time;
+#else
 			particles[i].time = gameLocal.time;
+#endif
+			//#modified-fva; END
 			BecomeActive( TH_UPDATEPARTICLES );
 		}
 	}

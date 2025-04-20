@@ -175,7 +175,13 @@ void idProjectile::Restore( idRestoreGame *savefile ) {
 		idVec3 dir;
 		dir = physicsObj.GetLinearVelocity();
 		dir.NormalizeFast();
-		gameLocal.smokeParticles->EmitSmoke( smokeFly, gameLocal.time, gameLocal.random.RandomFloat(), GetPhysics()->GetOrigin(), GetPhysics()->GetAxis(), timeGroup /*_D3XP*/ );
+		//#modified-fva; BEGIN
+		//gameLocal.smokeParticles->EmitSmoke( smokeFly, gameLocal.time, gameLocal.random.RandomFloat(), GetPhysics()->GetOrigin(), GetPhysics()->GetAxis(), timeGroup /*_D3XP*/ );
+#ifdef _D3XP
+		SetTimeState ts(originalTimeGroup);
+#endif
+		gameLocal.smokeParticles->EmitSmoke(smokeFly, gameLocal.time, gameLocal.random.RandomFloat(), GetPhysics()->GetOrigin(), GetPhysics()->GetAxis(), originalTimeGroup /*_D3XP*/);
+		//#modified-fva; END
 	}
 
 #ifdef _D3XP
@@ -433,7 +439,12 @@ void idProjectile::Launch( const idVec3 &start, const idVec3 &dir, const idVec3 
 	const char *smokeName = spawnArgs.GetString( "smoke_fly" );
 	if ( *smokeName != '\0' ) {
 		smokeFly = static_cast<const idDeclParticle *>( declManager->FindType( DECL_PARTICLE, smokeName ) );
-		smokeFlyTime = gameLocal.time;
+		//#modified-fva; BEGIN
+		//smokeFlyTime = gameLocal.time;
+		if (cstSmokeFlyControl.IsSmokeFlyAllowed(this)) {
+			smokeFlyTime = gameLocal.time;
+		}
+		//#modified-fva; END
 	}
 
 #ifdef _D3XP
@@ -484,7 +495,10 @@ void idProjectile::Think( void ) {
 #ifdef _D3XP
 		SetTimeState ts(originalTimeGroup);
 #endif
-		if ( !gameLocal.smokeParticles->EmitSmoke( smokeFly, smokeFlyTime, gameLocal.random.RandomFloat(), GetPhysics()->GetOrigin(), dir.ToMat3(), timeGroup /*_D3XP*/ ) ) {
+		//#modified-fva; BEGIN
+		//if ( !gameLocal.smokeParticles->EmitSmoke( smokeFly, smokeFlyTime, gameLocal.random.RandomFloat(), GetPhysics()->GetOrigin(), dir.ToMat3(), timeGroup /*_D3XP*/ ) ) {
+		if (!gameLocal.smokeParticles->EmitSmoke(smokeFly, smokeFlyTime, gameLocal.random.RandomFloat(), GetPhysics()->GetOrigin(), dir.ToMat3(), originalTimeGroup /*_D3XP*/)) {
+		//#modified-fva; END
 			smokeFlyTime = gameLocal.time;
 		}
 	}
@@ -494,6 +508,11 @@ void idProjectile::Think( void ) {
 		renderLight.origin = GetPhysics()->GetOrigin() + GetPhysics()->GetAxis() * lightOffset;
 		renderLight.axis = GetPhysics()->GetAxis();
 		if ( ( lightDefHandle != -1 ) ) {
+			//#modified-fva; BEGIN
+#ifdef _D3XP
+			SetTimeState ts(originalTimeGroup);
+#endif
+			//#modified-fva; END
 			if ( lightEndTime > 0 && gameLocal.time <= lightEndTime + gameLocal.GetMSec() ) {
 				idVec3 color( 0, 0, 0 );
 				if ( gameLocal.time < lightEndTime ) {
@@ -813,6 +832,16 @@ void idProjectile::Explode( const trace_t &collision, idEntity *ignore ) {
 		return;
 	}
 
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	int cstTime;
+	{
+		SetTimeState ts(originalTimeGroup);
+		cstTime = gameLocal.time;
+	}
+#endif
+	//#modified-fva; END
+
 	// stop sound
 	StopSound( SND_CHANNEL_BODY2, false );
 
@@ -890,7 +919,13 @@ void idProjectile::Explode( const trace_t &collision, idEntity *ignore ) {
 		renderEntity.shaderParms[SHADERPARM_GREEN] = 
 		renderEntity.shaderParms[SHADERPARM_BLUE] = 
 		renderEntity.shaderParms[SHADERPARM_ALPHA] = 1.0f;
+		//#modified-fva; BEGIN
+#ifdef _D3XP
+		renderEntity.shaderParms[SHADERPARM_TIMEOFFSET] = -MS2SEC(cstTime);
+#else
 		renderEntity.shaderParms[SHADERPARM_TIMEOFFSET] = -MS2SEC( gameLocal.time );
+#endif
+		//#modified-fva; END
 		renderEntity.shaderParms[SHADERPARM_DIVERSITY] = gameLocal.random.CRandomFloat();
 		Show();
 		removeTime = ( removeTime > 3000 ) ? removeTime : 3000;
@@ -929,7 +964,13 @@ void idProjectile::Explode( const trace_t &collision, idEntity *ignore ) {
 		renderLight.shaderParms[SHADERPARM_GREEN] = lightColor.y;
 		renderLight.shaderParms[SHADERPARM_BLUE] = lightColor.z;
 		renderLight.shaderParms[SHADERPARM_ALPHA] = 1.0f;
+		//#modified-fva; BEGIN
+#ifdef _D3XP
+		renderLight.shaderParms[SHADERPARM_TIMEOFFSET] = -MS2SEC(cstTime);
+#else
 		renderLight.shaderParms[SHADERPARM_TIMEOFFSET] = -MS2SEC( gameLocal.time );
+#endif
+		//#modified-fva; END
 
 #ifdef CTF
         // Midnight ctf
@@ -940,8 +981,15 @@ void idProjectile::Explode( const trace_t &collision, idEntity *ignore ) {
         else
 #endif        
 		light_fadetime = spawnArgs.GetFloat( "explode_light_fadetime", "0.5" );
+		//#modified-fva; BEGIN
+#ifdef _D3XP
+		lightStartTime = cstTime;
+		lightEndTime = cstTime + SEC2MS(light_fadetime);
+#else
 		lightStartTime = gameLocal.time;
 		lightEndTime = gameLocal.time + SEC2MS( light_fadetime );
+#endif
+		//#modified-fva; END
 		BecomeActive( TH_THINK );
 	}
 
@@ -1024,7 +1072,18 @@ void idProjectile::Explode( const trace_t &collision, idEntity *ignore ) {
 	}
 
 	CancelEvents( &EV_Explode );
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	if (fl.grabbed) {
+		timeGroup = originalTimeGroup;
+		PostEventMS(&EV_Remove, removeTime);
+	} else {
+		PostEventMS(&EV_Remove, removeTime);
+	}
+#else
 	PostEventMS( &EV_Remove, removeTime );
+#endif
+	//#modified-fva; END
 }
 
 /*
@@ -1119,10 +1178,18 @@ void idProjectile::CatchProjectile( idEntity* o, const char* reflectName ) {
 	owner = o;
 	physicsObj.GetClipModel()->SetOwner( o );
 
+	//#modified-fva; BEGIN
+	cstSmokeFlyControl.OnGrabberCatch(static_cast<idPlayer*>(o), this);
+	thrust = 0.0f;
+	//#modified-fva; END
+
 	if ( this->IsType( idGuidedProjectile::Type ) ) {
 		idGuidedProjectile *proj = static_cast<idGuidedProjectile*>(this);
 
 		proj->SetEnemy( prevowner );
+		//#modified-fva; BEGIN
+		proj->CstUnGuide();
+		//#modified-fva; END
 	}
 
 	idStr s = spawnArgs.GetString( "def_damage" );
@@ -1175,6 +1242,14 @@ void idProjectile::Event_SetGravity( float gravity ) {
 	physicsObj.SetGravity(gravVec * gravity);
 }
 #endif
+
+//#modified-fva; BEGIN
+#ifdef _D3XP
+void idProjectile::CstReleaseProjectile(idPlayer *grabberOwner) {
+	cstSmokeFlyControl.OnGrabberRelease(grabberOwner, this);
+}
+#endif
+//#modified-fva; END
 
 /*
 =================
@@ -1374,6 +1449,221 @@ bool idProjectile::ClientReceiveEvent( int event, int time, const idBitMsg &msg 
 	}
 	return false;
 }
+
+//#modified-fva; BEGIN
+idProjectile::CstSmokeFlyControl idProjectile::cstSmokeFlyControl;
+
+// ==============
+void idProjectile::CstInitSmokeFlyControl() {
+	cstSmokeFlyControl.Init();
+}
+
+// ==============
+idProjectile::CstSmokeFlyControl::CstSmokeFlyControl() {
+#ifdef _D3XP
+	grabberSlot = -1;
+#endif
+}
+
+// ==============
+void idProjectile::CstSmokeFlyControl::Init() {
+	controlTable.Clear();
+#ifdef _D3XP
+	grabberSlot = -1;
+#endif
+
+	const idDeclEntityDef *playerDef = gameLocal.FindEntityDef("player_doommarine", false);
+	if (!playerDef) {
+		return;
+	}
+
+	for (int i = 0; i < MAX_WEAPONS; i++) {
+		const char *weaponName;
+		if (!playerDef->dict.GetString(va("def_weapon%d", i), "", &weaponName) || *weaponName == '\0') {
+			continue;
+		}
+#ifdef _D3XP
+		if (strcmp(weaponName, "weapon_grabber") == 0) {
+			grabberSlot = i;
+			continue;
+		}
+#endif
+		const idDeclEntityDef *weaponDef = gameLocal.FindEntityDef(weaponName, false);
+		if (!weaponDef) {
+			continue;
+		}
+
+		const char *projectileName;
+		if (!weaponDef->dict.GetString("def_projectile", "", &projectileName) || *projectileName == '\0') {
+			continue;
+		}
+		const idDeclEntityDef *projectileDef = gameLocal.FindEntityDef(projectileName, false);
+		if (!projectileDef) {
+			continue;
+		}
+
+		const char *smokeName = projectileDef->dict.GetString("smoke_fly", "");
+		if (*smokeName == '\0') {
+			continue;
+		}
+
+		ProjectileWeaponPair pair;
+		pair.projectileDefNumber = projectileDef->Index();
+		pair.weaponSlot = i;
+		controlTable.Append(pair);
+	}
+}
+
+// ==============
+bool idProjectile::CstSmokeFlyControl::IsSmokeFlyAllowed(idProjectile *projectile, int weaponSlot) {
+	if (gameLocal.isMultiplayer && !gameLocal.cstSiAllowSmokeControlMP) {
+		return true;
+	}
+
+	idEntity *ownerEnt = projectile->owner.GetEntity();
+	if (!ownerEnt || !ownerEnt->IsType(idPlayer::Type)) {
+		return true;
+	}
+	idPlayer *player = static_cast<idPlayer*>(ownerEnt);
+
+	idCVar &noSmokeFlyCVar = GetNoSmokeFlyCVar(*player);
+	if (noSmokeFlyCVar.CstGetStringLength() == 0) {
+		// early return: implicit zeros to the left
+		return true;
+	}
+
+	if (weaponSlot < 0) {
+		weaponSlot = FindWeaponSlot(projectile->entityDefNumber);
+		// test again as FindWeaponSlot returns -1 if the weapon is not found
+		if (weaponSlot < 0) {
+			return true;
+		}
+	}
+
+	if (IsAllowedByWeapon(weaponSlot, noSmokeFlyCVar)) {
+		return true;
+	}
+	return false;
+}
+
+// ==============
+idCVar & idProjectile::CstSmokeFlyControl::GetNoSmokeFlyCVar(idPlayer &player) {
+	idCVar *noSmokeFlyCVar;
+	if (gameLocal.isMultiplayer && player.entityNumber != gameLocal.localClientNum) {
+		noSmokeFlyCVar = &cst_noSmokeFlyOthersMP;
+	} else {
+		noSmokeFlyCVar = &cst_noSmokeFly;
+	}
+	return *noSmokeFlyCVar;
+}
+
+// ==============
+bool idProjectile::CstSmokeFlyControl::IsAllowedByWeapon(int weaponSlot, idCVar &noSmokeFlyCVar) {
+	int lastCharIndex = noSmokeFlyCVar.CstGetStringLength() - 1;
+	int index = lastCharIndex - weaponSlot;
+	if (index < 0) {
+		// implicit zeros to the left
+		return true;
+	}
+	if (noSmokeFlyCVar.GetString()[index] == '1') {
+		return false;
+	}
+	return true;
+}
+
+// ==============
+int idProjectile::CstSmokeFlyControl::FindWeaponSlot(int projectileDefNumber) {
+	int num = controlTable.Num();
+	for (int i = 0; i < num; i++) {
+		if (controlTable[i].projectileDefNumber == projectileDefNumber) {
+			return controlTable[i].weaponSlot;
+		}
+	}
+	return -1;
+}
+
+// ==============
+#ifdef _D3XP
+void idProjectile::CstSmokeFlyControl::OnGrabberCatch(idPlayer *grabberOwner, idProjectile *projectile) {
+	if (gameLocal.isMultiplayer && !gameLocal.cstSiAllowSmokeControlMP) {
+		StartSmokeFly(projectile);
+		return;
+	}
+
+	if (!grabberOwner) {
+		return;
+	}
+
+	bool noSmokeFlyGrabbed = false;
+	if (gameLocal.isMultiplayer && grabberOwner->entityNumber != gameLocal.localClientNum) {
+		noSmokeFlyGrabbed = cst_noSmokeFlyGrabbedOthersMP.GetBool();
+	} else {
+		noSmokeFlyGrabbed = cst_noSmokeFlyGrabbed.GetBool();
+	}
+
+	if (noSmokeFlyGrabbed) {
+		StopSmokeFly(projectile);
+	} else {
+		UpdateSmokeFly(projectile);
+	}
+}
+
+// ==============
+void idProjectile::CstSmokeFlyControl::OnGrabberRelease(idPlayer *grabberOwner, idProjectile *projectile) {
+	if (gameLocal.isMultiplayer && !gameLocal.cstSiAllowSmokeControlMP) {
+		StartSmokeFly(projectile);
+		return;
+	}
+
+	int weaponSlot = FindWeaponSlot(projectile->entityDefNumber);
+	if (weaponSlot >= 0) {
+		// If the weapon was found, the projectile was fired by a player. In this case, update
+		// using the per-projectile settings.
+		UpdateSmokeFly(projectile, weaponSlot);
+		return;
+	}
+
+	// If the weapon was not found, there are two possibilities:
+	//   P1: The projectile was not fired by a player.
+	//   P2: The projectile was fired by a player, but does not have smoke_fly.
+	// The code below applies the grabber setting to all projectiles. This is the correct solution for P1,
+	// but it also works for P2 as it has no effect in that case (no smoke_fly in P2).
+
+	if (!grabberOwner) {
+		return;
+	}
+
+	idCVar &noSmokeFlyCVar = GetNoSmokeFlyCVar(*grabberOwner);
+	if (grabberSlot < 0 || IsAllowedByWeapon(grabberSlot, noSmokeFlyCVar)) {
+		StartSmokeFly(projectile);
+	} else {
+		StopSmokeFly(projectile);
+	}
+}
+
+// ==============
+void idProjectile::CstSmokeFlyControl::UpdateSmokeFly(idProjectile *projectile, int weaponSlot) {
+	if (IsSmokeFlyAllowed(projectile, weaponSlot)) {
+		StartSmokeFly(projectile);
+	} else {
+		StopSmokeFly(projectile);
+	}
+}
+
+// ==============
+void idProjectile::CstSmokeFlyControl::StopSmokeFly(idProjectile *projectile) {
+	projectile->smokeFlyTime = 0;
+}
+
+// ==============
+void idProjectile::CstSmokeFlyControl::StartSmokeFly(idProjectile *projectile) {
+	if (projectile->smokeFly && !projectile->smokeFlyTime && projectile->state == LAUNCHED) {
+		SetTimeState ts(projectile->originalTimeGroup);
+		projectile->smokeFlyTime = gameLocal.time;
+	}
+}
+#endif
+//#modified-fva; END
 
 /*
 ===============================================================================
@@ -1613,6 +1903,14 @@ void idGuidedProjectile::Event_SetEnemy(idEntity *ent) {
 }
 #endif
 
+//#modified-fva; BEGIN
+#ifdef _D3XP
+void idGuidedProjectile::CstUnGuide() {
+	unGuided = true;
+}
+#endif
+//#modified-fva; END
+
 /*
 ===============================================================================
 
@@ -1846,6 +2144,10 @@ CLASS_DECLARATION( idProjectile, idBFGProjectile )
 	EVENT( EV_RemoveBeams,		idBFGProjectile::Event_RemoveBeams )
 END_CLASS
 
+//#modified-fva; BEGIN
+idList<idBFGProjectile*> idBFGProjectile::cstBfgProjectiles;
+//#modified-fva; END
+
 
 /*
 =================
@@ -1856,6 +2158,9 @@ idBFGProjectile::idBFGProjectile() {
 	memset( &secondModel, 0, sizeof( secondModel ) );
 	secondModelDefHandle = -1;
 	nextDamageTime = 0;
+	//#modified-fva; BEGIN
+	cstBfgProjectiles.Append(this);
+	//#modified-fva; END
 }
 
 /*
@@ -1870,6 +2175,11 @@ idBFGProjectile::~idBFGProjectile() {
 		gameRenderWorld->FreeEntityDef( secondModelDefHandle );
 		secondModelDefHandle = -1;
 	}
+	//#modified-fva; BEGIN
+	cstBfgProjectiles.Remove(this);
+	// downsize the list using the same granularity
+	cstBfgProjectiles.SetGranularity(cstBfgProjectiles.GetGranularity());
+	//#modified-fva; END
 }
 
 /*
@@ -1894,6 +2204,10 @@ void idBFGProjectile::Spawn( void ) {
 	}
 	nextDamageTime = 0;
 	damageFreq = NULL;
+	//#modified-fva; BEGIN
+	memset(cstBfgVision, 0, sizeof(cstBfgVision));
+	cstTargetsMP = 0;
+	//#modified-fva; END
 }
 
 /*
@@ -1915,6 +2229,13 @@ void idBFGProjectile::Save( idSaveGame *savefile ) const {
 	savefile->WriteInt( secondModelDefHandle );
 	savefile->WriteInt( nextDamageTime );
 	savefile->WriteString( damageFreq );
+
+	//#modified-fva; BEGIN
+	for (int i = 0; i < CST_MAX_PLAYERS; i++) {
+		savefile->WriteBool(cstBfgVision[i]);
+	}
+	savefile->WriteInt(cstTargetsMP);
+	//#modified-fva; END
 }
 
 /*
@@ -1945,6 +2266,13 @@ void idBFGProjectile::Restore( idRestoreGame *savefile ) {
 	if ( secondModelDefHandle >= 0 ) {
 		secondModelDefHandle = gameRenderWorld->AddEntityDef( &secondModel );
 	}
+
+	//#modified-fva; BEGIN
+	for (int i = 0; i < CST_MAX_PLAYERS; i++) {
+		savefile->ReadBool(cstBfgVision[i]);
+	}
+	savefile->ReadInt(cstTargetsMP);
+	//#modified-fva; END
 }
 
 /*
@@ -1953,6 +2281,8 @@ idBFGProjectile::FreeBeams
 =================
 */
 void idBFGProjectile::FreeBeams() {
+	//#modified-fva; BEGIN
+	/*
 	for ( int i = 0; i < beamTargets.Num(); i++ ) {
 		if ( beamTargets[i].modelDefHandle >= 0 ) {
 			gameRenderWorld->FreeEntityDef( beamTargets[i].modelDefHandle );
@@ -1964,6 +2294,16 @@ void idBFGProjectile::FreeBeams() {
 	if ( player ) {
 		player->playerView.EnableBFGVision( false );
 	}
+	*/
+
+	for (int i = 0; i < beamTargets.Num(); i++) {
+		CstFreeSingleBeam(beamTargets[i]);
+	}
+	CstClearBfgVision();
+	if (!gameLocal.isClient) {
+		cstTargetsMP = 0;
+	}
+	//#modified-fva; END
 }
 
 /*
@@ -1972,14 +2312,39 @@ idBFGProjectile::Think
 ================
 */
 void idBFGProjectile::Think( void ) {
-	if ( state == LAUNCHED ) {
+	//#modified-fva; BEGIN
+	//if ( state == LAUNCHED ) {
+	if (state == LAUNCHED && gameLocal.isNewFrame) {
+	//#modified-fva; END
 
 		// update beam targets
 		for ( int i = 0; i < beamTargets.Num(); i++ ) {
 			if ( beamTargets[i].target.GetEntity() == NULL ) {
+				//#modified-fva; BEGIN
+				CstFreeSingleBeam(beamTargets[i]);
+				if (!gameLocal.isClient && beamTargets[i].cstIsPlayer) {
+					cstTargetsMP &= ~(1 << beamTargets[i].target.GetEntityNum());
+					beamTargets[i].target = NULL;
+					beamTargets[i].cstIsPlayer = false;
+				}
+				//#modified-fva; END
 				continue;
 			}
 			idPlayer *player = ( beamTargets[i].target.GetEntity()->IsType( idPlayer::Type ) ) ? static_cast<idPlayer*>( beamTargets[i].target.GetEntity() ) : NULL;
+			//#modified-fva; BEGIN
+			if (beamTargets[i].target.GetEntity()->health <= 0 || (player && player->spectating)) {
+				CstFreeSingleBeam(beamTargets[i]);
+				if (player) {
+					CstUpdateBfgVision(player, false);
+					if (!gameLocal.isClient) {
+						cstTargetsMP &= ~(1 << player->entityNumber);
+						beamTargets[i].target = NULL;
+						beamTargets[i].cstIsPlayer = false;
+					}
+				}
+				continue;
+			}
+			//#modified-fva; END
 #ifdef _D3XP
 			// Major hack for end boss.  :(
 			idAnimatedEntity	*beamEnt;
@@ -2006,6 +2371,8 @@ void idBFGProjectile::Think( void ) {
 			beamTargets[i].renderEntity.shaderParms[ SHADERPARM_BEAM_END_X ] = org.x;
 			beamTargets[i].renderEntity.shaderParms[ SHADERPARM_BEAM_END_Y ] = org.y;
 			beamTargets[i].renderEntity.shaderParms[ SHADERPARM_BEAM_END_Z ] = org.z;
+			//#modified-fva; BEGIN
+			/*
 			beamTargets[i].renderEntity.shaderParms[ SHADERPARM_RED ] = 
 			beamTargets[i].renderEntity.shaderParms[ SHADERPARM_GREEN ] = 
 			beamTargets[i].renderEntity.shaderParms[ SHADERPARM_BLUE ] = 
@@ -2033,7 +2400,50 @@ void idBFGProjectile::Think( void ) {
 				nextDamageTime = gameLocal.time + BFG_DAMAGE_FREQUENCY;
 			}
 			gameRenderWorld->UpdateEntityDef( beamTargets[i].modelDefHandle, &beamTargets[i].renderEntity );
+			*/
+			if (gameLocal.time > nextDamageTime) {
+				bool cstCanDamage = false;
+#ifdef _D3XP
+				if (damageFreq && *(const char *)damageFreq && beamTargets[i].target.GetEntity() && (forceDamage || beamTargets[i].target.GetEntity()->CanDamage(GetPhysics()->GetOrigin(), org))) //{
+#else
+				if (damageFreq && *(const char *)damageFreq && beamTargets[i].target.GetEntity() && beamTargets[i].target.GetEntity()->CanDamage(GetPhysics()->GetOrigin(), org)) //{
+#endif
+				{
+					cstCanDamage = true;
+#ifdef _D3XP
+					if (!gameLocal.isClient && (forceDamage || player)) //{
+#else
+					if (!gameLocal.isClient && player) //{
+#endif
+					{
+						// only players (and roe end boss) are damaged here; other actors are damaged in Explode.
+						org = beamTargets[i].target.GetEntity()->GetPhysics()->GetOrigin() - GetPhysics()->GetOrigin();
+						org.Normalize();
+						beamTargets[i].target.GetEntity()->Damage(this, owner.GetEntity(), org, damageFreq, (damagePower) ? damagePower : 1.0f, INVALID_JOINT);
+					}
+				}
+				if (player) {
+					CstUpdateBfgVision(player, cstCanDamage);
+				}
+				if (cstCanDamage) {
+					if (beamTargets[i].modelDefHandle >= 0) {
+						gameRenderWorld->UpdateEntityDef(beamTargets[i].modelDefHandle, &beamTargets[i].renderEntity);
+					} else {
+						beamTargets[i].modelDefHandle = gameRenderWorld->AddEntityDef(&beamTargets[i].renderEntity);
+					}
+				} else {
+					CstFreeSingleBeam(beamTargets[i]);
+				}
+			} else if (beamTargets[i].modelDefHandle >= 0) {
+				gameRenderWorld->UpdateEntityDef(beamTargets[i].modelDefHandle, &beamTargets[i].renderEntity);
+			}
+			//#modified-fva; END
 		}
+		//#modified-fva; BEGIN
+		if (gameLocal.time > nextDamageTime) {
+			nextDamageTime = gameLocal.time + BFG_DAMAGE_FREQUENCY;
+		}
+		//#modified-fva; END
 
 		if ( secondModelDefHandle >= 0 ) {
 			secondModel.origin = GetPhysics()->GetOrigin();
@@ -2064,6 +2474,8 @@ idBFGProjectile::Launch
 =================
 */
 void idBFGProjectile::Launch( const idVec3 &start, const idVec3 &dir, const idVec3 &pushVelocity, const float timeSinceFire, const float power, const float dmgPower ) {
+	//#modified-fva; BEGIN
+	/*
 	idProjectile::Launch( start, dir, pushVelocity, 0.0f, power, dmgPower );
 
 	// dmgPower * radius is the target acquisition area
@@ -2194,6 +2606,31 @@ void idBFGProjectile::Launch( const idVec3 &start, const idVec3 &dir, const idVe
 	damageFreq = spawnArgs.GetString( "def_damageFreq" );
 	nextDamageTime = gameLocal.time + BFG_DAMAGE_FREQUENCY;
 	UpdateVisuals();
+	*/
+
+	idProjectile::Launch(start, dir, pushVelocity, 0.0f, power, dmgPower);
+
+	memset(&secondModel, 0, sizeof(secondModel));
+	secondModelDefHandle = -1;
+	const char *temp = spawnArgs.GetString("model_two");
+	if (temp && *temp) {
+		secondModel.hModel = renderModelManager->FindModel(temp);
+		secondModel.bounds = secondModel.hModel->Bounds(&secondModel);
+		secondModel.shaderParms[SHADERPARM_RED] =
+			secondModel.shaderParms[SHADERPARM_GREEN] =
+			secondModel.shaderParms[SHADERPARM_BLUE] =
+			secondModel.shaderParms[SHADERPARM_ALPHA] = 1.0f;
+		secondModel.noSelfShadow = true;
+		secondModel.noShadow = true;
+		secondModel.origin = GetPhysics()->GetOrigin();
+		secondModel.axis = GetPhysics()->GetAxis();
+		secondModelDefHandle = gameRenderWorld->AddEntityDef(&secondModel);
+	}
+
+	if (!gameLocal.isClient) {
+		CstStartBeams();
+	}
+	//#modified-fva; END
 }
 
 /*
@@ -2259,7 +2696,10 @@ void idBFGProjectile::Explode( const trace_t &collision, idEntity *ignore ) {
 			}
 		}
 
-		if ( damage[0] && ( beamTargets[i].target.GetEntity()->entityNumber > gameLocal.numClients - 1 ) ) {
+		//#modified-fva; BEGIN
+		//if ( damage[0] && ( beamTargets[i].target.GetEntity()->entityNumber > gameLocal.numClients - 1 ) ) {
+		if (!gameLocal.isClient && damage[0] && (beamTargets[i].target.GetEntity()->entityNumber > gameLocal.numClients - 1)) {
+		//#modified-fva; END
 			dir = beamTargets[i].target.GetEntity()->GetPhysics()->GetOrigin() - GetPhysics()->GetOrigin();
 			dir.Normalize();
 			beamTargets[i].target.GetEntity()->Damage( this, ownerEnt, dir, damage, damageScale, ( collision.c.id < 0 ) ? CLIPMODEL_ID_TO_JOINT_HANDLE( collision.c.id ) : INVALID_JOINT );
@@ -2275,6 +2715,8 @@ void idBFGProjectile::Explode( const trace_t &collision, idEntity *ignore ) {
 		projectileFlags.noSplashDamage = true;
 	}
 
+	//#modified-fva; BEGIN
+	/*
 	if ( !gameLocal.isClient ) {
 		if ( ignore != NULL ) {
 			PostEventMS( &EV_RemoveBeams, 750 );
@@ -2282,9 +2724,308 @@ void idBFGProjectile::Explode( const trace_t &collision, idEntity *ignore ) {
 			PostEventMS( &EV_RemoveBeams, 0 );
 		}
 	}
+	*/
+	// free beams not only in singleplayer/server, but also in clients
+	Event_RemoveBeams();
+	//#modified-fva; END
 
 	return idProjectile::Explode( collision, ignore );
 }
+
+//#modified-fva; BEGIN
+void idBFGProjectile::CstClearBfgVision() {
+	for (int i = 0; i < CST_MAX_PLAYERS; i++) {
+		idEntity* ent = gameLocal.entities[i];
+		if (ent && ent->IsType(idPlayer::Type)) {
+			CstUpdateBfgVision(static_cast<idPlayer*>(ent), false);
+		} else {
+			cstBfgVision[i] = false;
+		}
+	}
+}
+
+// =======
+void idBFGProjectile::CstUpdateBfgVision(idPlayer* player, bool enable) {
+	if (!player) {
+		return;
+	}
+	int entityNum = player->entityNumber;
+
+	if (cstBfgVision[entityNum] == enable) {
+		// no changes, nothing else to do
+		return;
+	}
+	cstBfgVision[entityNum] = enable;
+
+	if (enable == false) {
+		// if disabling, first check other bfg projectiles
+		for (int i = 0; i < cstBfgProjectiles.Num(); i++) {
+			enable = enable || cstBfgProjectiles[i]->cstBfgVision[entityNum];
+			if (enable) {
+				return;
+			}
+		}
+	}
+	player->playerView.EnableBFGVision(enable);
+}
+
+// =======
+void idBFGProjectile::CstFreeSingleBeam(beamTarget_t& beamTarget) {
+	if (beamTarget.modelDefHandle >= 0) {
+		gameRenderWorld->FreeEntityDef(beamTarget.modelDefHandle);
+		beamTarget.modelDefHandle = -1;
+	}
+}
+
+// =======
+void idBFGProjectile::WriteToSnapshot(idBitMsgDelta &msg) const {
+	idProjectile::WriteToSnapshot(msg);
+	msg.WriteBits(cstTargetsMP, CST_MAX_PLAYERS);
+}
+
+// =======
+void idBFGProjectile::ReadFromSnapshot(const idBitMsgDelta &msg) {
+	idProjectile::ReadFromSnapshot(msg);
+	int targets = msg.ReadBits(CST_MAX_PLAYERS);
+
+	CstClientUpdateBeams(targets);
+}
+
+// =======
+void idBFGProjectile::CstStopBeams() {
+	if (gameLocal.isClient || state != LAUNCHED || !beamTargets.Num()) {
+		return;
+	}
+	CstClientStopBeams(); // we're not a client, but this part is the same
+}
+
+// =======
+void idBFGProjectile::CstStartBeams() {
+	// code below is from idBFGProjectile::Launch (with changes)
+
+	//#modified-fva; BEGIN
+	if (gameLocal.isClient || state != LAUNCHED || beamTargets.Num()) {
+		return;
+	}
+	cstTargetsMP = 0;
+	//#modified-fva; END
+
+	idEntity *	ent;
+	idEntity *	entityList[MAX_GENTITIES];
+	int			numListedEntities;
+	idBounds	bounds;
+	idVec3		damagePoint;
+
+	float radius;
+	spawnArgs.GetFloat("damageRadius", "512", radius);
+	bounds = idBounds(GetPhysics()->GetOrigin()).Expand(radius);
+
+	float beamWidth = spawnArgs.GetFloat("beam_WidthFly");
+	const char *skin = spawnArgs.GetString("skin_beam");
+
+	// get all entities touching the bounds
+	numListedEntities = gameLocal.clip.EntitiesTouchingBounds(bounds, CONTENTS_BODY, entityList, MAX_GENTITIES);
+	for (int e = 0; e < numListedEntities; e++) {
+		ent = entityList[e];
+		assert(ent);
+
+		if (ent == this || ent == owner.GetEntity() || ent->IsHidden() || !ent->IsActive() || !ent->fl.takedamage || ent->health <= 0 || !ent->IsType(idActor::Type)) {
+			continue;
+		}
+
+		if (!ent->CanDamage(GetPhysics()->GetOrigin(), damagePoint)) {
+			continue;
+		}
+
+		if (ent->IsType(idPlayer::Type)) {
+			idPlayer *player = static_cast<idPlayer*>(ent);
+
+			//#modified-fva; BEGIN
+#ifdef _D3XP
+			if (gameLocal.mpGame.IsGametypeTeamBased()) //{
+#else
+			if (gameLocal.gameType == GAME_TDM) //{
+#endif
+			{
+				idEntity *cstOwnerEnt = owner.GetEntity();
+				if (cstOwnerEnt && cstOwnerEnt->IsType(idPlayer::Type)) {
+					idPlayer *cstOwnerPlayer = static_cast<idPlayer*>(cstOwnerEnt);
+					if (cstOwnerPlayer->team == player->team) {
+						continue;
+					}
+				}
+			}
+			//#modified-fva; END
+
+			//#modified-fva; BEGIN
+			//player->playerView.EnableBFGVision( true );
+			CstUpdateBfgVision(player, true);
+			cstTargetsMP |= (1 << player->entityNumber);
+			//#modified-fva; END
+		}
+
+		beamTarget_t bt;
+		memset(&bt.renderEntity, 0, sizeof(renderEntity_t));
+		bt.renderEntity.origin = GetPhysics()->GetOrigin();
+		bt.renderEntity.axis = GetPhysics()->GetAxis();
+		bt.renderEntity.shaderParms[SHADERPARM_BEAM_WIDTH] = beamWidth;
+		bt.renderEntity.shaderParms[SHADERPARM_RED] = 1.0f;
+		bt.renderEntity.shaderParms[SHADERPARM_GREEN] = 1.0f;
+		bt.renderEntity.shaderParms[SHADERPARM_BLUE] = 1.0f;
+		bt.renderEntity.shaderParms[SHADERPARM_ALPHA] = 1.0f;
+		bt.renderEntity.shaderParms[SHADERPARM_DIVERSITY] = gameLocal.random.CRandomFloat() * 0.75;
+		bt.renderEntity.hModel = renderModelManager->FindModel("_beam");
+		bt.renderEntity.callback = NULL;
+		bt.renderEntity.numJoints = 0;
+		bt.renderEntity.joints = NULL;
+		bt.renderEntity.bounds.Clear();
+		bt.renderEntity.customSkin = declManager->FindSkin(skin);
+		bt.target = ent;
+		bt.modelDefHandle = gameRenderWorld->AddEntityDef(&bt.renderEntity);
+		//#modified-fva; BEGIN
+		bt.cstIsPlayer = ent->IsType(idPlayer::Type);
+		//#modified-fva; END
+		beamTargets.Append(bt);
+	}
+
+#ifdef _D3XP
+	// Major hack for end boss.  :(
+	idAnimatedEntity *maledict = static_cast<idAnimatedEntity*>(gameLocal.FindEntity("monster_boss_d3xp_maledict_1"));
+
+	if (maledict) {
+		SetTimeState	ts(maledict->timeGroup);
+
+		idVec3			realPoint;
+		idMat3			temp;
+		float			dist;
+		jointHandle_t	bodyJoint;
+
+		bodyJoint = maledict->GetAnimator()->GetJointHandle("Chest1");
+		maledict->GetJointWorldTransform(bodyJoint, gameLocal.time, realPoint, temp);
+
+		dist = idVec3(realPoint - GetPhysics()->GetOrigin()).Length();
+
+		if (dist < radius) {
+			beamTarget_t bt;
+			memset(&bt.renderEntity, 0, sizeof(renderEntity_t));
+			bt.renderEntity.origin = GetPhysics()->GetOrigin();
+			bt.renderEntity.axis = GetPhysics()->GetAxis();
+			bt.renderEntity.shaderParms[SHADERPARM_BEAM_WIDTH] = beamWidth;
+			bt.renderEntity.shaderParms[SHADERPARM_RED] = 1.0f;
+			bt.renderEntity.shaderParms[SHADERPARM_GREEN] = 1.0f;
+			bt.renderEntity.shaderParms[SHADERPARM_BLUE] = 1.0f;
+			bt.renderEntity.shaderParms[SHADERPARM_ALPHA] = 1.0f;
+			bt.renderEntity.shaderParms[SHADERPARM_DIVERSITY] = gameLocal.random.CRandomFloat() * 0.75;
+			bt.renderEntity.hModel = renderModelManager->FindModel("_beam");
+			bt.renderEntity.callback = NULL;
+			bt.renderEntity.numJoints = 0;
+			bt.renderEntity.joints = NULL;
+			bt.renderEntity.bounds.Clear();
+			bt.renderEntity.customSkin = declManager->FindSkin(skin);
+			bt.target = maledict;
+			bt.modelDefHandle = gameRenderWorld->AddEntityDef(&bt.renderEntity);
+			//#modified-fva; BEGIN
+			bt.cstIsPlayer = false;
+			//#modified-fva; END
+			beamTargets.Append(bt);
+
+			numListedEntities++;
+		}
+	}
+#endif
+
+	//#modified-fva; BEGIN
+	//if ( numListedEntities ) {
+	if (beamTargets.Num()) {
+	//#modified-fva; END
+		StartSound("snd_beam", SND_CHANNEL_BODY2, 0, false, NULL);
+	}
+	damageFreq = spawnArgs.GetString("def_damageFreq");
+	nextDamageTime = gameLocal.time + BFG_DAMAGE_FREQUENCY;
+	UpdateVisuals();
+}
+
+// =======
+void idBFGProjectile::CstClientStopBeams(bool stopSound) {
+	if (!beamTargets.Num()) {
+		// nothing else to do
+		return;
+	}
+	Event_RemoveBeams();
+	beamTargets.Clear();
+	if (stopSound) {
+		StopSound(SND_CHANNEL_BODY2, false);
+	}
+}
+
+// =======
+void idBFGProjectile::CstClientUpdateBeams(int targets) {
+	// part of the code below is from idBFGProjectile::Launch (with changes)
+
+	int oldTargets = cstTargetsMP;
+	cstTargetsMP = targets;
+
+	if (cstTargetsMP == oldTargets) {
+		return;
+	}
+	if (cstTargetsMP == 0) {
+		CstClientStopBeams();
+		return;
+	}
+
+	// cstTargetsMP != oldTargets && cstTargetsMP != 0
+	bool keepSound = (oldTargets != 0);
+
+	CstClientStopBeams(!keepSound);
+
+	float beamWidth = spawnArgs.GetFloat("beam_WidthFly");
+	idRenderModel *hModel = renderModelManager->FindModel("_beam");
+	const idDeclSkin *customSkin = declManager->FindSkin(spawnArgs.GetString("skin_beam"));
+
+	for (int i = 0; i < CST_MAX_PLAYERS; i++) {
+		bool isTarget = cstTargetsMP & (1 << i);
+		if (!isTarget) {
+			continue;
+		}
+		beamTarget_t bt;
+		memset(&bt.renderEntity, 0, sizeof(renderEntity_t));
+		bt.renderEntity.origin = GetPhysics()->GetOrigin();
+		bt.renderEntity.axis = GetPhysics()->GetAxis();
+		bt.renderEntity.shaderParms[SHADERPARM_BEAM_WIDTH] = beamWidth;
+		bt.renderEntity.shaderParms[SHADERPARM_RED] = 1.0f;
+		bt.renderEntity.shaderParms[SHADERPARM_GREEN] = 1.0f;
+		bt.renderEntity.shaderParms[SHADERPARM_BLUE] = 1.0f;
+		bt.renderEntity.shaderParms[SHADERPARM_ALPHA] = 1.0f;
+		bt.renderEntity.shaderParms[SHADERPARM_DIVERSITY] = gameLocal.random.CRandomFloat() * 0.75;
+		//bt.renderEntity.hModel = renderModelManager->FindModel("_beam");
+		bt.renderEntity.hModel = hModel;
+		bt.renderEntity.callback = NULL;
+		bt.renderEntity.numJoints = 0;
+		bt.renderEntity.joints = NULL;
+		bt.renderEntity.bounds.Clear();
+		//bt.renderEntity.customSkin = declManager->FindSkin(spawnArgs.GetString("skin_beam"));
+		bt.renderEntity.customSkin = customSkin;
+		//bt.target = ent;
+		bt.target = gameLocal.entities[i];
+		bt.modelDefHandle = gameRenderWorld->AddEntityDef(&bt.renderEntity);
+		//bt.cstIsPlayer = ent->IsType(idPlayer::Type);
+		bt.cstIsPlayer = true;
+		beamTargets.Append(bt);
+
+		idEntity* ent = bt.target.GetEntity();
+		if (ent && ent->IsType(idPlayer::Type)) {
+			CstUpdateBfgVision(static_cast<idPlayer*>(ent), true);
+		}
+	}
+	if (!keepSound) {
+		StartSound("snd_beam", SND_CHANNEL_BODY2, 0, false, NULL);
+	}
+	damageFreq = spawnArgs.GetString("def_damageFreq");
+	//nextDamageTime = gameLocal.time + BFG_DAMAGE_FREQUENCY;
+	nextDamageTime = gameLocal.realClientTime + BFG_DAMAGE_FREQUENCY;
+	UpdateVisuals();
+}
+//#modified-fva; END
 
 
 /*

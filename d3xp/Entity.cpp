@@ -478,6 +478,19 @@ void idEntity::Spawn( void ) {
 	}
 #endif
 
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	fl.cstGrabbedNoPhysicsMP = false;
+	fl.cstGrabbedNoThinkMP = false;
+#endif
+	//#modified-fva; END
+
+	//#modified-fva; BEGIN
+	if (spawnArgs.GetBool("cst_use_spawntime")) {
+		renderEntity.shaderParms[SHADERPARM_TIMEOFFSET] = -MS2SEC(gameLocal.realClientTime);
+	}
+	//#modified-fva; END
+
 	// go dormant within 5 frames so that when the map starts most monsters are dormant
 	dormantStart = gameLocal.time - DELAY_DORMANT_TIME + gameLocal.msec * 5;
 
@@ -2593,6 +2606,14 @@ bool idEntity::RunPhysics( void ) {
 	idEntity *	part, *blockedPart, *blockingEntity;
 	trace_t		results;
 	bool		moved;
+
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	if (fl.cstGrabbedNoPhysicsMP) {
+		return false;
+	}
+#endif
+	//#modified-fva; END
 
 	// don't run physics if not enabled
 	if ( !( thinkFlags & TH_PHYSICS ) ) {
@@ -4851,6 +4872,14 @@ idEntity::WriteToSnapshot
 ================
 */
 void idEntity::WriteToSnapshot( idBitMsgDelta &msg ) const {
+	//#modified-fva; BEGIN
+	if (spawnArgs.GetBool("cst_sync_origin")) {
+		const idVec3 &cstOrigin = GetPhysics()->GetOrigin();
+		msg.WriteFloat(cstOrigin.x);
+		msg.WriteFloat(cstOrigin.y);
+		msg.WriteFloat(cstOrigin.z);
+	}
+	//#modified-fva; END
 }
 
 /*
@@ -4859,6 +4888,18 @@ idEntity::ReadFromSnapshot
 ================
 */
 void idEntity::ReadFromSnapshot( const idBitMsgDelta &msg ) {
+	//#modified-fva; BEGIN
+	if (spawnArgs.GetBool("cst_sync_origin")) {
+		idVec3 cstOrigin;
+		cstOrigin.x = msg.ReadFloat();
+		cstOrigin.y = msg.ReadFloat();
+		cstOrigin.z = msg.ReadFloat();
+		GetPhysics()->SetOrigin(cstOrigin);
+		if (msg.HasChanged()) {
+			UpdateVisuals();
+		}
+	}
+	//#modified-fva; END
 }
 
 /*

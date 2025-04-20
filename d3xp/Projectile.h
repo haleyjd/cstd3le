@@ -13,6 +13,11 @@
 */
 
 extern const idEventDef EV_Explode;
+//#modified-fva; BEGIN
+#ifdef _D3XP
+extern const idEventDef EV_Fizzle;
+#endif
+//#modified-fva; END
 
 class idProjectile : public idEntity {
 public :
@@ -38,6 +43,16 @@ public :
 	void					Event_LaunchProjectile( const idVec3 &start, const idVec3 &dir, const idVec3 &pushVelocity );
 	void					Event_SetGravity( float gravity );
 #endif
+
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	void					CstReleaseProjectile(idPlayer *grabberOwner);
+#endif
+	//#modified-fva; END
+
+	//#modified-fva; BEGIN
+	static void				CstInitSmokeFlyControl();
+	//#modified-fva; END
 
 	virtual void			Think( void );
 	virtual void			Killed( idEntity *inflictor, idEntity *attacker, int damage, const idVec3 &dir, int location );
@@ -124,6 +139,37 @@ private:
 	void					Event_RadiusDamage( idEntity *ignore );
 	void					Event_Touch( idEntity *other, trace_t *trace );
 	void					Event_GetProjectileState( void );
+
+	//#modified-fva; BEGIN
+	class CstSmokeFlyControl {
+	public:
+		CstSmokeFlyControl();
+		void							Init();
+		bool							IsSmokeFlyAllowed(idProjectile *projectile, int weaponSlot = -1);
+#ifdef _D3XP
+		void							OnGrabberCatch(idPlayer *grabberOwner, idProjectile *projectile);
+		void							OnGrabberRelease(idPlayer *grabberOwner, idProjectile *projectile);
+#endif
+	private:
+		class ProjectileWeaponPair {
+		public:
+			ProjectileWeaponPair() { projectileDefNumber = -1; weaponSlot = -1; }
+			int							projectileDefNumber;
+			int							weaponSlot;
+		};
+		idList<ProjectileWeaponPair>	controlTable;
+		idCVar &						GetNoSmokeFlyCVar(idPlayer &player);
+		bool							IsAllowedByWeapon(int weaponSlot, idCVar &noSmokeFlyCVar);
+		int								FindWeaponSlot(int projectileDefNumber);
+#ifdef _D3XP
+		int								grabberSlot;
+		void							UpdateSmokeFly(idProjectile *projectile, int weaponSlot = -1);
+		void							StopSmokeFly(idProjectile *projectile);
+		void							StartSmokeFly(idProjectile *projectile);
+#endif
+	};
+	static CstSmokeFlyControl			cstSmokeFlyControl;
+	//#modified-fva; END
 };
 
 class idGuidedProjectile : public idProjectile {
@@ -143,6 +189,11 @@ public :
 	void					SetEnemy( idEntity *ent );
 	void					Event_SetEnemy(idEntity *ent);
 #endif
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	void					CstUnGuide();
+#endif
+	//#modified-fva; END
 
 protected:
 	float					speed;
@@ -196,6 +247,9 @@ struct beamTarget_t {
 	idEntityPtr<idEntity>	target;
 	renderEntity_t			renderEntity;
 	qhandle_t				modelDefHandle;
+	//#modified-fva; BEGIN
+	bool					cstIsPlayer;
+	//#modified-fva; END
 };
 
 class idBFGProjectile : public idProjectile {
@@ -213,6 +267,14 @@ public :
 	virtual void			Launch( const idVec3 &start, const idVec3 &dir, const idVec3 &pushVelocity, const float timeSinceFire = 0.0f, const float launchPower = 1.0f, const float dmgPower = 1.0f );
 	virtual void			Explode( const trace_t &collision, idEntity *ignore );
 
+	//#modified-fva; BEGIN
+	virtual void			WriteToSnapshot(idBitMsgDelta &msg) const;
+	virtual void			ReadFromSnapshot(const idBitMsgDelta &msg);
+
+	void CstStopBeams();
+	void CstStartBeams();
+	//#modified-fva; END
+
 private:
 	idList<beamTarget_t>	beamTargets;
 	renderEntity_t			secondModel;
@@ -223,6 +285,19 @@ private:
 	void					FreeBeams();
 	void					Event_RemoveBeams();
 	void					ApplyDamage();
+
+	//#modified-fva; BEGIN
+	static idList<idBFGProjectile*> cstBfgProjectiles;
+
+	bool cstBfgVision[CST_MAX_PLAYERS];
+	int cstTargetsMP;
+
+	void CstClearBfgVision();
+	void CstUpdateBfgVision(idPlayer* player, bool enable);
+	void CstFreeSingleBeam(beamTarget_t& beamTarget);
+	void CstClientStopBeams(bool stopSound = true);
+	void CstClientUpdateBeams(int targets);
+	//#modified-fva; END
 };
 
 //Added for LM (Lost mission)

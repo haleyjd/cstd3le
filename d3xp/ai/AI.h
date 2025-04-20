@@ -685,6 +685,11 @@ protected:
 	void					Event_GetEmitter( const char* name );
 	void					Event_StopEmitter( const char* name );
 #endif
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	void					Event_CstClearGrabbed();
+#endif
+	//#modified-fva; END
 };
 
 class idCombatNode : public idEntity {

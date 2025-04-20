@@ -71,7 +71,10 @@ static char* fastEntityList[] = {
 		"weapon_soulcube",
 		"projectile_soulblast",
 		"weapon_shotgun_double",
-		"projectile_shotgunbullet_double",
+		//#modified-fva; BEGIN
+		//"projectile_shotgunbullet_double",
+		"projectile_bullet_shotgun_double",
+		//#modified-fva; END
 		"weapon_grabber",
 		"weapon_bloodstone_active1",
 		"weapon_bloodstone_active2",
@@ -174,6 +177,16 @@ void idGameLocal::Clear( void ) {
 	int i;
 
 	serverInfo.Clear();
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	cstSiGrabberUnlimitedTimeMP = false;
+	cstSiGrabberStableThrowMP = 0;
+#endif
+	cstSiAllowHeadlampMP = false;
+	cstSiAllowSmokeControlMP = false;
+	cstSiAllowDamageFeedbackControlMP = false;
+	cstSiAllowGrenadesToggleMP = false;
+	//#modified-fva; END
 	numClients = 0;
 	for ( i = 0; i < MAX_CLIENTS; i++ ) {
 		userInfo[i].Clear();
@@ -210,6 +223,9 @@ void idGameLocal::Clear( void ) {
 	framenum = 0;
 	previousTime = 0;
 	time = 0;
+	//#modified-fva; BEGIN
+	cstMenuTime = 0;
+	//#modified-fva; END
 	vacuumAreaNum = 0;
 	mapFileName.Clear();
 	mapFile = NULL;
@@ -315,12 +331,18 @@ void idGameLocal::Init( void ) {
 
 
 #ifdef _D3XP
-	if(!g_xp_bind_run_once.GetBool()) {
+	//#modified-fva; BEGIN
+	//if(!g_xp_bind_run_once.GetBool()) {
+	if (!cst_bind_run_once.GetBool()) {
+	//#modified-fva; END
 		//The default config file contains remapped controls that support the XP weapons
 		//We want to run this once after the base doom config file has run so we can
 		//have the correct xp binds
 		cmdSystem->BufferCommandText( CMD_EXEC_APPEND, "exec default.cfg\n" );
-		cmdSystem->BufferCommandText( CMD_EXEC_APPEND, "seta g_xp_bind_run_once 1\n" );
+		//#modified-fva; BEGIN
+		//cmdSystem->BufferCommandText( CMD_EXEC_APPEND, "seta g_xp_bind_run_once 1\n" );
+		cmdSystem->BufferCommandText(CMD_EXEC_APPEND, "seta cst_bind_run_once 1\n");
+		//#modified-fva; END
 		cmdSystem->ExecuteCommandBuffer();
 	}
 #endif
@@ -366,6 +388,24 @@ void idGameLocal::Init( void ) {
 	}
 
 	gamestate = GAMESTATE_NOMAP;
+
+	//#modified-fva; BEGIN
+	idCVar *cstVersion = cvarSystem->Find("cst_version");
+	if (!cstVersion) {
+		Error("Wrong engine: use the engine provided with the mod");
+	}
+	if (strcmp(cstVersion->GetString(), CST_ENGINE_VERSION)) {
+		Error("Wrong cst_version: expected %s, got %s", CST_ENGINE_VERSION, cstVersion->GetString());
+	}
+	//#modified-fva; END
+
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	if (!fileSystem->HasD3XP()) {
+		Error("Resurrection of Evil is not installed");
+	}
+#endif
+	//#modified-fva; END
 
 	Printf( "...%d aas types\n", aasList.Num() );
 	Printf( "game initialized.\n" );
@@ -1297,6 +1337,10 @@ void idGameLocal::InitFromNewMap( const char *mapName, idRenderWorld *renderWorl
 	// free up any unused animations
 	animationLib.FlushUnusedAnims();
 
+	//#modified-fva; BEGIN
+	idProjectile::CstInitSmokeFlyControl();
+	//#modified-fva; END
+
 	gamestate = GAMESTATE_ACTIVE;
 
 	Printf( "--------------------------------------\n" );
@@ -1548,6 +1592,10 @@ bool idGameLocal::InitFromSaveGame( const char *mapName, idRenderWorld *renderWo
 
 	// free up any unused animations
 	animationLib.FlushUnusedAnims();
+
+	//#modified-fva; BEGIN
+	idProjectile::CstInitSmokeFlyControl();
+	//#modified-fva; END
 
 	gamestate = GAMESTATE_ACTIVE;
 
@@ -2345,7 +2393,10 @@ void idGameLocal::RunTimeGroup2() {
 	idEntity *ent;
 	int num = 0;
 
-	fast.Increment();
+	//#modified-fva; BEGIN
+	// moved to idGameLocal::RunFrame
+	//fast.Increment();
+	//#modified-fva; END
 	fast.Get( time, previousTime, msec, framenum, realClientTime );
 
 	for( ent = activeEntities.Next(); ent != NULL; ent = ent->activeNode.Next() ) {
@@ -2353,7 +2404,12 @@ void idGameLocal::RunTimeGroup2() {
 			continue;
 		}
 
-		ent->Think();
+		//#modified-fva; BEGIN
+		//ent->Think();
+		if (!ent->fl.cstGrabbedNoThinkMP) {
+			ent->Think();
+		}
+		//#modified-fva; END
 		num++;
 	}
 
@@ -2382,6 +2438,9 @@ gameReturn_t idGameLocal::RunFrame( const usercmd_t *clientCmds ) {
 #endif
 
 	player = GetLocalPlayer();
+	//#modified-fva; BEGIN
+	cstMenuTime = common->CstGetComFrameTime();
+	//#modified-fva; END
 
 #ifdef _D3XP
 	ComputeSlowMsec();
@@ -2409,6 +2468,10 @@ gameReturn_t idGameLocal::RunFrame( const usercmd_t *clientCmds ) {
 
 #ifdef _D3XP
 		slow.Set( time, previousTime, msec, framenum, realClientTime );
+		//#modified-fva; BEGIN
+		// moved from RunTimeGroup2
+		fast.Increment();
+		//#modified-fva; END
 #endif
 
 #ifdef GAME_DLL
@@ -2467,7 +2530,15 @@ gameReturn_t idGameLocal::RunFrame( const usercmd_t *clientCmds ) {
 				}
 				timer_singlethink.Clear();
 				timer_singlethink.Start();
+				//#modified-fva; BEGIN
+#ifdef _D3XP
+				if (!ent->fl.cstGrabbedNoThinkMP) {
+					ent->Think();
+				}
+#else
 				ent->Think();
+#endif
+				//#modified-fva; END
 				timer_singlethink.Stop();
 				ms = timer_singlethink.Milliseconds();
 				if ( ms >= g_timeentities.GetFloat() ) {
@@ -2483,7 +2554,15 @@ gameReturn_t idGameLocal::RunFrame( const usercmd_t *clientCmds ) {
 						ent->GetPhysics()->UpdateTime( time );
 						continue;
 					}
+					//#modified-fva; BEGIN
+#ifdef _D3XP
+					if (!ent->fl.cstGrabbedNoThinkMP) {
+						ent->Think();
+					}
+#else
 					ent->Think();
+#endif
+					//#modified-fva; END
 					num++;
 				}
 			} else {
@@ -2494,7 +2573,15 @@ gameReturn_t idGameLocal::RunFrame( const usercmd_t *clientCmds ) {
 						continue;
 					}
 #endif
+					//#modified-fva; BEGIN
+#ifdef _D3XP
+					if (!ent->fl.cstGrabbedNoThinkMP) {
+						ent->Think();
+					}
+#else
 					ent->Think();
+#endif
+					//#modified-fva; END
 					num++;
 				}
 			}
@@ -2578,6 +2665,9 @@ gameReturn_t idGameLocal::RunFrame( const usercmd_t *clientCmds ) {
 		// make sure we don't loop forever when skipping a cinematic
 		if ( skipCinematic && ( time > cinematicMaxSkipTime ) ) {
 			Warning( "Exceeded maximum cinematic skip length.  Cinematic may be looping infinitely." );
+			//#modified-fva; BEGIN
+			soundSystem->SetMute(false);
+			//#modified-fva; END
 			skipCinematic = false;
 			break;
 		}
@@ -2635,8 +2725,23 @@ void idGameLocal::CalcFov( float base_fov, float &fov_x, float &fov_y ) const {
 		Error( "idGameLocal::CalcFov: bad result" );
 	}
 
-	switch( r_aspectRatio.GetInteger() ) {
+	//#modified-fva; BEGIN
+	//switch( r_aspectRatio.GetInteger() ) {
+	switch (cst_aspectRatio.GetInteger()) {
+	//#modified-fva; END
 	default :
+	//#modified-fva; BEGIN
+	case -1:
+		// Automatic
+		int width;
+		int height;
+		renderSystem->GetGLSettings(width, height);
+		if (width > 0 && height > 0) {
+			ratio_x = (float)width;
+			ratio_y = (float)height;
+			break;
+		} // else fall through
+	//#modified-fva; END
 	case 0 :
 		// 4:3
 		fov_x = base_fov;
@@ -2659,11 +2764,15 @@ void idGameLocal::CalcFov( float base_fov, float &fov_x, float &fov_y ) const {
 	y = ratio_y / tan( fov_y / 360.0f * idMath::PI );
 	fov_x = atan2( ratio_x, y ) * 360.0f / idMath::PI;
 
+	//#modified-fva; BEGIN
+	/*
 	if ( fov_x < base_fov ) {
 		fov_x = base_fov;
 		x = ratio_x / tan( fov_x / 360.0f * idMath::PI );
 		fov_y = atan2( ratio_y, x ) * 360.0f / idMath::PI;
 	}
+	*/
+	//#modified-fva; END
 
 	// FIXME: somehow, this is happening occasionally
 	assert( ( fov_x > 0 ) && ( fov_y > 0 ) );
@@ -4674,6 +4783,16 @@ void idGameLocal::UpdateServerInfoFlags() {
 			serverInfo.SetInt( "si_fraglimit", 1 );
 		}
 	}
+	//#modified-fva; BEGIN
+#ifdef _D3XP
+	cstSiGrabberUnlimitedTimeMP = serverInfo.GetInt("cst_grabberUnlimitedTimeMP");
+	cstSiGrabberStableThrowMP = serverInfo.GetInt("cst_grabberStableThrowMP");
+#endif
+	cstSiAllowHeadlampMP = serverInfo.GetBool("cst_allowHeadlampMP");
+	cstSiAllowSmokeControlMP = serverInfo.GetBool("cst_allowSmokeControlMP");
+	cstSiAllowDamageFeedbackControlMP = serverInfo.GetBool("cst_allowDamageFeedbackControlMP");
+	cstSiAllowGrenadesToggleMP = serverInfo.GetBool("cst_allowGrenadesToggleMP");
+	//#modified-fva; END
 }
 
 
@@ -4958,4 +5077,55 @@ idGameLocal::GetMapLoadingGUI
 ===============
 */
 void idGameLocal::GetMapLoadingGUI( char gui[ MAX_STRING_CHARS ] ) { }
+
+//#modified-fva; BEGIN
+int idGameLocal::CstGetDifficulty() {
+	int skill = g_skill.GetInteger();
+	if (skill < 0) {
+		skill = 0;
+	} else if (skill > 3) {
+		skill = 3;
+	}
+	return skill;
+}
+
+// ==========
+int idGameLocal::CstGetAw() {
+#ifndef _D3XP
+	return 0;
+#else
+	if (isMultiplayer) {
+		return 0;
+	}
+	idPlayer *player = GetLocalPlayer();
+	if (!player) {
+		return 0;
+	}
+	return player->CstGetAw();
+#endif
+}
+
+// ==========
+void idGameLocal::CstChangeFov(float deltaFov) {
+	// adjust fov
+	float fov = g_fov.GetFloat();
+	fov += deltaFov;
+	fov = idMath::ClampFloat(65.0f, 100.0f, idMath::Floor(fov));
+
+	// adjust gun x
+	const float d1 = 1.0f / idMath::Tan(DEG2RAD(65.0f * 0.5f));
+	const float gunX_1 = 3.0f;
+
+	const float d2 = 1.0f / idMath::Tan(DEG2RAD(90.0f * 0.5f));
+	const float gunX_2 = 0.0f;
+
+	float d = 1.0f / idMath::Tan(DEG2RAD(fov * 0.5f));
+	float f = (d - d1) / (d2 - d1);
+	float gunX = gunX_1 * (1.0f - f) + gunX_2 * f;
+
+	// set the new values
+	g_fov.SetFloat(fov);
+	g_gun_x.SetFloat(gunX);
+}
+//#modified-fva; END
 

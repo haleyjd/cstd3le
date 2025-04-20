@@ -55,6 +55,9 @@ void idGameLocal::InitAsyncNetwork( void ) {
 	realClientTime = 0;
 	isNewFrame = true;
 	clientSmoothing = net_clientSmoothing.GetFloat();
+	//#modified-fva; BEGIN
+	cstMenuTime = 0;
+	//#modified-fva; END
 }
 
 /*
@@ -1502,6 +1505,9 @@ gameReturn_t idGameLocal::ClientPrediction( int clientNum, const usercmd_t *clie
 	framenum++;
 	previousTime = time;
 	time += msec;
+	//#modified-fva; BEGIN
+	cstMenuTime = common->CstGetComFrameTime();
+	//#modified-fva; END
 
 	// update the real client time and the new frame flag
 	if ( time > realClientTime ) {
@@ -1522,7 +1528,15 @@ gameReturn_t idGameLocal::ClientPrediction( int clientNum, const usercmd_t *clie
 	// run prediction on all entities from the last snapshot
 	for( ent = snapshotEntities.Next(); ent != NULL; ent = ent->snapshotNode.Next() ) {
 		ent->thinkFlags |= TH_PHYSICS;
+		//#modified-fva; BEGIN
+#ifdef _D3XP
+		if (!ent->fl.cstGrabbedNoThinkMP) {
+			ent->ClientPredictionThink();
+		}
+#else
 		ent->ClientPredictionThink();
+#endif
+		//#modified-fva; END
 	}
 
 	// service any pending events

@@ -122,6 +122,12 @@ public:
 		bool				hasAwakened			:1;	// before a monster has been awakened the first time, use full PVS for dormant instead of area-connected
 		bool				networkSync			:1; // if true the entity is synchronized over the network
 		bool				grabbed				:1;	// if true object is currently being grabbed
+		//#modified-fva; BEGIN
+#ifdef _D3XP
+		bool				cstGrabbedNoPhysicsMP	:1;
+		bool				cstGrabbedNoThinkMP		:1;
+#endif
+		//#modified-fva; END
 	} fl;
 
 #ifdef _D3XP

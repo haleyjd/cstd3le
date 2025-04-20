@@ -104,7 +104,10 @@ void Cmd_ListSpawnArgs_f( const idCmdArgs &args ) {
 
 	for ( i = 0; i < ent->spawnArgs.GetNumKeyVals(); i++ ) {
 		const idKeyValue *kv = ent->spawnArgs.GetKeyVal( i );
-		gameLocal.Printf( "\"%s\"  " S_COLOR_WHITE "\"%s\"\n", kv->GetKey().c_str(), kv->GetValue().c_str() );
+		//#modified-fva; BEGIN
+		//gameLocal.Printf( "\"%s\"  "S_COLOR_WHITE"\"%s\"\n", kv->GetKey().c_str(), kv->GetValue().c_str() );
+		gameLocal.Printf("\"%s\"  " S_COLOR_WHITE"\"%s\"\n", kv->GetKey().c_str(), kv->GetValue().c_str());
+		//#modified-fva; END
 	}
 }
 
@@ -291,7 +294,14 @@ void Cmd_Give_f( const idCmdArgs &args ) {
 			gameLocal.world->spawnArgs.SetBool( "no_Weapons", false );
 			for( i = 0; i < gameLocal.numClients; i++ ) {
 				if ( gameLocal.entities[ i ] ) {
+					//#modified-fva; BEGIN
+					//gameLocal.entities[ i ]->PostEventSec( &EV_Player_SelectWeapon, 0.5f, gameLocal.entities[ i ]->spawnArgs.GetString( "def_weapon1" ) );
+#ifdef _D3XP
+					gameLocal.entities[i]->PostEventSec(&EV_Player_SelectWeapon, 0.5f, gameLocal.entities[i]->spawnArgs.GetString("def_weapon3"));
+#else
 					gameLocal.entities[ i ]->PostEventSec( &EV_Player_SelectWeapon, 0.5f, gameLocal.entities[ i ]->spawnArgs.GetString( "def_weapon1" ) );
+#endif
+					//#modified-fva; END
 				}
 			}
 		}
@@ -311,6 +321,15 @@ void Cmd_Give_f( const idCmdArgs &args ) {
 
 	if ( give_all || idStr::Icmp( name, "weapons" ) == 0 ) {
 		player->inventory.weapons = BIT( MAX_WEAPONS ) - 1;
+		//#modified-fva; BEGIN
+#ifdef _D3XP
+		if (!gameLocal.isMultiplayer) {
+			if (player->cstAwChainsawRoE < 1 && player->cst_weapon_chainsaw > -1) {
+				player->inventory.weapons &= ~(int)BIT(player->cst_weapon_chainsaw);
+			}
+		}
+#endif
+		//#modified-fva; END
 		player->CacheWeapons();
 
 		if ( !give_all ) {
@@ -438,6 +457,10 @@ void Cmd_God_f( const idCmdArgs &args ) {
 	}
 
 	gameLocal.Printf( "%s", msg );
+
+	//#modified-fva; BEGIN
+	common->CstPrintMsg(msg);
+	//#modified-fva; END
 }
 
 /*
@@ -467,6 +490,10 @@ void Cmd_Notarget_f( const idCmdArgs &args ) {
 	}
 
 	gameLocal.Printf( "%s", msg );
+
+	//#modified-fva; BEGIN
+	common->CstPrintMsg(msg);
+	//#modified-fva; END
 }
 
 /*
@@ -493,6 +520,10 @@ void Cmd_Noclip_f( const idCmdArgs &args ) {
 	player->noclip = !player->noclip;
 
 	gameLocal.Printf( "%s", msg );
+
+	//#modified-fva; BEGIN
+	common->CstPrintMsg(msg);
+	//#modified-fva; END
 }
 
 /*
@@ -2359,6 +2390,107 @@ void Cmd_TestId_f( const idCmdArgs &args ) {
 	gameLocal.mpGame.AddChatLine( common->GetLanguageDict()->GetString( id ), "<nothing>", "<nothing>", "<nothing>" );	
 }
 
+//#modified-fva; BEGIN
+static void Cmd_CstSpawn_f(const idCmdArgs &args) {
+	if (!gameLocal.CheatsOk(true)) {
+		return;
+	}
+
+	if (args.Argc() != 4) {
+		gameLocal.Printf("usage: cstSpawn classname \'OrgX OrgY OrgZ\' \'AngX AngY AngZ\'\n");
+		return;
+	}
+
+	idDict dict;
+	dict.Set("classname", args.Argv(1));
+	dict.Set("origin", args.Argv(2));
+
+	idDict aux;
+	aux.Set("angles", args.Argv(3));
+	idMat3 mat = aux.GetAngles("angles").ToMat3();
+
+	idStr rotA;
+	idStr rotB;
+	idStr rotC;
+	sprintf(rotA, "%.6g %.6g %.6g", mat[0].x, mat[0].y, mat[0].z);
+	sprintf(rotB, "%.6g %.6g %.6g", mat[1].x, mat[1].y, mat[1].z);
+	sprintf(rotC, "%.6g %.6g %.6g", mat[2].x, mat[2].y, mat[2].z);
+
+	dict.Set("rotation", (rotA + " " + rotB + " " + rotC).c_str());
+	gameLocal.SpawnEntityDef(dict);
+	gameLocal.Printf("rotation:\n %s\n %s\n %s\n", rotA.c_str(), rotB.c_str(), rotC.c_str());
+}
+
+// ========
+static void Cmd_CstPrintEntityInfo_f(const idCmdArgs &args) {
+	// see g_dragEntity code
+	idPlayer *player = gameLocal.GetLocalPlayer();
+	if (!player || !gameLocal.CheatsOk(true)) {
+		return;
+	}
+
+	idVec3 origin;
+	idMat3 axis;
+	player->GetViewPos(origin, axis);
+
+	trace_t trace;
+	const float maxDistance = 2048.0f;
+	gameLocal.clip.TracePoint(trace, origin, origin + axis[0] * maxDistance, (CONTENTS_SOLID | CONTENTS_RENDERMODEL | CONTENTS_BODY), player);
+	if (trace.fraction < 1.0f) {
+		idEntity *ent = gameLocal.entities[trace.c.entityNum];
+		if (ent) {
+			idStr msgA = idStr("entityDef: ") + ent->GetEntityDefName();
+			idStr msgB = idStr(" name:     ") + ent->name;
+			idStr msgC = idStr(" origin:   ") + ent->GetPhysics()->GetOrigin().ToString();
+			idStr msgD = idStr(" angles:   ") + ent->GetPhysics()->GetAxis().ToAngles().ToString();
+
+			idMat3 mat = ent->GetPhysics()->GetAxis();
+			idStr rotA;
+			idStr rotB;
+			idStr rotC;
+			sprintf(rotA, "%.9g %.9g %.9g", mat[0].x, mat[0].y, mat[0].z);
+			sprintf(rotB, "%.9g %.9g %.9g", mat[1].x, mat[1].y, mat[1].z);
+			sprintf(rotC, "%.9g %.9g %.9g", mat[2].x, mat[2].y, mat[2].z);
+			idStr msgE;
+			sprintf(msgE, " rotation:\n  %s\n  %s\n  %s\n", rotA.c_str(), rotB.c_str(), rotC.c_str());
+
+			gameLocal.Printf("%s\n", msgA.c_str());
+			gameLocal.Printf("%s\n", msgB.c_str());
+			gameLocal.Printf("%s\n", msgC.c_str());
+			gameLocal.Printf("%s\n", msgD.c_str());
+			gameLocal.Printf("%s\n", msgE.c_str());
+
+			common->CstPrintMsg(msgA.c_str());
+			common->CstPrintMsg(msgC.c_str());
+			common->CstPrintMsg(msgD.c_str());
+		}
+	}
+}
+
+// ========
+static void Cmd_CstDemigod_f(const idCmdArgs &args) {
+	// see Cmd_God_f code
+	char		*msg;
+	idPlayer	*player;
+
+	player = gameLocal.GetLocalPlayer();
+	if (!player || !gameLocal.CheatsOk()) {
+		return;
+	}
+
+	if (player->cstDemigod) {
+		player->cstDemigod = false;
+		msg = "demigod OFF\n";
+	} else {
+		player->cstDemigod = true;
+		msg = "demigod ON\n";
+	}
+
+	gameLocal.Printf("%s", msg);
+	common->CstPrintMsg(msg);
+}
+//#modified-fva; END
+
 /*
 =================
 idGameLocal::InitConsoleCommands
@@ -2473,6 +2605,12 @@ void idGameLocal::InitConsoleCommands( void ) {
 #ifdef _D3XP
 	cmdSystem->AddCommand( "setActorState",			Cmd_SetActorState_f,		CMD_FL_GAME|CMD_FL_CHEAT,	"Manually sets an actors script state", idGameLocal::ArgCompletion_EntityName );
 #endif
+
+	//#modified-fva; BEGIN
+	cmdSystem->AddCommand("cstSpawn", Cmd_CstSpawn_f, CMD_FL_GAME | CMD_FL_CHEAT, "spawns a game entity", idCmdSystem::ArgCompletion_Decl<DECL_ENTITYDEF>);
+	cmdSystem->AddCommand("cstPrintEntityInfo", Cmd_CstPrintEntityInfo_f, CMD_FL_GAME | CMD_FL_CHEAT, "prints info about the pointed entity");
+	cmdSystem->AddCommand("cstDemigod", Cmd_CstDemigod_f, CMD_FL_GAME | CMD_FL_CHEAT, "enables demigod mode");
+	//#modified-fva; END
 }
 
 /*

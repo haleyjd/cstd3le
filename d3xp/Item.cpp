@@ -1710,7 +1710,13 @@ void idMoveableItem::Spawn( void ) {
 	const char *smokeName = spawnArgs.GetString( "smoke_trail" );
 	if ( *smokeName != '\0' ) {
 		smoke = static_cast<const idDeclParticle *>( declManager->FindType( DECL_PARTICLE, smokeName ) );
+		//#modified-fva; BEGIN
+#ifdef _D3XP
+		smokeTime = gameLocal.slow.time;
+#else
 		smokeTime = gameLocal.time;
+#endif
+		//#modified-fva; END
 		BecomeActive( TH_UPDATEPARTICLES );
 	}
 
@@ -1734,13 +1740,19 @@ void idMoveableItem::Think( void ) {
 	}
 	
 	if ( thinkFlags & TH_UPDATEPARTICLES ) {
-		if ( !gameLocal.smokeParticles->EmitSmoke( smoke, smokeTime, gameLocal.random.CRandomFloat(), GetPhysics()->GetOrigin(), GetPhysics()->GetAxis(), timeGroup /*_D3XP*/ ) ) {
+		//#modified-fva; BEGIN
+		//if ( !gameLocal.smokeParticles->EmitSmoke( smoke, smokeTime, gameLocal.random.CRandomFloat(), GetPhysics()->GetOrigin(), GetPhysics()->GetAxis(), timeGroup /*_D3XP*/ ) ) {
+		if (!gameLocal.smokeParticles->EmitSmoke(smoke, smokeTime, gameLocal.random.CRandomFloat(), GetPhysics()->GetOrigin(), GetPhysics()->GetAxis(), TIME_GROUP1 /*_D3XP*/)) {
+		//#modified-fva; END
 #ifdef CTF
 			if ( !repeatSmoke ) {
 				smokeTime = 0;
 				BecomeInactive( TH_UPDATEPARTICLES );
 			} else {
-				smokeTime = gameLocal.time;
+				//#modified-fva; BEGIN
+				//smokeTime = gameLocal.time;
+				smokeTime = gameLocal.slow.time;
+				//#modified-fva; END
 			}
 #else
 			smokeTime = 0;
