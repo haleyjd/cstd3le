@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug with inlines and memory log|Win32">
+      <Configuration>Debug with inlines and memory log</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug with inlines|Win32">
+      <Configuration>Debug with inlines</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dedicated Debug with Inlines|Win32">
+      <Configuration>Dedicated Debug with Inlines</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dedicated Release|Win32">
+      <Configuration>Dedicated Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>Game-d3xp</ProjectName>
+    <ProjectGuid>{A35F276C-85FC-45C7-ADA2-F053601716BA}</ProjectGuid>
+    <SccProjectName />
+    <SccAuxPath />
+    <SccLocalPath />
+    <SccProvider />
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug with Inlines|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug with inlines and memory log|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug with inlines|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug with Inlines|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug with inlines and memory log|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug with inlines|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>16.0.33801.447</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>d3xp/DebugDLL\</OutDir>
+    <IntDir>d3xp/DebugDLL\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>d3xp/ReleaseDLL\</OutDir>
+    <IntDir>d3xp/ReleaseDLL\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug with inlines|Win32'">
+    <OutDir>d3xp/InlineDebugDLL\</OutDir>
+    <IntDir>d3xp/InlineDebugDLL\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug with inlines and memory log|Win32'">
+    <OutDir>d3xp/InlineDebugMemoryDLL\</OutDir>
+    <IntDir>d3xp/InlineDebugMemoryDLL\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug with Inlines|Win32'">
+    <OutDir>d3xp/DedicatedInlineDebugDLL\</OutDir>
+    <IntDir>d3xp/DedicatedInlineDebugDLL\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Release|Win32'">
+    <OutDir>d3xp/DedicatedReleaseDLL\</OutDir>
+    <IntDir>d3xp/DedicatedReleaseDLL\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>mssdk/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_D3SDK;_D3XP;__DOOM__;GAME_DLL;WIN32;_DEBUG;_WINDOWS;CTF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile />
+      <PrecompiledHeaderOutputFile>$(IntDir)game.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <BrowseInformationFile>$(IntDir)</BrowseInformationFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/FIXED:no %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;dbghelp.lib;./DebugDLL/idLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>./DebugDLLD3XP/gamex86.dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ModuleDefinitionFile>.\d3xp\game.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)d3xp_game.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)d3xp_game.map</MapFileName>
+      <SubSystem>NotSet</SubSystem>
+      <StackReserveSize>16000000</StackReserveSize>
+      <StackCommitSize>16000000</StackCommitSize>
+      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>mssdk/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_D3SDK;_D3XP;__DOOM__;GAME_DLL;WIN32;NDEBUG;_WINDOWS;CTF;CSTD3LE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile />
+      <PrecompiledHeaderOutputFile>$(IntDir)game.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <BrowseInformation />
+      <BrowseInformationFile>$(IntDir)</BrowseInformationFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 /fixed:no %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;./ReleaseDLL/idLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>./ReleaseDLLD3XP/gamex86.dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ModuleDefinitionFile>.\d3xp\game.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)d3xp_game.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)d3xp_game.map</MapFileName>
+      <SubSystem>NotSet</SubSystem>
+      <StackReserveSize>4194304</StackReserveSize>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <EntryPointSymbol />
+      <SupportUnloadOfDelayLoadedDLL>false</SupportUnloadOfDelayLoadedDLL>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug with inlines|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>mssdk/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_D3SDK;_D3XP;__DOOM__;GAME_DLL;WIN32;_DEBUG;_WINDOWS;_INLINEDEBUG;CTF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile />
+      <PrecompiledHeaderOutputFile>$(IntDir)game.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <BrowseInformation>true</BrowseInformation>
+      <BrowseInformationFile>$(IntDir)</BrowseInformationFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;dbghelp.lib;./InlineDebugDLL/idLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>./InlineDebugDLLD3XP/gamex86.dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ModuleDefinitionFile>.\d3xp\game.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)d3xp_game.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)d3xp_game.map</MapFileName>
+      <SubSystem>NotSet</SubSystem>
+      <StackReserveSize>16000000</StackReserveSize>
+      <StackCommitSize>16000000</StackCommitSize>
+      <SupportUnloadOfDelayLoadedDLL>false</SupportUnloadOfDelayLoadedDLL>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <ResourceCompile>
+      <ShowProgress>true</ShowProgress>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug with inlines and memory log|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>mssdk/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_D3SDK;_D3XP;__DOOM__;GAME_DLL;WIN32;_DEBUG;_WINDOWS;_INLINEDEBUG;ID_REDIRECT_NEWDELETE;ID_DEBUG_MEMORY;ID_DEBUG_UNINITIALIZED_MEMORY;CTF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile />
+      <PrecompiledHeaderOutputFile>$(IntDir)game.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <BrowseInformation>true</BrowseInformation>
+      <BrowseInformationFile>$(IntDir)</BrowseInformationFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;dbghelp.lib;./InlineDebugMemoryDLL/idLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>./InlineDebugMemoryDLLD3XP/gamex86.dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ModuleDefinitionFile>.\d3xp\game.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)d3xp_game.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)d3xp_game.map</MapFileName>
+      <SubSystem>NotSet</SubSystem>
+      <StackReserveSize>16000000</StackReserveSize>
+      <StackCommitSize>16000000</StackCommitSize>
+      <SupportUnloadOfDelayLoadedDLL>true</SupportUnloadOfDelayLoadedDLL>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PreBuildEvent>
+      <Command>.\TypeInfo\InlineDebugMemoryDLL\typeinfo.exe</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug with Inlines|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>mssdk/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_D3SDK;_D3XP;__DOOM__;GAME_DLL;WIN32;_DEBUG;_WINDOWS;_INLINEDEBUG;CTF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile />
+      <PrecompiledHeaderOutputFile>$(IntDir)game.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <BrowseInformation>true</BrowseInformation>
+      <BrowseInformationFile>$(IntDir)</BrowseInformationFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;dbghelp.lib;./DedicatedInlineDebugDLL/idLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>./DedicatedInlineDebugDLLD3XP/gamex86.dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ModuleDefinitionFile>.\d3xp\game.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)d3xp_game.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)d3xp_game.map</MapFileName>
+      <SubSystem>NotSet</SubSystem>
+      <StackReserveSize>16000000</StackReserveSize>
+      <StackCommitSize>16000000</StackCommitSize>
+      <SupportUnloadOfDelayLoadedDLL>false</SupportUnloadOfDelayLoadedDLL>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <ResourceCompile>
+      <ShowProgress>true</ShowProgress>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>mssdk/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_D3SDK;_D3XP;__DOOM__;GAME_DLL;WIN32;NDEBUG;_WINDOWS;CTF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile />
+      <PrecompiledHeaderOutputFile>$(IntDir)game.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <BrowseInformation />
+      <BrowseInformationFile>$(IntDir)</BrowseInformationFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 /fixed:no %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;./DedicatedReleaseDLL/idLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>./DedicatedReleaseDLLD3XP/gamex86.dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ModuleDefinitionFile>.\d3xp\game.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)d3xp_game.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)d3xp_game.map</MapFileName>
+      <SubSystem>NotSet</SubSystem>
+      <StackReserveSize>4194304</StackReserveSize>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <EntryPointSymbol />
+      <SupportUnloadOfDelayLoadedDLL>false</SupportUnloadOfDelayLoadedDLL>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="d3xp\Actor.cpp" />
+    <ClCompile Include="d3xp\AF.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug with inlines and memory log|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug with inlines|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug with Inlines|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dedicated Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="d3xp\AFEntity.cpp" />
+    <ClCompile Include="d3xp\ai\AAS.cpp" />
+    <ClCompile Include="d3xp\ai\AAS_debug.cpp" />
+    <ClCompile Include="d3xp\ai\AAS_pathing.cpp" />
+    <ClCompile Include="d3xp\ai\AAS_routing.cpp" />
+    <ClCompile Include="d3xp\ai\AI.cpp" />
+    <ClCompile Include="d3xp\ai\AI_events.cpp" />
+    <ClCompile Include="d3xp\ai\AI_pathing.cpp" />
+    <ClCompile Include="d3xp\ai\AI_Vagary.cpp" />
+    <ClCompile Include="d3xp\anim\Anim.cpp" />
+    <ClCompile Include="d3xp\anim\Anim_Blend.cpp" />
+    <ClCompile Include="d3xp\anim\Anim_Import.cpp" />
+    <ClCompile Include="d3xp\anim\Anim_Testmodel.cpp" />
+    <ClCompile Include="d3xp\BrittleFracture.cpp" />
+    <ClCompile Include="d3xp\Camera.cpp" />
+    <ClCompile Include="d3xp\Entity.cpp" />
+    <ClCompile Include="d3xp\Fx.cpp" />
+    <ClCompile Include="d3xp\GameEdit.cpp" />
+    <ClCompile Include="d3xp\gamesys\Class.cpp" />
+    <ClCompile Include="d3xp\gamesys\DebugGraph.cpp" />
+    <ClCompile Include="d3xp\gamesys\Event.cpp" />
+    <ClCompile Include="d3xp\gamesys\SaveGame.cpp" />
+    <ClCompile Include="d3xp\gamesys\SysCmds.cpp" />
+    <ClCompile Include="d3xp\gamesys\SysCvar.cpp" />
+    <ClCompile Include="d3xp\gamesys\TypeInfo.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug with inlines and memory log|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug with inlines and memory log|Win32'">
+      </PrecompiledHeaderOutputFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug with inlines|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug with inlines|Win32'">$(IntDir)game.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)game.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug with Inlines|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug with Inlines|Win32'">$(IntDir)game.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dedicated Release|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Dedicated Release|Win32'">$(IntDir)game.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)game.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="d3xp\Game_local.cpp" />
+    <ClCompile Include="d3xp\Game_network.cpp" />
+    <ClCompile Include="d3xp\Grabber.cpp" />
+    <ClCompile Include="d3xp\IK.cpp" />
+    <ClCompile Include="d3xp\Item.cpp" />
+    <ClCompile Include="d3xp\Light.cpp" />
+    <ClCompile Include="d3xp\Misc.cpp" />
+    <ClCompile Include="d3xp\Moveable.cpp" />
+    <ClCompile Include="d3xp\Mover.cpp" />
+    <ClCompile Include="d3xp\MultiplayerGame.cpp" />
+    <ClCompile Include="d3xp\physics\Clip.cpp" />
+    <ClCompile Include="d3xp\physics\Force.cpp" />
+    <ClCompile Include="d3xp\physics\Force_Constant.cpp" />
+    <ClCompile Include="d3xp\physics\Force_Drag.cpp" />
+    <ClCompile Include="d3xp\physics\Force_Field.cpp" />
+    <ClCompile Include="d3xp\physics\Force_Grab.cpp" />
+    <ClCompile Include="d3xp\physics\Force_Spring.cpp" />
+    <ClCompile Include="d3xp\physics\Physics.cpp" />
+    <ClCompile Include="d3xp\physics\Physics_Actor.cpp" />
+    <ClCompile Include="d3xp\physics\Physics_AF.cpp" />
+    <ClCompile Include="d3xp\physics\Physics_Base.cpp" />
+    <ClCompile Include="d3xp\physics\Physics_Monster.cpp" />
+    <ClCompile Include="d3xp\physics\Physics_Parametric.cpp" />
+    <ClCompile Include="d3xp\physics\Physics_Player.cpp" />
+    <ClCompile Include="d3xp\physics\Physics_RigidBody.cpp" />
+    <ClCompile Include="d3xp\physics\Physics_Static.cpp" />
+    <ClCompile Include="d3xp\physics\Physics_StaticMulti.cpp" />
+    <ClCompile Include="d3xp\physics\Push.cpp" />
+    <ClCompile Include="d3xp\Player.cpp" />
+    <ClCompile Include="d3xp\PlayerIcon.cpp" />
+    <ClCompile Include="d3xp\PlayerView.cpp" />
+    <ClCompile Include="d3xp\Projectile.cpp" />
+    <ClCompile Include="d3xp\Pvs.cpp" />
+    <ClCompile Include="d3xp\script\Script_Compiler.cpp" />
+    <ClCompile Include="d3xp\script\Script_Interpreter.cpp" />
+    <ClCompile Include="d3xp\script\Script_Program.cpp" />
+    <ClCompile Include="d3xp\script\Script_Thread.cpp" />
+    <ClCompile Include="d3xp\SecurityCamera.cpp" />
+    <ClCompile Include="d3xp\SmokeParticles.cpp" />
+    <ClCompile Include="d3xp\Sound.cpp" />
+    <ClCompile Include="d3xp\Target.cpp" />
+    <ClCompile Include="d3xp\Trigger.cpp" />
+    <ClCompile Include="d3xp\Weapon.cpp" />
+    <ClCompile Include="d3xp\WorldSpawn.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="d3xp\Actor.h" />
+    <ClInclude Include="d3xp\AF.h" />
+    <ClInclude Include="d3xp\AFEntity.h" />
+    <ClInclude Include="d3xp\ai\AAS.h" />
+    <ClInclude Include="d3xp\ai\AAS_local.h" />
+    <ClInclude Include="d3xp\ai\AI.h" />
+    <ClInclude Include="d3xp\anim\Anim.h" />
+    <ClInclude Include="d3xp\anim\Anim_Testmodel.h" />
+    <ClInclude Include="d3xp\BrittleFracture.h" />
+    <ClInclude Include="d3xp\Camera.h" />
+    <ClInclude Include="d3xp\Entity.h" />
+    <ClInclude Include="d3xp\Fx.h" />
+    <ClInclude Include="d3xp\Game.h" />
+    <ClInclude Include="d3xp\GameEdit.h" />
+    <ClInclude Include="d3xp\gamesys\Class.h" />
+    <ClInclude Include="d3xp\gamesys\DebugGraph.h" />
+    <ClInclude Include="d3xp\gamesys\Event.h" />
+    <ClInclude Include="d3xp\gamesys\NoGameTypeInfo.h" />
+    <ClInclude Include="d3xp\gamesys\SaveGame.h" />
+    <ClInclude Include="d3xp\gamesys\SysCmds.h" />
+    <ClInclude Include="d3xp\gamesys\SysCvar.h" />
+    <ClInclude Include="d3xp\gamesys\TypeInfo.h" />
+    <ClInclude Include="d3xp\Game_local.h" />
+    <ClInclude Include="d3xp\Grabber.h" />
+    <ClInclude Include="d3xp\IK.h" />
+    <ClInclude Include="d3xp\Item.h" />
+    <ClInclude Include="d3xp\Light.h" />
+    <ClInclude Include="d3xp\Misc.h" />
+    <ClInclude Include="d3xp\Moveable.h" />
+    <ClInclude Include="d3xp\Mover.h" />
+    <ClInclude Include="d3xp\MultiplayerGame.h" />
+    <ClInclude Include="d3xp\physics\Clip.h" />
+    <ClInclude Include="d3xp\physics\Force.h" />
+    <ClInclude Include="d3xp\physics\Force_Constant.h" />
+    <ClInclude Include="d3xp\physics\Force_Drag.h" />
+    <ClInclude Include="d3xp\physics\Force_Field.h" />
+    <ClInclude Include="d3xp\physics\Force_Grab.h" />
+    <ClInclude Include="d3xp\physics\Force_Spring.h" />
+    <ClInclude Include="d3xp\physics\Physics.h" />
+    <ClInclude Include="d3xp\physics\Physics_Actor.h" />
+    <ClInclude Include="d3xp\physics\Physics_AF.h" />
+    <ClInclude Include="d3xp\physics\Physics_Base.h" />
+    <ClInclude Include="d3xp\physics\Physics_Monster.h" />
+    <ClInclude Include="d3xp\physics\Physics_Parametric.h" />
+    <ClInclude Include="d3xp\physics\Physics_Player.h" />
+    <ClInclude Include="d3xp\physics\Physics_RigidBody.h" />
+    <ClInclude Include="d3xp\physics\Physics_Static.h" />
+    <ClInclude Include="d3xp\physics\Physics_StaticMulti.h" />
+    <ClInclude Include="d3xp\physics\Push.h" />
+    <ClInclude Include="d3xp\Player.h" />
+    <ClInclude Include="d3xp\PlayerIcon.h" />
+    <ClInclude Include="d3xp\PlayerView.h" />
+    <ClInclude Include="d3xp\Projectile.h" />
+    <ClInclude Include="d3xp\Pvs.h" />
+    <ClInclude Include="d3xp\script\Script_Compiler.h" />
+    <ClInclude Include="d3xp\script\Script_Interpreter.h" />
+    <ClInclude Include="d3xp\script\Script_Program.h" />
+    <ClInclude Include="d3xp\script\Script_Thread.h" />
+    <ClInclude Include="d3xp\SecurityCamera.h" />
+    <ClInclude Include="d3xp\SmokeParticles.h" />
+    <ClInclude Include="d3xp\Sound.h" />
+    <ClInclude Include="d3xp\Target.h" />
+    <ClInclude Include="d3xp\Trigger.h" />
+    <ClInclude Include="d3xp\Weapon.h" />
+    <ClInclude Include="d3xp\WorldSpawn.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="d3xp\Game.def" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
