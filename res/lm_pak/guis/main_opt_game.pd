@@ -1,0 +1,6846 @@
+//#modified-fva; from "guis/mainmenu.gui"; BEGIN
+
+	//section Options Game
+	windowDef OptionsGame {
+		//#modified-fva; BEGIN
+		//rect		165, 70, 340, 330
+		rect		165, 61, 456, 339
+		//#modified-fva; END
+		visible		0
+
+		//Title
+		windowDef OGTitleText {
+			//#modified-fva; BEGIN
+			//rect		20, 5, 320, 20
+			rect		20, 5, 436, 20
+			//#modified-fva; END
+			text		"#str_02129"
+			textscale	0.32
+			textaligny	-3
+			forecolor	1, 1, 1, 1
+		}
+		//Title bar
+		windowDef OGTitleBar {
+			//#modified-fva; BEGIN
+			//rect		5, 23, 325, 2
+			rect		5, 23, 441, 2
+			//#modified-fva; END
+			backcolor	0.6 ,0.8 ,1 ,0.2
+			noevents	1
+		}
+
+	//Reset game defaults Text
+	windowDef ResetGameBtnText {
+		//#modified-fva; BEGIN
+		//rect		90, 307, 180, 20
+		rect		148, 316, 180, 20
+		//#modified-fva; END
+		text		"#str_04072"
+		textscale	0.26
+		textalign	1
+		textaligny	-3
+		forecolor	0.6, 1, 1, 1
+		float "exitanim" 0
+
+		onMouseEnter {
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "250" ;
+			transition "OptionsResetCornerG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+			transition "OptionsResetMiddleG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+			transition "OptionsResetRCornerG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+			transition "OptionsResetCornerBG::matcolor" "0.45 0.55 0.7 0.3" "0.55 0.65 0.75 0.5" "200" ;
+			transition "OptionsResetMiddleBG::matcolor" "0.45 0.55 0.7 0.3" "0.55 0.65 0.75 0.5" "200" ;
+			transition "OptionsResetRCornerBG::matcolor" "0.45 0.55 0.7 0.3" "0.55 0.65 0.75 0.5" "200" ;
+			resetTime "ToolTip1" "0" ;
+			set "ToolTip1::text" "#str_04073" ;
+			set "ToolTip2::text" "#str_04073" ;
+			set "exitanim" "1" ;
+		}
+
+		onMouseExit {
+			if ("exitanim" == 1) {
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+				transition "OptionsResetCornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "250" ;
+				transition "OptionsResetMiddleG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "250" ;
+				transition "OptionsResetRCornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "250" ;
+				transition "OptionsResetCornerBG::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "200" ;
+				transition "OptionsResetMiddleBG::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "200" ;
+				transition "OptionsResetRCornerBG::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "200" ;
+				resetTime "ToolTip2" "0" ;
+				set "exitanim" "0" ;
+			}
+		}
+		onAction {
+		//	resetTime "AnimRDGUp" "0" ;
+			resetTime "ToolTip2" "0" ;
+			set "GameOptionsBtnText::forecolor" "0.6 1 1 1" ;
+			set	"cmd"	"play guisounds_chirpconnect" ;
+			transition "OptionsBtn2Border::backcolor" "1 1 1 0.6" "0.45 0.55 0.7 0.3" "200" ;
+			transition "OptionsBtn2Corner::matcolor" "1 1 1 0.6" "0.45 0.55 0.7 0.3" "200" ;
+			resetTime "AnimGameDown" "0" ;
+			set "OptionsMenuParent::optionsSelected" "0" ;
+
+			set "exitanim" "0" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+			transition "OptionsResetCornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "250" ;
+			transition "OptionsResetMiddleG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "250" ;
+			transition "OptionsResetRCornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "250" ;
+			transition "OptionsResetCornerBG::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "200" ;
+			transition "OptionsResetMiddleBG::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "200" ;
+			transition "OptionsResetRCornerBG::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "200" ;
+		}
+	}
+
+	//#modified-fva; BEGIN
+	windowDef OGGroupBar {
+		rect		20, 29, 416, 18
+		backcolor	0.6, 0.8, 1, 0.2
+	}
+	windowDef OGGroupText {
+		rect		20, 29, 416, 18
+		text		CST_STR_00200074
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-6
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+
+		onMouseEnter {
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.3" "200" ;
+		}
+		onMouseExit {
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.55 0.65 0.75 0.3" "0.45 0.55 0.7 0" "400" ;
+		}
+		onAction {
+			set	"cmd" "play guisounds_menuclickup" ;
+			resetTime "OGShowGroup" "0" ;
+		}
+	}
+	//#modified-fva; END
+
+	//#modified-fva; BEGIN
+	windowDef OGGeneralOptions1 {
+		rect	20, 56, 416, 241
+	//#modified-fva; END
+
+	//SHOW DECALS
+		windowDef OG1 {
+			//#modified-fva; BEGIN
+			//rect		20, 222, 300, 16 //38
+			rect		0, 175, 416, 16
+			//#modified-fva; END
+			windowDef OG1L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG1M {
+				//#modified-fva; BEGIN
+				//rect		8, 0, 284, 16
+				rect		8, 0, 400, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG1R {
+				//#modified-fva; BEGIN
+				//rect		292, 0, 8, 16
+				rect		408, 0, 8, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG1Title {
+				//#modified-fva; BEGIN
+				//rect		1, 1, 180, 14
+				rect		1, 1, 280, 14
+				//#modified-fva; END
+				text		"#str_02132"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OG1Primary {
+				//#modified-fva; BEGIN
+				//rect		220, 1, 50, 14
+				rect		320, 1, 76, 14
+				//#modified-fva; END
+				choices		"#str_04221"
+				cvar		"g_decals"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+
+	//SHOW BLOOD -- change to ui_name
+		windowDef OG2 {
+			//#modified-fva; BEGIN
+			//rect		20, 34, 300, 16
+			rect		0, 0, 416, 16
+			//#modified-fva; END
+			windowDef OG2L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG2M {
+				//#modified-fva; BEGIN
+				//rect		8, 0, 284, 16
+				rect		8, 0, 400, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG2R {
+				//#modified-fva; BEGIN
+				//rect		292, 0, 8, 16
+				rect		408, 0, 8, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG2Title {
+				//#modified-fva; BEGIN
+				//rect		1, 1, 100, 14
+				rect		1, 1, 200, 14
+				//#modified-fva; END
+				text		"#str_02193"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+				//#modified-fva; BEGIN
+				onAction {
+					// hack to manually remove focus from OG2Primary
+					setFocus "OG2Title" ;
+				}
+				//#modified-fva; END
+			}
+			editDef OG2Primary {
+				//#modified-fva; BEGIN
+				//rect		110, 1, 160, 14
+				rect		210, 1, 186, 14
+				//#modified-fva; END
+				cvar		"ui_name"
+				maxchars 	40
+				font		"fonts/bank"
+				textscale	0.25
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		//#modified-fva; BEGIN
+		/*
+		//Title bar
+		windowDef OGTitleBar2 {
+			rect		20, 60, 300, 2
+			backcolor	0.6 ,0.8 ,1 ,0.2
+			noevents	1
+		}
+		*/
+		//#modified-fva; END
+//#modified-fva; BEGIN
+// * /
+//#modified-fva; END
+	//AUTO WEAPON RELOAD
+		windowDef OG3 {
+			//#modified-fva; BEGIN
+			//rect		20, 122, 300, 16
+			rect		0, 75, 416, 16
+			//#modified-fva; END
+			windowDef OG3L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG3M {
+				//#modified-fva; BEGIN
+				//rect		8, 0, 284, 16
+				rect		8, 0, 400, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG3R {
+				//#modified-fva; BEGIN
+				//rect		292, 0, 8, 16
+				rect		408, 0, 8, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG3Title {
+				//#modified-fva; BEGIN
+				//rect		1, 1, 180, 14
+				rect		1, 1, 280, 14
+				//#modified-fva; END
+				text		"#str_02134"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OG3Primary {
+				//#modified-fva; BEGIN
+				//rect		220, 1, 50, 14
+				rect		320, 1, 76, 14
+				//#modified-fva; END
+				choices		"#str_04221"
+				cvar		"ui_autoReload"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+	//AUTO WEAPON SWITCH
+		windowDef OG4 {
+			//#modified-fva; BEGIN
+			//rect		20, 147, 300, 16
+			rect		0, 100, 416, 16
+			//#modified-fva; END
+			windowDef OG4L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG4M {
+				//#modified-fva; BEGIN
+				//rect		8, 0, 284, 16
+				rect		8, 0, 400, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG4R {
+				//#modified-fva; BEGIN
+				//rect		292, 0, 8, 16
+				rect		408, 0, 8, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG4Title {
+				//#modified-fva; BEGIN
+				//rect		1, 1, 180, 14
+				rect		1, 1, 280, 14
+				//#modified-fva; END
+				text		"#str_02135"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OG4Primary {
+				//#modified-fva; BEGIN
+				//rect		220, 1, 50, 14
+				rect		320, 1, 76, 14
+				//#modified-fva; END
+				choices		"#str_04221"
+				cvar		"ui_autoSwitch"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+	//SHOW HUD
+		windowDef OG5 {
+			//#modified-fva; BEGIN
+			//rect		20, 172, 300, 16
+			rect		0, 125, 416, 16
+			//#modified-fva; END
+			windowDef OG5L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG5M {
+				//#modified-fva; BEGIN
+				//rect		8, 0, 284, 16
+				rect		8, 0, 400, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG5R {
+				//#modified-fva; BEGIN
+				//rect		292, 0, 8, 16
+				rect		408, 0, 8, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG5Title {
+				//#modified-fva; BEGIN
+				//rect		1, 1, 180, 14
+				rect		1, 1, 280, 14
+				//#modified-fva; END
+				text		"#str_02136"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OG5Primary {
+				//#modified-fva; BEGIN
+				//rect		220, 1, 50, 14
+				rect		320, 1, 76, 14
+				//#modified-fva; END
+				choices		"#str_04221"
+				cvar		"g_showHud"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+	//SHOW GUN MODEL
+		windowDef OG6 {
+			//#modified-fva; BEGIN
+			//rect		20, 197, 300, 16
+			rect		0, 150, 416, 16
+			//#modified-fva; END
+			windowDef OG6L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG6M {
+				//#modified-fva; BEGIN
+				//rect		8, 0, 284, 16
+				rect		8, 0, 400, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG6R {
+				//#modified-fva; BEGIN
+				//rect		292, 0, 8, 16
+				rect		408, 0, 8, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG6Title {
+				//#modified-fva; BEGIN
+				//rect		1, 1, 180, 14
+				rect		1, 1, 280, 14
+				//#modified-fva; END
+				text		"#str_02137"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OG6Primary {
+				//#modified-fva; BEGIN
+				//rect		220, 1, 50, 14
+				rect		320, 1, 76, 14
+				//#modified-fva; END
+				choices		"#str_04221"
+				cvar		"ui_showGun"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+	//INVERT MOUSE
+		windowDef OG7 {
+			//#modified-fva; BEGIN
+			//rect		20, 97, 300, 16
+			rect		0, 50, 416, 16
+			//#modified-fva; END
+			windowDef OG7L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG7M {
+				//#modified-fva; BEGIN
+				//rect		8, 0, 284, 16
+				rect		8, 0, 400, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG7R {
+				//#modified-fva; BEGIN
+				//rect		292, 0, 8, 16
+				rect		408, 0, 8, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG7Title {
+				//#modified-fva; BEGIN
+				//rect		1, 1, 180, 14
+				rect		1, 1, 280, 14
+				//#modified-fva; END
+				text		"#str_02138"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OG7Primary {
+				//#modified-fva; BEGIN
+				//rect		220, 1, 50, 14
+				rect		320, 1, 76, 14
+				//#modified-fva; END
+				choices		"#str_04221"
+				cvar		"m_pitch"
+				choiceType	1
+				values		"0.022;-0.022"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+	//SMOOTH MOUSE
+		windowDef OG8 {
+			//#modified-fva; BEGIN
+			//rect		20, 247, 300, 16
+			rect		0, 200, 416, 16
+			//#modified-fva; END
+			windowDef OG8L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG8M {
+				//#modified-fva; BEGIN
+				//rect		8, 0, 284, 16
+				rect		8, 0, 400, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG8R {
+				//#modified-fva; BEGIN
+				//rect		292, 0, 8, 16
+				rect		408, 0, 8, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG8Title {
+				//#modified-fva; BEGIN
+				//rect		1, 1, 180, 14
+				rect		1, 1, 280, 14
+				//#modified-fva; END
+				text		"#str_02139"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			windowDef OG8SliderBG {
+				//#modified-fva; BEGIN
+				//rect		210, 4, 128, 16
+				rect		310, 4, 128, 16
+				//#modified-fva; END
+				background	"guis/assets/mainmenu/slider_bg"
+				matcolor	0.6, 0.8, 0.8, 0.5
+				noevents	1
+			}
+			sliderDef OG8Primary {
+				//#modified-fva; BEGIN
+				//rect		210, 5, 71, 8
+				rect		310, 5, 71, 8
+				//#modified-fva; END
+				forecolor	0.8, 1, 1, 1
+				matcolor	1, 1, 1, 1
+				low			1
+				high		8
+				step		1
+				thumbShader	"guis/assets/mainmenu/slider_bar"
+				cvar		"m_smooth"
+			}
+
+		}
+	//MOUSE SENSITIVITY
+		windowDef OG9 {
+			//#modified-fva; BEGIN
+			//rect		20, 272, 300, 16
+			rect		0, 225, 416, 16
+			//#modified-fva; END
+			windowDef OG9L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG9M {
+				//#modified-fva; BEGIN
+				//rect		8, 0, 284, 16
+				rect		8, 0, 400, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG9R {
+				//#modified-fva; BEGIN
+				//rect		292, 0, 8, 16
+				rect		408, 0, 8, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG9Title {
+				//#modified-fva; BEGIN
+				//rect		1, 1, 180, 14
+				rect		1, 1, 280, 14
+				//#modified-fva; END
+				text		"#str_02140"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			windowDef OG9SliderBG {
+				//#modified-fva; BEGIN
+				//rect		210, 4, 128, 16
+				rect		310, 4, 128, 16
+				//#modified-fva; END
+				background	"guis/assets/mainmenu/slider_bg"
+				matcolor	0.6, 0.8, 0.8, 0.5
+				noevents	1
+			}
+			sliderDef OG9Primary {
+				//#modified-fva; BEGIN
+				//rect		210, 5, 71, 8
+				rect		310, 5, 71, 8
+				//#modified-fva; END
+				forecolor	0.8, 1, 1, 1
+				matcolor	1, 1, 1, 1
+				low			1
+				high		30
+				step		0.5
+				thumbShader	"guis/assets/mainmenu/slider_bar"
+				cvar		"sensitivity"
+			}
+		}
+
+	//FREE LOOK
+		windowDef OG10 {
+			//#modified-fva; BEGIN
+			//rect		20, 72, 300, 16
+			rect		0, 25, 416, 16
+			//#modified-fva; END
+			windowDef OG10L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG10M {
+				//#modified-fva; BEGIN
+				//rect		8, 0, 284, 16
+				rect		8, 0, 400, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG10R {
+				//#modified-fva; BEGIN
+				//rect		292, 0, 8, 16
+				rect		408, 0, 8, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OG10Title {
+				//#modified-fva; BEGIN
+				//rect		1, 1, 180, 14
+				rect		1, 1, 280, 14
+				//#modified-fva; END
+				text		"#str_02141"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OG10Primary {
+				//#modified-fva; BEGIN
+				//rect		220, 1, 50, 14
+				rect		320, 1, 76, 14
+				//#modified-fva; END
+				choices		"#str_04221"
+				cvar		"in_freeLook"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+	//#modified-fva; BEGIN
+	}
+	//#modified-fva; END
+
+	//#modified-fva; BEGIN
+	windowDef OGGeneralOptions2 {
+		rect		20, 56, 416, 241
+		visible		0
+
+		// Field Of View
+		windowDef OgGo2_0 {
+			rect		0, 0, 400, 16
+			windowDef OgGo2_0L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_0M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_0R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_0Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200223
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			editDef OgGo2_0Primary {
+				rect		320, 1, 76, 14
+				cvar		"g_fov"
+				font		"fonts/bank"
+				textscale	0.25
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+				noevents	1
+			}
+		}
+		// HUD Aspect Correction
+		windowDef OgGo2_1 {
+			rect		0, 25, 400, 16
+			windowDef OgGo2_1L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_1M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_1R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_1Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200209
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgGo2_1Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"cst_hudAdjustAspect"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Show Access Codes
+		windowDef OgGo2_2 {
+			rect		0, 50, 400, 16
+			windowDef OgGo2_2L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_2M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_2R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_2Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200085
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgGo2_2Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"cst_showAccessCodes"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Headlamp Alert Monsters
+		windowDef OgGo2_3 {
+			rect		0, 75, 400, 16
+			windowDef OgGo2_3L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_3M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_3R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_3Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200086
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgGo2_3Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"cst_headlampAlertMonsters"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Headlamp Keep State
+		windowDef OgGo2_4 {
+			rect		0, 100, 400, 16
+			windowDef OgGo2_4L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_4M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_4R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_4Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200180
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgGo2_4Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"cst_headlampKeepState"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Headlamp Sound
+		windowDef OgGo2_5 {
+			rect		0, 125, 400, 16
+			windowDef OgGo2_5L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_5M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_5R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_5Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200181
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgGo2_5Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"cst_headlampSound"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Crosshair Always Show
+		windowDef OgGo2_6 {
+			rect		0, 150, 400, 16
+			windowDef OgGo2_6L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_6M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_6R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_6Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200184
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgGo2_6Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"cst_crosshairAlwaysShow"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Allow Flashlight On/Off SP
+		windowDef OgGo2_7 {
+			rect		0, 175, 400, 16
+			windowDef OgGo2_7L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_7M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_7R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_7Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200087
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgGo2_7Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"cst_allowFlashlightToggleSP"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Always Take No-Ammo Weapons
+		windowDef OgGo2_8 {
+			rect		0, 200, 400, 16
+			windowDef OgGo2_8L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_8M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_8R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo2_8Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200088
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgGo2_8Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"cst_takeNoAmmoWeapons"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		//Filler
+		windowDef OgGo2_9 {
+			rect		0, 225, 416, 16
+			windowDef OgGo2_9L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgGo2_9M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgGo2_9R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+	}
+
+	// Field of View: minus button
+	windowDef OgGo2_0Minus {
+		rect		305.5, 58, 14, 12
+		text		"_"
+		font		"fonts/bank"
+		textscale	0.20
+		textalignx	1.8
+		textaligny	-8.7
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGeneralOptions2::visible" == 1)
+		notime		1
+
+		onMouseEnter {
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "notime" "1" ;
+		}
+		onAction {
+			set	"cmd" "play guisounds_menuclickup; cstChangeFov -1" ;
+			resetTime "0" ;
+		}
+		onActionRelease {
+			set "notime" "1" ;
+		}
+		onESC {
+			set "notime" "1" ;
+		}
+
+		onTime 400 {
+			if ("OgGo2_0Minus::notime" == 0) {
+				set	"cmd" "cstChangeFov -1" ;
+				resetTime "320" ;
+			}
+		}
+	}
+	// Field of View: plus button
+	windowDef OgGo2_0Plus {
+		rect		321.5, 58, 14, 12
+		text		"+"
+		font		"fonts/bank"
+		textscale	0.20
+		textalignx	1.2
+		textaligny	-4
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGeneralOptions2::visible" == 1)
+		notime		1
+
+		onMouseEnter {
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "notime" "1" ;
+		}
+		onAction {
+			set	"cmd" "play guisounds_menuclickup; cstChangeFov 1" ;
+			resetTime "0" ;
+		}
+		onActionRelease {
+			set "notime" "1" ;
+		}
+		onESC {
+			set "notime" "1" ;
+		}
+
+		onTime 400 {
+			if ("OgGo2_0Plus::notime" == 0) {
+				set	"cmd" "cstChangeFov 1" ;
+				resetTime "320" ;
+			}
+		}
+	}
+	// Help: Field of View
+	windowDef OgGo2_0Help {
+		rect		422, 56, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGeneralOptions2::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200224 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: HUD Aspect Correction
+	windowDef OgGo2_1Help {
+		rect		422, 81, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGeneralOptions2::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200210 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Show Access Codes
+	windowDef OgGo2_2Help {
+		rect		422, 106, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGeneralOptions2::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200134 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Headlamp Alert Monsters
+	windowDef OgGo2_3Help {
+		rect		422, 131, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGeneralOptions2::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200135 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Headlamp Keep State
+	windowDef OgGo2_4Help {
+		rect		422, 156, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGeneralOptions2::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200200 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Headlamp Sound
+	windowDef OgGo2_5Help {
+		rect		422, 181, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGeneralOptions2::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200201 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Crosshair Always Show
+	windowDef OgGo2_6Help {
+		rect		422, 206, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGeneralOptions2::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200202 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Allow Flashlight On/Off SP
+	windowDef OgGo2_7Help {
+		rect		422, 231, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGeneralOptions2::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200136 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Always Take No-Ammo Weapons
+	windowDef OgGo2_8Help {
+		rect		422, 256, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGeneralOptions2::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200137 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+
+	windowDef OGGeneralOptions3 {
+		rect		20, 56, 416, 241
+		visible		0
+
+		// Smoke Fix MP
+		windowDef OgGo3_0 {
+			rect		0, 0, 400, 16
+			windowDef OgGo3_0L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo3_0M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo3_0R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo3_0Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200089
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgGo3_0Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"cst_smokeFixMP"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Lag-O-Meter MP
+		windowDef OgGo3_1 {
+			rect		0, 25, 400, 16
+			windowDef OgGo3_1L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo3_1M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo3_1R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo3_1Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200090
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgGo3_1Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"net_clientLagOMeter"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Unlock Console
+		windowDef OgGo3_2 {
+			rect		0, 50, 400, 16
+			windowDef OgGo3_2L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo3_2M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo3_2R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo3_2Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200091
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgGo3_2Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"com_allowConsole"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Show FPS
+		windowDef OgGo3_3 {
+			rect		0, 75, 400, 16
+			windowDef OgGo3_3L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo3_3M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo3_3R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo3_3Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200092
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgGo3_3Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"com_showFPS"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// haleyjd: Armor Protection (SP)
+		windowDef OgGo3_4 {
+			rect		0, 100, 416, 16
+			windowDef OgGo3_4L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo3_4M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo3_4R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo3_4Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200227
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgGo3_4Primary {
+				rect		320, 1, 76, 14
+				choices		"-1;0.0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;0.9;1.0"
+				values		"-1;0.0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;0.9;1.0"
+				cvar		"cst_armorProtectionSP"
+				choiceType	1
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// haleyjd: Armor Protection (SP) END
+		// haleyjd: Use BFG Edition Player Speed
+		windowDef OgGo3_5 {
+			rect		0, 125, 416, 16
+			windowDef OgGo3_5L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo3_5M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo3_5R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgGo3_5Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200229
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgGo3_5Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"cst_bfgPlayerSpeedSP"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// haleyjd: Use BFG Edition Player Speed END
+		//Filler
+		windowDef OgGo3_6 {
+			rect		0, 150, 416, 16
+			windowDef OgGo3_6L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgGo3_6M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgGo3_6R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+		//Filler
+		windowDef OgGo3_7 {
+			rect		0, 175, 416, 16
+			windowDef OgGo3_7L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgGo3_7M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgGo3_7R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+		//Filler
+		windowDef OgGo3_8 {
+			rect		0, 200, 416, 16
+			windowDef OgGo3_8L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgGo3_8M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgGo3_8R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+		//Filler
+		windowDef OgGo3_9 {
+			rect		0, 225, 416, 16
+			windowDef OgGo3_9L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgGo3_9M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgGo3_9R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+	}
+
+	// Help: Smoke Fix MP
+	windowDef OgGo3_0Help {
+		rect		422, 56, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGeneralOptions3::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200138 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Lag-O-Meter MP
+	windowDef OgGo3_1Help {
+		rect		422, 81, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGeneralOptions3::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200139 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Unlock Console
+	windowDef OgGo3_2Help {
+		rect		422, 106, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGeneralOptions3::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200140 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Show FPS
+	windowDef OgGo3_3Help {
+		rect		422, 131, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGeneralOptions3::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200141 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+
+	// haleyjd: Help: Armor Protection (SP)
+	windowDef OgGo3_4Help {
+		rect		422, 156, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGeneralOptions3::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200228 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// haleyjd: Help: Armor Protection (SP) END
+
+	// haleyjd: Help: BFG Edition Player Speed
+	windowDef OgGo3_5Help {
+		rect		422, 181, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGeneralOptions3::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200230 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// haleyjd: Help: BFG Edition Player Speed END
+
+	windowDef OGRunCrouchZoom {
+		rect		20, 56, 416, 241
+		visible		0
+
+		// Stamina Drop
+		windowDef OgRcz0 {
+			rect		0, 0, 400, 16
+			windowDef OgRcz0L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz0M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz0R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz0Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200093
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgRcz0Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noStaminaDrop"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Always Run
+		windowDef OgRcz1 {
+			rect		0, 25, 400, 16
+			windowDef OgRcz1L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz1M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz1R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz1Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200094
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgRcz1Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"in_alwaysRun"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Toggle Run
+		windowDef OgRcz2 {
+			rect		0, 50, 400, 16
+			windowDef OgRcz2L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz2M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz2R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz2Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200095
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgRcz2Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"in_toggleRun"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Toggle Crouch
+		windowDef OgRcz3 {
+			rect		0, 75, 400, 16
+			windowDef OgRcz3L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz3M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz3R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz3Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200096
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgRcz3Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"in_toggleCrouch"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Toggle Zoom
+		windowDef OgRcz4 {
+			rect		0, 100, 400, 16
+			windowDef OgRcz4L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz4M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz4R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz4Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200097
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgRcz4Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"in_toggleZoom"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Run Indicator On HUD
+		windowDef OgRcz5 {
+			rect		0, 125, 400, 16
+			windowDef OgRcz5L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz5M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz5R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz5Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200098
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgRcz5Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"cst_hudRun"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Crouch Indicator On HUD
+		windowDef OgRcz6 {
+			rect		0, 150, 400, 16
+			windowDef OgRcz6L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz6M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz6R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz6Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200099
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgRcz6Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"cst_hudCrouch"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Zoom Indicator On HUD
+		windowDef OgRcz7 {
+			rect		0, 175, 400, 16
+			windowDef OgRcz7L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz7M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz7R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgRcz7Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200100
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgRcz7Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"cst_hudZoom"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		//Filler
+		windowDef OgRcz8 {
+			rect		0, 200, 416, 16
+			windowDef OgRcz8L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgRcz8M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgRcz8R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+		//Filler
+		windowDef OgRcz9 {
+			rect		0, 225, 416, 16
+			windowDef OgRcz9L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgRcz9M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgRcz9R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+	}
+
+	// Help: Stamina Drop
+	windowDef OgRcz0Help {
+		rect		422, 56, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGRunCrouchZoom::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200142 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Always Run
+	windowDef OgRcz1Help {
+		rect		422, 81, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGRunCrouchZoom::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200143 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Toggle Run
+	windowDef OgRcz2Help {
+		rect		422, 106, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGRunCrouchZoom::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200144 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Toggle Crouch
+	windowDef OgRcz3Help {
+		rect		422, 131, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGRunCrouchZoom::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200145 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Toggle Zoom
+	windowDef OgRcz4Help {
+		rect		422, 156, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGRunCrouchZoom::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200146 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Run Indicator On HUD
+	windowDef OgRcz5Help {
+		rect		422, 181, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGRunCrouchZoom::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200147 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Crouch Indicator On HUD
+	windowDef OgRcz6Help {
+		rect		422, 206, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGRunCrouchZoom::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200148 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Zoom Indicator On HUD
+	windowDef OgRcz7Help {
+		rect		422, 231, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGRunCrouchZoom::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200149 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+
+	windowDef OGWeaponOptions {
+		rect		20, 56, 416, 241
+		visible		0
+
+		// Chainsaw in RoE
+		windowDef OgWop0 {
+			rect		0, 0, 400, 16
+			windowDef OgWop0L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop0M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop0R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop0Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200213
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWop0Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"cst_awChainsawRoE"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Shotgun Spread Reduction
+		windowDef OgWop1 {
+			rect		0, 25, 400, 16
+			windowDef OgWop1L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop1M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop1R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop1Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200214
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWop1Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"cst_shotgunHalfSpreadSP"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Grenades Toggle
+		windowDef OgWop2 {
+			rect		0, 50, 400, 16
+			windowDef OgWop2L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop2M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop2R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop2Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200215
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWop2Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"cst_grenadesToggle"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Grabber Unlimited Time SP
+		windowDef OgWop3 {
+			rect		0, 75, 400, 16
+			windowDef OgWop3L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop3M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop3R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop3Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200101
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWop3Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200084
+				cvar		"cst_grabberUnlimitedTimeSP"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Grabber Stable Throw SP
+		windowDef OgWop4 {
+			rect		0, 100, 400, 16
+			windowDef OgWop4L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop4M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop4R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop4Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200102
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWop4Primary {
+				rect		305, 1, 91, 14
+				choices		CST_STR_00200103
+				cvar		"cst_grabberStableThrowSP"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Grabber Drop On Hold Layer
+		windowDef OgWop5 {
+			rect		0, 125, 400, 16
+			windowDef OgWop5L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop5M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop5R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop5Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200104
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWop5Primary {
+				rect		305, 1, 91, 14
+				choices		CST_STR_00200105
+				values		"-1;0;1;2;3;4;5;6;7;8;9"
+				cvar		"cst_grabberDropOnHoldLayer"
+				choiceType	1
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Grabber Drop On Switch Layer
+		windowDef OgWop6 {
+			rect		0, 150, 400, 16
+			windowDef OgWop6L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop6M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop6R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop6Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200106
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWop6Primary {
+				rect		305, 1, 91, 14
+				choices		CST_STR_00200105
+				values		"-1;0;1;2;3;4;5;6;7;8;9"
+				cvar		"cst_grabberDropOnSwitchLayer"
+				choiceType	1
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// haleyjd: ammo pickup factor
+		windowDef OgWop7 {
+			rect		0, 175, 416, 16
+			windowDef OgWop7L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop7M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop7R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWop7Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200225
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWop7Primary {
+				rect		305, 1, 75, 14
+				choices		"0.25;0.5;0.75;1.0;1.25;1.5;1.75;2.0"
+				values		"0.25;0.5;0.75;1.0;1.25;1.5;1.75;2.0"
+				cvar		"cst_ammoPickupFactor"
+				choiceType	1
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+			// haleyjd: ammo pickup factor END
+		}
+		//Filler
+		windowDef OgWop8 {
+			rect		0, 200, 416, 16
+			windowDef OgWop8L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgWop8M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgWop8R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+		//Filler
+		windowDef OgWop9 {
+			rect		0, 225, 416, 16
+			windowDef OgWop9L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgWop9M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgWop9R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+	}
+
+	// Help: Chainsaw in RoE
+	windowDef OgWop0Help {
+		rect		422, 56, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGWeaponOptions::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200218 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Shotgun Spread Reduction
+	windowDef OgWop1Help {
+		rect		422, 81, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGWeaponOptions::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200219 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Grenades Toggle
+	windowDef OgWop2Help {
+		rect		422, 106, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGWeaponOptions::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200220 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Grabber Unlimited Time SP
+	windowDef OgWop3Help {
+		rect		422, 131, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGWeaponOptions::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200150 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Grabber Stable Throw SP
+	windowDef OgWop4Help {
+		rect		422, 156, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGWeaponOptions::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200151 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Grabber Drop On Hold Layer
+	windowDef OgWop5Help {
+		rect		422, 181, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGWeaponOptions::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200152 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Grabber Drop On Switch Layer
+	windowDef OgWop6Help {
+		rect		422, 206, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGWeaponOptions::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200153 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+
+	// haleyjd: Help: Ammo Pickup Factor
+	windowDef OgWop7Help {
+		rect		422, 231, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGWeaponOptions::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200226 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// haleyjd: Help: Ammo Pickup Factor END
+
+	windowDef OGWeaponSmokeSelf {
+		rect		20, 56, 416, 241
+		visible		0
+
+		// Grabber (Weapon Smoke, Self)
+		windowDef OgWss0 {
+			rect		0, 0, 416, 16
+			windowDef OgWss0L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss0M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss0R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss0Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200107
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWss0Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeMuzzle"
+				cstPseudoBit	2 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Pistol (Weapon Smoke, Self)
+		windowDef OgWss1 {
+			rect		0, 25, 416, 16
+			windowDef OgWss1L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss1M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss1R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss1Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200108
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWss1Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeMuzzle"
+				cstPseudoBit	3 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Shotgun (Weapon Smoke, Self)
+		windowDef OgWss2 {
+			rect		0, 50, 416, 16
+			windowDef OgWss2L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss2M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss2R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss2Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200109
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWss2Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeMuzzle"
+				cstPseudoBit	4 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Double Barrel Shotgun (Weapon Smoke, Self)
+		windowDef OgWss3 {
+			rect		0, 75, 416, 16
+			windowDef OgWss3L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss3M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss3R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss3Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200110
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWss3Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeMuzzle"
+				cstPseudoBit	5 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Machinegun (Weapon Smoke, Self)
+		windowDef OgWss4 {
+			rect		0, 100, 416, 16
+			windowDef OgWss4L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss4M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss4R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss4Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200111
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWss4Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeMuzzle"
+				cstPseudoBit	6 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Chaingun (Weapon Smoke, Self)
+		windowDef OgWss5 {
+			rect		0, 125, 416, 16
+			windowDef OgWss5L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss5M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss5R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss5Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200112
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWss5Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeMuzzle"
+				cstPseudoBit	7 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Plasmagun (Weapon Smoke, Self)
+		windowDef OgWss6 {
+			rect		0, 150, 416, 16
+			windowDef OgWss6L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss6M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss6R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss6Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200113
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWss6Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeMuzzle"
+				cstPseudoBit	9 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// BFG (Weapon Smoke, Self)
+		windowDef OgWss7 {
+			rect		0, 175, 416, 16
+			windowDef OgWss7L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss7M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss7R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss7Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200114
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWss7Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeMuzzle"
+				cstPseudoBit	11 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Chainsaw (Weapon Smoke, Self)
+		windowDef OgWss8 {
+			rect		0, 200, 416, 16
+			windowDef OgWss8L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss8M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss8R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWss8Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200115
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWss8Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeMuzzle"
+				cstPseudoBit	18 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		//Filler
+		windowDef OgWss9 {
+			rect		0, 225, 416, 16
+			windowDef OgWss9L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgWss9M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgWss9R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+	}
+
+	windowDef OGWeaponSmokeOthers {
+		rect		20, 56, 416, 241
+		visible		0
+
+		// Grabber (Weapon Smoke, Others-MP)
+		windowDef OgWso0 {
+			rect		0, 0, 416, 16
+			windowDef OgWso0L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso0M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso0R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso0Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200107
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWso0Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeMuzzleOthersMP"
+				cstPseudoBit	2 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Pistol (Weapon Smoke, Others-MP)
+		windowDef OgWso1 {
+			rect		0, 25, 416, 16
+			windowDef OgWso1L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso1M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso1R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso1Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200108
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWso1Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeMuzzleOthersMP"
+				cstPseudoBit	3 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Shotgun (Weapon Smoke, Others-MP)
+		windowDef OgWso2 {
+			rect		0, 50, 416, 16
+			windowDef OgWso2L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso2M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso2R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso2Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200109
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWso2Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeMuzzleOthersMP"
+				cstPseudoBit	4 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Double Barrel Shotgun (Weapon Smoke, Others-MP)
+		windowDef OgWso3 {
+			rect		0, 75, 416, 16
+			windowDef OgWso3L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso3M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso3R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso3Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200110
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWso3Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeMuzzleOthersMP"
+				cstPseudoBit	5 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Machinegun (Weapon Smoke, Others-MP)
+		windowDef OgWso4 {
+			rect		0, 100, 416, 16
+			windowDef OgWso4L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso4M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso4R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso4Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200111
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWso4Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeMuzzleOthersMP"
+				cstPseudoBit	6 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Chaingun (Weapon Smoke, Others-MP)
+		windowDef OgWso5 {
+			rect		0, 125, 416, 16
+			windowDef OgWso5L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso5M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso5R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso5Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200112
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWso5Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeMuzzleOthersMP"
+				cstPseudoBit	7 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Plasmagun (Weapon Smoke, Others-MP)
+		windowDef OgWso6 {
+			rect		0, 150, 416, 16
+			windowDef OgWso6L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso6M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso6R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso6Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200113
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWso6Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeMuzzleOthersMP"
+				cstPseudoBit	9 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// BFG (Weapon Smoke, Others-MP)
+		windowDef OgWso7 {
+			rect		0, 175, 416, 16
+			windowDef OgWso7L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso7M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso7R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso7Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200114
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWso7Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeMuzzleOthersMP"
+				cstPseudoBit	11 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Chainsaw (Weapon Smoke, Others-MP)
+		windowDef OgWso8 {
+			rect		0, 200, 416, 16
+			windowDef OgWso8L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso8M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso8R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgWso8Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200115
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgWso8Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeMuzzleOthersMP"
+				cstPseudoBit	18 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		//Filler
+		windowDef OgWso9 {
+			rect		0, 225, 416, 16
+			windowDef OgWso9L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgWso9M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgWso9R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+	}
+
+	windowDef OGProjectileSmokeSelf {
+		rect		20, 56, 416, 241
+		visible		0
+
+		// Grabber (Throw) (Projectile Smoke, Self)
+		windowDef OgPss0 {
+			rect		0, 0, 400, 16
+			windowDef OgPss0L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPss0M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPss0R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPss0Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200116
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgPss0Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeFly"
+				cstPseudoBit	2 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Grabber (Hold) (Projectile Smoke, Self)
+		windowDef OgPss1 {
+			rect		0, 25, 400, 16
+			windowDef OgPss1L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPss1M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPss1R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPss1Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200117
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgPss1Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeFlyGrabbed"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Grenades (Projectile Smoke, Self)
+		windowDef OgPss2 {
+			rect		0, 50, 416, 16
+			windowDef OgPss2L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPss2M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPss2R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPss2Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200118
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgPss2Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeFly"
+				cstPseudoBit	8 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Plasmagun (Projectile Smoke, Self)
+		windowDef OgPss3 {
+			rect		0, 75, 416, 16
+			windowDef OgPss3L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPss3M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPss3R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPss3Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200113
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgPss3Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeFly"
+				cstPseudoBit	9 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Rockets (Projectile Smoke, Self)
+		windowDef OgPss4 {
+			rect		0, 100, 416, 16
+			windowDef OgPss4L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPss4M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPss4R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPss4Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200119
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgPss4Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeFly"
+				cstPseudoBit	10 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		//Filler
+		windowDef OgPss5 {
+			rect		0, 125, 416, 16
+			windowDef OgPss5L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPss5M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPss5R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+		//Filler
+		windowDef OgPss6 {
+			rect		0, 150, 416, 16
+			windowDef OgPss6L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPss6M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPss6R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+		//Filler
+		windowDef OgPss7 {
+			rect		0, 175, 416, 16
+			windowDef OgPss7L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPss7M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPss7R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+		//Filler
+		windowDef OgPss8 {
+			rect		0, 200, 416, 16
+			windowDef OgPss8L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPss8M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPss8R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+		//Filler
+		windowDef OgPss9 {
+			rect		0, 225, 416, 16
+			windowDef OgPss9L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPss9M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPss9R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+	}
+
+	// Help: Grabber (Throw) (Projectile Smoke, Self)
+	windowDef OgPss0Help {
+		rect		422, 56, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGProjectileSmokeSelf::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200157 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Grabber (Hold) (Projectile Smoke, Self)
+	windowDef OgPss1Help {
+		rect		422, 81, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGProjectileSmokeSelf::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200158 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+
+	windowDef OGProjectileSmokeOthers {
+		rect		20, 56, 416, 241
+		visible		0
+
+		// Grabber (Throw) (Projectile Smoke, Others-MP)
+		windowDef OgPso0 {
+			rect		0, 0, 400, 16
+			windowDef OgPso0L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPso0M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPso0R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPso0Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200116
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgPso0Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeFlyOthersMP"
+				cstPseudoBit	2 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Grabber (Hold) (Projectile Smoke, Others-MP)
+		windowDef OgPso1 {
+			rect		0, 25, 400, 16
+			windowDef OgPso1L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPso1M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPso1R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPso1Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200117
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgPso1Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeFlyGrabbedOthersMP"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Grenades (Projectile Smoke, Others-MP)
+		windowDef OgPso2 {
+			rect		0, 50, 416, 16
+			windowDef OgPso2L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPso2M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPso2R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPso2Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200118
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgPso2Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeFlyOthersMP"
+				cstPseudoBit	8 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Plasmagun (Projectile Smoke, Others-MP)
+		windowDef OgPso3 {
+			rect		0, 75, 416, 16
+			windowDef OgPso3L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPso3M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPso3R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPso3Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200113
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgPso3Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeFlyOthersMP"
+				cstPseudoBit	9 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Rockets (Projectile Smoke, Others-MP)
+		windowDef OgPso4 {
+			rect		0, 100, 416, 16
+			windowDef OgPso4L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPso4M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPso4R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgPso4Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200119
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgPso4Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_noSmokeFlyOthersMP"
+				cstPseudoBit	10 // pseudo-bit support
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		//Filler
+		windowDef OgPso5 {
+			rect		0, 125, 416, 16
+			windowDef OgPso5L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPso5M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPso5R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+		//Filler
+		windowDef OgPso6 {
+			rect		0, 150, 416, 16
+			windowDef OgPso6L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPso6M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPso6R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+		//Filler
+		windowDef OgPso7 {
+			rect		0, 175, 416, 16
+			windowDef OgPso7L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPso7M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPso7R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+		//Filler
+		windowDef OgPso8 {
+			rect		0, 200, 416, 16
+			windowDef OgPso8L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPso8M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPso8R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+		//Filler
+		windowDef OgPso9 {
+			rect		0, 225, 416, 16
+			windowDef OgPso9L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPso9M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgPso9R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+	}
+
+	// Help: Grabber (Throw) (Projectile Smoke, Others-MP)
+	windowDef OgPso0Help {
+		rect		422, 56, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGProjectileSmokeOthers::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200160 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Grabber (Hold) (Projectile Smoke, Others-MP)
+	windowDef OgPso1Help {
+		rect		422, 81, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGProjectileSmokeOthers::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200161 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+
+	windowDef OGDamageFeedback {
+		rect		20, 56, 416, 241
+		visible		0
+
+		// Double Vision
+		windowDef OgDf0 {
+			rect		0, 0, 400, 16
+			windowDef OgDf0L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf0M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf0R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf0Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200121
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgDf0Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_dfNoDoubleVision"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Tunnel Vision
+		windowDef OgDf1 {
+			rect		0, 25, 400, 16
+			windowDef OgDf1L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf1M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf1R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf1Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200122
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgDf1Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_dfNoTunnelVision"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// View Angle Kick
+		windowDef OgDf2 {
+			rect		0, 50, 400, 16
+			windowDef OgDf2L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf2M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf2R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf2Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200123
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgDf2Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_dfNoViewAngleKick"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Screen Blob
+		windowDef OgDf3 {
+			rect		0, 75, 400, 16
+			windowDef OgDf3L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf3M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf3R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf3Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200124
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgDf3Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_dfNoScreenBlob"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Armor Pulse
+		windowDef OgDf4 {
+			rect		0, 100, 400, 16
+			windowDef OgDf4L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf4M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf4R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf4Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200125
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgDf4Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_dfNoArmorPulse"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Pain Sound
+		windowDef OgDf5 {
+			rect		0, 125, 400, 16
+			windowDef OgDf5L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf5M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf5R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf5Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200126
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgDf5Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_dfNoSoundPain"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Air Gasp Sound
+		windowDef OgDf6 {
+			rect		0, 150, 400, 16
+			windowDef OgDf6L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf6M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf6R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgDf6Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200127
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgDf6Primary {
+				rect		320, 1, 76, 14
+				choices		CST_STR_00200073
+				cvar		"cst_dfNoSoundAirGasp"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		//Filler
+		windowDef OgDf7 {
+			rect		0, 175, 416, 16
+			windowDef OgDf7L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgDf7M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgDf7R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+		//Filler
+		windowDef OgDf8 {
+			rect		0, 200, 416, 16
+			windowDef OgDf8L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgDf8M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgDf8R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+		//Filler
+		windowDef OgDf9 {
+			rect		0, 225, 416, 16
+			windowDef OgDf9L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgDf9M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgDf9R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+	}
+
+	// Help: Double Vision
+	windowDef OgDf0Help {
+		rect		422, 56, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGDamageFeedback::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200163 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Tunnel Vision
+	windowDef OgDf1Help {
+		rect		422, 81, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGDamageFeedback::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200164 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: View Angle Kick
+	windowDef OgDf2Help {
+		rect		422, 106, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGDamageFeedback::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200165 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Screen Blob
+	windowDef OgDf3Help {
+		rect		422, 131, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGDamageFeedback::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200166 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Armor Pulse
+	windowDef OgDf4Help {
+		rect		422, 156, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGDamageFeedback::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200167 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Pain Sound
+	windowDef OgDf5Help {
+		rect		422, 181, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGDamageFeedback::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200168 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Air Gasp Sound
+	windowDef OgDf6Help {
+		rect		422, 206, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGDamageFeedback::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200169 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+
+	windowDef OGServerOptions {
+		rect		20, 56, 416, 241
+		visible		0
+
+		// Allow Headlamp
+		windowDef OgSv0 {
+			rect		0, 0, 400, 16
+			windowDef OgSv0L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgSv0M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgSv0R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgSv0Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200128
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgSv0Primary {
+				rect		305, 1, 91, 14
+				choices		CST_STR_00200084
+				cvar		"cst_allowHeadlampMP"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Allow Grenades Toggle
+		windowDef OgSv1 {
+			rect		0, 25, 400, 16
+			windowDef OgSv1L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgSv1M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgSv1R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgSv1Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200221
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgSv1Primary {
+				rect		305, 1, 91, 14
+				choices		CST_STR_00200084
+				cvar		"cst_allowGrenadesToggleMP"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Allow Smoke Control
+		windowDef OgSv2 {
+			rect		0, 50, 400, 16
+			windowDef OgSv2L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgSv2M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgSv2R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgSv2Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200129
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgSv2Primary {
+				rect		305, 1, 91, 14
+				choices		CST_STR_00200084
+				cvar		"cst_allowSmokeControlMP"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Allow Damage Feedback Control
+		windowDef OgSv3 {
+			rect		0, 75, 400, 16
+			windowDef OgSv3L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgSv3M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgSv3R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgSv3Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200130
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgSv3Primary {
+				rect		305, 1, 91, 14
+				choices		CST_STR_00200084
+				cvar		"cst_allowDamageFeedbackControlMP"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Grabber Unlimited Time MP
+		windowDef OgSv4 {
+			rect		0, 100, 400, 16
+			windowDef OgSv4L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgSv4M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgSv4R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgSv4Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200131
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgSv4Primary {
+				rect		305, 1, 91, 14
+				choices		CST_STR_00200084
+				cvar		"cst_grabberUnlimitedTimeMP"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		// Grabber Stable Throw MP
+		windowDef OgSv5 {
+			rect		0, 125, 400, 16
+			windowDef OgSv5L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgSv5M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgSv5R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OgSv5Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200132
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OgSv5Primary {
+				rect		305, 1, 91, 14
+				choices		CST_STR_00200103
+				cvar		"cst_grabberStableThrowMP"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+		//Filler
+		windowDef OgSv6 {
+			rect		0, 150, 416, 16
+			windowDef OgSv6L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgSv6M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgSv6R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+		//Filler
+		windowDef OgSv7 {
+			rect		0, 175, 416, 16
+			windowDef OgSv7L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgSv7M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgSv7R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+		//Filler
+		windowDef OgSv8 {
+			rect		0, 200, 416, 16
+			windowDef OgSv8L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgSv8M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgSv8R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+		//Filler
+		windowDef OgSv9 {
+			rect		0, 225, 416, 16
+			windowDef OgSv9L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgSv9M {
+				rect		8, 0, 400, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef OgSv9R {
+				rect		408, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+	}
+
+	// Help: Allow Headlamp (MP)
+	windowDef OgSv0Help {
+		rect		422, 56, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGServerOptions::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200171 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Allow Grenades Toggle (MP)
+	windowDef OgSv1Help {
+		rect		422, 81, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGServerOptions::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200222 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Allow Smoke Control (MP)
+	windowDef OgSv2Help {
+		rect		422, 106, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGServerOptions::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200172 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Allow Damage Feedback Control (MP)
+	windowDef OgSv3Help {
+		rect		422, 131, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGServerOptions::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200173 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Grabber Unlimited Time MP
+	windowDef OgSv4Help {
+		rect		422, 156, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGServerOptions::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200174 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Help: Grabber Stable Throw MP
+	windowDef OgSv5Help {
+		rect		422, 181, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGServerOptions::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200175 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+
+	windowDef OGGroupSelectionBox {
+		rect		20, 56, 416, 241
+		backcolor	0.11, 0.16, 0.21, 0.8
+		visible		0
+	}
+	// Select Group OGGeneralOptions1
+	windowDef OGSelectGroup0 {
+		rect		20, 56, 416, 16
+		text		CST_STR_00200074
+		font		"fonts/bank"
+		textscale	0.25
+		textalign	0
+		textaligny	-5
+		forecolor	0.6, 1, 1, 1
+		visible ("OGGroupSelectionBox::visible" == 1)
+		float clicked 0
+
+		onMouseEnter {
+			set "clicked" "0" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.2" "200" ;
+		}
+		onMouseExit {
+			set "clicked" "0" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.55 0.65 0.75 0.2" "0.45 0.55 0.7 0" "400" ;
+		}
+		onAction {
+			set "clicked" "1" ;
+		}
+		onActionRelease {
+			if ("clicked") {
+				set "clicked" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				set "OGShowGroup::group" "0" ;
+				resetTime "OGShowGroup" "0" ;
+			}
+		}
+	}
+	// Select Group OGGeneralOptions2
+	windowDef OGSelectGroup1 {
+		rect		20, 78, 416, 16
+		text		CST_STR_00200075
+		font		"fonts/bank"
+		textscale	0.25
+		textalign	0
+		textaligny	-5
+		forecolor	0.6, 1, 1, 1
+		visible ("OGGroupSelectionBox::visible" == 1)
+		float clicked 0
+
+		onMouseEnter {
+			set "clicked" "0" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.2" "200" ;
+		}
+		onMouseExit {
+			set "clicked" "0" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.55 0.65 0.75 0.2" "0.45 0.55 0.7 0" "400" ;
+		}
+		onAction {
+			set "clicked" "1" ;
+		}
+		onActionRelease {
+			if ("clicked") {
+				set "clicked" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				set "OGShowGroup::group" "1" ;
+				resetTime "OGShowGroup" "0" ;
+			}
+		}
+	}
+	// Select Group OGGeneralOptions3
+	windowDef OGSelectGroup2 {
+		rect		20, 100, 416, 16
+		text		CST_STR_00200203
+		font		"fonts/bank"
+		textscale	0.25
+		textalign	0
+		textaligny	-5
+		forecolor	0.6, 1, 1, 1
+		visible ("OGGroupSelectionBox::visible" == 1)
+		float clicked 0
+
+		onMouseEnter {
+			set "clicked" "0" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.2" "200" ;
+		}
+		onMouseExit {
+			set "clicked" "0" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.55 0.65 0.75 0.2" "0.45 0.55 0.7 0" "400" ;
+		}
+		onAction {
+			set "clicked" "1" ;
+		}
+		onActionRelease {
+			if ("clicked") {
+				set "clicked" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				set "OGShowGroup::group" "2" ;
+				resetTime "OGShowGroup" "0" ;
+			}
+		}
+	}
+	// Select Group OGRunCrouchZoom
+	windowDef OGSelectGroup3 {
+		rect		20, 122, 416, 16
+		text		CST_STR_00200076
+		font		"fonts/bank"
+		textscale	0.25
+		textalign	0
+		textaligny	-5
+		forecolor	0.6, 1, 1, 1
+		visible ("OGGroupSelectionBox::visible" == 1)
+		float clicked 0
+
+		onMouseEnter {
+			set "clicked" "0" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.2" "200" ;
+		}
+		onMouseExit {
+			set "clicked" "0" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.55 0.65 0.75 0.2" "0.45 0.55 0.7 0" "400" ;
+		}
+		onAction {
+			set "clicked" "1" ;
+		}
+		onActionRelease {
+			if ("clicked") {
+				set "clicked" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				set "OGShowGroup::group" "3" ;
+				resetTime "OGShowGroup" "0" ;
+			}
+		}
+	}
+	// Select Group OGWeaponOptions
+	windowDef OGSelectGroup4 {
+		rect		20, 144, 416, 16
+		text		CST_STR_00200077
+		font		"fonts/bank"
+		textscale	0.25
+		textalign	0
+		textaligny	-5
+		forecolor	0.6, 1, 1, 1
+		visible ("OGGroupSelectionBox::visible" == 1)
+		float clicked 0
+
+		onMouseEnter {
+			set "clicked" "0" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.2" "200" ;
+		}
+		onMouseExit {
+			set "clicked" "0" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.55 0.65 0.75 0.2" "0.45 0.55 0.7 0" "400" ;
+		}
+		onAction {
+			set "clicked" "1" ;
+		}
+		onActionRelease {
+			if ("clicked") {
+				set "clicked" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				set "OGShowGroup::group" "4" ;
+				resetTime "OGShowGroup" "0" ;
+			}
+		}
+	}
+	// Select Group OGWeaponSmokeSelf
+	windowDef OGSelectGroup5 {
+		rect		20, 166, 400, 16
+		text		CST_STR_00200078
+		font		"fonts/bank"
+		textscale	0.25
+		textalign	0
+		textaligny	-5
+		forecolor	0.6, 1, 1, 1
+		visible ("OGGroupSelectionBox::visible" == 1)
+		float clicked 0
+
+		onMouseEnter {
+			set "clicked" "0" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.2" "200" ;
+		}
+		onMouseExit {
+			set "clicked" "0" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.55 0.65 0.75 0.2" "0.45 0.55 0.7 0" "400" ;
+		}
+		onAction {
+			set "clicked" "1" ;
+		}
+		onActionRelease {
+			if ("clicked") {
+				set "clicked" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				set "OGShowGroup::group" "5" ;
+				resetTime "OGShowGroup" "0" ;
+			}
+		}
+	}
+	// Select Group OGWeaponSmokeOthers
+	windowDef OGSelectGroup6 {
+		rect		20, 188, 400, 16
+		text		CST_STR_00200079
+		font		"fonts/bank"
+		textscale	0.25
+		textalign	0
+		textaligny	-5
+		forecolor	0.6, 1, 1, 1
+		visible ("OGGroupSelectionBox::visible" == 1)
+		float clicked 0
+
+		onMouseEnter {
+			set "clicked" "0" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.2" "200" ;
+		}
+		onMouseExit {
+			set "clicked" "0" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.55 0.65 0.75 0.2" "0.45 0.55 0.7 0" "400" ;
+		}
+		onAction {
+			set "clicked" "1" ;
+		}
+		onActionRelease {
+			if ("clicked") {
+				set "clicked" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				set "OGShowGroup::group" "6" ;
+				resetTime "OGShowGroup" "0" ;
+			}
+		}
+	}
+	// Select Group OGProjectileSmokeSelf
+	windowDef OGSelectGroup7 {
+		rect		20, 210, 400, 16
+		text		CST_STR_00200080
+		font		"fonts/bank"
+		textscale	0.25
+		textalign	0
+		textaligny	-5
+		forecolor	0.6, 1, 1, 1
+		visible ("OGGroupSelectionBox::visible" == 1)
+		float clicked 0
+
+		onMouseEnter {
+			set "clicked" "0" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.2" "200" ;
+		}
+		onMouseExit {
+			set "clicked" "0" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.55 0.65 0.75 0.2" "0.45 0.55 0.7 0" "400" ;
+		}
+		onAction {
+			set "clicked" "1" ;
+		}
+		onActionRelease {
+			if ("clicked") {
+				set "clicked" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				set "OGShowGroup::group" "7" ;
+				resetTime "OGShowGroup" "0" ;
+			}
+		}
+	}
+	// Select Group OGProjectileSmokeOthers
+	windowDef OGSelectGroup8 {
+		rect		20, 232, 400, 16
+		text		CST_STR_00200081
+		font		"fonts/bank"
+		textscale	0.25
+		textalign	0
+		textaligny	-5
+		forecolor	0.6, 1, 1, 1
+		visible ("OGGroupSelectionBox::visible" == 1)
+		float clicked 0
+
+		onMouseEnter {
+			set "clicked" "0" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.2" "200" ;
+		}
+		onMouseExit {
+			set "clicked" "0" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.55 0.65 0.75 0.2" "0.45 0.55 0.7 0" "400" ;
+		}
+		onAction {
+			set "clicked" "1" ;
+		}
+		onActionRelease {
+			if ("clicked") {
+				set "clicked" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				set "OGShowGroup::group" "8" ;
+				resetTime "OGShowGroup" "0" ;
+			}
+		}
+	}
+	// Select Group OGDamageFeedback
+	windowDef OGSelectGroup9 {
+		rect		20, 254, 400, 16
+		text		CST_STR_00200082
+		font		"fonts/bank"
+		textscale	0.25
+		textalign	0
+		textaligny	-5
+		forecolor	0.6, 1, 1, 1
+		visible ("OGGroupSelectionBox::visible" == 1)
+		float clicked 0
+
+		onMouseEnter {
+			set "clicked" "0" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.2" "200" ;
+		}
+		onMouseExit {
+			set "clicked" "0" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.55 0.65 0.75 0.2" "0.45 0.55 0.7 0" "400" ;
+		}
+		onAction {
+			set "clicked" "1" ;
+		}
+		onActionRelease {
+			if ("clicked") {
+				set "clicked" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				set "OGShowGroup::group" "9" ;
+				resetTime "OGShowGroup" "0" ;
+			}
+		}
+	}
+	// Select Group OGServerOptions
+	windowDef OGSelectGroup10 {
+		rect		20, 276, 400, 16
+		text		CST_STR_00200083
+		font		"fonts/bank"
+		textscale	0.25
+		textalign	0
+		textaligny	-5
+		forecolor	0.6, 1, 1, 1
+		visible ("OGGroupSelectionBox::visible" == 1)
+		float clicked 0
+
+		onMouseEnter {
+			set "clicked" "0" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.2" "200" ;
+		}
+		onMouseExit {
+			set "clicked" "0" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.55 0.65 0.75 0.2" "0.45 0.55 0.7 0" "400" ;
+		}
+		onAction {
+			set "clicked" "1" ;
+		}
+		onActionRelease {
+			if ("clicked") {
+				set "clicked" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				set "OGShowGroup::group" "10" ;
+				resetTime "OGShowGroup" "0" ;
+			}
+		}
+	}
+
+	// Group Help: Weapon Smoke (Self)
+	windowDef OGSelectGroup5Help {
+		rect		422, 166, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGroupSelectionBox::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200154 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Group Help: Weapon Smoke (Others-MP)
+	windowDef OGSelectGroup6Help {
+		rect		422, 188, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGroupSelectionBox::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200155 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Group Help: Projectile Smoke (Self)
+	windowDef OGSelectGroup7Help {
+		rect		422, 210, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGroupSelectionBox::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200156 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Group Help: Projectile Smoke (Others-MP)
+	windowDef OGSelectGroup8Help {
+		rect		422, 232, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGroupSelectionBox::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200159 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Group Help: Damage Feedback
+	windowDef OGSelectGroup9Help {
+		rect		422, 254, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGroupSelectionBox::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200162 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+	// Group Help: Server Options
+	windowDef OGSelectGroup10Help {
+		rect		422, 276, 14, 16
+		text		CST_STR_00200047
+		font		"fonts/bank"
+		textscale	0.32
+		textaligny	-7
+		textalign	1
+		forecolor	0.6, 1, 1, 1
+		backcolor	0.6, 0.8, 1, 0.2
+		visible		("OGGroupSelectionBox::visible" == 1)
+		float		mouseExitAnim 0
+
+		onMouseEnter {
+			set "mouseExitAnim" "1" ;
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+			transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+		}
+		onMouseExit {
+			if ("mouseExitAnim") {
+				set "mouseExitAnim" "0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			}
+		}
+		onAction {
+			set "mouseExitAnim" "0" ;
+			set	"cmd" "play guisounds_menuclickup" ;
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+			transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+			set "CstHelpText::text" CST_STR_00200170 ;
+			resetTime "CstHelpAnimUp" "0" ;
+		}
+	}
+
+	windowDef OGShowGroup {
+		rect		0, 0, 0, 0
+		visible		0
+		notime		1
+		noevents	1
+		float group 0
+
+		onTime 0 {
+			set "OGGeneralOptions1::visible" "0" ;
+			set "OGGeneralOptions2::visible" "0" ;
+			set "OGGeneralOptions3::visible" "0" ;
+			set "OGRunCrouchZoom::visible" "0" ;
+			set "OGWeaponOptions::visible" "0" ;
+			set "OGWeaponSmokeSelf::visible" "0" ;
+			set "OGWeaponSmokeOthers::visible" "0" ;
+			set "OGProjectileSmokeSelf::visible" "0" ;
+			set "OGProjectileSmokeOthers::visible" "0" ;
+			set "OGDamageFeedback::visible" "0" ;
+			set "OGServerOptions::visible" "0" ;
+
+			if ("OGGroupSelectionBox::visible") {
+				set "OGGroupSelectionBox::visible" "0" ;
+				if ("group" <= 0 || "group" > 10) {
+					set "OGGeneralOptions1::visible" "1" ;
+					set "OGGroupText::text" CST_STR_00200074 ;
+				} else if ("group" == 1) {
+					set "OGGeneralOptions2::visible" "1" ;
+					set "OGGroupText::text" CST_STR_00200075 ;
+				} else if ("group" == 2) {
+					set "OGGeneralOptions3::visible" "1" ;
+					set "OGGroupText::text" CST_STR_00200203 ;
+				} else if ("group" == 3) {
+					set "OGRunCrouchZoom::visible" "1" ;
+					set "OGGroupText::text" CST_STR_00200076 ;
+				} else if ("group" == 4) {
+					set "OGWeaponOptions::visible" "1" ;
+					set "OGGroupText::text" CST_STR_00200077 ;
+				} else if ("group" == 5) {
+					set "OGWeaponSmokeSelf::visible" "1" ;
+					set "OGGroupText::text" CST_STR_00200078 ;
+				} else if ("group" == 6) {
+					set "OGWeaponSmokeOthers::visible" "1" ;
+					set "OGGroupText::text" CST_STR_00200079 ;
+				} else if ("group" == 7) {
+					set "OGProjectileSmokeSelf::visible" "1" ;
+					set "OGGroupText::text" CST_STR_00200080 ;
+				} else if ("group" == 8) {
+					set "OGProjectileSmokeOthers::visible" "1" ;
+					set "OGGroupText::text" CST_STR_00200081 ;
+				} else if ("group" == 9) {
+					set "OGDamageFeedback::visible" "1" ;
+					set "OGGroupText::text" CST_STR_00200082 ;
+				} else if ("group" == 10) {
+					set "OGServerOptions::visible" "1" ;
+					set "OGGroupText::text" CST_STR_00200083 ;
+				}
+			} else {
+				set "OGGroupSelectionBox::visible" "1" ;
+			}
+		}
+	}
+	//#modified-fva; END
+
+	}
+
+//#modified-fva; from "guis/mainmenu.gui"; END

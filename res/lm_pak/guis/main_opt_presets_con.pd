@@ -1,0 +1,420 @@
+//#modified-fva; from "guis/mainmenu.gui"; BEGIN
+
+	//#modified-fva; BEGIN
+	// ResetDefaultGame is now used as confirmation dialog for the presets
+	//#modified-fva; END
+
+//RESET ALL SETTINGS
+	windowDef ResetDefaultGame {
+		rect		0, 0, 640, 0
+		backcolor 	0, 0, 0, 0.5
+		modal		1
+
+		windowDef RDGGlowLeft
+		{
+			rect	66,74,256,256
+			background	"guis/assets/mainmenu/boxframe"
+			matcolor	1,1,1,1
+			noevents	1
+			visible	1
+		}
+		windowDef RDGGlowRight
+		{
+			rect	322,74,-256,256
+			background	"guis/assets/mainmenu/boxframe"
+			matcolor	1,1,1,1
+			noevents	1
+			visible	1
+		}
+		windowDef RDGBgMain1 {
+			rect		140, 130, -32, -32
+			background	"gui/mainmenu/content_smallcorner"
+			matcolor	0.18 ,0.25 ,0.3 ,1
+			noevents	1
+		}
+		windowDef RDGBgMain2 {
+			rect		172, 130, 300, 32
+			backcolor	0.18 ,0.25 ,0.3 ,1
+			noevents	1
+		}
+		windowDef RDGBgMain3 {
+			rect		472, 130, 32, -32
+			background	"gui/mainmenu/content_smallcorner"
+			matcolor	0.18 ,0.25 ,0.3 ,1
+			noevents	1
+		}
+		windowDef RDGBgMain4 {
+			rect		140, 162, 364, 80
+			backcolor	0.18 ,0.25 ,0.3 ,1
+			noevents	1
+		}
+		windowDef RDGBgMain5 {
+			rect		140, 242, -32, 32
+			background	"gui/mainmenu/content_smallcorner"
+			matcolor	0.18 ,0.25 ,0.3 ,1
+			noevents	1
+		}
+		windowDef RDGBgMain6 {
+			rect		172, 242, 300, 32
+			backcolor	0.18 ,0.25 ,0.3 ,1
+			noevents	1
+		}
+		windowDef RDGBgMain7{
+			rect		472, 242, 32, 32
+			background	"gui/mainmenu/content_smallcorner"
+			matcolor	0.18 ,0.25 ,0.3 ,1
+			noevents	1
+		}
+		windowDef RDGBgMain8 {
+			rect		143, 133, 340, 279
+			background	"gui/mainmenu/content_glow2"
+			matcolor	1, 1, 1, 0.18
+			noevents	1
+		}
+		windowDef RDGBgMain81
+		{
+			rect	161,-7,-340,-279
+			background	"gui/mainmenu/content_glow2"
+			matcolor	0, 0.08, 0.1, 0.3
+			noevents	1
+			visible	1
+		}
+		windowDef RDG {
+			rect		142, 132, 360, 140
+			visible		0
+
+			windowDef RDGTitleText {
+				rect		20, 5, 320, 20
+				text		"#str_04130"
+				textscale	0.32
+				textaligny	-3
+				forecolor	1, 1, 1, 1
+			}
+			windowDef RDGTitleBar {
+				rect		5, 23, 325, 2
+				backcolor	0.6 ,0.8 ,1 ,0.2
+				noevents	1
+			}
+
+			windowDef RDGText {
+				rect		30, 30, 300, 100
+				text		"#str_04131"
+				forecolor	1, 1, 1, 1
+				textscale	0.25
+				font "fonts/bank"
+			}
+
+			//select button 1
+			windowDef RDGBtn1 {
+				rect		60, 100, 133, 32
+
+				windowDef RDGBtn1Border {
+					rect		4, 6, 76, 19
+					backcolor	0.45 ,0.55 ,0.7 ,0.3
+					noevents	1
+				}
+				windowDef RDGBtn1Corner {
+					rect		80, 0, 16, 32
+					background	"gui/mainmenu/button_cornerangle"
+					matcolor	0.45 ,0.55 ,0.7 ,0.3
+					noevents	1
+				}
+				windowDef RDGBtn1EdgeG {
+					rect		0, 0, 16, 32
+					background	"gui/mainmenu/buttong_cornersquare"
+					matcolor	0.55 ,0.65 ,0.75 ,0.5
+					noevents	1
+				}
+				windowDef RDGBtn1BorderG {
+					rect		16, 0, 64, 32
+					background	"gui/mainmenu/buttong_middlesm"
+					matcolor	0.55 ,0.65 ,0.75 ,0.5
+					noevents	1
+				}
+				windowDef RDGBtn1CornerG {
+					rect		80, 0, 16, 32
+					background	"gui/mainmenu/buttong_cornerangle"
+					matcolor	0.55 ,0.65 ,0.75 ,0.5
+					noevents	1
+				}
+			}
+
+			//select button 2
+			windowDef RDGBtn2 {
+				rect		210, 100, 133, 32
+
+				windowDef RDGBtn2Border {
+					rect		4, 6, 76, 19
+					backcolor	0.45 ,0.55 ,0.7 ,0.3
+					noevents	1
+				}
+				windowDef RDGBtn2Corner {
+					rect		80, 0, 16, 32
+					background	"gui/mainmenu/button_cornerangle"
+					matcolor	0.45 ,0.55 ,0.7 ,0.3
+					noevents	1
+				}
+				windowDef RDGBtn2EdgeG {
+					rect		0, 0, 16, 32
+					background	"gui/mainmenu/buttong_cornersquare"
+					matcolor	0.55 ,0.65 ,0.75 ,0.5
+					noevents	1
+				}
+				windowDef RDGBtn2BorderG {
+					rect		16, 0, 64, 32
+					background	"gui/mainmenu/buttong_middlesm"
+					matcolor	0.55 ,0.65 ,0.75 ,0.5
+					noevents	1
+				}
+				windowDef RDGBtn2CornerG {
+					rect		80, 0, 16, 32
+					background	"gui/mainmenu/buttong_cornerangle"
+					matcolor	0.55 ,0.65 ,0.75 ,0.5
+					noevents	1
+				}
+			}
+
+			windowDef RDGYesBtnText {
+				rect		65, 106, 80, 19
+				text		"#str_02322"
+				textscale	0.25
+				textalign	1
+				textaligny	-1
+				forecolor	0.6, 1, 1, 1
+				visible 	1
+				wantenter	1
+				//#modified-fva; BEGIN
+				float mouseExitAnim 0
+				//#modified-fva; END
+
+				onMouseEnter {
+					//#modified-fva; BEGIN
+					set "mouseExitAnim" "1" ;
+					//#modified-fva; END
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "250" ;
+					transition "RDGBtn1EdgeG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+					transition "RDGBtn1BorderG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+					transition "RDGBtn1CornerG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+					transition "RDGBtn1Border::backcolor" "0.45 0.55 0.7 0.3" "0.55 0.65 0.75 0.5" "200" ;
+					transition "RDGBtn1Corner::matcolor" "0.45 0.55 0.7 0.3" "0.55 0.65 0.75 0.5" "200" ;
+
+					//#modified-fva; BEGIN
+					//resetTime "ToolTip1" "0" ;
+					//set "ToolTip1::text" "#str_04132" ;
+					//set "ToolTip2::text" "#str_04132" ;
+					//#modified-fva; END
+				}
+				onMouseExit {
+					//#modified-fva; BEGIN
+					if ("mouseExitAnim") {
+					set "mouseExitAnim" "0" ;
+					//#modified-fva; END
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+					transition "RDGBtn1EdgeG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "RDGBtn1BorderG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "RDGBtn1CornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "RDGBtn1Border::backcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+					transition "RDGBtn1Corner::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+
+					//#modified-fva; BEGIN
+					//resetTime "ToolTip2" "0" ;
+					}
+					//#modified-fva; END
+				}
+
+				onAction {
+					//#modified-fva; BEGIN
+					if ("RDG::visible") {
+					set "mouseExitAnim" "0" ;
+					//#modified-fva; END
+
+					//#modified-fva; BEGIN
+					//set	"cmd"	"exec cvar_restart ; play guisounds_chirpconnect" ; 
+					if ("AnimRDGUp::cstSelectedPreset" <= 0 || "AnimRDGUp::cstSelectedPreset" > 2) {
+						set "cmd" "exec cvar_restart ; play guisounds_chirpconnect" ;
+					} else if ("AnimRDGUp::cstSelectedPreset" == 1) {
+						set "cmd" "exec 'exec _cst_preset_default_controls.cfg' ; play guisounds_chirpconnect" ;
+					} else if ("AnimRDGUp::cstSelectedPreset" == 2) {
+						set "cmd" "exec 'exec _cst_preset_layered_controls.cfg' ; play guisounds_chirpconnect" ;
+					}
+					//#modified-fva; END
+
+					resetTime "AnimRDGDown" "0" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+					transition "RDGBtn1EdgeG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "RDGBtn1BorderG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "RDGBtn1CornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "RDGBtn1Border::backcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+					transition "RDGBtn1Corner::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+
+					//#modified-fva; BEGIN
+					//resetTime "ToolTip1" "0" ;
+					//set "ToolTip1::text" "#str_04133" ;
+					//set "ToolTip2::text" "#str_04133" ;
+					}
+					//#modified-fva; END
+				}
+			}
+
+			windowDef RDGCancelBtnText {
+				rect		215, 106, 80, 19
+				text		"#str_00124"
+				textscale	0.25
+				textalign	1
+				textaligny	-1
+				forecolor	0.6, 1, 1, 1
+				visible 	1
+				wantenter	1
+				//#modified-fva; BEGIN
+				float mouseExitAnim 0
+				//#modified-fva; END
+
+				onMouseEnter {
+					//#modified-fva; BEGIN
+					set "mouseExitAnim" "1" ;
+					//#modified-fva; END
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "250" ;
+					transition "RDGBtn2EdgeG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+					transition "RDGBtn2BorderG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+					transition "RDGBtn2CornerG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+					transition "RDGBtn2Border::backcolor" "0.45 0.55 0.7 0.3" "0.55 0.65 0.75 0.5" "200" ;
+					transition "RDGBtn2Corner::matcolor" "0.45 0.55 0.7 0.3" "0.55 0.65 0.75 0.5" "200" ;
+
+					//#modified-fva; BEGIN
+					//resetTime "ToolTip1" "0" ;
+					//set "ToolTip1::text" "#str_04134" ;
+					//set "ToolTip2::text" "#str_04134" ;
+					//#modified-fva; END
+				}
+				onMouseExit {
+					//#modified-fva; BEGIN
+					if ("mouseExitAnim") {
+					set "mouseExitAnim" "0" ;
+					//#modified-fva; END
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+					transition "RDGBtn2EdgeG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "RDGBtn2BorderG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "RDGBtn2CornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "RDGBtn2Border::backcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+					transition "RDGBtn2Corner::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+
+					//#modified-fva; BEGIN
+					//resetTime "ToolTip2" "0" ;
+					}
+					//#modified-fva; END
+				}
+
+				onAction {
+					//#modified-fva; BEGIN
+					if ("RDG::visible") {
+					set "mouseExitAnim" "0" ;
+					//#modified-fva; END
+					set	"cmd"	"play guisounds_menuerror" ; 
+					resetTime "AnimRDGDown" "0" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+					transition "RDGBtn2EdgeG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "RDGBtn2BorderG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "RDGBtn2CornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "RDGBtn2Border::backcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+					transition "RDGBtn2Corner::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+
+					//#modified-fva; BEGIN
+					//resetTime "ToolTip1" "0" ;
+					//set "ToolTip1::text" "#str_04135" ;
+					//set "ToolTip2::text" "#str_04135" ;
+					}
+					//#modified-fva; END
+				}
+			}
+		}
+	}
+
+	//reset default game options up animation
+	windowDef AnimRDGUp {
+		rect		0, 0, 0, 0
+		visible		0
+		notime		1
+		//#modified-fva; BEGIN
+		float cstSelectedPreset 0
+		//#modified-fva; END
+
+		onTime 0 {
+			set "ResetDefaultGame::rect" "0 0 640 480" ;
+			//#modified-fva; BEGIN
+			//resetTime "ToolTip2" "0" ;
+			//#modified-fva; END
+			transition "ResetDefaultGame::backcolor" "0 0 0 0" "0 0 0 0.5" "200" ;
+
+			//#modified-fva; BEGIN
+			if ("cstSelectedPreset" <= 0 || "cstSelectedPreset" > 2) {
+				set "RDGTitleText::text" "#str_04130" ;
+				set "RDGText::text" "#str_04131" ;
+				set "RDGYesBtnText::text" "#str_02322" ;
+				set "RDGCancelBtnText::text" "#str_00124" ;
+			} else if ("cstSelectedPreset" == 1) {
+				set "RDGTitleText::text" CST_STR_00200191 ;
+				set "RDGText::text" CST_STR_00200198 ;
+				set "RDGYesBtnText::text" CST_STR_00200196 ;
+				set "RDGCancelBtnText::text" CST_STR_00200197 ;
+			} else if ("cstSelectedPreset" == 2) {
+				set "RDGTitleText::text" CST_STR_00200192 ;
+				set "RDGText::text" CST_STR_00200199 ;
+				set "RDGYesBtnText::text" CST_STR_00200196 ;
+				set "RDGCancelBtnText::text" CST_STR_00200197 ;
+			}
+			//#modified-fva; END
+		}
+		onTime 200 {
+			transition "RDGBgMain1::matcolor" "1 1 1 0.4" "0.18 0.25 0.3 1" "50" ;
+			transition "RDGBgMain2::backcolor" "1 1 1 0.4" "0.18 0.25 0.3 1" "50" ;
+			transition "RDGBgMain3::matcolor" "1 1 1 0.4" "0.18 0.25 0.3 1" "50" ;
+			transition "RDGBgMain4::backcolor" "1 1 1 0.4" "0.18 0.25 0.3 1" "50" ;
+			transition "RDGBgMain5::matcolor" "1 1 1 0.4" "0.18 0.25 0.3 1" "50" ;
+			transition "RDGBgMain6::backcolor" "1 1 1 0.4" "0.18 0.25 0.3 1" "50" ;
+			transition "RDGBgMain7::matcolor" "1 1 1 0.4" "0.18 0.25 0.3 1" "50" ;
+			transition "RDGBgMain8::matcolor" "1 1 1 0" "1 1 1 0.18" "50" ;
+		}
+		onTime 260 {
+			transition "RDGBgMain1::matcolor" "1 1 1 0.4" "0.18 0.25 0.3 1" "200" ;
+			transition "RDGBgMain2::backcolor" "1 1 1 0.4" "0.18 0.25 0.3 1" "200" ;
+			transition "RDGBgMain3::matcolor" "1 1 1 0.4" "0.18 0.25 0.3 1" "200" ;
+			transition "RDGBgMain4::backcolor" "1 1 1 0.4" "0.18 0.25 0.3 1" "200" ;
+			transition "RDGBgMain5::matcolor" "1 1 1 0.4" "0.18 0.25 0.3 1" "200" ;
+			transition "RDGBgMain6::backcolor" "1 1 1 0.4" "0.18 0.25 0.3 1" "200" ;
+			transition "RDGBgMain7::matcolor" "1 1 1 0.4" "0.18 0.25 0.3 1" "200" ;
+			transition "RDGBgMain8::matcolor" "1 1 1 0" "1 1 1 0.18" "200" ;
+			set "RDG::visible" "1" ;
+			setFocus "RDGCancelBtnText" ;
+		}
+	}
+
+	//reset default game options down animation
+	windowDef AnimRDGDown {
+		rect		0, 0, 0, 0
+		visible		0
+		notime		1
+
+		onTime 0 {
+			transition "ResetDefaultGame::backcolor" "0 0 0 0.5" "0 0 0 0" "200" ;
+			transition "RDGBgMain1::matcolor" "0.18 0.25 0.3 1" "0.18 0.25 0.3 0" "200" ;
+			transition "RDGBgMain2::backcolor" "0.18 0.25 0.3 1" "0.18 0.25 0.3 0" "200" ;
+			transition "RDGBgMain3::matcolor" "0.18 0.25 0.3 1" "0.18 0.25 0.3 0" "200" ;
+			transition "RDGBgMain4::backcolor" "0.18 0.25 0.3 1" "0.18 0.25 0.3 0" "200" ;
+			transition "RDGBgMain5::matcolor" "0.18 0.25 0.3 1" "0.18 0.25 0.3 0" "200" ;
+			transition "RDGBgMain6::backcolor" "0.18 0.25 0.3 1" "0.18 0.25 0.3 0" "200" ;
+			transition "RDGBgMain7::matcolor" "0.18 0.25 0.3 1" "0.18 0.25 0.3 0" "200" ;
+			transition "RDGBgMain8::matcolor" "1 1 1 0.18" "1 1 1 0" "200" ;
+			set "RDG::visible" "0" ;
+			//#modified-fva; BEGIN
+			set "AnimRDGUp::cstSelectedPreset" "0" ;
+			//#modified-fva; END
+		}
+		onTime 200 {
+			set "ResetDefaultGame::rect" "0 0 640 0" ;
+		}
+		onTime 1000 {
+			set "cmd" "loadBinds" ;
+		}
+	}
+
+//#modified-fva; from "guis/mainmenu.gui"; END

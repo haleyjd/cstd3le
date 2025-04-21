@@ -1,0 +1,5629 @@
+//#modified-fva; from "guis/mpmain.gui"; BEGIN
+
+	windowDef BoxParent4
+	{
+		//#modified-fva; BEGIN
+		//rect	50,-10,472,407
+		rect	42,-10,478,382
+		//#modified-fva; END
+		visible	0
+		windowDef boxbg4
+		{
+			//#modified-fva; BEGIN
+			//rect	10,49,451,295
+			rect	10,49,458,323
+			//#modified-fva; END
+			backcolor	0.1, 0.2, 0.2, 0.5
+			bordercolor	0.1, 0.25, 0.25, 1
+			bordersize	1
+			visible	1
+		}
+		windowDef BorderTM4
+		{
+			//#modified-fva; BEGIN
+			//rect	10,41,451,8
+			rect	10,41,458,8
+			//#modified-fva; END
+			matcolor	0.2, 0.45, 0.4, pdflick2 [ time * .0025 ] / 2.5
+			background	"guis/assets/hud/mp/score_horiz"
+			visible	1
+		}
+		windowDef BorderTR4
+		{
+			//#modified-fva; BEGIN
+			//rect	461,41,8,8
+			rect	468,41,8,8
+			//#modified-fva; END
+			matcolor	0.2, 0.45, 0.4, pdflick2 [ time * .0025 ] / 2.5
+			background	"guis/assets/hud/mp/score_corner"
+			visible	1
+		}
+		windowDef BorderR4
+		{
+			//#modified-fva; BEGIN
+			//rect	461,49,8,295
+			rect	468,49,8,323
+			//#modified-fva; END
+			matcolor	0.2, 0.45, 0.4, pdflick2 [ time * .0025 ] / 2.5
+			background	"guis/assets/hud/mp/score_vert"
+			visible	1
+		}
+		windowDef BorderBM4
+		{
+			//#modified-fva; BEGIN
+			//rect	10,344,451,-8
+			rect	10,372,458,-8
+			//#modified-fva; END
+			matcolor	0.2, 0.45, 0.4, pdflick2 [ time * .0025 ] / 2.5
+			background	"guis/assets/hud/mp/score_horiz"
+			visible	1
+		}
+		windowDef BorderBR4
+		{
+			//#modified-fva; BEGIN
+			//rect	461,344,8,-8
+			rect	468,372,8,-8
+			//#modified-fva; END
+			matcolor	0.2, 0.45, 0.4, pdflick2 [ time * .0025 ] / 2.5
+			background	"guis/assets/hud/mp/score_corner"
+			visible	1
+		}
+		windowDef BorderBL4
+		{
+			//#modified-fva; BEGIN
+			//rect	2,344,-8,-8
+			rect	2,372,-8,-8
+			//#modified-fva; END
+			matcolor	0.2, 0.45, 0.4, pdflick2 [ time * .0025 ] / 2.5
+			background	"guis/assets/hud/mp/score_corner"
+			visible	1
+		}
+		windowDef BorderL4
+		{
+			//#modified-fva; BEGIN
+			//rect	2,49,-8,295
+			rect	2,49,-8,323
+			//#modified-fva; END
+			matcolor	0.2, 0.45, 0.4, pdflick2 [ time * .0025 ] / 2.5
+			background	"guis/assets/hud/mp/score_vert"
+			visible	1
+		}
+		windowDef BorderTL4
+		{
+			rect	2,41,-8,8
+			matcolor	0.2, 0.45, 0.4, pdflick2 [ time * .0025 ] / 2.5
+			background	"guis/assets/hud/mp/score_corner"
+			visible	1
+		}
+		windowDef LeftBorder4
+		{
+			//#modified-fva; BEGIN
+			//rect	170,17,-27,26
+			rect	177,17,-27,26
+			//#modified-fva; END
+			background	"gui/mainmenu/borderb_corner2"
+			matcolor	0.2, 0.45, 0.4,0.3
+			noevents	1
+			visible	1
+		}
+		windowDef MiddleBorder4
+		{
+			//#modified-fva; BEGIN
+			//rect	197,27,83,16
+			rect	204,27,83,16
+			//#modified-fva; END
+			backcolor	0.2, 0.45, 0.4,0.3
+			noevents	1
+			visible	1
+		}
+		windowDef RightBorder4
+		{
+			//#modified-fva; BEGIN
+			//rect	280,17,27,26
+			rect	287,17,27,26
+			//#modified-fva; END
+			background	"gui/mainmenu/borderb_corner2"
+			matcolor	0.2, 0.45, 0.4,0.3
+			noevents	1
+			visible	1
+		}
+		windowDef OptionsControls
+		{
+			//#modified-fva; BEGIN
+			//rect	4,20,450,350
+			rect	4,43,470,335
+			//#modified-fva; END
+			visible	1
+			//#modified-fva; BEGIN
+			windowDef OCLayersBar {
+				rect		12, 14, 445, 18
+				backcolor	0.6, 1, 1, 0.1
+			}
+			windowDef OCLayersTitle {
+				rect	12, 14, 125, 18
+				text	CST_STR_00200002
+				font	"fonts/bank"
+				textscale	0.32
+				textaligny	-6
+				textalign	1
+				forecolor	1, 1, 1, 1
+				noevents	1
+			}
+			windowDef OCLayer0 {
+				rect	137, 14, 32, 18
+				text	CST_STR_00200003
+				font	"fonts/bank"
+				textscale	0.32
+				textaligny	-6
+				textalign	1
+				forecolor	1, 1, 1, 1
+				backcolor	0.67, 0, 0, 0.7
+				noevents	1
+
+				onMouseEnter {
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.3" "200" ;
+				}	
+				onMouseExit {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.55 0.65 0.75 0.3" "0.45 0.55 0.7 0" "400" ;
+				}
+				onAction {
+					set	"cmd" "play guisounds_menuclickup" ;
+					set "OCLayersUpdate::selectedLayer" "0" ;
+					resetTime "OCLayersUpdate" "0" ;
+
+					transition "backcolor" "0.55 0.65 0.75 0.2" "0.67, 0, 0, 0.7" "400" ;
+					set "OCLayer1::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer2::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer3::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer4::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer5::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer6::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer7::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer8::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer9::backcolor" "0.45 0.55 0.7 0" ;
+
+					//set "OCLayer0::forecolor" "0.6 1 1 1" ;
+					set "OCLayer1::forecolor" "0.6 1 1 1" ;
+					set "OCLayer2::forecolor" "0.6 1 1 1" ;
+					set "OCLayer3::forecolor" "0.6 1 1 1" ;
+					set "OCLayer4::forecolor" "0.6 1 1 1" ;
+					set "OCLayer5::forecolor" "0.6 1 1 1" ;
+					set "OCLayer6::forecolor" "0.6 1 1 1" ;
+					set "OCLayer7::forecolor" "0.6 1 1 1" ;
+					set "OCLayer8::forecolor" "0.6 1 1 1" ;
+					set "OCLayer9::forecolor" "0.6 1 1 1" ;
+
+					set "noevents" "1" ;
+					set "OCLayer1::noevents" "0" ;
+					set "OCLayer2::noevents" "0" ;
+					set "OCLayer3::noevents" "0" ;
+					set "OCLayer4::noevents" "0" ;
+					set "OCLayer5::noevents" "0" ;
+					set "OCLayer6::noevents" "0" ;
+					set "OCLayer7::noevents" "0" ;
+					set "OCLayer8::noevents" "0" ;
+					set "OCLayer9::noevents" "0" ;
+				}
+			}
+			windowDef OCLayer1 {
+				rect	169, 14, 32, 18
+				text	CST_STR_00200004
+				font	"fonts/bank"
+				textscale	0.32
+				textaligny	-6
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				noevents	0
+
+				onMouseEnter {
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.3" "200" ;
+				}	
+				onMouseExit {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.55 0.65 0.75 0.3" "0.45 0.55 0.7 0" "400" ;
+				}
+				onAction {
+					set	"cmd" "play guisounds_menuclickup" ;
+					set "OCLayersUpdate::selectedLayer" "1" ;
+					resetTime "OCLayersUpdate" "0" ;
+
+					set "OCLayer0::backcolor" "0.45 0.55 0.7 0" ;
+					transition "backcolor" "0.55 0.65 0.75 0.2" "0.67, 0, 0, 0.7" "400" ;
+					set "OCLayer2::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer3::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer4::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer5::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer6::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer7::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer8::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer9::backcolor" "0.45 0.55 0.7 0" ;
+
+					set "OCLayer0::forecolor" "0.6 1 1 1" ;
+					//set "OCLayer1::forecolor" "0.6 1 1 1" ;
+					set "OCLayer2::forecolor" "0.6 1 1 1" ;
+					set "OCLayer3::forecolor" "0.6 1 1 1" ;
+					set "OCLayer4::forecolor" "0.6 1 1 1" ;
+					set "OCLayer5::forecolor" "0.6 1 1 1" ;
+					set "OCLayer6::forecolor" "0.6 1 1 1" ;
+					set "OCLayer7::forecolor" "0.6 1 1 1" ;
+					set "OCLayer8::forecolor" "0.6 1 1 1" ;
+					set "OCLayer9::forecolor" "0.6 1 1 1" ;
+
+					set "OCLayer0::noevents" "0" ;
+					set "noevents" "1" ;
+					set "OCLayer2::noevents" "0" ;
+					set "OCLayer3::noevents" "0" ;
+					set "OCLayer4::noevents" "0" ;
+					set "OCLayer5::noevents" "0" ;
+					set "OCLayer6::noevents" "0" ;
+					set "OCLayer7::noevents" "0" ;
+					set "OCLayer8::noevents" "0" ;
+					set "OCLayer9::noevents" "0" ;
+				}
+			}
+			windowDef OCLayer2 {
+				rect	201, 14, 32, 18
+				text	CST_STR_00200005
+				font	"fonts/bank"
+				textscale	0.32
+				textaligny	-6
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				noevents	0
+
+				onMouseEnter {
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.3" "200" ;
+				}	
+				onMouseExit {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.55 0.65 0.75 0.3" "0.45 0.55 0.7 0" "400" ;
+				}
+				onAction {
+					set	"cmd" "play guisounds_menuclickup" ;
+					set "OCLayersUpdate::selectedLayer" "2" ;
+					resetTime "OCLayersUpdate" "0" ;
+
+					set "OCLayer0::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer1::backcolor" "0.45 0.55 0.7 0" ;
+					transition "backcolor" "0.55 0.65 0.75 0.2" "0.67, 0, 0, 0.7" "400" ;
+					set "OCLayer3::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer4::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer5::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer6::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer7::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer8::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer9::backcolor" "0.45 0.55 0.7 0" ;
+
+					set "OCLayer0::forecolor" "0.6 1 1 1" ;
+					set "OCLayer1::forecolor" "0.6 1 1 1" ;
+					//set "OCLayer2::forecolor" "0.6 1 1 1" ;
+					set "OCLayer3::forecolor" "0.6 1 1 1" ;
+					set "OCLayer4::forecolor" "0.6 1 1 1" ;
+					set "OCLayer5::forecolor" "0.6 1 1 1" ;
+					set "OCLayer6::forecolor" "0.6 1 1 1" ;
+					set "OCLayer7::forecolor" "0.6 1 1 1" ;
+					set "OCLayer8::forecolor" "0.6 1 1 1" ;
+					set "OCLayer9::forecolor" "0.6 1 1 1" ;
+
+					set "OCLayer0::noevents" "0" ;
+					set "OCLayer1::noevents" "0" ;
+					set "noevents" "1" ;
+					set "OCLayer3::noevents" "0" ;
+					set "OCLayer4::noevents" "0" ;
+					set "OCLayer5::noevents" "0" ;
+					set "OCLayer6::noevents" "0" ;
+					set "OCLayer7::noevents" "0" ;
+					set "OCLayer8::noevents" "0" ;
+					set "OCLayer9::noevents" "0" ;
+				}
+			}
+			windowDef OCLayer3 {
+				rect	233, 14, 32, 18
+				text	CST_STR_00200006
+				font	"fonts/bank"
+				textscale	0.32
+				textaligny	-6
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				noevents	0
+
+				onMouseEnter {
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.3" "200" ;
+				}	
+				onMouseExit {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.55 0.65 0.75 0.3" "0.45 0.55 0.7 0" "400" ;
+				}
+				onAction {
+					set	"cmd" "play guisounds_menuclickup" ;
+					set "OCLayersUpdate::selectedLayer" "3" ;
+					resetTime "OCLayersUpdate" "0" ;
+
+					set "OCLayer0::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer1::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer2::backcolor" "0.45 0.55 0.7 0" ;
+					transition "backcolor" "0.55 0.65 0.75 0.2" "0.67, 0, 0, 0.7" "400" ;
+					set "OCLayer4::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer5::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer6::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer7::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer8::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer9::backcolor" "0.45 0.55 0.7 0" ;
+
+					set "OCLayer0::forecolor" "0.6 1 1 1" ;
+					set "OCLayer1::forecolor" "0.6 1 1 1" ;
+					set "OCLayer2::forecolor" "0.6 1 1 1" ;
+					//set "OCLayer3::forecolor" "0.6 1 1 1" ;
+					set "OCLayer4::forecolor" "0.6 1 1 1" ;
+					set "OCLayer5::forecolor" "0.6 1 1 1" ;
+					set "OCLayer6::forecolor" "0.6 1 1 1" ;
+					set "OCLayer7::forecolor" "0.6 1 1 1" ;
+					set "OCLayer8::forecolor" "0.6 1 1 1" ;
+					set "OCLayer9::forecolor" "0.6 1 1 1" ;
+
+					set "OCLayer0::noevents" "0" ;
+					set "OCLayer1::noevents" "0" ;
+					set "OCLayer2::noevents" "0" ;
+					set "noevents" "1" ;
+					set "OCLayer4::noevents" "0" ;
+					set "OCLayer5::noevents" "0" ;
+					set "OCLayer6::noevents" "0" ;
+					set "OCLayer7::noevents" "0" ;
+					set "OCLayer8::noevents" "0" ;
+					set "OCLayer9::noevents" "0" ;
+				}
+			}
+			windowDef OCLayer4 {
+				rect	265, 14, 32, 18
+				text	CST_STR_00200007
+				font	"fonts/bank"
+				textscale	0.32
+				textaligny	-6
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				noevents	0
+
+				onMouseEnter {
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.3" "200" ;
+				}	
+				onMouseExit {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.55 0.65 0.75 0.3" "0.45 0.55 0.7 0" "400" ;
+				}
+				onAction {
+					set	"cmd" "play guisounds_menuclickup" ;
+					set "OCLayersUpdate::selectedLayer" "4" ;
+					resetTime "OCLayersUpdate" "0" ;
+
+					set "OCLayer0::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer1::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer2::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer3::backcolor" "0.45 0.55 0.7 0" ;
+					transition "backcolor" "0.55 0.65 0.75 0.2" "0.67, 0, 0, 0.7" "400" ;
+					set "OCLayer5::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer6::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer7::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer8::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer9::backcolor" "0.45 0.55 0.7 0" ;
+
+					set "OCLayer0::forecolor" "0.6 1 1 1" ;
+					set "OCLayer1::forecolor" "0.6 1 1 1" ;
+					set "OCLayer2::forecolor" "0.6 1 1 1" ;
+					set "OCLayer3::forecolor" "0.6 1 1 1" ;
+					//set "OCLayer4::forecolor" "0.6 1 1 1" ;
+					set "OCLayer5::forecolor" "0.6 1 1 1" ;
+					set "OCLayer6::forecolor" "0.6 1 1 1" ;
+					set "OCLayer7::forecolor" "0.6 1 1 1" ;
+					set "OCLayer8::forecolor" "0.6 1 1 1" ;
+					set "OCLayer9::forecolor" "0.6 1 1 1" ;
+
+					set "OCLayer0::noevents" "0" ;
+					set "OCLayer1::noevents" "0" ;
+					set "OCLayer2::noevents" "0" ;
+					set "OCLayer3::noevents" "0" ;
+					set "noevents" "1" ;
+					set "OCLayer5::noevents" "0" ;
+					set "OCLayer6::noevents" "0" ;
+					set "OCLayer7::noevents" "0" ;
+					set "OCLayer8::noevents" "0" ;
+					set "OCLayer9::noevents" "0" ;
+				}
+			}
+			windowDef OCLayer5 {
+				rect	297, 14, 32, 18
+				text	CST_STR_00200008
+				font	"fonts/bank"
+				textscale	0.32
+				textaligny	-6
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				noevents	0
+
+				onMouseEnter {
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.3" "200" ;
+				}	
+				onMouseExit {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.55 0.65 0.75 0.3" "0.45 0.55 0.7 0" "400" ;
+				}
+				onAction {
+					set	"cmd" "play guisounds_menuclickup" ;
+					set "OCLayersUpdate::selectedLayer" "5" ;
+					resetTime "OCLayersUpdate" "0" ;
+
+					set "OCLayer0::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer1::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer2::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer3::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer4::backcolor" "0.45 0.55 0.7 0" ;
+					transition "backcolor" "0.55 0.65 0.75 0.2" "0.67, 0, 0, 0.7" "400" ;
+					set "OCLayer6::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer7::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer8::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer9::backcolor" "0.45 0.55 0.7 0" ;
+
+					set "OCLayer0::forecolor" "0.6 1 1 1" ;
+					set "OCLayer1::forecolor" "0.6 1 1 1" ;
+					set "OCLayer2::forecolor" "0.6 1 1 1" ;
+					set "OCLayer3::forecolor" "0.6 1 1 1" ;
+					set "OCLayer4::forecolor" "0.6 1 1 1" ;
+					//set "OCLayer5::forecolor" "0.6 1 1 1" ;
+					set "OCLayer6::forecolor" "0.6 1 1 1" ;
+					set "OCLayer7::forecolor" "0.6 1 1 1" ;
+					set "OCLayer8::forecolor" "0.6 1 1 1" ;
+					set "OCLayer9::forecolor" "0.6 1 1 1" ;
+
+					set "OCLayer0::noevents" "0" ;
+					set "OCLayer1::noevents" "0" ;
+					set "OCLayer2::noevents" "0" ;
+					set "OCLayer3::noevents" "0" ;
+					set "OCLayer4::noevents" "0" ;
+					set "noevents" "1" ;
+					set "OCLayer6::noevents" "0" ;
+					set "OCLayer7::noevents" "0" ;
+					set "OCLayer8::noevents" "0" ;
+					set "OCLayer9::noevents" "0" ;
+				}
+			}
+			windowDef OCLayer6 {
+				rect	329, 14, 32, 18
+				text	CST_STR_00200009
+				font	"fonts/bank"
+				textscale	0.32
+				textaligny	-6
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				noevents	0
+
+				onMouseEnter {
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.3" "200" ;
+				}	
+				onMouseExit {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.55 0.65 0.75 0.3" "0.45 0.55 0.7 0" "400" ;
+				}
+				onAction {
+					set	"cmd" "play guisounds_menuclickup" ;
+					set "OCLayersUpdate::selectedLayer" "6" ;
+					resetTime "OCLayersUpdate" "0" ;
+
+					set "OCLayer0::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer1::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer2::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer3::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer4::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer5::backcolor" "0.45 0.55 0.7 0" ;
+					transition "backcolor" "0.55 0.65 0.75 0.2" "0.67, 0, 0, 0.7" "400" ;
+					set "OCLayer7::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer8::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer9::backcolor" "0.45 0.55 0.7 0" ;
+
+					set "OCLayer0::forecolor" "0.6 1 1 1" ;
+					set "OCLayer1::forecolor" "0.6 1 1 1" ;
+					set "OCLayer2::forecolor" "0.6 1 1 1" ;
+					set "OCLayer3::forecolor" "0.6 1 1 1" ;
+					set "OCLayer4::forecolor" "0.6 1 1 1" ;
+					set "OCLayer5::forecolor" "0.6 1 1 1" ;
+					//set "OCLayer6::forecolor" "0.6 1 1 1" ;
+					set "OCLayer7::forecolor" "0.6 1 1 1" ;
+					set "OCLayer8::forecolor" "0.6 1 1 1" ;
+					set "OCLayer9::forecolor" "0.6 1 1 1" ;
+
+					set "OCLayer0::noevents" "0" ;
+					set "OCLayer1::noevents" "0" ;
+					set "OCLayer2::noevents" "0" ;
+					set "OCLayer3::noevents" "0" ;
+					set "OCLayer4::noevents" "0" ;
+					set "OCLayer5::noevents" "0" ;
+					set "noevents" "1" ;
+					set "OCLayer7::noevents" "0" ;
+					set "OCLayer8::noevents" "0" ;
+					set "OCLayer9::noevents" "0" ;
+				}
+			}
+			windowDef OCLayer7 {
+				rect	361, 14, 32, 18
+				text	CST_STR_00200010
+				font	"fonts/bank"
+				textscale	0.32
+				textaligny	-6
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				noevents	0
+
+				onMouseEnter {
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.3" "200" ;
+				}	
+				onMouseExit {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.55 0.65 0.75 0.3" "0.45 0.55 0.7 0" "400" ;
+				}
+				onAction {
+					set	"cmd" "play guisounds_menuclickup" ;
+					set "OCLayersUpdate::selectedLayer" "7" ;
+					resetTime "OCLayersUpdate" "0" ;
+
+					set "OCLayer0::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer1::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer2::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer3::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer4::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer5::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer6::backcolor" "0.45 0.55 0.7 0" ;
+					transition "backcolor" "0.55 0.65 0.75 0.2" "0.67, 0, 0, 0.7" "400" ;
+					set "OCLayer8::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer9::backcolor" "0.45 0.55 0.7 0" ;
+
+					set "OCLayer0::forecolor" "0.6 1 1 1" ;
+					set "OCLayer1::forecolor" "0.6 1 1 1" ;
+					set "OCLayer2::forecolor" "0.6 1 1 1" ;
+					set "OCLayer3::forecolor" "0.6 1 1 1" ;
+					set "OCLayer4::forecolor" "0.6 1 1 1" ;
+					set "OCLayer5::forecolor" "0.6 1 1 1" ;
+					set "OCLayer6::forecolor" "0.6 1 1 1" ;
+					//set "OCLayer7::forecolor" "0.6 1 1 1" ;
+					set "OCLayer8::forecolor" "0.6 1 1 1" ;
+					set "OCLayer9::forecolor" "0.6 1 1 1" ;
+
+					set "OCLayer0::noevents" "0" ;
+					set "OCLayer1::noevents" "0" ;
+					set "OCLayer2::noevents" "0" ;
+					set "OCLayer3::noevents" "0" ;
+					set "OCLayer4::noevents" "0" ;
+					set "OCLayer5::noevents" "0" ;
+					set "OCLayer6::noevents" "0" ;
+					set "noevents" "1" ;
+					set "OCLayer8::noevents" "0" ;
+					set "OCLayer9::noevents" "0" ;
+				}
+			}
+			windowDef OCLayer8 {
+				rect	393, 14, 32, 18
+				text	CST_STR_00200011
+				font	"fonts/bank"
+				textscale	0.32
+				textaligny	-6
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				noevents	0
+
+				onMouseEnter {
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.3" "200" ;
+				}	
+				onMouseExit {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.55 0.65 0.75 0.3" "0.45 0.55 0.7 0" "400" ;
+				}
+				onAction {
+					set	"cmd" "play guisounds_menuclickup" ;
+					set "OCLayersUpdate::selectedLayer" "8" ;
+					resetTime "OCLayersUpdate" "0" ;
+
+					set "OCLayer0::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer1::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer2::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer3::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer4::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer5::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer6::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer7::backcolor" "0.45 0.55 0.7 0" ;
+					transition "backcolor" "0.55 0.65 0.75 0.2" "0.67, 0, 0, 0.7" "400" ;
+					set "OCLayer9::backcolor" "0.45 0.55 0.7 0" ;
+
+					set "OCLayer0::forecolor" "0.6 1 1 1" ;
+					set "OCLayer1::forecolor" "0.6 1 1 1" ;
+					set "OCLayer2::forecolor" "0.6 1 1 1" ;
+					set "OCLayer3::forecolor" "0.6 1 1 1" ;
+					set "OCLayer4::forecolor" "0.6 1 1 1" ;
+					set "OCLayer5::forecolor" "0.6 1 1 1" ;
+					set "OCLayer6::forecolor" "0.6 1 1 1" ;
+					set "OCLayer7::forecolor" "0.6 1 1 1" ;
+					//set "OCLayer8::forecolor" "0.6 1 1 1" ;
+					set "OCLayer9::forecolor" "0.6 1 1 1" ;
+
+					set "OCLayer0::noevents" "0" ;
+					set "OCLayer1::noevents" "0" ;
+					set "OCLayer2::noevents" "0" ;
+					set "OCLayer3::noevents" "0" ;
+					set "OCLayer4::noevents" "0" ;
+					set "OCLayer5::noevents" "0" ;
+					set "OCLayer6::noevents" "0" ;
+					set "OCLayer7::noevents" "0" ;
+					set "noevents" "1" ;
+					set "OCLayer9::noevents" "0" ;
+				}
+			}
+			windowDef OCLayer9 {
+				rect	425, 14, 32, 18
+				text	CST_STR_00200012
+				font	"fonts/bank"
+				textscale	0.32
+				textaligny	-6
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				noevents	0
+
+				onMouseEnter {
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.3" "200" ;
+				}	
+				onMouseExit {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.55 0.65 0.75 0.3" "0.45 0.55 0.7 0" "400" ;
+				}
+				onAction {
+					set	"cmd" "play guisounds_menuclickup" ;
+					set "OCLayersUpdate::selectedLayer" "9" ;
+					resetTime "OCLayersUpdate" "0" ;
+
+					set "OCLayer0::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer1::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer2::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer3::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer4::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer5::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer6::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer7::backcolor" "0.45 0.55 0.7 0" ;
+					set "OCLayer8::backcolor" "0.45 0.55 0.7 0" ;
+					transition "backcolor" "0.55 0.65 0.75 0.2" "0.67, 0, 0, 0.7" "400" ;
+
+					set "OCLayer0::forecolor" "0.6 1 1 1" ;
+					set "OCLayer1::forecolor" "0.6 1 1 1" ;
+					set "OCLayer2::forecolor" "0.6 1 1 1" ;
+					set "OCLayer3::forecolor" "0.6 1 1 1" ;
+					set "OCLayer4::forecolor" "0.6 1 1 1" ;
+					set "OCLayer5::forecolor" "0.6 1 1 1" ;
+					set "OCLayer6::forecolor" "0.6 1 1 1" ;
+					set "OCLayer7::forecolor" "0.6 1 1 1" ;
+					set "OCLayer8::forecolor" "0.6 1 1 1" ;
+					//set "OCLayer9::forecolor" "0.6 1 1 1" ;
+
+					set "OCLayer0::noevents" "0" ;
+					set "OCLayer1::noevents" "0" ;
+					set "OCLayer2::noevents" "0" ;
+					set "OCLayer3::noevents" "0" ;
+					set "OCLayer4::noevents" "0" ;
+					set "OCLayer5::noevents" "0" ;
+					set "OCLayer6::noevents" "0" ;
+					set "OCLayer7::noevents" "0" ;
+					set "OCLayer8::noevents" "0" ;
+					set "noevents" "1" ;
+				}
+			}
+			windowDef OCLayersUpdate {
+				rect		0, 0, 0, 0
+				visible		0
+				notime		1
+				noevents	1
+				float selectedLayer 0
+
+				onTime 0 {
+					set "CM1Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CM2Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CM3Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CM4Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CM5Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CM6Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CM7Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CM8Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CM9Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CM10Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CM11Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+
+					set "CW1Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CW1bPrimary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CW2Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CW3Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CW3bPrimary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CW4Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CW5Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CW6Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CW7Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CW8Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CW9Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CW10Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+
+					set "CW13Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CW14Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+
+					set "CA1Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CA2Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CA3Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CA4Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CA5Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CA6Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CA7Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CA8Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CA9Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CA10Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CA11Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+
+					set "CHL1Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CHL2Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CHL3Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CHL4Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CHL5Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CHL6Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CHL7Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CHL8Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CHL9Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+
+					set "CSL1Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CSL2Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CSL3Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CSL4Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CSL5Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CSL6Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CSL7Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CSL8Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CSL9Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+
+					set "CMP1APrimary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CMP2APrimary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CMP3APrimary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CMP4Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CMP5Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CMP6Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CMP8Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CMP9Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CMP10Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CMP11Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CMP12Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+					set "CMP13Primary::cstLayer" "$OCLayersUpdate::selectedLayer" ;
+
+					set	"cmd" "loadbinds" ;
+					resetTime "ControlsFlash" "0" ;
+				}
+			}
+			//#modified-fva; END
+			windowDef OCMovementBtnText
+			{
+				//#modified-fva; BEGIN
+				//rect	7,50,117,14
+				rect	7,55,122,14
+				//#modified-fva; END
+				text	"#str_02091"
+				textscale	0.24
+				textalign	2
+				textaligny	-3
+				forecolor	1, 1, 1, 1
+				noevents	1
+				visible	1
+
+				onMouseEnter {
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.3" "200" ;
+				}
+
+				onMouseExit {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.55 0.65 0.75 0.3" "0.45 0.55 0.7 0" "400" ;	
+				}
+
+				onAction {
+					set	"cmd"	"play guisounds_menuclickup" ; 
+					//#modified-fva; BEGIN
+					resetTime "ControlsFlash" "0" ;
+					//#modified-fva; END
+					transition "backcolor" "0.55 0.65 0.75 0.2" "0.45 0.55 0.7 0" "400" ;	
+					set "OCMovementBtnText::noevents" "1" ;
+					set "OCWeaponsBtnText::noevents" "0" ;
+					set "OCAttackBtnText::noevents" "0" ;
+					set "OCMultiplayerBtnText::noevents" "0" ;
+					transition "OCMovementBtnText::forecolor" "1 1 1 1" "1 1 1 1" "200" ;
+					transition "OCWeaponsBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCAttackBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCMultiplayerBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					set "ControlsMovement::visible" "1" ;
+					set "ControlsWeapons::visible" "0" ;
+					set "ControlsAttack::visible" "0" ;
+					set "ControlsMultiplayer::visible" "0" ;
+
+					//#modified-fva; BEGIN
+					set "OCWeapons2BtnText::noevents" "0" ;
+					set "OCHoldLayerBtnText::noevents" "0" ;
+					set "OCSwitchLayerBtnText::noevents" "0" ;
+					transition "OCWeapons2BtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCHoldLayerBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCSwitchLayerBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					set "ControlsWeapons2::visible" "0" ;
+					set "ControlsHoldLayer::visible" "0" ;
+					set "ControlsSwitchLayer::visible" "0" ;
+					//#modified-fva; END
+				}
+
+			}
+			windowDef OCWeaponsBtnText
+			{
+				//#modified-fva; BEGIN
+				//rect	7,70,117,14
+				rect	7,75,122,14
+				//#modified-fva; END
+				//#modified-fva; BEGIN
+				//text	"#str_02092"
+				text		CST_STR_00200015
+				//#modified-fva; END
+				textscale	0.24
+				textalign	2
+				textaligny	-3
+				forecolor	0.6, 1, 1, 1
+				visible	1
+
+				onMouseEnter {
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.3" "200" ;
+				}
+
+				onMouseExit {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.55 0.65 0.75 0.3" "0.45 0.55 0.7 0" "400" ;		
+				}
+
+				onAction {
+					set	"cmd"	"play guisounds_menuclickup" ; 
+					//#modified-fva; BEGIN
+					resetTime "ControlsFlash" "0" ;
+					//#modified-fva; END
+					transition "backcolor" "0.55 0.65 0.75 0.2" "0.45 0.55 0.7 0" "400" ;	
+					set "OCMovementBtnText::noevents" "0" ;
+					set "OCWeaponsBtnText::noevents" "1" ;
+					set "OCAttackBtnText::noevents" "0" ;
+					set "OCMultiplayerBtnText::noevents" "0" ;
+					transition "OCMovementBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCWeaponsBtnText::forecolor" "1 1 1 1" "1 1 1 1" "200" ;
+					transition "OCAttackBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCMultiplayerBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					set "ControlsMovement::visible" "0" ;
+					set "ControlsWeapons::visible" "1" ;
+					set "ControlsAttack::visible" "0" ;
+					set "ControlsMultiplayer::visible" "0" ;
+
+					//#modified-fva; BEGIN
+					set "OCWeapons2BtnText::noevents" "0" ;
+					set "OCHoldLayerBtnText::noevents" "0" ;
+					set "OCSwitchLayerBtnText::noevents" "0" ;
+					transition "OCWeapons2BtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCHoldLayerBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCSwitchLayerBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					set "ControlsWeapons2::visible" "0" ;
+					set "ControlsHoldLayer::visible" "0" ;
+					set "ControlsSwitchLayer::visible" "0" ;
+					//#modified-fva; END
+				}
+
+			}
+			//#modified-fva; BEGIN
+			windowDef OCWeapons2BtnText {
+				rect		7, 95, 122, 14
+				text		CST_STR_00200020
+				textscale	0.24
+				textalign	2
+				textaligny	-3
+				forecolor	0.6, 1, 1, 1
+
+				onMouseEnter {
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.3" "200" ;
+				}	
+				onMouseExit {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.55 0.65 0.75 0.3" "0.45 0.55 0.7 0" "400" ;		
+				}
+				onAction {
+					set	"cmd"	"play guisounds_menuclickup" ; 
+					resetTime "ControlsFlash" "0" ;
+					transition "backcolor" "0.55 0.65 0.75 0.2" "0.45 0.55 0.7 0" "400" ;	
+					set "OCMovementBtnText::noevents" "0" ;
+					set "OCWeaponsBtnText::noevents" "0" ;
+					set "OCAttackBtnText::noevents" "0" ;
+					set "OCMultiplayerBtnText::noevents" "0" ;
+					transition "OCMovementBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCWeaponsBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCAttackBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCMultiplayerBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					set "ControlsMovement::visible" "0" ;
+					set "ControlsWeapons::visible" "0" ;
+					set "ControlsAttack::visible" "0" ;
+					set "ControlsMultiplayer::visible" "0" ;
+
+					set "OCWeapons2BtnText::noevents" "1" ;
+					set "OCHoldLayerBtnText::noevents" "0" ;
+					set "OCSwitchLayerBtnText::noevents" "0" ;
+					transition "OCWeapons2BtnText::forecolor" "1 1 1 1" "1 1 1 1" "200" ;
+					transition "OCHoldLayerBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCSwitchLayerBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					set "ControlsWeapons2::visible" "1" ;
+					set "ControlsHoldLayer::visible" "0" ;
+					set "ControlsSwitchLayer::visible" "0" ;
+				}
+			}
+			//#modified-fva; END
+			windowDef OCAttackBtnText
+			{
+				//#modified-fva; BEGIN
+				//rect	7,90,117,14
+				rect	7,115,122,14
+				//#modified-fva; END
+				text	"#str_02094"
+				textscale	0.24
+				textalign	2
+				textaligny	-3
+				forecolor	0.6, 1, 1, 1
+				visible	1
+
+				onMouseEnter {
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.3" "200" ;
+				}
+
+				onMouseExit {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.55 0.65 0.75 0.3" "0.45 0.55 0.7 0" "400" ;	
+				}
+
+				onAction {
+					set	"cmd"	"play guisounds_menuclickup" ; 
+					//#modified-fva; BEGIN
+					resetTime "ControlsFlash" "0" ;
+					//#modified-fva; END
+					transition "backcolor" "0.55 0.65 0.75 0.2" "0.45 0.55 0.7 0" "400" ;
+					set "OCMovementBtnText::noevents" "0" ;
+					set "OCWeaponsBtnText::noevents" "0" ;
+					set "OCAttackBtnText::noevents" "1" ;
+					set "OCMultiplayerBtnText::noevents" "0" ;
+					transition "OCMovementBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCWeaponsBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCAttackBtnText::forecolor" "1 1 1 1" "1 1 1 1" "200" ;
+					transition "OCMultiplayerBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					set "ControlsMovement::visible" "0" ;
+					set "ControlsWeapons::visible" "0" ;
+					set "ControlsAttack::visible" "1" ;
+					set "ControlsMultiplayer::visible" "0" ;
+
+					//#modified-fva; BEGIN
+					set "OCWeapons2BtnText::noevents" "0" ;
+					set "OCHoldLayerBtnText::noevents" "0" ;
+					set "OCSwitchLayerBtnText::noevents" "0" ;
+					transition "OCWeapons2BtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCHoldLayerBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCSwitchLayerBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					set "ControlsWeapons2::visible" "0" ;
+					set "ControlsHoldLayer::visible" "0" ;
+					set "ControlsSwitchLayer::visible" "0" ;
+					//#modified-fva; END
+				}
+
+			}
+			//#modified-fva; BEGIN
+			windowDef OCHoldLayerBtnText {
+				rect		7, 135, 122, 14
+				text		CST_STR_00200042
+				textscale	0.24
+				textalign	2
+				textaligny	-3
+				forecolor	0.6, 1, 1, 1
+
+				onMouseEnter {
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.3" "200" ;
+				}	
+				onMouseExit {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.55 0.65 0.75 0.3" "0.45 0.55 0.7 0" "400" ;		
+				}
+				onAction {
+					set	"cmd"	"play guisounds_menuclickup" ; 
+					resetTime "ControlsFlash" "0" ;
+					transition "backcolor" "0.55 0.65 0.75 0.2" "0.45 0.55 0.7 0" "400" ;	
+					set "OCMovementBtnText::noevents" "0" ;
+					set "OCWeaponsBtnText::noevents" "0" ;
+					set "OCAttackBtnText::noevents" "0" ;
+					set "OCMultiplayerBtnText::noevents" "0" ;
+					transition "OCMovementBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCWeaponsBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCAttackBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCMultiplayerBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					set "ControlsMovement::visible" "0" ;
+					set "ControlsWeapons::visible" "0" ;
+					set "ControlsAttack::visible" "0" ;
+					set "ControlsMultiplayer::visible" "0" ;
+
+					set "OCWeapons2BtnText::noevents" "0" ;
+					set "OCHoldLayerBtnText::noevents" "1" ;
+					set "OCSwitchLayerBtnText::noevents" "0" ;
+					transition "OCWeapons2BtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCHoldLayerBtnText::forecolor" "1 1 1 1" "1 1 1 1" "200" ;
+					transition "OCSwitchLayerBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					set "ControlsWeapons2::visible" "0" ;
+					set "ControlsHoldLayer::visible" "1" ;
+					set "ControlsSwitchLayer::visible" "0" ;
+				}
+			}
+			windowDef OCSwitchLayerBtnText {
+				rect		7, 155, 122, 14
+				text		CST_STR_00200044
+				textscale	0.24
+				textalign	2
+				textaligny	-3
+				forecolor	0.6, 1, 1, 1
+
+				onMouseEnter {
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.3" "200" ;
+				}	
+				onMouseExit {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.55 0.65 0.75 0.3" "0.45 0.55 0.7 0" "400" ;		
+				}
+				onAction {
+					set	"cmd"	"play guisounds_menuclickup" ; 
+					resetTime "ControlsFlash" "0" ;
+					transition "backcolor" "0.55 0.65 0.75 0.2" "0.45 0.55 0.7 0" "400" ;	
+					set "OCMovementBtnText::noevents" "0" ;
+					set "OCWeaponsBtnText::noevents" "0" ;
+					set "OCAttackBtnText::noevents" "0" ;
+					set "OCMultiplayerBtnText::noevents" "0" ;
+					transition "OCMovementBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCWeaponsBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCAttackBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCMultiplayerBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					set "ControlsMovement::visible" "0" ;
+					set "ControlsWeapons::visible" "0" ;
+					set "ControlsAttack::visible" "0" ;
+					set "ControlsMultiplayer::visible" "0" ;
+
+					set "OCWeapons2BtnText::noevents" "0" ;
+					set "OCHoldLayerBtnText::noevents" "0" ;
+					set "OCSwitchLayerBtnText::noevents" "1" ;
+					transition "OCWeapons2BtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCHoldLayerBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCSwitchLayerBtnText::forecolor" "1 1 1 1" "1 1 1 1" "200" ;
+					set "ControlsWeapons2::visible" "0" ;
+					set "ControlsHoldLayer::visible" "0" ;
+					set "ControlsSwitchLayer::visible" "1" ;
+				}
+			}
+			//#modified-fva; END
+			windowDef OCMultiplayerBtnText
+			{
+				//#modified-fva; BEGIN
+				//rect	7,110,117,14
+				rect	7,175,122,14
+				//#modified-fva; END
+				text	"#str_04064"
+				textscale	0.24
+				textalign	2
+				textaligny	-3
+				forecolor	0.6, 1, 1, 1
+				visible	1
+
+				onMouseEnter {
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.45 0.55 0.7 0" "0.55 0.65 0.75 0.3" "200" ;
+				}
+
+				onMouseExit {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.55 0.65 0.75 0.3" "0.45 0.55 0.7 0" "400" ;	
+				}
+
+				onAction {
+					set	"cmd"	"play guisounds_menuclickup" ; 
+					//#modified-fva; BEGIN
+					resetTime "ControlsFlash" "0" ;
+					//#modified-fva; END
+					transition "backcolor" "0.55 0.65 0.75 0.2" "0.45 0.55 0.7 0" "400" ;	
+					set "OCMovementBtnText::noevents" "0" ;
+					set "OCWeaponsBtnText::noevents" "0" ;
+					set "OCAttackBtnText::noevents" "0" ;
+					set "OCMultiplayerBtnText::noevents" "1" ;
+					transition "OCMovementBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCWeaponsBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCAttackBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCMultiplayerBtnText::forecolor" "1 1 1 1" "1 1 1 1" "200" ;
+					set "ControlsMovement::visible" "0" ;
+					set "ControlsWeapons::visible" "0" ;
+					set "ControlsAttack::visible" "0" ;
+					set "ControlsMultiplayer::visible" "1" ;				
+
+					//#modified-fva; BEGIN
+					set "OCWeapons2BtnText::noevents" "0" ;
+					set "OCHoldLayerBtnText::noevents" "0" ;
+					set "OCSwitchLayerBtnText::noevents" "0" ;
+					transition "OCWeapons2BtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCHoldLayerBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					transition "OCSwitchLayerBtnText::forecolor" "0.6 1 1 1" "0.6 1 1 1" "200" ;
+					set "ControlsWeapons2::visible" "0" ;
+					set "ControlsHoldLayer::visible" "0" ;
+					set "ControlsSwitchLayer::visible" "0" ;
+					//#modified-fva; END
+				}
+
+			}
+			windowDef OCActionText
+			{
+				//#modified-fva; BEGIN
+				//rect	130, 34, 110, 10
+				rect	137, 39, 110, 10
+				//#modified-fva; END
+				text	"#str_02098"
+				font	"fonts/bank"
+				textscale	0.25
+				textaligny	-9
+				forecolor	0.8, 1, 1, 1
+			}
+			windowDef OCPrimaryText
+			{
+				//#modified-fva; BEGIN
+				//rect	251, 34, 195, 10
+				rect	258, 39, 195, 10
+				//#modified-fva; END
+				text	"#str_02099"
+				font	"fonts/bank"
+				textscale	0.25
+				textaligny	-9
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+			windowDef ControlsMovement
+			{
+				//#modified-fva; BEGIN
+				//rect	130, 48, 320, 268
+				rect	137, 53, 320, 269
+				//#modified-fva; END
+				windowDef CM1
+				{
+					rect	0, 0, 320, 16
+					windowDef CM1L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM1M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM1R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM1Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02100"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CM1Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_forward"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CM2
+				{
+					rect	0, 23, 320, 16
+					windowDef CM2L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM2M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM2R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM2Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02101"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CM2Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_back"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CM3
+				{
+					rect	0, 46, 320, 16
+					windowDef CM3L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM3M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM3R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM3Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02102"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CM3Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_moveLeft"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CM4
+				{
+					rect	0, 69, 320, 16
+					windowDef CM4L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM4M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM4R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM4Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02103"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CM4Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_moveRight"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CM5
+				{
+					rect	0, 92, 320, 16
+					windowDef CM5L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM5M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM5R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM5Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02104"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CM5Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_moveUp"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CM6
+				{
+					rect	0, 115, 320, 16
+					windowDef CM6L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM6M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM6R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM6Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02105"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CM6Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_moveDown"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CM7
+				{
+					rect	0, 138, 320, 16
+					windowDef CM7L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM7M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM7R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM7Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02106"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CM7Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_left"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CM8
+				{
+					rect	0, 161, 320, 16
+					windowDef CM8L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM8M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM8R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM8Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02107"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CM8Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_right"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CM9
+				{
+					rect	0, 184, 320, 16
+					windowDef CM9L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM9M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM9R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM9Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02108"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CM9Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_strafe"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CM10
+				{
+					rect	0, 207, 320, 16
+					windowDef CM10L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM10M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM10R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM10Title
+					{
+						rect	1, 1, 110, 14
+						//#modified-fva; BEGIN
+						//text	"#str_02109"
+						text		CST_STR_00200013
+						//#modified-fva; END
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CM10Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_speed"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//#modified-fva; BEGIN
+				/*
+				windowDef CM11
+				{
+					rect	0, 230, 320, 16
+					windowDef CM11L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CM11M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CM11R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+				*/
+				windowDef CM11 {
+					//rect		0, 230, 320, 16
+					rect		0, 230, 304, 16
+					windowDef CM11L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM11M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM11R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CM11Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200014
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CM11Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstLockForward"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//#modified-fva; END
+				windowDef CM12
+				{
+					rect	0, 253, 320, 16
+					windowDef CM12L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CM12M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CM12R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+			}
+			//#modified-fva; BEGIN
+			// Help: Lock Forward
+			windowDef CM11Help {
+				rect		443, 283, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsMovement::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200048 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			//#modified-fva; END
+
+//#modified-fva; BEGIN
+//#include "guis/mp-weaponconfig.pd"
+//#modified-fva; END
+
+			//#modified-fva; BEGIN
+			// from "guis/mp-weaponconfig.pd"
+			windowDef ControlsWeapons
+			{
+				//#modified-fva; BEGIN
+				//rect	130, 48, 320, 268
+				rect	137, 53, 320, 269
+				//#modified-fva; END
+				visible	0
+				
+				//#modified-fva; BEGIN
+				// //FISTS
+				//FISTS/GRABBER
+				//#modified-fva; END
+				windowDef CW1
+				{
+					//#modified-fva; BEGIN
+					//rect	0, 0, 320, 16
+					rect	0, 0, 304, 16
+					//#modified-fva; END
+					windowDef CW1L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW1M
+					{
+						//#modified-fva; BEGIN
+						//rect	8, 0, 304, 16
+						rect	8, 0, 288, 16
+						//#modified-fva; END
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW1R
+					{
+						//#modified-fva; BEGIN
+						//rect	312, 0, 8, 16
+						rect	296, 0, 8, 16
+						//#modified-fva; END
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW1Title
+					{
+						rect	1, 1, 110, 14
+						//#modified-fva; BEGIN
+						//text	"#str_00100177"
+						text	CST_STR_00200016
+						//#modified-fva; END
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CW1Primary
+					{
+						//#modified-fva; BEGIN
+						//rect	121, 1, 195, 14
+						rect	121, 1, 179, 14
+						//#modified-fva; END
+						bind	"_impulse1"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//#modified-fva; BEGIN
+				//GRABBER/FISTS
+				windowDef CW1b {
+					//rect		0, 23, 320, 16
+					rect		0, 23, 304, 16
+					windowDef CW1bL {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW1bM {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW1bR {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW1bTitle {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200017
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CW1bPrimary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_impulse2"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//#modified-fva; END
+				
+				//PISTOL
+				windowDef CW2
+				{
+					//#modified-fva; BEGIN
+					//rect	0, 23, 320, 16
+					rect	0, 46, 320, 16
+					//#modified-fva; END
+					windowDef CW2L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW2M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW2R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW2Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_00100178"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CW2Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_impulse3"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//SHOTGUN/DOUBLE BARREL
+				windowDef CW3
+				{
+					//#modified-fva; BEGIN
+					//rect	0, 46, 320, 16
+					rect	0, 69, 304, 16
+					//#modified-fva; END
+					windowDef CW3L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW3M
+					{
+						//#modified-fva; BEGIN
+						//rect	8, 0, 304, 16
+						rect	8, 0, 288, 16
+						//#modified-fva; END
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW3R
+					{
+						//#modified-fva; BEGIN
+						//rect	312, 0, 8, 16
+						rect	296, 0, 8, 16
+						//#modified-fva; END
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW3Title
+					{
+						rect	1, 1, 110, 14
+						//#modified-fva; BEGIN
+						//text	"#str_00100179"
+						text	CST_STR_00200018
+						//#modified-fva; END
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CW3Primary
+					{
+						//#modified-fva; BEGIN
+						//rect	121, 1, 195, 14
+						rect	121, 1, 179, 14
+						//#modified-fva; END
+						bind	"_impulse4"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//#modified-fva; BEGIN
+				//DOUBLE BARREL/SHOTGUN
+				windowDef CW3b {
+					//rect		0, 92, 320, 16
+					rect		0, 92, 304, 16
+					windowDef CW3bL {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW3bM {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW3bR {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW3bTitle {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200019
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CW3bPrimary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_impulse5"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//#modified-fva; END
+				//MACHINEGUN
+				windowDef CW4
+				{
+					//#modified-fva; BEGIN
+					//rect	0, 69, 320, 16
+					rect	0, 115, 320, 16
+					//#modified-fva; END
+					windowDef CW4L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW4M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW4R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW4Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_00100180"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CW4Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_impulse6"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//CHAINGUN
+				windowDef CW5
+				{
+					//#modified-fva; BEGIN
+					//rect	0, 92, 320, 16
+					rect	0, 138, 320, 16
+					//#modified-fva; END
+					windowDef CW5L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW5M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW5R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW5Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_00100181"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CW5Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_impulse7"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//GRENADE
+				windowDef CW6
+				{
+					//#modified-fva; BEGIN
+					//rect	0, 115, 320, 16
+					rect	0, 161, 320, 16
+					//#modified-fva; END
+					windowDef CW6L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW6M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW6R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW6Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_00100182"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CW6Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_impulse8"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//PLASMAGUN
+				windowDef CW7
+				{
+					//#modified-fva; BEGIN
+					//rect	0, 138, 320, 16
+					rect	0, 184, 320, 16
+					//#modified-fva; END
+					windowDef CW7L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW7M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW7R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW7Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_00100183"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CW7Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_impulse9"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//ROCKETS
+				windowDef CW8
+				{
+					//#modified-fva; BEGIN
+					//rect	0, 161, 320, 16
+					rect	0, 207, 320, 16
+					//#modified-fva; END
+					windowDef CW8L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW8M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW8R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW8Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_00100184"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CW8Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_impulse10"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//BFG
+				windowDef CW9
+				{
+					//#modified-fva; BEGIN
+					//rect	0, 184, 320, 16
+					rect	0, 230, 320, 16
+					//#modified-fva; END
+					windowDef CW9L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW9M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW9R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW9Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_00100185"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CW9Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_impulse11"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//#modified-fva; BEGIN
+				// //Chainsaw
+				//ARTIFACT
+				//#modified-fva; END
+				windowDef CW10
+				{
+					//#modified-fva; BEGIN
+					//rect	0, 207, 320, 16
+					rect	0, 253, 320, 16
+					//#modified-fva; END
+					windowDef CW10L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW10M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW10R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW10Title
+					{
+						rect	1, 1, 110, 14
+						//#modified-fva; BEGIN
+						//text	"#str_00100205"
+						text	"#str_00100186"
+						//#modified-fva; END
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CW10Primary
+					{
+						rect	121, 1, 195, 14
+						//#modified-fva; BEGIN
+						//bind	"_impulse27"
+						bind	"_impulse12"
+						//#modified-fva; END
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//#modified-fva; BEGIN
+				/*
+				//Flashlight
+				windowDef CW11
+				{
+					rect	0, 230, 320, 16
+					windowDef CW11L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW11M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW11R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW11Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_00100187"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CW11Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_impulse0"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CW12 
+				{
+					rect		0, 253, 320, 16
+					windowDef CW12L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW12M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW12R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+				*/
+				//#modified-fva; END
+			}
+			//#modified-fva; END
+
+			//#modified-fva; BEGIN
+			// Help: Fists/Grabber
+			windowDef CW1Help {
+				rect		443, 53, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsWeapons::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200049 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: Grabber/Fists
+			windowDef CW1bHelp {
+				rect		443, 76, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsWeapons::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200050 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: Shotgun/DBS
+			windowDef CW3Help {
+				rect		443, 122, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsWeapons::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200051 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: DBS/Shotgun
+			windowDef CW3bHelp {
+				rect		443, 145, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsWeapons::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200052 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			//#modified-fva; END
+
+			//#modified-fva; BEGIN
+			windowDef ControlsWeapons2 {
+				rect		137, 53, 320, 269
+				visible		0
+
+				//CHAINSAW
+				windowDef CW13 {
+					rect		0, 0, 320, 16
+					windowDef CW13L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW13M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW13R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW13Title {
+						rect		1, 1, 110, 14
+						text		"#str_00100205"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CW13Primary {
+						rect		121, 1, 195, 14
+						bind		"_impulse27"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//FLASHLIGHT
+				windowDef CW14 {
+					rect		0, 23, 320, 16
+					windowDef CW14L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW14M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW14R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CW14Title {
+						rect		1, 1, 110, 14
+						text		"#str_00100187"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CW14Primary {
+						rect		121, 1, 195, 14
+						bind		"_impulse0"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CW15 {
+					rect		0, 46, 320, 16
+					windowDef CW15L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW15M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW15R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+				windowDef CW16 {
+					rect		0, 69, 320, 16
+					windowDef CW16L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW16M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW16R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+				windowDef CW17 {
+					rect		0, 92, 320, 16
+					windowDef CW17L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW17M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW17R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+				windowDef CW18 {
+					rect		0, 115, 320, 16
+					windowDef CW18L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW18M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW18R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+				windowDef CW19 {
+					rect		0, 138, 320, 16
+					windowDef CW19L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW19M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW19R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+				windowDef CW20 {
+					rect		0, 161, 320, 16
+					windowDef CW20L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW20M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW20R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+				windowDef CW21 {
+					rect		0, 184, 320, 16
+					windowDef CW21L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW21M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW21R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+				windowDef CW22 {
+					rect		0, 207, 320, 16
+					windowDef CW22L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW22M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW22R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+				windowDef CW23 {
+					rect		0, 230, 320, 16
+					windowDef CW23L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW23M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW23R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+				windowDef CW24 {
+					rect		0, 253, 320, 16
+					windowDef CW24L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW24M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CW24R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+			}
+			//#modified-fva; END
+			windowDef ControlsAttack
+			{
+				//#modified-fva; BEGIN
+				//rect	130, 48, 320, 268
+				rect	137, 53, 320, 269
+				//#modified-fva; END
+				visible	0
+				windowDef CA1
+				{
+					rect	0, 0, 320, 16
+					windowDef CA1L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1 
+						noevents	1
+					}
+					windowDef CA1M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA1R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA1Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02112"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CA1Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_attack"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CA2
+				{
+					rect	0, 23, 320, 16
+					windowDef CA2L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA2M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA2R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA2Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02113"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CA2Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_impulse15"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CA3
+				{
+					rect	0, 46, 320, 16
+					windowDef CA3L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA3M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA3R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA3Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02114"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CA3Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_impulse14"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CA4
+				{
+					rect	0, 69, 320, 16
+					windowDef CA4L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA4M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA4R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA4Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02115"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CA4Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_impulse13"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CA5
+				{
+					rect	0, 92, 320, 16
+					windowDef CA5L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA5M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA5R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA5Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02116"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CA5Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_lookUp"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CA6
+				{
+					rect	0, 115, 320, 16
+					windowDef CA6L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA6M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA6R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA6Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02117"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CA6Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_lookDown"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CA7
+				{
+					rect	0, 138, 320, 16
+					windowDef CA7L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA7M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA7R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA7Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02118"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CA7Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_mlook"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CA8
+				{
+					rect	0, 161, 320, 16
+					windowDef CA8L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA8M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA8R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA8Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02119"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CA8Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_impulse18"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CA9
+				{
+					rect	0, 184, 320, 16
+					windowDef CA9L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA9M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA9R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA9Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02120"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CA9Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_zoom"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CA10
+				{
+					rect	0, 207, 320, 16
+					windowDef CA10L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA10M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA10R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA10Title
+					{
+						rect	1, 1, 180, 14
+						text	"#str_04066"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CA10Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_impulse19"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//#modified-fva; BEGIN
+				/*
+				windowDef CA11
+				{
+					rect	0, 230, 320, 16
+					windowDef CA11L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CA11M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CA11R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+				*/
+				windowDef CA11 {
+					//rect		0, 230, 320, 16
+					rect		0, 230, 304, 16
+					windowDef CA11L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA11M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA11R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CA11Title {
+						rect		1, 1, 180, 14
+						text		CST_STR_00200023
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CA11Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_impulse26"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//#modified-fva; END
+				windowDef CA12
+				{
+					rect	0, 253, 320, 16
+					windowDef CA12L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CA12M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CA12R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+			}
+			//#modified-fva; BEGIN
+			// Help: Headlamp
+			windowDef CA11Help {
+				rect		443, 283, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsAttack::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200053 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			//#modified-fva; END
+			//#modified-fva; BEGIN
+			windowDef ControlsHoldLayer {
+				rect		137, 53, 320, 269
+				visible		0
+
+				windowDef CHL1 {
+					//rect		0, 0, 320, 16
+					rect		0, 0, 304, 16
+					windowDef CHL1L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL1M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL1R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL1Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200024
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CHL1Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstHoldLayer1"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CHL2 {
+					//rect		0, 23, 320, 16
+					rect		0, 23, 304, 16
+					windowDef CHL2L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL2M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL2R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL2Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200025
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CHL2Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstHoldLayer2"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CHL3 {
+					//rect		0, 46, 320, 16
+					rect		0, 46, 304, 16
+					windowDef CHL3L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL3M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL3R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL3Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200026
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CHL3Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstHoldLayer3"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CHL4 {
+					//rect		0, 69, 320, 16
+					rect		0, 69, 304, 16
+					windowDef CHL4L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL4M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL4R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL4Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200027
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CHL4Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstHoldLayer4"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CHL5 {
+					//rect		0, 92, 320, 16
+					rect		0, 92, 304, 16
+					windowDef CHL5L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL5M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL5R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL5Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200028
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CHL5Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstHoldLayer5"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CHL6 {
+					//rect		0, 115, 320, 16
+					rect		0, 115, 304, 16
+					windowDef CHL6L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL6M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL6R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL6Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200029
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CHL6Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstHoldLayer6"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CHL7 {
+					//rect		0, 138, 320, 16
+					rect		0, 138, 304, 16
+					windowDef CHL7L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL7M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL7R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL7Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200030
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CHL7Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstHoldLayer7"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CHL8 {
+					//rect		0, 161, 320, 16
+					rect		0, 161, 304, 16
+					windowDef CHL8L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL8M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL8R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL8Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200031
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CHL8Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstHoldLayer8"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CHL9 {
+					//rect		0, 184, 320, 16
+					rect		0, 184, 304, 16
+					windowDef CHL9L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL9M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL9R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CHL9Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200032
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CHL9Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstHoldLayer9"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CHL10 {
+					rect		0, 207, 320, 16
+					windowDef CHL10L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CHL10M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CHL10R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+				windowDef CHL11 {
+					rect		0, 230, 320, 16
+					windowDef CHL11L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CHL11M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CHL11R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+				windowDef CHL12 {
+					rect		0, 253, 320, 16
+					windowDef CHL12L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CHL12M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CHL12R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+			}
+			// Help: Hold Layer 1
+			windowDef CHL1Help {
+				rect		443, 53, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsHoldLayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200054 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: Hold Layer 2
+			windowDef CHL2Help {
+				rect		443, 76, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsHoldLayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200055 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: Hold Layer 3
+			windowDef CHL3Help {
+				rect		443, 99, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsHoldLayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200056 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: Hold Layer 4
+			windowDef CHL4Help {
+				rect		443, 122, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsHoldLayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200057 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: Hold Layer 5
+			windowDef CHL5Help {
+				rect		443, 145, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsHoldLayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200058 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: Hold Layer 6
+			windowDef CHL6Help {
+				rect		443, 168, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsHoldLayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200059 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: Hold Layer 7
+			windowDef CHL7Help {
+				rect		443, 191, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsHoldLayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200060 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: Hold Layer 8
+			windowDef CHL8Help {
+				rect		443, 214, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsHoldLayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200061 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: Hold Layer 9
+			windowDef CHL9Help {
+				rect		443, 237, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsHoldLayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200062 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			windowDef ControlsSwitchLayer {
+				rect		137, 53, 320, 269
+				visible		0
+
+				windowDef CSL1 {
+					//rect		0, 0, 320, 16
+					rect		0, 0, 304, 16
+					windowDef CSL1L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL1M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL1R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL1Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200033
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CSL1Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstSwitchLayer1"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CSL2 {
+					//rect		0, 23, 320, 16
+					rect		0, 23, 304, 16
+					windowDef CSL2L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL2M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL2R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL2Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200034
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CSL2Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstSwitchLayer2"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CSL3 {
+					//rect		0, 46, 320, 16
+					rect		0, 46, 304, 16
+					windowDef CSL3L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL3M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL3R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL3Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200035
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CSL3Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstSwitchLayer3"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CSL4 {
+					//rect		0, 69, 320, 16
+					rect		0, 69, 304, 16
+					windowDef CSL4L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL4M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL4R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL4Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200036
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CSL4Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstSwitchLayer4"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CSL5 {
+					//rect		0, 92, 320, 16
+					rect		0, 92, 304, 16
+					windowDef CSL5L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL5M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL5R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL5Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200037
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CSL5Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstSwitchLayer5"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CSL6 {
+					//rect		0, 115, 320, 16
+					rect		0, 115, 304, 16
+					windowDef CSL6L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL6M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL6R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL6Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200038
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CSL6Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstSwitchLayer6"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CSL7 {
+					//rect		0, 138, 320, 16
+					rect		0, 138, 304, 16
+					windowDef CSL7L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL7M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL7R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL7Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200039
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CSL7Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstSwitchLayer7"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CSL8 {
+					//rect		0, 161, 320, 16
+					rect		0, 161, 304, 16
+					windowDef CSL8L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL8M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL8R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL8Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200040
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CSL8Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstSwitchLayer8"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CSL9 {
+					//rect		0, 184, 320, 16
+					rect		0, 184, 304, 16
+					windowDef CSL9L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL9M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL9R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CSL9Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200041
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CSL9Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstSwitchLayer9"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CSL10 {
+					rect		0, 207, 320, 16
+					windowDef CSL10L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CSL10M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CSL10R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+				windowDef CSL11 {
+					rect		0, 230, 320, 16
+					windowDef CSL11L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CSL11M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CSL11R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+				windowDef CSL12 {
+					rect		0, 253, 320, 16
+					windowDef CSL12L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CSL12M {
+						rect		8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CSL12R {
+						rect		312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+			}
+			// Help: Switch Layer 1
+			windowDef CSL1Help {
+				rect		443, 53, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsSwitchLayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200063 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: Switch Layer 2
+			windowDef CSL2Help {
+				rect		443, 76, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsSwitchLayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200064 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: Switch Layer 3
+			windowDef CSL3Help {
+				rect		443, 99, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsSwitchLayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200065 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: Switch Layer 4
+			windowDef CSL4Help {
+				rect		443, 122, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsSwitchLayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200066 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: Switch Layer 5
+			windowDef CSL5Help {
+				rect		443, 145, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsSwitchLayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200067 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: Switch Layer 6
+			windowDef CSL6Help {
+				rect		443, 168, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsSwitchLayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200068 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: Switch Layer 7
+			windowDef CSL7Help {
+				rect		443, 191, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsSwitchLayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200069 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: Switch Layer 8
+			windowDef CSL8Help {
+				rect		443, 214, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsSwitchLayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200070 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			// Help: Switch Layer 9
+			windowDef CSL9Help {
+				rect		443, 237, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsSwitchLayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200071 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			//#modified-fva; END
+			windowDef ControlsMultiplayer
+			{
+				//#modified-fva; BEGIN
+				//rect	130, 48, 320, 268
+				rect	137, 53, 320, 269
+				//#modified-fva; END
+				visible	0
+				windowDef CMP1A
+				{
+					rect	0, 0, 320, 16
+					windowDef CMP1AL
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP1AM
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP1AR
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP1ATitle
+					{
+						rect	1, 1, 110, 14
+						text	"#str_04067"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CMP1APrimary
+					{
+						rect	121, 1, 195, 14
+						bind	"savegame quick"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CMP2A
+				{
+					rect	0, 23, 320, 16
+					windowDef CMP2AL
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP2AM
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP2AR
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP2ATitle
+					{
+						rect	1, 1, 110, 14
+						text	"#str_04068"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CMP2APrimary
+					{
+						rect	121, 1, 195, 14
+						bind	"loadgame quick"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CMP3A
+				{
+					rect	0, 46, 320, 16
+					windowDef CMP3AL
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP3AM
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP3AR
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP3ATitle
+					{
+						rect	1, 1, 110, 14
+						text	"#str_04069"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CMP3APrimary
+					{
+						rect	121, 1, 195, 14
+						bind	"screenshot"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CMP4
+				{
+					rect	0, 69, 320, 16
+					windowDef CMP4L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP4M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP4R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP4Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02068"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CMP4Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"clientMessageMode"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CMP5
+				{
+					rect	0, 92, 320, 16
+					windowDef CMP5L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP5M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP5R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP5Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02122"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CMP5Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"clientMessageMode 1"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CMP6
+				{
+					rect	0, 115, 320, 16
+					windowDef CMP6L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP6M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP6R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP6Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_04070"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CMP6Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_impulse20"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CMP8
+				{
+					rect	0, 138, 320, 16
+					windowDef CMP8L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP8M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP8R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP8Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02125"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CMP8Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_impulse22"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CMP9
+				{
+					rect	0, 161, 320, 16
+					windowDef CMP9L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP9M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP9R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP9Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02126"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CMP9Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_impulse17"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CMP10
+				{
+					rect	0, 184, 320, 16
+					windowDef CMP10L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP10M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP10R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP10Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02127"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CMP10Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_impulse28"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CMP11
+				{
+					rect	0, 207, 320, 16
+					windowDef CMP11L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP11M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP11R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP1Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_02128"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CMP11Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"_impulse29"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				windowDef CMP12
+				{
+					rect	0, 230, 320, 16
+					windowDef CMP12L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP12M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP12R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP12Title
+					{
+						rect	1, 1, 110, 14
+						text	"#str_04071"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CMP12Primary
+					{
+						rect	121, 1, 195, 14
+						bind	"clientDropWeapon"
+						font	"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//#modified-fva; BEGIN
+				/*
+				windowDef FILLER1
+				{
+					rect	0, 253, 320, 16
+					windowDef CMP10L
+					{
+						rect	0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CMP10M
+					{
+						rect	8, 0, 304, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+					windowDef CMP10R
+					{
+						rect	312, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 0.2
+						noevents	1
+					}
+				}
+				*/
+				windowDef CMP13 {
+					//rect		0, 253, 320, 16
+					rect		0, 253, 304, 16
+					windowDef CMP13L {
+						rect		0, 0, 8, 16
+						background	"gui/mainmenu/select_edge"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP13M {
+						//rect		8, 0, 304, 16
+						rect		8, 0, 288, 16
+						background	"gui/mainmenu/select_border"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP13R {
+						//rect		312, 0, 8, 16
+						rect		296, 0, 8, 16
+						background	"gui/mainmenu/select_angle"
+						matcolor	0, 0, 0, 1
+						noevents	1
+					}
+					windowDef CMP13Title {
+						rect		1, 1, 110, 14
+						text		CST_STR_00200046
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	1, 1, 1, 1
+					}
+					bindDef CMP13Primary {
+						//rect		121, 1, 195, 14
+						rect		121, 1, 179, 14
+						bind		"_cstCancelLayer"
+						font		"fonts/bank"
+						textscale	0.25
+						textaligny	-6
+						forecolor	0.6, 0.8, 0.8, 1
+					}
+				}
+				//#modified-fva; END
+			}
+			//#modified-fva; BEGIN
+			// Help: Cancel Layer
+			windowDef CMP13Help {
+				rect		443, 306, 14, 16
+				text		CST_STR_00200047
+				font		"fonts/bank"
+				textscale	0.32
+				textaligny	-7
+				textalign	1
+				forecolor	0.6, 1, 1, 1
+				backcolor	0.6, 1, 1, 0.1
+				visible		("ControlsMultiplayer::visible" == 1)
+				float		mouseExitAnim 0
+
+				onMouseEnter {
+					set "mouseExitAnim" "1" ;
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+					transition "backcolor" "0.6 1 1 0.1" "0.56 0.72 0.8 0.37" "200" ;
+				}
+				onMouseExit {
+					if ("mouseExitAnim") {
+						set "mouseExitAnim" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+						transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					}
+				}
+				onAction {
+					set "mouseExitAnim" "0" ;
+					set	"cmd" "play guisounds_menuclickup" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.56 0.72 0.8 0.37" "0.6 1 1 0.1" "400" ;
+					set "CstHelpText::text" CST_STR_00200072 ;
+					resetTime "CstHelpAnimUp" "0" ;
+				}
+			}
+			//#modified-fva; END
+			//#modified-fva; BEGIN
+			// from "guis/mainmenu.gui"
+			windowDef ControlsFlash {
+				//#modified-fva; BEGIN
+				//rect		130, 48, 320, 268
+				rect	137, 53, 320, 269
+				//#modified-fva; END
+				visible		1
+				notime		1
+				noevents	1
+
+				onTime 0 {
+				//	transition "rect" "130 48 20 268" "130 48 320 268" "300" ;
+					transition "CFP1::backcolor" "1 1 1 0.15" "1 1 1 0" "250" ;
+				}
+				onTime 20 {
+					transition "CFP2::backcolor" "1 1 1 0.15" "1 1 1 0" "250" ;
+				}
+				onTime 40 {
+					transition "CFP3::backcolor" "1 1 1 0.15" "1 1 1 0" "250" ;
+				}
+				onTime 60 {
+					transition "CFP4::backcolor" "1 1 1 0.15" "1 1 1 0" "250" ;
+				}
+				onTime 80 {
+					transition "CFP5::backcolor" "1 1 1 0.15" "1 1 1 0" "250" ;
+				}
+				onTime 100 {
+					transition "CFP6::backcolor" "1 1 1 0.15" "1 1 1 0" "250" ;
+				}
+				onTime 120 {
+					transition "CFP7::backcolor" "1 1 1 0.15" "1 1 1 0" "250" ;
+				}
+				onTime 140 {
+					transition "CFP8::backcolor" "1 1 1 0.15" "1 1 1 0" "250" ;
+				}
+				onTime 160 {
+					transition "CFP9::backcolor" "1 1 1 0.15" "1 1 1 0" "250" ;
+				}
+				onTime 180 {
+					transition "CFP10::backcolor" "1 1 1 0.15" "1 1 1 0" "250" ;
+				}
+				onTime 200 {
+					transition "CFP11::backcolor" "1 1 1 0.15" "1 1 1 0" "250" ;
+				}
+				onTime 220 {
+					transition "CFP12::backcolor" "1 1 1 0.15" "1 1 1 0" "250" ;
+				}
+
+				windowDef CFP1 {
+					rect		0, 0, 320, 16
+					backcolor	1, 1, 1, 0
+				}
+				windowDef CFP2 {
+					rect		0, 23, 320, 16
+					backcolor	1, 1, 1, 0
+				}
+				windowDef CFP3 {
+					rect		0, 46, 320, 16
+					backcolor	1, 1, 1, 0
+				}
+				windowDef CFP4 {
+					rect		0, 69, 320, 16
+					backcolor	1, 1, 1, 0
+				}
+				windowDef CFP5 {
+					rect		0, 92, 320, 16
+					backcolor	1, 1, 1, 0
+				}
+				windowDef CFP6 {
+					rect		0, 115, 320, 16
+					backcolor	1, 1, 1, 0
+				}
+				windowDef CFP7 {
+					rect		0, 138, 320, 16
+					backcolor	1, 1, 1, 0
+				}
+				windowDef CFP8 {
+					rect		0, 161, 320, 16
+					backcolor	1, 1, 1, 0
+				}
+				windowDef CFP9 {
+					rect		0, 184, 320, 16
+					backcolor	1, 1, 1, 0
+				}
+				windowDef CFP10 {
+					rect		0, 207, 320, 16
+					backcolor	1, 1, 1, 0
+				}
+				windowDef CFP11 {
+					rect		0, 230, 320, 16
+					backcolor	1, 1, 1, 0
+				}
+				windowDef CFP12 {
+					rect		0, 253, 320, 16
+					backcolor	1, 1, 1, 0
+				}
+			}
+			//#modified-fva; END
+		}
+	}
+
+//#modified-fva; from "guis/mpmain.gui"; END

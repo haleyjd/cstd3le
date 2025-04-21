@@ -1,0 +1,12 @@
+//#modified-fva; BEGIN
+// weapons
+scriptEvent	float cstGetAux();
+scriptEvent	void cstSetAux(float aux);
+scriptEvent	void cstBeginLightSync();
+scriptEvent	void cstSetNetfiring(float isNetfiring);
+scriptEvent	void cstSetWeaponGuiParm(string key, string value);
+// monsters
+scriptEvent	void cstClearGrabbed();
+// players
+scriptEvent float cstGetAwChainsawRoE();
+//#modified-fva; END

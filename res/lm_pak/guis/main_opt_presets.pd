@@ -1,0 +1,427 @@
+//#modified-fva; BEGIN
+
+	//section Options Presets
+	windowDef OptionsPresets {
+		rect		165, 170, 290, 230
+		visible		0
+
+		//Title
+		windowDef OpTitleText {
+			rect		20, 5, 270, 20
+			text		CST_STR_00200187
+			textscale	0.32
+			textaligny	-3
+			forecolor	1, 1, 1, 1
+		}
+		//Title bar
+		windowDef OpTitleBar {
+			rect		5, 23, 275, 2
+			backcolor	0.6 ,0.8 ,1 ,0.2
+			noevents	1
+		}
+
+	//RESET ALL DEFAULTS
+		windowDef OpBtn0 {
+			rect		20, 33, 234, 32
+
+			windowDef OpBtn0Border {
+				rect		4, 6, 214, 19
+				backcolor	0.45 ,0.55 ,0.7 ,0.3
+				noevents	1
+			}
+			windowDef OpBtn0Corner {
+				rect		218, 0, 16, 32
+				background	"gui/mainmenu/button_cornerangle"
+				matcolor	0.45 ,0.55 ,0.7 ,0.3
+				noevents	1
+			}
+			windowDef OpBtn0EdgeG {
+				rect		0, 0, 16, 32
+				background	"gui/mainmenu/buttong_cornersquare"
+				matcolor	0.55 ,0.65 ,0.75 ,0.5
+				noevents	1
+			}
+			windowDef OpBtn0BorderG {
+				rect		16, 0, 202, 32
+				background	"gui/mainmenu/buttong_middlesm"
+				matcolor	0.55 ,0.65 ,0.75 ,0.5
+				noevents	1
+			}
+			windowDef OpBtn0CornerG {
+				rect		218, 0, 16, 32
+				background	"gui/mainmenu/buttong_cornerangle"
+				matcolor	0.55 ,0.65 ,0.75 ,0.5
+				noevents	1
+			}
+		}
+		windowDef OpBtn0Text {
+			rect		25, 39, 218, 19
+			text		CST_STR_00200190
+			textscale	0.25
+			textalignx	5
+			textaligny	-1
+			forecolor	0.6, 1, 1, 1
+			visible 	1
+			wantenter	1
+			float mouseExitAnim 0
+
+			onMouseEnter {
+				set "mouseExitAnim" "1" ;
+				transition "forecolor" "0.6 1 1 1" "1 1 1 1" "250" ;
+				transition "OpBtn0EdgeG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+				transition "OpBtn0BorderG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+				transition "OpBtn0CornerG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+				transition "OpBtn0Border::backcolor" "0.45 0.55 0.7 0.3" "0.55 0.65 0.75 0.5" "200" ;
+				transition "OpBtn0Corner::matcolor" "0.45 0.55 0.7 0.3" "0.55 0.65 0.75 0.5" "200" ;
+			}
+			onMouseExit {
+				if ("mouseExitAnim") {
+					set "mouseExitAnim" "0" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+					transition "OpBtn0EdgeG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "OpBtn0BorderG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "OpBtn0CornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "OpBtn0Border::backcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+					transition "OpBtn0Corner::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+				}
+			}
+			onAction {
+				set "mouseExitAnim" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+				transition "OpBtn0EdgeG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+				transition "OpBtn0BorderG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+				transition "OpBtn0CornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+				transition "OpBtn0Border::backcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+				transition "OpBtn0Corner::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+				set "AnimRDGUp::cstSelectedPreset" "0" ;
+				resetTime "AnimRDGUp" "0" ;
+			}
+		}
+	//DEFAULT CONTROLS
+		windowDef OpBtn1 {
+			rect		20, 65, 234, 32
+
+			windowDef OpBtn1Border {
+				rect		4, 6, 214, 19
+				backcolor	0.45 ,0.55 ,0.7 ,0.3
+				noevents	1
+			}
+			windowDef OpBtn1Corner {
+				rect		218, 0, 16, 32
+				background	"gui/mainmenu/button_cornerangle"
+				matcolor	0.45 ,0.55 ,0.7 ,0.3
+				noevents	1
+			}
+			windowDef OpBtn1EdgeG {
+				rect		0, 0, 16, 32
+				background	"gui/mainmenu/buttong_cornersquare"
+				matcolor	0.55 ,0.65 ,0.75 ,0.5
+				noevents	1
+			}
+			windowDef OpBtn1BorderG {
+				rect		16, 0, 202, 32
+				background	"gui/mainmenu/buttong_middlesm"
+				matcolor	0.55 ,0.65 ,0.75 ,0.5
+				noevents	1
+			}
+			windowDef OpBtn1CornerG {
+				rect		218, 0, 16, 32
+				background	"gui/mainmenu/buttong_cornerangle"
+				matcolor	0.55 ,0.65 ,0.75 ,0.5
+				noevents	1
+			}
+		}
+		windowDef OpBtn1Text {
+			rect		25, 71, 218, 19
+			text		CST_STR_00200191
+			textscale	0.25
+			textalignx	5
+			textaligny	-1
+			forecolor	0.6, 1, 1, 1
+			visible 	1
+			wantenter	1
+			float mouseExitAnim 0
+
+			onMouseEnter {
+				set "mouseExitAnim" "1" ;
+				transition "forecolor" "0.6 1 1 1" "1 1 1 1" "250" ;
+				transition "OpBtn1EdgeG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+				transition "OpBtn1BorderG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+				transition "OpBtn1CornerG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+				transition "OpBtn1Border::backcolor" "0.45 0.55 0.7 0.3" "0.55 0.65 0.75 0.5" "200" ;
+				transition "OpBtn1Corner::matcolor" "0.45 0.55 0.7 0.3" "0.55 0.65 0.75 0.5" "200" ;
+			}
+			onMouseExit {
+				if ("mouseExitAnim") {
+					set "mouseExitAnim" "0" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+					transition "OpBtn1EdgeG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "OpBtn1BorderG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "OpBtn1CornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "OpBtn1Border::backcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+					transition "OpBtn1Corner::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+				}
+			}
+			onAction {
+				set "mouseExitAnim" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+				transition "OpBtn1EdgeG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+				transition "OpBtn1BorderG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+				transition "OpBtn1CornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+				transition "OpBtn1Border::backcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+				transition "OpBtn1Corner::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+				set "AnimRDGUp::cstSelectedPreset" "1" ;
+				resetTime "AnimRDGUp" "0" ;
+			}
+		}
+	//LAYERED CONTROLS
+		windowDef OpBtn2 {
+			rect		20, 97, 234, 32
+
+			windowDef OpBtn2Border {
+				rect		4, 6, 214, 19
+				backcolor	0.45 ,0.55 ,0.7 ,0.3
+				noevents	1
+			}
+			windowDef OpBtn2Corner {
+				rect		218, 0, 16, 32
+				background	"gui/mainmenu/button_cornerangle"
+				matcolor	0.45 ,0.55 ,0.7 ,0.3
+				noevents	1
+			}
+			windowDef OpBtn2EdgeG {
+				rect		0, 0, 16, 32
+				background	"gui/mainmenu/buttong_cornersquare"
+				matcolor	0.55 ,0.65 ,0.75 ,0.5
+				noevents	1
+			}
+			windowDef OpBtn2BorderG {
+				rect		16, 0, 202, 32
+				background	"gui/mainmenu/buttong_middlesm"
+				matcolor	0.55 ,0.65 ,0.75 ,0.5
+				noevents	1
+			}
+			windowDef OpBtn2CornerG {
+				rect		218, 0, 16, 32
+				background	"gui/mainmenu/buttong_cornerangle"
+				matcolor	0.55 ,0.65 ,0.75 ,0.5
+				noevents	1
+			}
+		}
+		windowDef OpBtn2Text {
+			rect		25, 103, 218, 19
+			text		CST_STR_00200192
+			textscale	0.25
+			textalignx	5
+			textaligny	-1
+			forecolor	0.6, 1, 1, 1
+			visible 	1
+			wantenter	1
+			float mouseExitAnim 0
+
+			onMouseEnter {
+				set "mouseExitAnim" "1" ;
+				transition "forecolor" "0.6 1 1 1" "1 1 1 1" "250" ;
+				transition "OpBtn2EdgeG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+				transition "OpBtn2BorderG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+				transition "OpBtn2CornerG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+				transition "OpBtn2Border::backcolor" "0.45 0.55 0.7 0.3" "0.55 0.65 0.75 0.5" "200" ;
+				transition "OpBtn2Corner::matcolor" "0.45 0.55 0.7 0.3" "0.55 0.65 0.75 0.5" "200" ;
+			}
+			onMouseExit {
+				if ("mouseExitAnim") {
+					set "mouseExitAnim" "0" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+					transition "OpBtn2EdgeG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "OpBtn2BorderG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "OpBtn2CornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "OpBtn2Border::backcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+					transition "OpBtn2Corner::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+				}
+			}
+			onAction {
+				set "mouseExitAnim" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+				transition "OpBtn2EdgeG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+				transition "OpBtn2BorderG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+				transition "OpBtn2CornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+				transition "OpBtn2Border::backcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+				transition "OpBtn2Corner::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+				set "AnimRDGUp::cstSelectedPreset" "2" ;
+				resetTime "AnimRDGUp" "0" ;
+			}
+		}
+	//FILLER
+		windowDef OpBtn3 {
+			rect		20, 129, 256, 32
+
+			windowDef OpBtn3Border {
+				rect		4, 6, 236, 19
+				backcolor	0, 0, 0, 0.1
+				noevents	1
+			}
+			windowDef OpBtn3Corner {
+				rect		240, 0, 16, 32
+				background	"gui/mainmenu/button_cornerangle"
+				matcolor	0, 0, 0, 0.1
+				noevents	1
+			}
+			windowDef OpBtn3EdgeG {
+				rect		0, 0, 16, 32
+				background	"gui/mainmenu/buttong_cornersquare"
+				matcolor	0, 0, 0, 0.1
+				noevents	1
+			}
+			windowDef OpBtn3BorderG {
+				rect		16, 0, 224, 32
+				background	"gui/mainmenu/buttong_middlesm"
+				matcolor	0, 0, 0, 0.1
+				noevents	1
+			}
+			windowDef OpBtn3CornerG {
+				rect		240, 0, 16, 32
+				background	"gui/mainmenu/buttong_cornerangle"
+				matcolor	0, 0, 0, 0.1
+				noevents	1
+			}
+		}
+	//FILLER
+		windowDef OpBtn4 {
+			rect		20, 161, 256, 32
+
+			windowDef OpBtn4Border {
+				rect		4, 6, 236, 19
+				backcolor	0, 0, 0, 0.1
+				noevents	1
+			}
+			windowDef OpBtn4Corner {
+				rect		240, 0, 16, 32
+				background	"gui/mainmenu/button_cornerangle"
+				matcolor	0, 0, 0, 0.1
+				noevents	1
+			}
+			windowDef OpBtn4EdgeG {
+				rect		0, 0, 16, 32
+				background	"gui/mainmenu/buttong_cornersquare"
+				matcolor	0, 0, 0, 0.1
+				noevents	1
+			}
+			windowDef OpBtn4BorderG {
+				rect		16, 0, 224, 32
+				background	"gui/mainmenu/buttong_middlesm"
+				matcolor	0, 0, 0, 0.1
+				noevents	1
+			}
+			windowDef OpBtn4CornerG {
+				rect		240, 0, 16, 32
+				background	"gui/mainmenu/buttong_cornerangle"
+				matcolor	0, 0, 0, 0.1
+				noevents	1
+			}
+		}
+
+	// Help: Reset all defaults
+		windowDef OpBtn0Help {
+			rect		256, 42, 14, 16
+			text		CST_STR_00200047
+			font		"fonts/bank"
+			textscale	0.32
+			textaligny	-7
+			textalign	1
+			forecolor	0.6, 1, 1, 1
+			backcolor	0.6, 0.8, 1, 0.2
+			float		mouseExitAnim 0
+
+			onMouseEnter {
+				set "mouseExitAnim" "1" ;
+				transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+				transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+			}
+			onMouseExit {
+				if ("mouseExitAnim") {
+					set "mouseExitAnim" "0" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+				}
+			}
+			onAction {
+				set "mouseExitAnim" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+				set "CstHelpText::text" CST_STR_00200193 ;
+				resetTime "CstHelpAnimUp" "0" ;
+			}
+		}
+	// Help: Default controls
+		windowDef OpBtn1Help {
+			rect		256, 74, 14, 16
+			text		CST_STR_00200047
+			font		"fonts/bank"
+			textscale	0.32
+			textaligny	-7
+			textalign	1
+			forecolor	0.6, 1, 1, 1
+			backcolor	0.6, 0.8, 1, 0.2
+			float		mouseExitAnim 0
+
+			onMouseEnter {
+				set "mouseExitAnim" "1" ;
+				transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+				transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+			}
+			onMouseExit {
+				if ("mouseExitAnim") {
+					set "mouseExitAnim" "0" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+				}
+			}
+			onAction {
+				set "mouseExitAnim" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+				set "CstHelpText::text" CST_STR_00200194 ;
+				resetTime "CstHelpAnimUp" "0" ;
+			}
+		}
+	// Help: Layered controls
+		windowDef OpBtn2Help {
+			rect		256, 106, 14, 16
+			text		CST_STR_00200047
+			font		"fonts/bank"
+			textscale	0.32
+			textaligny	-7
+			textalign	1
+			forecolor	0.6, 1, 1, 1
+			backcolor	0.6, 0.8, 1, 0.2
+			float		mouseExitAnim 0
+
+			onMouseEnter {
+				set "mouseExitAnim" "1" ;
+				transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+				transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+			}
+			onMouseExit {
+				if ("mouseExitAnim") {
+					set "mouseExitAnim" "0" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+				}
+			}
+			onAction {
+				set "mouseExitAnim" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+				set "CstHelpText::text" CST_STR_00200195 ;
+				resetTime "CstHelpAnimUp" "0" ;
+			}
+		}
+	}
+
+//#modified-fva; END

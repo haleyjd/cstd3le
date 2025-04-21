@@ -1,0 +1,1224 @@
+//#modified-fva; from "guis/mainmenu.gui"; BEGIN
+
+	//section Options System
+	windowDef OptionsSystem {
+		rect		165, 30, 390, 370
+		visible		0
+
+		//Title
+		windowDef OSTitleText {
+			rect		20, 5, 320, 20
+			text		"#str_00183"
+			textscale	0.32
+			textaligny	-3
+			forecolor	1, 1, 1, 1
+		}
+		//Title bar
+		windowDef OSTitleBar {
+			rect		5, 23, 375, 2
+			backcolor	0.6 ,0.8 ,1 ,0.2
+			noevents	1
+		}
+
+	//Reset game defaults Text
+	windowDef ResetSystemBtnText {
+		rect		100, 347, 180, 20
+		text		"#str_04062"
+		textscale	0.26
+		textalign	1
+		textaligny	-3
+		forecolor	0.6, 1, 1, 1
+		float "exitanim" 0
+		float "vidrestrt" 0
+		float "soundrestrt" 0
+
+
+		onMouseEnter {
+			transition "forecolor" "0.6 1 1 1" "1 1 1 1" "250" ;
+			transition "OptionsResetCornerG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+			transition "OptionsResetMiddleG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+			transition "OptionsResetRCornerG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+			transition "OptionsResetCornerBG::matcolor" "0.45 0.55 0.7 0.3" "0.55 0.65 0.75 0.5" "200" ;
+			transition "OptionsResetMiddleBG::matcolor" "0.45 0.55 0.7 0.3" "0.55 0.65 0.75 0.5" "200" ;
+			transition "OptionsResetRCornerBG::matcolor" "0.45 0.55 0.7 0.3" "0.55 0.65 0.75 0.5" "200" ;
+			resetTime "ToolTip1" "0" ;
+			set "ToolTip1::text" "#str_00100604" ;
+			set "ToolTip2::text" "#str_00100604" ;
+			set "exitanim" "1" ;
+		}
+
+		onMouseExit {
+			if ("exitanim" == 1) {
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+				transition "OptionsResetCornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "250" ;
+				transition "OptionsResetMiddleG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "250" ;
+				transition "OptionsResetRCornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "250" ;
+				transition "OptionsResetCornerBG::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "200" ;
+				transition "OptionsResetMiddleBG::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "200" ;
+				transition "OptionsResetRCornerBG::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "200" ;
+				resetTime "ToolTip2" "0" ;
+				set "exitanim" "0" ;
+			}
+		}
+		onAction {
+/*
+			if ("soundrestrt" == 1) {
+				set	"cmd"	"play guisounds_menuclickup" ;
+				set "cmd" "sound" ;
+			}
+			if ("vidrestrt" == 2) {
+				resetTime "AnimUQUp" "0" ;
+			}
+*/
+			if ("vidrestrt" >= 1) {
+				set	"cmd"	"play guisounds_menuclickup" ;
+				if ("vidrestrt" == 1) {
+					resetTime "AnimRDSUp" "0" ;
+				}
+				if ("vidrestrt" == 2) {
+					resetTime "AnimUQUp" "0" ;
+				}
+				set "vidrestrt" "0" ;
+			} else {
+				set	"cmd"	"play guisounds_chirpconnect" ;
+				transition "OptionsBtn3Border::backcolor" "1 1 1 0.6" "0.45 0.55 0.7 0.3" "200" ;
+				transition "OptionsBtn3Corner::matcolor" "1 1 1 0.6" "0.45 0.55 0.7 0.3" "200" ;
+				resetTime "AnimSystemDown" "0" ;
+				transition "SystemOptionsBtnText::forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				set "OptionsMenuParent::optionsSelected" "0" ;
+
+				set "OSWarning::forecolor" "1 1 1 0" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+			//	transition "RDSBtn1EdgeG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+			//	transition "RDSBtn1BorderG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+			//	transition "RDSBtn1CornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+			//	transition "RDSBtn1Border::backcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+			//	transition "RDSBtn1Corner::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+
+				resetTime "ToolTip1" "0" ;
+				set "ToolTip1::text" "#str_00100709" ;
+				set "ToolTip2::text" "#str_00100709" ;
+			}
+
+			//set	"cmd"	"video restart" ;
+
+			transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+			transition "OptionsResetCornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "250" ;
+			transition "OptionsResetMiddleG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "250" ;
+			transition "OptionsResetRCornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "250" ;
+			transition "OptionsResetCornerBG::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "200" ;
+			transition "OptionsResetMiddleBG::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "200" ;
+			transition "OptionsResetRCornerBG::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "200" ;
+			resetTime "ToolTip2" "0" ;
+			set "exitanim" "0" ;
+		}
+	}
+
+		//button 1
+		windowDef OSBtn1 {
+			rect		184, 30, 190, 28
+			text		"#str_04076"
+			textscale	0.25
+			textaligny	4
+			forecolor	0.6, 1, 1, 1
+			float "exitanim" 0
+
+			onMouseEnter {
+				transition "forecolor" "0.6 1 1 1" "1 1 1 1" "250" ;
+				transition "OSBtn1EdgeG::matcolor" "0.8 0.9 1 1" "0.6 0.8 0.9 1" "250" ;
+				transition "OSBtn1BorderG::matcolor" "0.8 0.9 1 1" "0.6 0.8 0.9 1" "250" ;
+				transition "OSBtn1CornerG::matcolor" "0.8 0.9 1 1" "0.6 0.8 0.9 1" "250" ;
+
+				resetTime "ToolTip1" "0" ;
+				set "ToolTip1::text" "#str_04077" ;
+				set "ToolTip2::text" "#str_04077" ;
+				set "exitanim" "1" ;
+			}
+			onMouseExit {
+				if ("exitanim" == 1) {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+					transition "OSBtn1EdgeG::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+					transition "OSBtn1BorderG::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+					transition "OSBtn1CornerG::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+					set "exitanim" "0" ;
+					resetTime "ToolTip2" "0" ;
+				}
+			}
+
+			onAction {
+				set	"cmd"	"play guisounds_menuclickup" ;
+				resetTime "AnimRDCUp" "0" ;
+
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+				transition "OSBtn1EdgeG::matcolor" "1 1 1 1" "0.5 0.7 0.8 0.5" "400" ;
+				transition "OSBtn1BorderG::matcolor" "1 1 1 1" "0.5 0.7 0.8 0.5" "400" ;
+				transition "OSBtn1CornerG::matcolor" "1 1 1 1" "0.5 0.7 0.8 0.5" "400" ;
+				set "exitanim" "0" ;
+				resetTime "ToolTip2" "0" ;
+			}
+
+			//button edge 1 GLOW
+			windowDef OSBtn1EdgeG {
+				rect		0, 0, 16, 32
+				background	"gui/mainmenu/buttong_cornersquare2"
+				matcolor	0.5 ,0.7 ,0.8 ,0.5
+				noevents	1
+			}
+			//button side 1 GLOW
+			windowDef OSBtn1BorderG {
+				rect		16, 0, 160, 32
+				background	"gui/mainmenu/buttong_middlesm2"
+				matcolor	0.5 ,0.7 ,0.8 ,0.5
+				noevents	1
+			}
+			//button corner 1 GLOW
+			windowDef OSBtn1CornerG {
+				rect		176, 0, 16, 32
+				background	"gui/mainmenu/buttong_cornerangle2"
+				matcolor	0.5 ,0.7 ,0.8 ,0.5
+				noevents	1
+			}
+		}
+
+
+	//VIDEO SETTINGS
+
+		windowDef OSBox1_1 {
+			rect		20, 36, 166, 167
+			backcolor	0.6, 0.8, 1, 0.1
+			noevents	1
+		}
+		windowDef OSBox1_2 {
+			rect		21, 37, 164, 16
+			backcolor	0.6, 0.8, 1, 0.22
+			noevents	1
+		}
+		windowDef OSBox1_3 {
+			rect		186, 55, 174, 148
+			backcolor	0.6, 0.8, 1, 0.1
+			noevents	1
+		}
+		windowDef OSBox1_4 {
+			rect		360, 55, 10, 129
+			backcolor	0.6, 0.8, 1, 0.1
+			noevents	1
+		}
+		windowDef OSBox1_5 {
+			rect		360, 177, 16, -32
+			background	"gui/mainmenu/button_cornerangle"
+			matcolor	0.6, 0.8, 1, 0.1
+			noevents	1
+		}
+		windowDef OSBoxTitle1 {
+			rect		32, 38, 110, 14
+			text		"#str_02145"
+			font		"fonts/bank"
+			textscale	0.25
+			textaligny	-6
+			forecolor	1, 1, 1, 0.5
+			noevents	1
+		}
+
+	//VIDEO QUALITY
+		windowDef OS1 {
+			rect		34, 60, 320, 70
+
+			windowDef OS1L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS1M {
+				rect		8, 0, 170, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS1M2 {
+				rect		178, 0, 134, 8
+				background	"gui/mainmenu/select_boxborderh"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS1R {
+				rect		312, 0, 8, 8
+				background	"gui/mainmenu/select_boxangle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS1R2 {
+				rect		312, 8, 8, 40
+				background	"gui/mainmenu/select_boxborderv"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS1R3 {
+				rect		312, 48, -8, -8
+				background	"gui/mainmenu/select_boxcorner"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS1C {
+				rect		178, 16, 8, 8
+				background	"gui/mainmenu/select_boxcorner2"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS1C2 {
+				rect		186, 24, -8, 24
+				background	"gui/mainmenu/select_boxborderv"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS1C3 {
+				rect		186, 48, 8, -8
+				background	"gui/mainmenu/select_boxcorner"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS1B1 {
+				rect		194, 48, 118, -8
+				background	"gui/mainmenu/select_boxborderh"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS1M1 {
+				rect		178, 8, 134, 8
+				backcolor	0, 0, 0, 0.6
+				noevents	1
+			}
+			windowDef OS1M2 {
+				rect		186, 16, 126, 8
+				backcolor	0, 0, 0, 0.6
+				noevents	1
+			}
+			windowDef OS1M3 {
+				rect		194, 24, 118, 24
+				backcolor	0, 0, 0, 0.6
+				noevents	1
+			}
+			windowDef OS1Title {
+				rect		1, 1, 169, 14
+				text		"#str_02146"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+
+			onTime 100 {
+				set	"OSQuality0::forecolor" "0.4 0.4 0.4 1" ;
+				set	"OSQuality1::forecolor" "0.4 0.4 0.4 1" ;
+				set	"OSQuality2::forecolor" "0.4 0.4 0.4 1" ;
+				set	"OSQuality3::forecolor" "0.4 0.4 0.4 1" ;
+
+				set	"OSQuality0::noevents" "0" ;
+				set	"OSQuality1::noevents" "0" ;
+				set	"OSQuality2::noevents" "0" ;
+				set	"OSQuality3::noevents" "0" ;
+
+				if ( "gui::com_machineSpec" == 0 ) {
+					transition	"OSQuality3::forecolor" "1 1 1 1" "0.6 0.8 0.8 1" "100" ;
+					set	"OSQuality3::noevents" "1" ;
+				}
+				if ( "gui::com_machineSpec" == 1 ) {
+					transition	"OSQuality2::forecolor" "1 1 1 1" "0.6 0.8 0.8 1" "100" ;
+					set	"OSQuality2::noevents" "1" ;
+				}
+				if ( "gui::com_machineSpec" == 2 ) {
+					transition	"OSQuality1::forecolor" "1 1 1 1" "0.6 0.8 0.8 1" "100" ;
+					set	"OSQuality1::noevents" "1" ;
+				}
+				if ( "gui::com_machineSpec" == 3 ) {
+					transition	"OSQuality0::forecolor" "1 1 1 1" "0.6 0.8 0.8 1" "100" ;
+					set	"OSQuality0::noevents" "1" ;
+				}
+			}
+
+			windowDef OSQuality0 {
+				rect		193, 2, 125, 13
+				text		"#str_04078"
+				font		"fonts/bank"
+				textscale	0.25
+				textaligny	-6
+				forecolor	0.4, 0.4, 0.4, 1
+
+				onMouseEnter {
+					transition	"forecolor" "0.4 0.4 0.4 1" "1 1 1 1" "200" ;
+				}
+				onMouseExit {
+					transition	"forecolor" "1 1 1 1" "0.4 0.4 0.4 1" "200" ;
+				}
+				onAction {
+					set	"cmd"	"play guisounds_menuclickup ; video ultra" ;
+					resetTime "OS1" "0" ;
+					set "OSWarning::forecolor" "1 1 1 1" ;
+					set "ResetSystemBtnText::vidrestrt" "2" ;
+				}
+			}
+			windowDef OSQuality1 {
+				rect		193, 15, 125, 13
+				text		"#str_02147"
+				font		"fonts/bank"
+				textscale	0.25
+				textaligny	-6
+				forecolor	0.4, 0.4, 0.4, 1
+
+				onMouseEnter {
+					transition	"forecolor" "0.4 0.4 0.4 1" "1 1 1 1" "200" ;
+				}
+				onMouseExit {
+					transition	"forecolor" "1 1 1 1" "0.4 0.4 0.4 1" "200" ;
+				}
+				onAction {
+					set	"cmd"	"play guisounds_menuclickup ; video high" ;
+					resetTime "OS1" "0" ;
+					set "OSWarning::forecolor" "1 1 1 1" ;
+					set "ResetSystemBtnText::vidrestrt" "1" ;
+				}
+			}
+			windowDef OSQuality2 {
+				rect		193, 28, 125, 13
+				text		"#str_02148"
+				font		"fonts/bank"
+				textscale	0.25
+				textaligny	-6
+				forecolor	0.4, 0.4, 0.4, 1
+
+				onMouseEnter {
+					transition	"forecolor" "0.4 0.4 0.4 1" "1 1 1 1" "200" ;
+				}
+				onMouseExit {
+					transition	"forecolor" "1 1 1 1" "0.4 0.4 0.4 1" "200" ;
+				}
+				onAction {
+					set	"cmd"	"play guisounds_menuclickup ; video medium" ;
+					resetTime "OS1" "0" ;
+					set "OSWarning::forecolor" "1 1 1 1" ;
+					set "ResetSystemBtnText::vidrestrt" "1" ;
+				}
+			}
+			windowDef OSQuality3 {
+				rect		193, 41, 125, 13
+				text		"#str_02149"
+				font		"fonts/bank"
+				textscale	0.25
+				textaligny	-6
+				forecolor	0.4, 0.4, 0.4, 1
+
+				onMouseEnter {
+					transition	"forecolor" "0.4 0.4 0.4 1" "1 1 1 1" "200" ;
+				}
+				onMouseExit {
+					transition	"forecolor" "1 1 1 1" "0.4 0.4 0.4 1" "200" ;
+				}
+				onAction {
+					set	"cmd"	"play guisounds_menuclickup ; video low" ;
+					resetTime "OS1" "0" ;
+					set "OSWarning::forecolor" "1 1 1 1" ;
+					set "ResetSystemBtnText::vidrestrt" "1" ;
+				}
+			}
+		}
+
+		//button 1a
+		windowDef OSBtn1A {
+			rect		31, 72, 190, 50
+			text		"#str_04079"
+			font		"fonts/bank"
+			textscale	0.25
+			textaligny	1
+			forecolor	0.6, 1, 1, 1
+			float "exitanim" 0
+
+			onMouseEnter {
+				transition "forecolor" "0.6 1 1 1" "1 1 1 1" "250" ;
+				transition "OSBtn1A2::forecolor" "0.6 1 1 1" "1 1 1 1" "250" ;
+				transition "OSBtn1A3::forecolor" "0.6 1 1 1" "1 1 1 1" "250" ;
+				transition "OSBtn1AEdgeG1::matcolor" "0.8 0.9 1 1" "0.6 0.8 0.9 1" "250" ;
+				transition "OSBtn1ABorderG1::matcolor" "0.8 0.9 1 1" "0.6 0.8 0.9 1" "250" ;
+				transition "OSBtn1ACornerG1::matcolor" "0.8 0.9 1 1" "0.6 0.8 0.9 1" "250" ;
+				transition "OSBtn1AEdgeG2::matcolor" "0.8 0.9 1 1" "0.6 0.8 0.9 1" "250" ;
+				transition "OSBtn1ABorderG2::matcolor" "0.8 0.9 1 1" "0.6 0.8 0.9 1" "250" ;
+				transition "OSBtn1ACornerG2::matcolor" "0.8 0.9 1 1" "0.6 0.8 0.9 1" "250" ;
+				transition "OSBtn1AEdgeG3::matcolor" "0.8 0.9 1 1" "0.6 0.8 0.9 1" "250" ;
+				transition "OSBtn1ABorderG3::matcolor" "0.8 0.9 1 1" "0.6 0.8 0.9 1" "250" ;
+				transition "OSBtn1ACornerG3::matcolor" "0.8 0.9 1 1" "0.6 0.8 0.9 1" "250" ;
+
+				resetTime "ToolTip1" "0" ;
+				set "ToolTip1::text" "#str_04080" ;
+				set "ToolTip2::text" "#str_04080" ;
+				set "exitanim" "1" ;
+			}
+			onMouseExit {
+				if ("exitanim" == 1) {
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+					transition "OSBtn1A2::forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+					transition "OSBtn1A3::forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+					transition "OSBtn1AEdgeG1::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+					transition "OSBtn1ABorderG1::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+					transition "OSBtn1ACornerG1::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+					transition "OSBtn1AEdgeG2::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+					transition "OSBtn1ABorderG2::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+					transition "OSBtn1ACornerG2::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+					transition "OSBtn1AEdgeG3::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+					transition "OSBtn1ABorderG3::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+					transition "OSBtn1ACornerG3::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+					set "exitanim" "0" ;
+				}
+				resetTime "ToolTip2" "0" ;
+			}
+
+			onAction {
+				set	"cmd"	"play guisounds_menuclickup ; video recommended" ;
+				resetTime "OS1" "0" ;
+
+				resetTime "ToolTip1" "0" ;
+				set "ToolTip1::text" "#str_04081" ;
+				set "ToolTip2::text" "#str_04081" ;
+				set "OSWarning::forecolor" "1 1 1 1" ;
+				set "ResetSystemBtnText::vidrestrt" "1" ;
+
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+				transition "OSBtn1A2::forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+				transition "OSBtn1A3::forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+				transition "OSBtn1AEdgeG1::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+				transition "OSBtn1ABorderG1::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+				transition "OSBtn1ACornerG1::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+				transition "OSBtn1AEdgeG2::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+				transition "OSBtn1ABorderG2::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+				transition "OSBtn1ACornerG2::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+				transition "OSBtn1AEdgeG3::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+				transition "OSBtn1ABorderG3::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+				transition "OSBtn1ACornerG3::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+				set "exitanim" "0" ;
+			}
+
+			windowDef OSBtn1A2 {
+				rect		0, 11, 190, 14
+				text		"#str_04082"
+				font		"fonts/bank"
+				textscale	0.25
+				forecolor	0.6, 1, 1, 1
+			}
+			windowDef OSBtn1A3 {
+				rect		0, 22, 190, 14
+				text		"#str_04083"
+				font		"fonts/bank"
+				textscale	0.25
+				forecolor	0.6, 1, 1, 1
+			}
+			windowDef OSBtn1AEdgeGTrim1 {
+				rect		0, 0, 16, 16
+
+				windowDef OSBtn1AEdgeG1 {
+					rect		0, 0, 16, 32
+					background	"gui/mainmenu/buttong_cornersquare2"
+					matcolor	0.5 ,0.7 ,0.8 ,0.5
+					noevents	1
+				}
+			}
+			windowDef OSBtn1AEdgeGTrim2 {
+				rect		0, 16, 16, 20
+
+				windowDef OSBtn1AEdgeG2 {
+					rect		0, -52, 16, 150
+					background	"gui/mainmenu/buttong_cornersquare2"
+					matcolor	0.5 ,0.7 ,0.8 ,0.5
+					noevents	1
+				}
+			}
+			windowDef OSBtn1AEdgeGTrim3 {
+				rect		0, 36, 16, 16
+
+				windowDef OSBtn1AEdgeG3 {
+					rect		0, -16, 16, 32
+					background	"gui/mainmenu/buttong_cornersquare2"
+					matcolor	0.5 ,0.7 ,0.8 ,0.5
+					noevents	1
+				}
+			}
+
+			windowDef OSBtn1ABorderGTrim1 {
+				rect		16, 0, 159, 16
+				windowDef OSBtn1ABorderG1 {
+					rect		0, 0, 159, 32
+					background	"gui/mainmenu/buttong_middlesm2"
+					matcolor	0.5 ,0.7 ,0.8 ,0.5
+					noevents	1
+				}
+			}
+			windowDef OSBtn1ABorderGTrim2 {
+				rect		16, 16, 159, 20
+
+				windowDef OSBtn1ABorderG2 {
+					rect		0, -52, 159, 150
+					background	"gui/mainmenu/buttong_middlesm2"
+					matcolor	0.5 ,0.7 ,0.8 ,0.5
+					noevents	1
+				}
+			}
+			windowDef OSBtn1ABorderGTrim3 {
+				rect		16, 36, 159, 16
+				windowDef OSBtn1ABorderG3 {
+					rect		0, -16, 159, 32
+					background	"gui/mainmenu/buttong_middlesm2"
+					matcolor	0.5 ,0.7 ,0.8 ,0.5
+					noevents	1
+				}
+			}
+
+			windowDef OSBtn1ACornerGTrim1 {
+				rect		175, 0, 16, 16
+				windowDef OSBtn1ACornerG1 {
+					rect		0, 0, 16, 32
+					background	"gui/mainmenu/buttong_cornerangle2"
+					matcolor	0.5 ,0.7 ,0.8 ,0.5
+					noevents	1
+				}
+			}
+			windowDef OSBtn1ACornerGTrim2 {
+				rect		175, 16, 16, 20
+
+				windowDef OSBtn1ACornerG2 {
+					rect		-2, -52, -16, 150
+					background	"gui/mainmenu/buttong_cornersquare2"
+					matcolor	0.5 ,0.7 ,0.8 ,0.5
+					noevents	1
+				}
+			}
+			windowDef OSBtn1ACornerGTrim3 {
+				rect		175, 36, 16, 16
+				windowDef OSBtn1ACornerG3 {
+					rect		0, -16, 16, 32
+					background	"gui/mainmenu/buttong_cornerangle2"
+					matcolor	0.5 ,0.7 ,0.8 ,0.5
+					noevents	1
+				}
+			}
+		}
+
+	//SCREEN SIZE
+		windowDef OS2 {
+			//#modified-fva; BEGIN
+			//rect		34, 125, 320, 16
+			rect		34, 125, 304, 16
+			//#modified-fva; END
+			windowDef OS2L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS2M {
+				//#modified-fva; BEGIN
+				//rect		8, 0, 304, 16
+				rect		8, 0, 288, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS2R {
+				//#modified-fva; BEGIN
+				//rect		312, 0, 8, 16
+				rect		296, 0, 8, 16
+				//#modified-fva; END
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS2Title {
+				//#modified-fva; BEGIN
+				//rect		1, 1, 180, 14
+				//text		"#str_02153"
+				rect		1, 1, 169, 14
+				text		CST_STR_00200177
+				//#modified-fva; END
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OS2Primary {
+				//#modified-fva; BEGIN
+				//rect		210, 1, 100, 14
+				//choices		"#str_04222"//320x240;400x300;512x384;
+				//values		"3;4;5;6;7;8"//0;1;2;
+				rect		193, 1, 107, 14
+				choices		CST_STR_00200178
+				values		"-1;3;4;5;6;7;8"
+				//#modified-fva; END
+				cvar		"r_mode"
+				updateGroup	render
+				choiceType	1
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+
+				onAction {
+					set "OSWarning::forecolor" "1 1 1 1" ;
+					set "ResetSystemBtnText::vidrestrt" "1" ;
+				}
+			}
+		}
+
+	//FULLSCREEN
+		windowDef OS3 {
+			rect		34, 150, 320, 16
+			windowDef OS3L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS3M {
+				rect		8, 0, 304, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS3R {
+				rect		312, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS3Title {
+				//#modified-fva; BEGIN
+				//rect		1, 1, 180, 14
+				rect		1, 1, 169, 14
+				//#modified-fva; END
+				text		"#str_02154"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OS3Primary {
+				//#modified-fva; BEGIN
+				//rect		210, 1, 90, 14
+				rect		193, 1, 107, 14
+				//#modified-fva; END
+				choices		"#str_04221"
+				cvar		"r_fullscreen"
+				updateGroup	render
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+
+				onAction {
+					set "OSWarning::forecolor" "1 1 1 1" ;
+					set "ResetSystemBtnText::vidrestrt" "1" ;
+				}
+
+			}
+		}
+
+	//BRIGHTNESS
+		windowDef OS4 {
+			rect		34, 175, 320, 16
+			windowDef OS4L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS4M {
+				rect		8, 0, 304, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS4R {
+				rect		312, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS4Title {
+				//#modified-fva; BEGIN
+				//rect		1, 1, 180, 14
+				rect		1, 1, 169, 14
+				//#modified-fva; END
+				text		"#str_02155"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			windowDef OS4SliderBG {
+				//#modified-fva; BEGIN
+				//rect		220, 4, 128, 16
+				rect		193, 4, 128, 16
+				//#modified-fva; END
+				background	"guis/assets/mainmenu/slider_bg"
+				matcolor	0.6, 0.8, 0.8, 0.5
+				noevents	1
+			}
+			sliderDef OS4Primary {
+				//#modified-fva; BEGIN
+				//rect		220, 5, 71, 8
+				rect		193, 5, 71, 8
+				//#modified-fva; END
+				forecolor	0.8, 1, 1, 1
+				matcolor	1, 1, 1, 1
+				low		0.5
+				high		2.0
+				step		0.1
+				thumbShader	"guis/assets/mainmenu/slider_bar"
+				cvar		"r_brightness"
+			}
+		}
+		windowDef OSWarning {
+			rect		15, 205, 300, 14
+			text		"#str_04084"
+			font		"fonts/bank"
+			textscale	0.25
+			textalign	2
+			textaligny	-6
+			forecolor	1, 1, 1, 0
+		}
+/*
+		//button 2
+		windowDef OSBtn2 {
+			rect		184, 195, 190, 28
+			text		"#str_02156"
+			textscale	0.25
+			textaligny	4
+			forecolor	1, 1, 1, 0.5
+			noevents	1
+			float activebtn 0
+
+			onMouseEnter {
+				transition "forecolor" "0.6 1 1 1" "1 1 1 1" "250" ;
+				transition "OSBtn2EdgeG::matcolor" "0.8 0.9 1 1" "0.6 0.8 0.9 1" "250" ;
+				transition "OSBtn2BorderG::matcolor" "0.8 0.9 1 1" "0.6 0.8 0.9 1" "250" ;
+				transition "OSBtn2CornerG::matcolor" "0.8 0.9 1 1" "0.6 0.8 0.9 1" "250" ;
+
+				resetTime "ToolTip1" "0" ;
+				set "ToolTip1::text" "#str_02157" ;
+				set "ToolTip2::text" "#str_02157" ;
+			}
+			onMouseExit {
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+				transition "OSBtn2EdgeG::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+				transition "OSBtn2BorderG::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+				transition "OSBtn2CornerG::matcolor" "0.6 0.8 0.9 1" "0.5 0.7 0.8 0.5" "400" ;
+
+				resetTime "ToolTip2" "0" ;
+			}
+
+			onAction {
+				set	"cmd"	"play guisounds_chirpconnect" ;
+				set	"cmd"	"sound restart" ;
+				set	"noevents" "1" ;
+				set	"activebtn" "0" ;
+
+				transition "forecolor" "1 1 1 1" "1 1 1 0.5" "250" ;
+				transition "OSBtn2EdgeG::matcolor" "1 1 1 1" "0.5 0.7 0.8 0.5" "400" ;
+				transition "OSBtn2BorderG::matcolor" "1 1 1 1" "0.5 0.7 0.8 0.5" "400" ;
+				transition "OSBtn2CornerG::matcolor" "1 1 1 1" "0.5 0.7 0.8 0.5" "400" ;
+
+				resetTime "ToolTip2" "0" ;
+			}
+
+			//button edge 2 GLOW
+			windowDef OSBtn2EdgeG {
+				rect		0, 0, 16, 32
+				background	"gui/mainmenu/buttong_cornersquare2"
+				matcolor	0.5 ,0.7 ,0.8 ,0.5
+				noevents	1
+			}
+			//button side 2 GLOW
+			windowDef OSBtn2BorderG {
+				rect		16, 0, 160, 32
+				background	"gui/mainmenu/buttong_middlesm2"
+				matcolor	0.5 ,0.7 ,0.8 ,0.5
+				noevents	1
+			}
+			//button corner 2 GLOW
+			windowDef OSBtn2CornerG {
+				rect		176, 0, 16, 32
+				background	"gui/mainmenu/buttong_cornerangle2"
+				matcolor	0.5 ,0.7 ,0.8 ,0.5
+				noevents	1
+			}
+		}
+*/
+
+	//AUDIO SETTINGS TITLE
+
+		windowDef OSBox2_1 {
+			rect		20, 221, 166, 107
+			backcolor	0.6, 0.8, 1, 0.1
+			noevents	1
+		}
+		windowDef OSBox2_2 {
+			rect		21, 222, 348, 16
+			backcolor	0.6, 0.8, 1, 0.2
+			noevents	1
+		}
+		windowDef OSBox2_3 {
+			rect		186, 221, 174, 107
+			backcolor	0.6, 0.8, 1, 0.1
+			noevents	1
+		}
+		windowDef OSBox2_4 {
+			rect		360, 221, 10, 88
+			backcolor	0.6, 0.8, 1, 0.1
+			noevents	1
+		}
+		windowDef OSBox2_5 {
+			rect		360, 302, 16, -32
+			background	"gui/mainmenu/button_cornerangle"
+			matcolor	0.6, 0.8, 1, 0.1
+			noevents	1
+		}
+		windowDef OSBoxTitle2 {
+			rect		32, 223, 110, 14
+			text		"#str_02158"
+			font		"fonts/bank"
+			textscale	0.25
+			textaligny	-6
+			forecolor	1, 1, 1, 0.5
+			noevents	1
+		}
+/*
+	//SOUND QUALITY
+		windowDef OS5 {
+			rect		34, 225, 320, 16
+			windowDef OS5L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS5M {
+				rect		8, 0, 304, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS5R {
+				rect		312, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS5Title {
+				rect		1, 1, 180, 14
+				text		"#str_02159"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+
+			choiceDef OS5Primary {
+				rect		210, 1, 90, 14
+				choices		"High;Low"
+				cvar		"s_quality"
+				updateGroup	sound
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+
+				onAction {
+					if ("OSBtn2::activebtn" == 0) {
+						set "OSBtn2::activebtn" "1" ;
+						set "OSBtn2::noevents" "0" ;
+						set "OSBtn2::forecolor" "0.6 1 1 1" ;
+					}
+				}
+			}
+
+		}
+*/
+// SPEAKER SETUP
+		windowDef OS6 {
+			rect		34, 250, 180, 16
+			windowDef OS6L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS6M {
+				rect		8, 0, 164, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS6R {
+				rect		172, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS6Title {
+				rect		1, 1, 85, 14
+				text		"#str_07225" // Speakers
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OS6Primary {
+				rect		93, 1, 75, 14
+				choices		"#str_07226" // Stereo;Surround
+				values		"2;6"
+				cvar		"s_numberOfSpeakers"
+				choiceType	1
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+
+				onAction {
+					set "cmd" "sound speakers" ;
+				}
+			}
+		}
+	//EAX
+		windowDef SND_EAX {
+			rect		220, 250, 150, 16
+			windowDef EAXL {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef EAXM {
+				rect		8, 0, 118, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef EAXR {
+				rect		126, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef EAXTitle {
+				rect		1, 1, 105, 14
+				text		"#str_07227" // EAX
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	0
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef EAXPrimary {
+				rect		0, 1, 135, 14
+				choices		"#str_07228" // On;Off
+				values		"1;0"
+				cvar		"s_useEAXReverb"
+				choiceType	1
+				font		"fonts/bank"
+				textscale	0.25
+				textalignx	100
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+
+				onAction {
+					set "cmd" "sound eax" ;
+				}
+			}
+		}
+
+	//REVERSE CHANNELS - disabled to make room when backend is needed
+		windowDef OS7 {
+			rect		34, 275, 320, 16
+			visible		("gui::driver_prompt" != 1)
+			windowDef OS7L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS7M {
+				rect		8, 0, 304, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS7R {
+				rect		312, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS7Title {
+				rect		1, 1, 180, 14
+				text		"#str_02161"		// reverse channels
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef OS7Primary {
+				rect		210, 1, 90, 14
+				choices		"#str_04221"
+				cvar		"s_reverse"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+
+	//SOUND BACKEND - only on some OSes
+		windowDef SNDB {
+			rect		34, 275, 320, 16
+			visible		("gui::driver_prompt" == 1)
+
+			windowDef SNDBL {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef SNDBM {
+				rect		8, 0, 304, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef SNDBR {
+				rect		312, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef SNDBTitle {
+				rect		1, 1, 180, 14
+				text		"#str_07229" // Sound Backend
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef SNDBPrimary {
+				rect		210, 1, 90, 14
+				choices		"best;oss;alsa"
+				cvar		"s_driver"
+				choiceType	1
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+				onAction {
+					set "cmd" "sound drivar" ;
+				}
+			}
+		}
+	//VOLUME
+		windowDef OS9 {
+			rect		34, 300, 320, 16
+			windowDef OS9L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS9M {
+				rect		8, 0, 304, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS9R {
+				rect		312, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef OS9Title {
+				rect		1, 1, 180, 14
+				text		"#str_02163"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			windowDef OS9SliderBG {
+				rect		220, 4, 128, 16
+				background	"guis/assets/mainmenu/slider_bg"
+				matcolor	0.6, 0.8, 0.8, 0.5
+				noevents	1
+			}
+			sliderDef OS9Primary {
+				rect		220, 5, 71, 8
+				forecolor	0.8, 1, 1, 1
+				matcolor	1, 1, 1, 1
+				low			-40
+				high		0
+				step		1
+				thumbShader	"guis/assets/mainmenu/slider_bar"
+				cvar		"s_volume_dB"
+			}
+		}
+
+
+		//#modified-fva; BEGIN
+		// Help: Screen Size
+		windowDef OS2Help {
+			rect		340, 125, 14, 16
+			text		CST_STR_00200047
+			font		"fonts/bank"
+			textscale	0.32
+			textaligny	-7
+			textalign	1
+			forecolor	0.6, 1, 1, 1
+			backcolor	0.6, 0.8, 1, 0.2
+			float		mouseExitAnim 0
+
+			onMouseEnter {
+				set "mouseExitAnim" "1" ;
+				transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+				transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+			}
+			onMouseExit {
+				if ("mouseExitAnim") {
+					set "mouseExitAnim" "0" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+				}
+			}
+			onAction {
+				set "mouseExitAnim" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+				set "CstHelpText::text" CST_STR_00200179 ;
+				resetTime "CstHelpAnimUp" "0" ;
+			}
+		}
+		//#modified-fva; END
+	}
+
+//#modified-fva; from "guis/mainmenu.gui"; END

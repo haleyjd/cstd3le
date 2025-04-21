@@ -1,0 +1,863 @@
+//
+//Weapon Icon Set
+//
+	onEvent {
+		if ("gui::weapon0" >= 1) { 
+			set "WeapIcon0::background" "gui/hud/flashlight" ; 
+		}
+		if ("gui::weapon1" >= 1) { 
+			set "WeapIcon1::background" "gui/hud/fists" ; 
+		}
+		if ("gui::weapon2" >= 1) { 
+			set "WeapIcon2::background" "gui/hud/grabber" ; 
+		}
+		if ("gui::weapon3" >= 1) { 
+			set "WeapIcon3::background" "gui/hud/pistol" ; 
+		}
+		if ("gui::weapon4" >= 1) { 
+			set "WeapIcon4::background" "gui/hud/shotgun" ; 
+		}
+		if ("gui::weapon5" >= 1) { 
+			set "WeapIcon5::background" "gui/hud/shotgundouble" ; 
+		}
+		if ("gui::weapon6" >= 1) { 
+			set "WeapIcon6::background" "gui/hud/machinegun" ; 
+		}
+		if ("gui::weapon7" >= 1) { 
+			set "WeapIcon7::background" "gui/hud/chaingun" ; 
+		}
+		if ("gui::weapon8" >= 1) { 
+			set "WeapIcon8::background" "gui/hud/grenade" ; 
+		}		
+		if ("gui::weapon9" >= 1) { 
+			set "WeapIcon9::background" "gui/hud/plasmagun" ; 
+		}
+		if ("gui::weapon10" >= 1) { 
+			set "WeapIcon10::background" "gui/hud/rocketlauncher" ; 
+		}
+		if ("gui::weapon11" >= 1) { 
+			set "WeapIcon11::background" "gui/hud/bfg" ; 
+		}
+		if ("gui::weapon18" >= 1) { 
+			set "WeapIcon18::background" "gui/hud/chainsaw" ; 
+		}		
+//
+		if ("gui::weapon0" == 0) { 
+			set "WeapIcon0::background" "gui/hud/flashlightr" ; 
+		}
+		if ("gui::weapon1" == 0) { 
+			set "WeapIcon1::background" "gui/hud/fistsr" ; 
+		}
+		if ("gui::weapon2" == 0) { 
+			set "WeapIcon2::background" "gui/hud/grabberr" ; 
+		}
+		if ("gui::weapon3" == 0) { 
+			set "WeapIcon3::background" "gui/hud/pistolr" ; 
+		}
+		if ("gui::weapon4" == 0) { 
+			set "WeapIcon4::background" "gui/hud/shotgunr" ; 
+		}
+		if ("gui::weapon5" == 0) { 
+			set "WeapIcon5::background" "gui/hud/shotgundoubler" ; 
+		}
+		if ("gui::weapon6" == 0) { 
+			set "WeapIcon6::background" "gui/hud/machinegunr" ; 
+		}
+		if ("gui::weapon7" == 0) { 
+			set "WeapIcon7::background" "gui/hud/chaingunr" ; 
+		}
+		if ("gui::weapon8" == 0) { 
+			set "WeapIcon8::background" "gui/hud/grenader" ; 
+		}		
+		if ("gui::weapon9" == 0) { 
+			set "WeapIcon9::background" "gui/hud/plasmagunr" ; 
+		}
+		if ("gui::weapon10" == 0) { 
+			set "WeapIcon10::background" "gui/hud/rocketlauncherr" ; 
+		}
+		if ("gui::weapon11" == 0) { 
+			set "WeapIcon11::background" "gui/hud/bfgr" ; 
+		}
+		if ("gui::weapon18" == 0) { 
+			set "WeapIcon18::background" "gui/hud/chainsawr" ; 
+		}
+	}
+//
+//Weapon Icon Flash
+//
+	onNamedEvent weaponChange {
+		if ("gui::weapon0" == 2) { 
+			if ("weapon" != 0) { 
+				set	"weapon" "0" ; 
+				resetTime "WeapText" "0" ; 
+				resetTime "WeapIcon0" "0" ; 
+				set	"AmmoParent::visible" "0" ;
+			} 
+		}
+		if ("gui::weapon1" == 2) { 
+			if ("weapon" != 1) { 
+				set	"weapon" "1" ; 
+				resetTime "WeapText" "0" ; 
+				resetTime "WeapIcon1" "0" ; 
+				set	"AmmoParent::visible" "0" ;
+			} 
+		}
+		if ("gui::weapon2" == 2) { 
+			if ("weapon" != 2) { 
+				set	"weapon" "2" ; 
+				resetTime "WeapText" "0" ; 
+				resetTime "WeapIcon2" "0" ; 
+				set	"AmmoParent::visible" "0" ;
+			} 
+		}
+		if ("gui::weapon3" == 2) { 
+			if ("weapon" != 3) {
+				set	"weapon" "3" ; 
+				resetTime "WeapText" "0" ; 
+				resetTime "WeapIcon3" "0" ; 
+				set	"AmmoParent::visible" "1" ;
+			} 
+		}
+		if ("gui::weapon4" == 2) { 
+			if ("weapon" != 4) {
+				set	"weapon" "4" ; 
+				resetTime "WeapText" "0" ; 
+				resetTime "WeapIcon4" "0" ; 
+				set	"AmmoParent::visible" "1" ;
+			} 
+		}
+		if ("gui::weapon5" == 2) { 
+			if ("weapon" != 5) {
+				set	"weapon" "5" ; 
+				resetTime "WeapText" "0" ; 
+				resetTime "WeapIcon5" "0" ; 
+				set	"AmmoParent::visible" "1" ;
+			} 
+		}		
+		if ("gui::weapon6" == 2) { 
+			if ("weapon" != 6) {
+				set	"weapon" "6" ;
+				resetTime "WeapText" "0" ;  
+				resetTime "WeapIcon6" "0" ; 
+				set	"AmmoParent::visible" "0" ;
+			} 
+		}
+
+		if ("gui::weapon7" == 2) { 
+			if ("weapon" != 7) {
+				set	"weapon" "7" ; 
+				resetTime "WeapText" "0" ;  
+				resetTime "WeapIcon7" "0" ; 
+				set	"AmmoParent::visible" "0" ;
+			} 
+		}
+		if ("gui::weapon8" == 2) { 
+			if ("weapon" != 8) {
+				set	"weapon" "8" ; 
+				resetTime "WeapText" "0" ; 
+				resetTime "WeapIcon8" "0" ; 
+				set	"AmmoParent::visible" "1" ;
+			} 
+		}
+		if ("gui::weapon9" == 2) { 
+			if ("weapon" != 9) {
+				set	"weapon" "9" ; 
+				resetTime "WeapText" "0" ; 
+				resetTime "WeapIcon9" "0" ; 
+				set	"AmmoParent::visible" "0" ;
+			} 
+		}
+		if ("gui::weapon10" == 2) { 
+			if ("weapon" != 10) {
+				set	"weapon" "10" ; 
+				resetTime "WeapText" "0" ; 
+				resetTime "WeapIcon10" "0" ; 
+				set	"AmmoParent::visible" "1" ;
+			} 
+		}		
+		if ("gui::weapon11" == 2) { 
+			if ("weapon" != 11) {
+				set	"weapon" "11" ; 
+				resetTime "WeapText" "0" ;  
+				resetTime "WeapIcon11" "0" ; 
+				set	"AmmoParent::visible" "0" ;
+			} 
+		}
+		if ("gui::weapon18" == 2) { 
+			if ("weapon" != 18) {
+				set	"weapon" "18" ; 
+				resetTime "WeapText" "0" ;  
+				resetTime "WeapIcon18" "0" ; 
+				set	"AmmoParent::visible" "0" ;
+			} 
+		}
+	}
+
+	
+////////////////////////////
+//WEAPON ICONS
+////////////////////////////
+
+	windowDef WeapIcon0 {
+		visible		1
+		rect		0,0,0,0
+		//#modified-fva; BEGIN
+		cstAnchor	CST_ANCHOR_BOTTOM_CENTER
+		cstNoClipBackground 1
+		//#modified-fva; END
+		background	"gui/hud/flashlightr"
+		matcolor	1, 1, 1 ,1
+		notime		1
+
+		onTime 0 {
+			set "WeapText::text"	"#str_00100187" ;
+
+			// WeapIcon0
+			set "WeapIcon0::rect" "256	390	128	64" ; 
+			// Next
+			set "WeapIcon1::rect" "396	416	32	32" ; 
+			set "WeapIcon2::rect" "440	416	64	32" ; 
+			set "WeapIcon3::rect" "516	416	32	32" ; 
+			set "WeapIcon4::rect" "560	416	64	32" ; 
+			set "WeapIcon5::rect" "636	416	64	32" ; 
+			set "WeapIcon6::rect" "712	416	64	32" ; 
+			// Previous
+			set "WeapIcon18::rect" "180	416	64	32" ; 
+			set "WeapIcon11::rect" "104	416	64	32" ; 
+			set "WeapIcon10::rect" "28	416	64	32" ; 
+			set "WeapIcon9::rect" "-48	416	64	32" ; 
+			set "WeapIcon8::rect" "-92	416	32	32" ; 
+			set "WeapIcon7::rect" "-168	416	64	32" ; 
+
+		}
+	}
+	
+	windowDef WeapIcon1 {
+		visible		1
+		rect		0,0,0,0
+		//#modified-fva; BEGIN
+		cstAnchor	CST_ANCHOR_BOTTOM_CENTER
+		cstNoClipBackground 1
+		//#modified-fva; END
+		background	"gui/hud/fistsr"
+		matcolor	1, 1, 1 ,1
+		notime		1
+
+		onTime 0 {
+			set "WeapText::text"	"#str_00100188" ;
+
+			// WeapIcon1
+			set "WeapIcon1::rect" "288	390	64	64" ; 
+			// Next
+			set "WeapIcon2::rect" "364	416	64	32" ; 
+			set "WeapIcon3::rect" "440	416	32	32" ; 
+			set "WeapIcon4::rect" "484	416	64	32" ; 
+			set "WeapIcon5::rect" "560	416	64	32" ; 
+			set "WeapIcon6::rect" "636	416	64	32" ; 
+			set "WeapIcon7::rect" "712	416	64	32" ; 
+			// Previous
+			set "WeapIcon0::rect" "212	416	64	32" ; 
+			set "WeapIcon18::rect" "136	416	64	32" ; 
+			set "WeapIcon11::rect" "60	416	64	32" ; 
+			set "WeapIcon10::rect" "-16	416	64	32" ; 
+			set "WeapIcon9::rect" "-92	416	64	32" ; 
+			set "WeapIcon8::rect" "-136	416	32	32" ; 
+		}							 	
+	}
+	
+	windowDef WeapIcon2 {
+		visible		1
+		rect		0,0,0,0
+		//#modified-fva; BEGIN
+		cstAnchor	CST_ANCHOR_BOTTOM_CENTER
+		cstNoClipBackground 1
+		//#modified-fva; END
+		background	"gui/hud/grabber"
+		matcolor	1, 1, 1 ,1
+		notime		1
+
+		onTime 0 {
+			set "WeapText::text"	"#str_00100189" ;
+
+			// WeapIcon2
+			set "WeapIcon2::rect" "256	390	128	64" ; 
+			// Next
+			set "WeapIcon3::rect" "396	416	32	32" ; 
+			set "WeapIcon4::rect" "440	416	64	32" ; 
+			set "WeapIcon5::rect" "516	416	64	32" ; 
+			set "WeapIcon6::rect" "592	416	64	32" ; 
+			set "WeapIcon7::rect" "668	416	64	32" ; 
+			set "WeapIcon8::rect" "744	416	32	32" ; 
+			// Previous
+			set "WeapIcon1::rect" "212	416	32	32" ; 
+			set "WeapIcon0::rect" "136	416	64	32" ; 
+			set "WeapIcon18::rect" "60	416	64	32" ; 
+			set "WeapIcon11::rect" "-16	416	64	32" ; 
+			set "WeapIcon10::rect" "-92	416	64	32" ; 
+			set "WeapIcon9::rect" "-168	416	64	32" ; 
+		}							 	
+	}
+
+	windowDef WeapIcon3 {
+		visible		1
+		rect		0,0,0,0
+		//#modified-fva; BEGIN
+		cstAnchor	CST_ANCHOR_BOTTOM_CENTER
+		cstNoClipBackground 1
+		//#modified-fva; END
+		background	"gui/hud/pistolr"
+		matcolor	1, 1, 1, 1
+		notime		1
+
+		onTime 0 {
+			set "WeapText::text"	"#str_00100178" ;
+			
+			// WeapIcon3
+			set "WeapIcon3::rect" "288	390	64	64" ; 
+			// Next
+			set "WeapIcon4::rect" "364	416	64	32" ; 
+			set "WeapIcon5::rect" "440	416	64	32" ; 
+			set "WeapIcon6::rect" "516	416	64	32" ; 
+			set "WeapIcon7::rect" "592	416	64	32" ; 
+			set "WeapIcon8::rect" "668	416	32	32" ; 
+			set "WeapIcon9::rect" "712	416	64	32" ; 
+			// Previous
+			set "WeapIcon2::rect" "212	416	64	32" ; 
+			set "WeapIcon1::rect" "168	416	32	32" ; 
+			set "WeapIcon0::rect" "92	416	64	32" ; 
+			set "WeapIcon18::rect" "16	416	64	32" ; 
+			set "WeapIcon11::rect" "-60	416	64	32" ; 
+			set "WeapIcon10::rect" "-136	416	64	32" ; 
+		}							 	
+	}
+
+	windowDef WeapIcon4 {
+		visible		1
+		rect		0,0,0,0
+		//#modified-fva; BEGIN
+		cstAnchor	CST_ANCHOR_BOTTOM_CENTER
+		cstNoClipBackground 1
+		//#modified-fva; END
+		background	"gui/hud/shotgunr"
+		matcolor	1, 1, 1, 1
+		notime		1
+
+		onTime 0 {
+			set "WeapText::text"	"#str_00100190" ;
+
+			// WeapIcon4
+			set "WeapIcon4::rect" "256	390	128	64" ; 
+			// Next
+			set "WeapIcon5::rect" "396	416	64	32" ; 
+			set "WeapIcon6::rect" "472	416	64	32" ; 
+			set "WeapIcon7::rect" "548	416	64	32" ; 
+			set "WeapIcon8::rect" "624	416	32	32" ; 
+			set "WeapIcon9::rect" "668	416	64	32" ; 
+			set "WeapIcon10::rect" "744	416	64	32" ; 
+			// Previous
+			set "WeapIcon3::rect" "212	416	32	32" ; 
+			set "WeapIcon2::rect" "136	416	64	32" ; 
+			set "WeapIcon1::rect" "92	416	32	32" ; 
+			set "WeapIcon0::rect" "16	416	64	32" ; 
+			set "WeapIcon18::rect" "-60	416	64	32" ; 
+			set "WeapIcon11::rect" "-136	416	64	32" ; 
+
+			
+		}							 		
+	}
+	
+	windowDef WeapIcon5 {
+		visible		1
+		rect		0,0,0,0
+		//#modified-fva; BEGIN
+		cstAnchor	CST_ANCHOR_BOTTOM_CENTER
+		cstNoClipBackground 1
+		//#modified-fva; END
+		background	"gui/hud/shotgundoubler"
+		matcolor	1, 1, 1, 1
+		notime		1
+
+		onTime 0 {
+			set "WeapText::text"	"#str_00100206" ;
+
+			// WeapIcon5
+			set "WeapIcon5::rect" "256	390	128	64" ; 
+			// Next
+			set "WeapIcon6::rect" "396	416	64	32" ; 
+			set "WeapIcon7::rect" "472	416	64	32" ; 
+			set "WeapIcon8::rect" "548	416	32	32" ; 
+			set "WeapIcon9::rect" "592	416	64	32" ; 
+			set "WeapIcon10::rect" "668	416	64	32" ; 
+			set "WeapIcon11::rect" "744	416	64	32" ; 
+			// Previous
+			set "WeapIcon4::rect" "180	416	64	32" ; 
+			set "WeapIcon3::rect" "136	416	32	32" ; 
+			set "WeapIcon2::rect" "60	416	64	32" ; 
+			set "WeapIcon1::rect" "16	416	32	32" ; 
+			set "WeapIcon0::rect" "-60	416	64	32" ; 
+			set "WeapIcon18::rect" "-136	416	64	32" ; 
+
+			
+		}							 		
+	}
+
+	windowDef WeapIcon6 {
+		visible		1
+		rect		0,0,0,0
+		//#modified-fva; BEGIN
+		cstAnchor	CST_ANCHOR_BOTTOM_CENTER
+		cstNoClipBackground 1
+		//#modified-fva; END
+		background	"gui/hud/machinegunr"
+		matcolor	1, 1, 1, 1
+		notime		1
+
+		onTime 0 {
+			set "WeapText::text"	"#str_00100180" ;
+
+			// WeapIcon6
+			set "WeapIcon6::rect" "256	390	128	64" ; 
+			// Next
+			set "WeapIcon7::rect" "396	416	64	32" ; 
+			set "WeapIcon8::rect" "472	416	32	32" ; 
+			set "WeapIcon9::rect" "516	416	64	32" ; 
+			set "WeapIcon10::rect" "592	416	64	32" ; 
+			set "WeapIcon11::rect" "668	416	64	32" ; 
+			set "WeapIcon18::rect" "744	416	64	32" ; 
+			// Previous
+			set "WeapIcon5::rect" "180	416	64	32" ; 
+			set "WeapIcon4::rect" "104	416	64	32" ; 
+			set "WeapIcon3::rect" "60	416	32	32" ; 
+			set "WeapIcon2::rect" "-16	416	64	32" ; 
+			set "WeapIcon1::rect" "-60	416	32	32" ; 
+			set "WeapIcon0::rect" "-136	416	64	32" ; 
+
+			
+		}							 	
+	}
+	
+	windowDef WeapIcon7 {
+		visible		1
+		rect		0,0,0,0
+		//#modified-fva; BEGIN
+		cstAnchor	CST_ANCHOR_BOTTOM_CENTER
+		cstNoClipBackground 1
+		//#modified-fva; END
+		background	"gui/hud/chaingunr"
+		matcolor	1, 1, 1, 1
+		notime		1
+
+		onTime 0 {
+			set "WeapText::text"	"#str_00100181" ;
+
+			// WeapIcon7
+			set "WeapIcon7::rect" "256	390	128	64" ; 
+			// Next
+			set "WeapIcon8::rect" "396	416	32	32" ; 
+			set "WeapIcon9::rect" "440	416	64	32" ; 
+			set "WeapIcon10::rect" "516	416	64	32" ; 
+			set "WeapIcon11::rect" "592	416	64	32" ; 
+			set "WeapIcon18::rect" "668	416	64	32" ; 
+			set "WeapIcon0::rect" "744	416	64	32" ; 
+			// Previous
+			set "WeapIcon6::rect" "180	416	64	32" ; 
+			set "WeapIcon5::rect" "104	416	64	32" ; 
+			set "WeapIcon4::rect" "28	416	64	32" ; 
+			set "WeapIcon3::rect" "-16	416	32	32" ; 
+			set "WeapIcon2::rect" "-92	416	64	32" ; 
+			set "WeapIcon1::rect" "-136	416	32	32" ; 
+
+			
+		}								
+	}
+
+	windowDef WeapIcon8 {
+		visible		1
+		rect		0,0,0,0
+		//#modified-fva; BEGIN
+		cstAnchor	CST_ANCHOR_BOTTOM_CENTER
+		cstNoClipBackground 1
+		//#modified-fva; END
+		background	"gui/hud/grenader"
+		matcolor	1, 1, 1, 1
+		notime		1
+
+		onTime 0 {
+			set "WeapText::text"	"#str_00100194" ;
+
+			// WeapIcon8
+			set "WeapIcon8::rect" "288	390	64	64" ; 
+			// Next
+			set "WeapIcon9::rect" "364	416	64	32" ; 
+			set "WeapIcon10::rect" "440	416	64	32" ; 
+			set "WeapIcon11::rect" "516	416	64	32" ; 
+			set "WeapIcon18::rect" "592	416	64	32" ; 
+			set "WeapIcon0::rect" "668	416	64	32" ; 
+			set "WeapIcon1::rect" "744	416	32	32" ; 
+			// Previous
+			set "WeapIcon7::rect" "212	416	64	32" ; 
+			set "WeapIcon6::rect" "136	416	64	32" ; 
+			set "WeapIcon5::rect" "60	416	64	32" ; 
+			set "WeapIcon4::rect" "-16	416	64	32" ; 
+			set "WeapIcon3::rect" "-60	416	32	32" ; 
+			set "WeapIcon2::rect" "-136	416	64	32" ; 
+
+			
+		}							 	
+	}
+	
+	windowDef WeapIcon9 {
+		visible		1
+		rect		0,0,0,0
+		//#modified-fva; BEGIN
+		cstAnchor	CST_ANCHOR_BOTTOM_CENTER
+		cstNoClipBackground 1
+		//#modified-fva; END
+		background	"gui/hud/plasmagunr"
+		matcolor	1, 1, 1, 1
+		notime		1
+
+		onTime 0 {
+			set "WeapText::text"	"#str_00100195" ;
+
+			// WeapIcon9
+			set "WeapIcon9::rect" "256	390	128	64" ; 
+			// Next
+			set "WeapIcon10::rect" "396	416	64	32" ; 
+			set "WeapIcon11::rect" "472	416	64	32" ; 
+			set "WeapIcon18::rect" "548	416	64	32" ; 
+			set "WeapIcon0::rect" "624	416	64	32" ; 
+			set "WeapIcon1::rect" "700	416	32	32" ; 
+			set "WeapIcon2::rect" "744	416	64	32" ; 
+			// Previous
+			set "WeapIcon8::rect" "212	416	32	32" ; 
+			set "WeapIcon7::rect" "136	416	64	32" ; 
+			set "WeapIcon6::rect" "60	416	64	32" ; 
+			set "WeapIcon5::rect" "-16	416	64	32" ; 
+			set "WeapIcon4::rect" "-92	416	64	32" ; 
+			set "WeapIcon3::rect" "-136	416	32	32" ; 
+
+			
+		}							 	
+	}
+
+	windowDef WeapIcon10 {
+		visible		1
+		rect		0,0,0,0
+		//#modified-fva; BEGIN
+		cstAnchor	CST_ANCHOR_BOTTOM_CENTER
+		cstNoClipBackground 1
+		//#modified-fva; END
+		background	"gui/hud/rocketlauncherr"
+		matcolor	1, 1, 1, 1
+		notime		1
+
+		onTime 0 {
+			set "WeapText::text"	"#str_00100196" ;
+
+
+			// WeapIcon10
+			set "WeapIcon10::rect" "256	390	128	64" ; 
+			// Next
+			set "WeapIcon11::rect" "396	416	64	32" ; 
+			set "WeapIcon18::rect" "472	416	64	32" ; 
+			set "WeapIcon0::rect" "548	416	64	32" ; 
+			set "WeapIcon1::rect" "624	416	32	32" ; 
+			set "WeapIcon2::rect" "668	416	64	32" ; 
+			set "WeapIcon3::rect" "744	416	32	32" ; 
+			// Previous
+			set "WeapIcon9::rect" "180	416	64	32" ; 
+			set "WeapIcon8::rect" "136	416	32	32" ; 
+			set "WeapIcon7::rect" "60	416	64	32" ; 
+			set "WeapIcon6::rect" "-16	416	64	32" ; 
+			set "WeapIcon5::rect" "-92	416	64	32" ; 
+			set "WeapIcon4::rect" "-168	416	64	32" ; 
+
+			
+		}							 	
+	}
+
+	windowDef WeapIcon11 {
+		visible		1
+		rect		0,0,0,0
+		//#modified-fva; BEGIN
+		cstAnchor	CST_ANCHOR_BOTTOM_CENTER
+		cstNoClipBackground 1
+		//#modified-fva; END
+		background	"gui/hud/bfgr"
+		matcolor	1, 1, 1, 1
+		notime		1
+
+		onTime 0 {
+			set "WeapText::text"	"#str_00100197" ;
+
+			// WeapIcon11
+			set "WeapIcon11::rect" "256	390	128	64" ; 
+			// Next
+			set "WeapIcon18::rect" "396	416	64	32" ; 
+			set "WeapIcon0::rect" "472	416	64	32" ; 
+			set "WeapIcon1::rect" "548	416	32	32" ; 
+			set "WeapIcon2::rect" "592	416	64	32" ; 
+			set "WeapIcon3::rect" "668	416	32	32" ; 
+			set "WeapIcon4::rect" "712	416	64	32" ; 
+			// Previous
+			set "WeapIcon10::rect" "180	416	64	32" ; 
+			set "WeapIcon9::rect" "104	416	64	32" ; 
+			set "WeapIcon8::rect" "60	416	32	32" ; 
+			set "WeapIcon7::rect" "-16	416	64	32" ; 
+			set "WeapIcon6::rect" "-92	416	64	32" ; 
+			set "WeapIcon5::rect" "-168	416	64	32" ; 
+
+			
+		}							 	
+	}
+	
+	windowDef WeapIcon18 {
+		visible		1
+		rect		0,0,0,0
+		//#modified-fva; BEGIN
+		cstAnchor	CST_ANCHOR_BOTTOM_CENTER
+		cstNoClipBackground 1
+		//#modified-fva; END
+		background	"gui/hud/chainsawr"
+		matcolor	1, 1, 1, 1
+		notime		1
+
+		onTime 0 {
+			set "WeapText::text"	"#str_00100205" ;
+
+			// WeapIcon18
+			set "WeapIcon18::rect" "256	390	128	64" ; 
+			// Next
+			set "WeapIcon0::rect" "396	416	64	32" ; 
+			set "WeapIcon1::rect" "472	416	32	32" ; 
+			set "WeapIcon2::rect" "516	416	64	32" ; 
+			set "WeapIcon3::rect" "592	416	32	32" ; 
+			set "WeapIcon4::rect" "636	416	64	32" ; 
+			set "WeapIcon5::rect" "712	416	64	32" ; 
+			// Previous
+			set "WeapIcon11::rect" "180	416	64	32" ; 
+			set "WeapIcon10::rect" "104	416	64	32" ; 
+			set "WeapIcon9::rect" "28	416	64	32" ; 
+			set "WeapIcon8::rect" "-16	416	32	32" ; 
+			set "WeapIcon7::rect" "-92	416	64	32" ; 
+			set "WeapIcon6::rect" "-168	416	64	32" ; 
+		}							 	
+	}
+	
+	
+
+	windowDef WeapText {
+		text	""
+		font	"fonts/bank"
+	//	shadow	1
+		rect	55 ,375 ,540 ,20 
+		//#modified-fva; BEGIN
+		cstAnchor	CST_ANCHOR_BOTTOM_CENTER
+		//#modified-fva; END
+		forecolor	0.6, 0.8, 0.75, 0
+		visible	1
+		textscale	0.25
+		textalign	1
+
+		onTime 0 {
+			transition "WeapText::forecolor" "0.6 0.8 0.75 1" "0.6 0.8 0.75 0" "1500" "0.6" "0" ;
+			
+			if ("desktop::weapon" == 0) { 
+				transition "WeapIcon0::matcolor"	"1 1 1 1.0"	"1 1 1 0" "1500" ;
+				transition "WeapIcon1::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon2::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon3::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon4::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon5::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon6::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon7::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon8::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon9::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon10::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon11::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon18::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+			}
+			if ("desktop::weapon" == 1) { 
+				transition "WeapIcon0::matcolor"	"1 1 1 0.8"	"1 1 1 0" "1500" ;
+				transition "WeapIcon1::matcolor"	"1 1 1 1.0" "1 1 1 0" "1500" ;
+				transition "WeapIcon2::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon3::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon4::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon5::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon6::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon7::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon8::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon9::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon10::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon11::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon18::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+			}
+			if ("desktop::weapon" == 2) { 
+				transition "WeapIcon0::matcolor"	"1 1 1 0.6"	"1 1 1 0" "1500" ;
+				transition "WeapIcon1::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon2::matcolor"	"1 1 1 1.0" "1 1 1 0" "1500" ;
+				transition "WeapIcon3::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon4::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon5::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon6::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon7::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon8::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon9::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon10::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon11::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon18::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+			}														   
+			if ("desktop::weapon" == 3) { 
+				transition "WeapIcon0::matcolor"	"1 1 1 0.4"	"1 1 1 0" "1500" ;
+				transition "WeapIcon1::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon2::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon3::matcolor"	"1 1 1 1.0" "1 1 1 0" "1500" ;
+				transition "WeapIcon4::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon5::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon6::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon7::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon8::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon9::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon10::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon11::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon18::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+			}											   
+			if ("desktop::weapon" == 4) { 
+				transition "WeapIcon0::matcolor"	"1 1 1 0.2"	"1 1 1 0" "1500" ;
+				transition "WeapIcon1::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon2::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon3::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon4::matcolor"	"1 1 1 1.0" "1 1 1 0" "1500" ;
+				transition "WeapIcon5::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon6::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon7::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon8::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon9::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon10::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon11::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon18::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+			}			
+			if ("desktop::weapon" == 5) { 
+				transition "WeapIcon0::matcolor"	"1 1 1 0.2"	"1 1 1 0" "1500" ;
+				transition "WeapIcon1::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon2::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon3::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon4::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon5::matcolor"	"1 1 1 1.0" "1 1 1 0" "1500" ;
+				transition "WeapIcon6::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon7::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon8::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon9::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon10::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon11::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon18::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+			}			
+			if ("desktop::weapon" == 6) { 
+				transition "WeapIcon0::matcolor"	"1 1 1 0.2"	"1 1 1 0" "1500" ;
+				transition "WeapIcon1::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon2::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon3::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon4::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon5::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon6::matcolor"	"1 1 1 1.0" "1 1 1 0" "1500" ;
+				transition "WeapIcon7::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon8::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon9::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon10::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon11::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon18::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+			}			
+			if ("desktop::weapon" == 7) { 
+				transition "WeapIcon0::matcolor"	"1 1 1 0.2"	"1 1 1 0" "1500" ;
+				transition "WeapIcon1::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon2::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon3::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon4::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon5::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon6::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon7::matcolor"	"1 1 1 1.0" "1 1 1 0" "1500" ;
+				transition "WeapIcon8::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon9::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon10::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon11::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon18::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+			}			
+			if ("desktop::weapon" == 8) { 
+				transition "WeapIcon0::matcolor"	"1 1 1 0.2"	"1 1 1 0" "1500" ;
+				transition "WeapIcon1::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon2::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon3::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon4::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon5::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon6::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon7::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon8::matcolor"	"1 1 1 1.0" "1 1 1 0" "1500" ;
+				transition "WeapIcon9::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon10::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon11::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon18::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+			}			
+			if ("desktop::weapon" == 9) { 
+				transition "WeapIcon0::matcolor"	"1 1 1 0.2"	"1 1 1 0" "1500" ;
+				transition "WeapIcon1::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon2::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon3::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon4::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon5::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon6::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon7::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon8::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon9::matcolor"	"1 1 1 1.0" "1 1 1 0" "1500" ;
+				transition "WeapIcon10::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon11::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon18::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+			}			
+			if ("desktop::weapon" == 10) { 
+				transition "WeapIcon0::matcolor"	"1 1 1 0.4"	"1 1 1 0" "1500" ;
+				transition "WeapIcon1::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon2::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon3::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon4::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon5::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon6::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon7::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon8::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon9::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon10::matcolor"	"1 1 1 1.0" "1 1 1 0" "1500" ;
+				transition "WeapIcon11::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon18::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+			}			
+			if ("desktop::weapon" == 11) { 
+				transition "WeapIcon0::matcolor"	"1 1 1 0.6"	"1 1 1 0" "1500" ;
+				transition "WeapIcon1::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon2::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon3::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon4::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon5::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon6::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon7::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon8::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon9::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon10::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon11::matcolor"	"1 1 1 1.0" "1 1 1 0" "1500" ;
+				transition "WeapIcon18::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+			}			
+			if ("desktop::weapon" == 18) { 
+				transition "WeapIcon0::matcolor"	"1 1 1 0.8"	"1 1 1 0" "1500" ;
+				transition "WeapIcon1::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon2::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon3::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon4::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon5::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon6::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon7::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon8::matcolor"	"1 1 1 0.2" "1 1 1 0" "1500" ;
+				transition "WeapIcon9::matcolor"	"1 1 1 0.4" "1 1 1 0" "1500" ;
+				transition "WeapIcon10::matcolor"	"1 1 1 0.6" "1 1 1 0" "1500" ;
+				transition "WeapIcon11::matcolor"	"1 1 1 0.8" "1 1 1 0" "1500" ;
+				transition "WeapIcon18::matcolor"	"1 1 1 1.0" "1 1 1 0" "1500" ;
+			}			
+			
+		}
+	}

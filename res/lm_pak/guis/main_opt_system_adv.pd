@@ -1,0 +1,850 @@
+//#modified-fva; from "guis/mainmenu.gui"; BEGIN
+
+	//THIS IS REALLY ADVANCED OPTIONS...leaving old RDC windowdef names to avoid anim issues
+	windowDef AdvancedOptionsWin {
+		rect		0, 0, 640, 0
+		backcolor 	0, 0, 0, 0.5
+		modal		1
+
+		//#modified-fva; BEGIN
+		windowDef SysAdvOptBox {
+			//rect	136, 40, 580, 352
+			rect	151, 40, 444, 312
+		//#modified-fva; END
+
+		windowDef RDCBgMain1 {
+			//#modified-fva; BEGIN
+			//rect		136, 40, -32, -32
+			rect		0, 0, -32, -32
+			//#modified-fva; END
+			background	"gui/mainmenu/content_smallcorner"
+			matcolor	0.18 ,0.25 ,0.3 ,1
+			noevents	1
+		}
+		windowDef RDCBgMain2 {
+			//#modified-fva; BEGIN
+			//rect		168, 40, 380, 32
+			rect		32, 0, 380, 32
+			//#modified-fva; END
+			backcolor	0.18 ,0.25 ,0.3 ,1
+			noevents	1
+		}
+		windowDef RDCBgMain3 {
+			//#modified-fva; BEGIN
+			//rect		548, 40, 32, -32
+			rect		412, 0, 32, -32
+			//#modified-fva; END
+			background	"gui/mainmenu/content_smallcorner"
+			matcolor	0.18 ,0.25 ,0.3 ,1
+			noevents	1
+		}
+		windowDef RDCBgMain4 {
+			//#modified-fva; BEGIN
+			//rect		136, 72, 444, 170
+			rect		0, 32, 444, 248
+			//#modified-fva; END
+			backcolor	0.18 ,0.25 ,0.3 ,1
+			noevents	1
+		}
+		windowDef RDCBgMain5 {
+			//#modified-fva; BEGIN
+			//rect		136, 242, -32, 32
+			rect		0, 280, -32, 32
+			//#modified-fva; END
+			background	"gui/mainmenu/content_smallcorner"
+			matcolor	0.18 ,0.25 ,0.3 ,1
+			noevents	1
+		}
+		windowDef RDCBgMain6 {
+			//#modified-fva; BEGIN
+			//rect		168, 242, 380, 32
+			rect		32, 280, 380, 32
+			//#modified-fva; END
+			backcolor	0.18 ,0.25 ,0.3 ,1
+			noevents	1
+		}
+		windowDef RDCBgMain7 {
+			//#modified-fva; BEGIN
+			//rect		548, 242, 32, 32
+			rect		412, 280, 32, 32
+			//#modified-fva; END
+			background	"gui/mainmenu/content_smallcorner"
+			matcolor	0.18 ,0.25 ,0.3 ,1
+			noevents	1
+		}
+		windowDef RDCBgMain8 {
+			//#modified-fva; BEGIN
+			//rect		139, 43, 340, 279
+			rect		3, 3, 340, 279
+			//#modified-fva; END
+			background	"gui/mainmenu/content_glow2"
+			matcolor	1, 1, 1, 0.18
+			noevents	1
+		}
+
+		windowDef RDC {
+			//#modified-fva; BEGIN
+			//rect		138, 42, 440, 320
+			rect		2, 2, 440, 308 // 308 = 230 + 78
+			//#modified-fva; END
+			visible		0
+
+			windowDef RDCTitleText {
+				rect		20, 5, 320, 20
+				text		"#str_04121"
+				textscale	0.32
+				textaligny	-3
+				forecolor	1, 1, 1, 1
+			}
+			windowDef RDCTitleBar {
+				rect		5, 23, 325, 2
+				backcolor	0.6 ,0.8 ,1 ,0.2
+				noevents	1
+			}
+//new advanced option selections
+	//FRAGMENT VERTEX
+		windowDef ADV1 {
+			rect		20, 38, 400, 16
+			windowDef ADV1L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV1M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV1R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV1Title {
+				rect		1, 1, 280, 14
+				text		"#str_04122"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef ADV1Primary {
+				//#modified-fva; BEGIN
+				//rect		320, 1, 50, 14
+				rect		305, 1, 75, 14
+				//#modified-fva; END
+				choices		"#str_04230"
+				cvar		"r_skipNewAmbient"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+	//SHADOWS
+		windowDef ADV2 {
+			rect		20, 64, 400, 16
+			windowDef ADV2L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV2M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV2R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV2Title {
+				rect		1, 1, 280, 14
+				text		"#str_04123"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef ADV2Primary {
+				//#modified-fva; BEGIN
+				//rect		320, 1, 50, 14
+				rect		305, 1, 75, 14
+				//#modified-fva; END
+				choices		"#str_04221"
+				cvar		"r_shadows"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+	//Enable Specular
+		windowDef ADV3 {
+			rect		20, 90, 400, 16
+			windowDef ADV3L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV3M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV3R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV3Title {
+				rect		1, 1, 280, 14
+				text		"#str_04124"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef ADV3Primary {
+				//#modified-fva; BEGIN
+				//rect		320, 1, 50, 14
+				rect		305, 1, 75, 14
+				//#modified-fva; END
+				choices		"#str_04230"
+				cvar		"r_skipSpecular"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+	//Enable Bump Maps
+		windowDef ADV4 {
+			rect		20, 116, 700, 16
+			windowDef ADV4L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV4M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV4R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV4Title {
+				rect		1, 1, 280, 14
+				text		"#str_04125"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef ADV4Primary {
+				//#modified-fva; BEGIN
+				//rect		320, 1, 50, 14
+				rect		305, 1, 75, 14
+				//#modified-fva; END
+				choices		"#str_04230"
+				cvar		"r_skipBump"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+	//Video Sync
+		windowDef ADV5 {
+			rect		20, 142, 400, 16
+			windowDef ADV5L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV5M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV5R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV5Title {
+				rect		1, 1, 280, 14
+				text		"#str_04126"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef ADV5Primary {
+				//#modified-fva; BEGIN
+				//rect		320, 1, 50, 14
+				rect		305, 1, 75, 14
+				//#modified-fva; END
+				choices		"#str_04221"
+				cvar		"r_swapInterval"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+
+	//Force texture down sample -- CHANGED TO AA
+		windowDef ADV7 {
+			rect		20, 168, 400, 16
+			windowDef ADV7L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV7M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV7R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV7Title {
+				rect		1, 1, 280, 14
+				text		"#str_04128"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef ADV7Primary {
+				//#modified-fva; BEGIN
+				//rect		320, 1, 50, 14
+				rect		305, 1, 75, 14
+				//#modified-fva; END
+				choices		"#str_04231"
+				values		"0;2;4;8;16"
+				cvar		"r_multisamples"
+				choiceType	1
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+
+				onAction {
+					set "ResetSystemBtnText::vidrestrt" "1" ;
+					set "OSWarning::forecolor" "1 1 1 1" ;
+				}
+			}
+		}
+	/*
+	//Precompressed Textures
+		windowDef ADV8 {
+			rect		20, 220, 400, 16
+			windowDef ADV8L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV8M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV8R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV8Title {
+				rect		1, 1, 280, 14
+				text		"Precompressed Textures"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef ADV8Primary {
+				rect		320, 1, 50, 14
+				choices		"No;Yes"
+				cvar		"image_usePrecompressedTextures"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+	//Ignore High Quality Textures
+		windowDef ADV9 {
+			rect		20, 246, 400, 16
+			windowDef ADV9L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV9M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV9R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV9Title {
+				rect		1, 1, 280, 14
+				text		"Ignore High Quality Textures"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			choiceDef ADV9Primary {
+				rect		320, 1, 50, 14
+				choices		"No;Yes"
+				cvar		"image_ignoreHighQuality"
+				choiceType	0
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	1
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+			}
+		}
+
+	//Sound Diversity
+		windowDef ADV10 {
+			rect		20, 272, 400, 16
+			windowDef ADV10L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV10M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV10R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV10Title {
+				rect		1, 1, 280, 14
+				text		"Sound diversity"
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+			}
+			windowDef ADV10SliderBG {
+				rect		310, 4, 128, 16
+				background	"guis/assets/mainmenu/slider_bg"
+				matcolor	0.6, 0.8, 0.8, 0.5
+				noevents	1
+			}
+			sliderDef ADV10Primary {
+				rect		310, 5, 71, 8
+				forecolor	0.8, 1, 1, 1
+				matcolor	1, 1, 1, 1
+				low		1
+				high		10
+				step		1
+				thumbShader	"guis/assets/mainmenu/slider_bar"
+				cvar		"s_maxSoundsPerShader"
+			}
+		}
+*/
+		//#modified-fva; BEGIN
+	//Custom Width
+		windowDef ADV8 {
+			rect		20, 194, 384, 16
+			windowDef ADV8L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV8M {
+				rect		8, 0, 368, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV8R {
+				rect		376, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV8Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200182
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+
+				onAction {
+					// hack to manually remove focus from ADV8Primary
+					setFocus "ADV8Title" ;
+				}
+			}
+			editDef ADV8Primary {
+				rect		305, 1, 75, 14
+				cvar		"r_customWidth"
+				font		"fonts/bank"
+				textscale	0.25
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+
+				onAction {
+					set "ResetSystemBtnText::vidrestrt" "1" ;
+					set "OSWarning::forecolor" "1 1 1 1" ;
+				}
+			}
+		}
+	//Custom Height
+		windowDef ADV9 {
+			rect		20, 220, 384, 16
+			windowDef ADV9L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV9M {
+				rect		8, 0, 368, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV9R {
+				rect		376, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 1
+				noevents	1
+			}
+			windowDef ADV9Title {
+				rect		1, 1, 280, 14
+				text		CST_STR_00200183
+				font		"fonts/bank"
+				textscale	0.25
+				textalign	2
+				textaligny	-6
+				forecolor	1, 1, 1, 1
+
+				onAction {
+					// hack to manually remove focus from ADV9Primary
+					setFocus "ADV9Title" ;
+				}
+			}
+			editDef ADV9Primary {
+				rect		305, 1, 75, 14
+				cvar		"r_customHeight"
+				font		"fonts/bank"
+				textscale	0.25
+				textaligny	-6
+				forecolor	0.6, 0.8, 0.8, 1
+
+				onAction {
+					set "ResetSystemBtnText::vidrestrt" "1" ;
+					set "OSWarning::forecolor" "1 1 1 1" ;
+				}
+			}
+		}
+	//Filler
+		windowDef ADV10 {
+			rect		20, 246, 400, 16
+			windowDef ADV10L {
+				rect		0, 0, 8, 16
+				background	"gui/mainmenu/select_edge"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef ADV10M {
+				rect		8, 0, 384, 16
+				background	"gui/mainmenu/select_border"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+			windowDef ADV10R {
+				rect		392, 0, 8, 16
+				background	"gui/mainmenu/select_angle"
+				matcolor	0, 0, 0, 0.2
+				noevents	1
+			}
+		}
+
+	//Help: Custom Width
+		windowDef ADV8Help {
+			rect		406, 194, 14, 16
+			text		CST_STR_00200047
+			font		"fonts/bank"
+			textscale	0.32
+			textaligny	-7
+			textalign	1
+			forecolor	0.6, 1, 1, 1
+			backcolor	0.6, 0.8, 1, 0.2
+			float		mouseExitAnim 0
+
+			onMouseEnter {
+				set "mouseExitAnim" "1" ;
+				transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+				transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+			}
+			onMouseExit {
+				if ("mouseExitAnim") {
+					set "mouseExitAnim" "0" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+				}
+			}
+			onAction {
+				set "mouseExitAnim" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+				set "CstHelpText::text" CST_STR_00200185 ;
+				set "CstHelpAnimUp::fromSysAdvOpt" "1";
+				resetTime "CstHelpAnimUp" "0" ;
+			}
+		}
+	//Help: Custom Height
+		windowDef ADV9Help {
+			rect		406, 220, 14, 16
+			text		CST_STR_00200047
+			font		"fonts/bank"
+			textscale	0.32
+			textaligny	-7
+			textalign	1
+			forecolor	0.6, 1, 1, 1
+			backcolor	0.6, 0.8, 1, 0.2
+			float		mouseExitAnim 0
+
+			onMouseEnter {
+				set "mouseExitAnim" "1" ;
+				transition "forecolor" "0.6 1 1 1" "1 1 1 1" "200" ;
+				transition "backcolor" "0.6 0.8 1 0.2" "0.57 0.7 0.83 0.44" "200" ;
+			}
+			onMouseExit {
+				if ("mouseExitAnim") {
+					set "mouseExitAnim" "0" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+					transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+				}
+			}
+			onAction {
+				set "mouseExitAnim" "0" ;
+				set	"cmd" "play guisounds_menuclickup" ;
+				transition "forecolor" "1 1 1 1" "0.6 1 1 1" "200" ;
+				transition "backcolor" "0.57 0.7 0.83 0.44" "0.6 0.8 1 0.2" "400" ;
+				set "CstHelpText::text" CST_STR_00200186 ;
+				set "CstHelpAnimUp::fromSysAdvOpt" "1";
+				resetTime "CstHelpAnimUp" "0" ;
+			}
+		}
+		//#modified-fva; END
+
+			//select button 1
+			windowDef RDCBtn1 {
+				//#modified-fva; BEGIN
+				//rect		150, 192, 300, 32
+				rect		150, 270, 256, 32
+				//#modified-fva; END
+
+				windowDef RDCBtn1Border {
+					rect		4, 6, 236, 19
+					backcolor	0.45 ,0.55 ,0.7 ,0.3
+					noevents	1
+				}
+				windowDef RDCBtn1Corner {
+					rect		240, 0, 16, 32
+					background	"gui/mainmenu/button_cornerangle"
+					matcolor	0.45 ,0.55 ,0.7 ,0.3
+					noevents	1
+				}
+				windowDef RDCBtn1EdgeG {
+					rect		0, 0, 16, 32
+					background	"gui/mainmenu/buttong_cornersquare"
+					matcolor	0.55 ,0.65 ,0.75 ,0.5
+					noevents	1
+				}
+				windowDef RDCBtn1BorderG {
+					rect		16, 0, 224, 32
+					background	"gui/mainmenu/buttong_middlesm"
+					matcolor	0.55 ,0.65 ,0.75 ,0.5
+					noevents	1
+				}
+				windowDef RDCBtn1CornerG {
+					rect		240, 0, 16, 32
+					background	"gui/mainmenu/buttong_cornerangle"
+					matcolor	0.55 ,0.65 ,0.75 ,0.5
+					noevents	1
+				}
+			}
+
+			windowDef RDCYesBtnText {
+				//#modified-fva; BEGIN
+				//rect		155, 198, 240, 19
+				rect		155, 276, 240, 19
+				//#modified-fva; END
+				text		"#str_04129"
+				textscale	0.25
+				textalign	1
+				textaligny	-1
+				forecolor	0.6, 1, 1, 1
+				visible 	1
+				wantenter	1
+				//#modified-fva; BEGIN
+				float mouseExitAnim 0
+				float clicked 0
+				//#modified-fva; END
+
+				onMouseEnter {
+					//#modified-fva; BEGIN
+					set "clicked" "0" ;
+					set "mouseExitAnim" "1" ;
+					//#modified-fva; END
+					transition "forecolor" "0.6 1 1 1" "1 1 1 1" "250" ;
+					transition "RDCBtn1EdgeG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+					transition "RDCBtn1BorderG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+					transition "RDCBtn1CornerG::matcolor" "0.8 0.9 1 1" "0.55 0.65 0.75 1" "250" ;
+					transition "RDCBtn1Border::backcolor" "0.45 0.55 0.7 0.3" "0.55 0.65 0.75 0.5" "200" ;
+					transition "RDCBtn1Corner::matcolor" "0.45 0.55 0.7 0.3" "0.55 0.65 0.75 0.5" "200" ;
+
+					resetTime "ToolTip1" "0" ;
+					set "ToolTip1::text" "#str_02323" ;
+					set "ToolTip2::text" "#str_02323" ;
+				}
+				onMouseExit {
+					//#modified-fva; BEGIN
+					set "clicked" "0" ;
+					if ("mouseExitAnim") {
+					set "mouseExitAnim" "0" ;
+					//#modified-fva; END
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+					transition "RDCBtn1EdgeG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "RDCBtn1BorderG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "RDCBtn1CornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "RDCBtn1Border::backcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+					transition "RDCBtn1Corner::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+
+					resetTime "ToolTip2" "0" ;
+					//#modified-fva; BEGIN
+					}
+					//#modified-fva; END
+				}
+
+				//#modified-fva; BEGIN
+				/*
+				onAction {
+					set	"cmd"	"play guisounds_menuclickdown" ;
+					resetTime "AnimRDCDown" "0" ;
+					transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+					transition "RDCBtn1EdgeG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "RDCBtn1BorderG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "RDCBtn1CornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+					transition "RDCBtn1Border::backcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+					transition "RDCBtn1Corner::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+
+					resetTime "ToolTip1" "0" ;
+					set "ToolTip1::text" "" ;
+					set "ToolTip2::text" "" ;
+				}
+				*/
+				onAction {
+					// onAction is needed (even if empty) to let "wantenter"
+					// work on action release.
+					if ("RDC::visible") {
+						set "clicked" "1" ;
+					} else {
+						set "clicked" "0" ;
+					}
+				}
+				onActionRelease {
+					if ("clicked") {
+						set "clicked" "0" ;
+						set "mouseExitAnim" "0" ;
+
+						set	"cmd"	"play guisounds_menuclickdown" ; 
+						resetTime "AnimRDCDown" "0" ;
+						transition "forecolor" "1 1 1 1" "0.6 1 1 1" "250" ;
+						transition "RDCBtn1EdgeG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+						transition "RDCBtn1BorderG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+						transition "RDCBtn1CornerG::matcolor" "0.55 0.65 0.75 1" "0.55 0.65 0.75 0.5" "400" ;
+						transition "RDCBtn1Border::backcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+						transition "RDCBtn1Corner::matcolor" "0.55 0.65 0.75 0.5" "0.45 0.55 0.7 0.3" "400" ;
+
+						set "ToolTip1::text" "" ;
+						set "ToolTip2::text" "" ;
+					}
+				}
+				//#modified-fva; END
+			}
+		}
+		//#modified-fva; BEGIN
+		}
+		//#modified-fva; END
+	}
+
+//#modified-fva; from "guis/mainmenu.gui"; END
