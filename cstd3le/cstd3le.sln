@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33927.289
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game-d3xp", "..\game-d3xp.vcxproj", "{A35F276C-85FC-45C7-ADA2-F053601716BA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{49BEC5C6-B964-417A-851E-808886B57400} = {49BEC5C6-B964-417A-851E-808886B57400}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "idLib", "..\idlib.vcxproj", "{49BEC5C6-B964-417A-851E-808886B57400}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug with inlines and memory log|x86 = Debug with inlines and memory log|x86
+		Debug with inlines|x86 = Debug with inlines|x86
+		Debug|x86 = Debug|x86
+		Dedicated Debug with Inlines|x86 = Dedicated Debug with Inlines|x86
+		Dedicated Release|x86 = Dedicated Release|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A35F276C-85FC-45C7-ADA2-F053601716BA}.Debug with inlines and memory log|x86.ActiveCfg = Debug with inlines and memory log|Win32
+		{A35F276C-85FC-45C7-ADA2-F053601716BA}.Debug with inlines and memory log|x86.Build.0 = Debug with inlines and memory log|Win32
+		{A35F276C-85FC-45C7-ADA2-F053601716BA}.Debug with inlines|x86.ActiveCfg = Debug with inlines|Win32
+		{A35F276C-85FC-45C7-ADA2-F053601716BA}.Debug with inlines|x86.Build.0 = Debug with inlines|Win32
+		{A35F276C-85FC-45C7-ADA2-F053601716BA}.Debug|x86.ActiveCfg = Debug|Win32
+		{A35F276C-85FC-45C7-ADA2-F053601716BA}.Debug|x86.Build.0 = Debug|Win32
+		{A35F276C-85FC-45C7-ADA2-F053601716BA}.Dedicated Debug with Inlines|x86.ActiveCfg = Dedicated Debug with Inlines|Win32
+		{A35F276C-85FC-45C7-ADA2-F053601716BA}.Dedicated Debug with Inlines|x86.Build.0 = Dedicated Debug with Inlines|Win32
+		{A35F276C-85FC-45C7-ADA2-F053601716BA}.Dedicated Release|x86.ActiveCfg = Dedicated Release|Win32
+		{A35F276C-85FC-45C7-ADA2-F053601716BA}.Dedicated Release|x86.Build.0 = Dedicated Release|Win32
+		{A35F276C-85FC-45C7-ADA2-F053601716BA}.Release|x86.ActiveCfg = Release|Win32
+		{A35F276C-85FC-45C7-ADA2-F053601716BA}.Release|x86.Build.0 = Release|Win32
+		{49BEC5C6-B964-417A-851E-808886B57400}.Debug with inlines and memory log|x86.ActiveCfg = Debug with inlines and memory log|Win32
+		{49BEC5C6-B964-417A-851E-808886B57400}.Debug with inlines and memory log|x86.Build.0 = Debug with inlines and memory log|Win32
+		{49BEC5C6-B964-417A-851E-808886B57400}.Debug with inlines|x86.ActiveCfg = Debug with inlines|Win32
+		{49BEC5C6-B964-417A-851E-808886B57400}.Debug with inlines|x86.Build.0 = Debug with inlines|Win32
+		{49BEC5C6-B964-417A-851E-808886B57400}.Debug|x86.ActiveCfg = Debug|Win32
+		{49BEC5C6-B964-417A-851E-808886B57400}.Debug|x86.Build.0 = Debug|Win32
+		{49BEC5C6-B964-417A-851E-808886B57400}.Dedicated Debug with Inlines|x86.ActiveCfg = Debug|Win32
+		{49BEC5C6-B964-417A-851E-808886B57400}.Dedicated Debug with Inlines|x86.Build.0 = Debug|Win32
+		{49BEC5C6-B964-417A-851E-808886B57400}.Dedicated Release|x86.ActiveCfg = Release|Win32
+		{49BEC5C6-B964-417A-851E-808886B57400}.Dedicated Release|x86.Build.0 = Release|Win32
+		{49BEC5C6-B964-417A-851E-808886B57400}.Release|x86.ActiveCfg = Release|Win32
+		{49BEC5C6-B964-417A-851E-808886B57400}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A164E379-9B58-4077-BF8B-CF3630B478BB}
+	EndGlobalSection
+EndGlobal
